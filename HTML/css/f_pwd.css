@@ -1,0 +1,37 @@
+.btn-fpwd{
+    color: #F88634;
+    border: 2px solid #F88634;
+    background-color: white;
+    border-radius: 20px;
+}
+.center_link{
+    text-align: center;
+    text-decoration: none;
+}
+.card{
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+p, a{
+    font-size:0.875rem;
+}
+.b_bg
+{
+    background-color:#0000000D ;
+}
+.c_bg{
+    background-color: #FFFFFF;
+}
+label{
+    text-align: left;
+}
+a{
+    text-decoration: none;
+}
+@media (max-width:1024px) and  (min-width:767px){
+    .mb-5{
+        display: none;
+    }
+}
+

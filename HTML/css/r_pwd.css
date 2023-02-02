@@ -1,0 +1,31 @@
+.btn-cp{
+    color: #F88634;
+    border: 2px solid #F88634;
+    background-color: white;
+    border-radius: 20px;
+}
+p, a{
+    font-size:0.875rem;
+}
+label{
+    font-size:0.875rem;
+}
+.center_link{
+    text-align: center;
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
+}
+.b_bg
+{
+    background-color:#0000000D ;
+}
+.c_bg{
+    background-color: #FFFFFF;
+}
+@media (max-width:1024px) and  (min-width:767px){
+    .mb-2{
+        display: none;
+    }
+}
