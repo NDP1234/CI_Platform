@@ -2,6 +2,9 @@
 {
     background-color:#0000000D ;
 }
+.fullscreen{
+    height: 100vh;
+}
 .c_bg{
     background-color: #FFFFFF;
 }
@@ -27,9 +30,26 @@ p, a{
 .form-outline{
     font-size: 0.7rem;
 }
+.colm {
+    padding: 0px;
+}
+
 @media (min-width:1025px)
 {
     .pb-lg-2{
         display: none;
     }
 }
+@media (max-width:1024px) and  (min-width:426px) {
+    form{
+        width: 50%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+} 
+@media(min-width:990px){
+    img {
+        height: 100vh;
+    }
+
+} 
