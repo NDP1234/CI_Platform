@@ -1,0 +1,58 @@
+.btn-fpwd{
+    color: #F88634;
+    border: 2px solid #F88634;
+    background-color: white;
+    border-radius: 20px;
+}
+.center_link{
+    text-align: center;
+    text-decoration: none;
+}
+.card{
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+p, a{
+    font-size:0.875rem;
+}
+.b_bg
+{
+    background-color:#0000000D ;
+}
+.c_bg{
+    background-color: #FFFFFF;
+}
+label{
+    text-align: left;
+}
+a{
+    text-decoration: none;
+}
+.colm{
+    padding: 0px;
+}
+
+@media (max-width:768px) and  (min-width:426px) {
+    .card-body{
+        width: 50%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}  
+
+
+@media(min-width:1025px){
+    .card{
+        margin-top: 30%;
+        
+    }
+} 
+@media(min-width:990px){
+    img {
+        height: 100vh;
+    }
+
+} 
+
+
