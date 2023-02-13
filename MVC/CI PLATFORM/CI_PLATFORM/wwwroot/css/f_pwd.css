@@ -4,15 +4,26 @@
     background-color: white;
     border-radius: 20px;
 }
-.center_link{
+.lnbtn{
+    line-height:1.5;
+}
+
+
+
+a:hover{
+    color:blue;
+}
+
+.center_link {
     text-align: center;
     text-decoration: none;
 }
 .card{
-    height: 100%;
-    width: 100%;
+   height: 100%;
+   width: 100%;
     border: none;
 }
+
 p, a{
     font-size:0.875rem;
 }
@@ -34,25 +45,26 @@ a{
 }
 
 @media (max-width:768px) and  (min-width:426px) {
-    .card-body{
+    .card{
         width: 50%;
         margin-right: auto;
         margin-left: auto;
     }
-}  
+}
 
-
-@media(min-width:1025px){
-    .card{
-        margin-top: 30%;
-        
+@media (max-width:768px) {
+    .card {
+        margin-top: 20px;
     }
-} 
+}
+
 @media(min-width:990px){
     img {
         height: 100vh;
     }
 
-} 
+}
+
+
 
 
