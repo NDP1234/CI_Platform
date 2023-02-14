@@ -40,12 +40,6 @@ a{
     }
 } 
 
-@media(min-width:1025px){
-    .card-body{
-        margin-top: 20%;
-        
-    }
-} 
 @media(min-width:990px){
     img {
         height: 100vh;
