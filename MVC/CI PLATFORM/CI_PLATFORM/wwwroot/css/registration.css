@@ -8,11 +8,12 @@
 .c_bg{
     background-color: #FFFFFF;
 }
-.btn-login{
+.btn-login {
     color: #F88634;
     border: 2px solid #F88634;
     background-color: white;
     border-radius: 20px;
+    width:100%;
 }
 .center_link{
     text-align: center;
@@ -34,15 +35,10 @@ p, a{
     padding: 0px;
 }
 
-@media (min-width:1025px)
-{
-    .pb-lg-2{
-        display: none;
-    }
-}
+
 @media (max-width:1024px) and  (min-width:426px) {
     form{
-        width: 50%;
+        width: 100%;
         margin-right: auto;
         margin-left: auto;
     }
@@ -52,4 +48,16 @@ p, a{
         height: 100vh;
     }
 
-} 
+}
+
+@media (max-width:1024px) and (min-width:426px) {
+    .d {
+        width: 70%;
+        margin: auto;
+    }
+    .btn-login{
+        width:70%;
+        margin: auto;
+    }
+
+}
