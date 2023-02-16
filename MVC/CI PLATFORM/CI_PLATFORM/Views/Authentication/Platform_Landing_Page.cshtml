@@ -1,0 +1,171 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+       Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="~/css/pl.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 mrg-start">
+
+                        <li class="nav-item ">
+                            <a class="nav-link  text-dark" href="#">Stories</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle  text-dark" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Policy
+                            </a>
+                            <ul class="dropdown-menu ">
+                                <li><a class="dropdown-item " href="#">Policy-1</a></li>
+                                <li><a class="dropdown-item" href="#">Policy-2</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <form class="d-flex">
+
+                        <div class="dropdown">
+                            <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="~/images/user-img.png" alt="" style="border-radius: 50%;" height="30px"
+                                    width="30px">
+                                <span>Evan Donohue</span>
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Option-1</a></li>
+                                <li><a class="dropdown-item" href="#">Option-2</a></li>
+                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <div class="row mt-4 bdr">
+            <div class="input-group rounded bd ">
+
+                <div class="col-12 col-lg-6 col-md-6 be ">
+                    <div class="srch ">
+                        <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
+                        <input type="search" class="form-control rounded d-inline srch" placeholder="Search mission..."
+                            aria-label="Search" aria-describedby="search-addon" />
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-6 col-md-6 ">
+                    <div class="row  ">
+                        <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
+                            <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <span>Country&nbsp; &nbsp;</span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Country-1</a></li>
+                                <li><a class="dropdown-item" href="#">Country-2</a></li>
+                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                            </ul>
+                        </div>
+
+                        <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
+                            <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <span>City&nbsp; &nbsp;</span>
+                            </a>
+                            <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">City-1</a></li>
+                                <li><a class="dropdown-item" href="#">City-2</a></li>
+                                <li><a class="dropdown-item" href="#">Something else</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="dropdown d-inline col-lg-3  col-md-3 col-6 be text-center">
+                            <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <span>Theme &nbsp; &nbsp;</span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Theme-1</a></li>
+                                <li><a class="dropdown-item" href="#">Theme-2</a></li>
+                                <li><a class="dropdown-item" href="#">Something else</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="dropdown d-inline col-lg-3 col-md-3 col-6 text-center">
+                            <a class="btn  dropdown-toggle p-0 " href="#" role="button" id="dropdownMenuLink"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <span>Skills &nbsp; &nbsp;</span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Skill-1</a></li>
+                                <li><a class="dropdown-item" href="#">Skill-2</a></li>
+                                <li><a class="dropdown-item" href="#">Something else</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="all-filters d-flex align-items-center flex-wrap mt-4 mgl">
+            <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1 flex-nowrap">
+            <p class="filter">Tree Plantation</p>
+            <i class="bi bi-x"></i>
+            </div>
+            <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
+            <p class="filter">Canada</p>
+            <i class="bi bi-x"></i>
+            </div>
+            <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
+            <p class="filter">Toronto</p>
+            <i class="bi bi-x"></i>
+            </div>
+            <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
+            <p class="filter">Montreal</p>
+            <i class="bi bi-x"></i>
+            </div>
+            <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
+            <p class="filter">Environment</p>
+            <i class="bi bi-x"></i>
+            </div>
+            <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
+            <p class="filter">Nuitrition</p>
+            <i class="bi bi-x"></i>
+            </div>
+            </div>
+            <h1 class="mgl mt-2">Explore 72 missions</h1>
+
+    </div>
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+</body>
+
+</html>
