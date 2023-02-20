@@ -23,6 +23,11 @@ namespace CI_PLATFORM.Controllers
         public IActionResult Platform_Landing_Page()
         {
             return View();
+
+        }
+        public IActionResult No_mission_found()
+        {
+            return View();
         }
     }
 }

@@ -1,0 +1,286 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+     Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> No mission found</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="~/css/nmf.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <nav class="navbar navbar-expand-lg navbar-light d-none d-md-block ">
+            <div class="container">
+                <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 mrg-start">
+
+                        <li class="nav-item ">
+                            <a class="nav-link text-dark" href="#">Stories</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Policy
+                            </a>
+                            <ul class="dropdown-menu ">
+                                <li><a class="dropdown-item " href="#">Policy-1</a></li>
+                                <li><a class="dropdown-item" href="#">Policy-2</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <form class="d-flex" role="search">
+
+                        <div class="dropdown">
+                            <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="~/images/user-img.png" alt="" style="border-radius: 50%;" height="30px"
+                                    width="30px">
+                                <span>Evan Donohue</span>
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <div class="first-nav d-md-none ">
+            <div id="mySidebar1" class="sidebar d-inline">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+                <a href="#">
+                    Stories
+                </a>
+
+                <a href="#">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Policy
+                        </a>
+                        <ul class="dropdown-menu ">
+                            <li><a class="dropdown-item " href="#">Policy-1</a></li>
+                            <li><a class="dropdown-item" href="#">Policy-2</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else </a></li>
+                        </ul>
+                    </li>
+                </a>
+            </div>
+            <div id="main1" class="d-flex justify-content-between m-2">
+                <button class="openbtn " onclick="openNav()">☰ </button>
+                <img src="~/images/user-img.png" class="rounded-pill  " height="40px" width="40px" alt="">
+            </div>
+        </div>
+        <div class="row mt-4 border container-fluid  ps-0 pe-0  mb-2">
+            <div class="srchbar">
+                <div class="input-group rounded bd d-none d-md-flex  ">
+
+                    <div class="col-12 col-lg-6 col-md-6 be ">
+                        <div class="srch border-end">
+                            <!-- <span class="input-group-text  border-0" id="search-addon"> -->
+                            <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
+                            <!-- </span> -->
+                            <input type="search" class="form-control rounded d-inline srch"
+                                placeholder="Search mission..." aria-label="Search" aria-describedby="search-addon" />
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 col-md-6 ">
+                        <div class="row  ">
+                            <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center border-end">
+                                <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span>Country&nbsp; &nbsp;</span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">Country-1</a></li>
+                                    <li><a class="dropdown-item" href="#">Country-2</a></li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                </ul>
+                            </div>
+
+                            <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center border-end">
+                                <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span>City&nbsp; &nbsp;</span>
+                                </a>
+                                <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">City-1</a></li>
+                                    <li><a class="dropdown-item" href="#">City-2 </a></li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                </ul>
+                            </div>
+
+                            <div class="dropdown d-inline col-lg-3  col-md-3 col-6 be text-center border-end">
+                                <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span>Theme &nbsp; &nbsp;</span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">Theme-1</a></li>
+                                    <li><a class="dropdown-item" href="#">Theme-2 </a></li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                </ul>
+                            </div>
+
+                            <div class="dropdown d-inline col-lg-3 col-md-3 col-6 text-center">
+                                <a class="btn  dropdown-toggle p-0 " href="#" role="button" id="dropdownMenuLink"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span>Skills &nbsp; &nbsp;</span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">Skill-1</a></li>
+                                    <li><a class="dropdown-item" href="#">Skills-2</a></li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ///////////////////// -->
+            <div class="second-nav 	d-md-none w-100">
+                <div class="mob-sidebar mx-auto">
+
+                    <!-- </div> -->
+                    <div id="mySidebar2" class="sidebar d-inline">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">×</a>
+                        <a href="#">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Country
+                                </a>
+                                <ul class="dropdown-menu ">
+                                    <li><a class="dropdown-item " href="#">Country-1</a></li>
+                                    <li><a class="dropdown-item" href="#">Country-2</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                </ul>
+                            </li>
+                        </a>
+                        <a href="#">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    City
+                                </a>
+                                <ul class="dropdown-menu ">
+                                    <li><a class="dropdown-item " href="#">City-1</a></li>
+                                    <li><a class="dropdown-item" href="#">City-2</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                </ul>
+                            </li>
+                        </a>
+                        <a href="#">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Theme
+                                </a>
+                                <ul class="dropdown-menu ">
+                                    <li><a class="dropdown-item " href="#">Theme-1</a></li>
+                                    <li><a class="dropdown-item" href="#">Theme-2</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                </ul>
+                            </li>
+                        </a>
+                        <a href="#">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Skills
+                                </a>
+                                <ul class="dropdown-menu ">
+                                    <li><a class="dropdown-item " href="#">Skills-1</a></li>
+                                    <li><a class="dropdown-item" href="#">Skills-2</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                </ul>
+                            </li>
+                        </a>
+                    </div>
+
+                    <div id="main2" class="d-flex justify-content-end m-2 ">
+                        <input type="search" class="form-control rounded d-inline srch " placeholder="Search mission..."
+                            aria-label="Search" aria-describedby="search-addon" />
+                        <button class="openbtn " onclick="openNav2()">☰ </button>
+                        <!-- <h2>Collapsed Sidebar</h2>
+                                <p>Click on the hamburger menu/bar icon to open the sidebar, and push this content to the right.</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content mt-5">
+            <div class="head">
+                <h5>No mission found</h5>
+            </div>
+            <a class="btn btnlist mt-3 text-center" href="#">Go to Homepage <img src="~/images/right-arrow.png"
+                    alt=""></a>
+
+        </div>
+
+    </div>
+
+
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script>
+            function openNav() {
+                document.getElementById("mySidebar1").style.width = "250px";
+                document.getElementById("main1").style.marginLeft = "250px";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidebar1").style.width = "0";
+                document.getElementById("main1").style.marginLeft = "0";
+            }
+            function openNav2() {
+                document.getElementById("mySidebar2").style.width = "250px";
+                document.getElementById("main2").style.marginLeft = "250px";
+            }
+
+            function closeNav2() {
+                document.getElementById("mySidebar2").style.width = "0";
+                document.getElementById("main2").style.marginLeft = "0";
+            }
+
+        </script>
+</body>
+
+</html>

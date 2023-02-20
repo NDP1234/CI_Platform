@@ -476,3 +476,260 @@
         left: 25%;
     }
 }
+
+
+/*  /////////////////// */
+/* body {
+    font-family: "Lato", sans-serif;
+  } */
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+    .sidebar a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+    .sidebar .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+}
+
+    .openbtn:hover {
+        background-color: #444;
+    }
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 15px;
+    }
+
+        .sidebar a {
+            font-size: 18px;
+        }
+}
+
+.bottom-right4 {
+    background-color: rgba(0,0,0, 0.5);
+    position: absolute;
+    bottom: 50%;
+    right: 16px;
+    /* border: 2px solid black; */
+    width: 6%;
+    height: 10%;
+    left: 90%;
+    border-radius: 50%;
+}
+
+.bottom-right5 {
+    background-color: rgba(0,0,0, 0.5);
+    position: absolute;
+    bottom: 30%;
+    right: -7px;
+    /* border: 2px solid black; */
+    width: 6%;
+    height: 10%;
+    left: 90%;
+    border-radius: 50%;
+}
+
+.bottom-right6 {
+    background-color: rgba(0,0,0, 0.5);
+    position: absolute;
+    /* bottom: 260px; */
+    bottom: 85%;
+    /* right: 40%; */
+    /* border: 2px solid black; */
+    color: white;
+    width: 25%;
+    height: 13%;
+    left: 70%;
+    border-radius: 20%;
+}
+
+.bl1 {
+    position: absolute;
+    bottom: -5px;
+    /* top: -20px; */
+    left: 16px;
+    background-color: white;
+    color: black;
+    width: 30%;
+    left: 34%;
+    text-align: center;
+    border-radius: 25%;
+}
+
+.thumbimg {
+    width: 100%;
+    height: 100%;
+}
+
+.bdr-rds {
+    border-radius: 20px;
+}
+
+.btnlist {
+    border: 2px solid #F88634;
+    color: #F88634;
+    border-radius: 20px;
+}
+
+.bgw1 {
+    background-color: #F88634;
+}
+
+@media(min-width:1441px) {
+    .bottom-right4 {
+        background-color: rgba(0,0,0, 0.5);
+        position: absolute;
+        bottom: 50%;
+        right: 16px;
+        /* border: 2px solid black; */
+        width: 7%;
+        height: 14%;
+        left: 89%;
+        border-radius: 50%;
+    }
+
+    .bottom-right5 {
+        background-color: rgba(0,0,0, 0.5);
+        position: absolute;
+        bottom: 31%;
+        /* right: 12px; */
+        /* border: 2px solid black; */
+        width: 8%;
+        height: 15%;
+        left: 88%;
+        border-radius: 50%;
+    }
+}
+
+@media (min-width:1025px) and ( max-width:1440px) {
+    .bottom-right4 {
+        background-color: rgba(0,0,0, 0.5);
+        position: absolute;
+        bottom: 46%;
+        right: 16px;
+        /* border: 2px solid black; */
+        width: 7%;
+        height: 14%;
+        left: 89%;
+        border-radius: 50%;
+    }
+
+    .bottom-right5 {
+        background-color: rgba(0,0,0, 0.5);
+        position: absolute;
+        bottom: 26%;
+        right: -7px;
+        /* border: 2px solid black; */
+        width: 7%;
+        height: 16%;
+        left: 89%;
+        border-radius: 50%;
+    }
+}
+
+@media (min-width:769px) and ( max-width:1024px) {
+    .bottom-right6 {
+        background-color: rgba(0,0,0, 0.5);
+        position: absolute;
+        /* bottom: 260px; */
+        bottom: 83%;
+        /* right: 40%; */
+        /* border: 2px solid black; */
+        color: white;
+        width: 40%;
+        height: 13%;
+        left: 55%;
+        border-radius: 20%;
+    }
+
+    .bottom-right4 {
+        background-color: rgba(0,0,0, 0.5);
+        position: absolute;
+        bottom: 50%;
+        right: 16px;
+        /* border: 2px solid black; */
+        width: 10%;
+        height: 15%;
+        left: 84%;
+        border-radius: 50%;
+    }
+
+    .bottom-right5 {
+        background-color: rgba(0,0,0, 0.5);
+        position: absolute;
+        bottom: 30%;
+        right: -7px;
+        /* border: 2px solid black; */
+        width: 9%;
+        height: 16%;
+        left: 85%;
+        border-radius: 50%;
+    }
+}
+
+@media (min-width:426px) and ( max-width:768px) {
+    .bottom-right6 {
+        background-color: rgba(0,0,0, 0.5);
+        position: absolute;
+        /* bottom: 260px; */
+        bottom: 88%;
+        /* right: 40%; */
+        /* border: 2px solid black; */
+        color: white;
+        width: 21%;
+        height: 10%;
+        left: 75%;
+        border-radius: 20%;
+    }
+
+    .mtop {
+        margin-top: 3%;
+    }
+}
+
+@media (max-width: 425px) {
+    #list {
+        display: none;
+    }
+}

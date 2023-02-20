@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "guXNy81doPiDhJ2r2ezlA7BM0Cyk98RFYfVUVwAd/wo=",
+  "Hash": "OpkA49qOlXmC2rzO10K8Y1Gi2j4tmg9sdHRv8Uy+Ul4=",
   "Source": "CI_PLATFORM",
   "BasePath": "_content/CI_PLATFORM",
   "Mode": "Default",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\login.css"
+    },
+    {
+      "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\css\\nmf.css",
+      "SourceId": "CI_PLATFORM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\",
+      "BasePath": "_content/CI_PLATFORM",
+      "RelativePath": "css/nmf.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\nmf.css"
     },
     {
       "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\css\\pl.css",
