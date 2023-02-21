@@ -1,0 +1,800 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+     Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteering Mission Page</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="~/css/vmp.css">
+</head>
+
+<body>
+  
+    <div class="container">
+
+        <nav class="navbar navbar-expand-lg navbar-light d-none d-md-block">
+            <div class="container">
+                <button class="navbar-toggler bg-light " type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 mrg-start">
+
+                        <li class="nav-item ">
+                            <a class="nav-link text-dark" href="#">Stories</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Policy
+                            </a>
+                            <ul class="dropdown-menu ">
+                                <li><a class="dropdown-item " href="#">Policy-1</a></li>
+                                <li><a class="dropdown-item" href="#">Policy-2</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <form class="d-flex" role="search">
+
+                        <div class="dropdown">
+                            <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="~/images/user-img.png" alt="" style="border-radius: 50%;" height="30px"
+                                    width="30px">
+                                <span>Evan Donohue</span>
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ////////////////////////////////// -->
+        <div class="first-nav d-md-none ">
+            <div id="mySidebar1" class="sidebar d-inline">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+                <a href="#">
+                    Stories
+                </a>
+
+                <a href="#">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Policy
+                        </a>
+                        <ul class="dropdown-menu ">
+                            <li><a class="dropdown-item " href="#">Policy-1</a></li>
+                            <li><a class="dropdown-item" href="#">Policy-2</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else </a></li>
+                        </ul>
+                    </li>
+                </a>
+            </div>
+            <div id="main1" class="d-flex justify-content-between m-2">
+                <button class="openbtn " onclick="openNav()">☰ </button>
+                <img src="~/images/user-img.png" class="rounded-pill  " height="40px" width="40px" alt="">
+            </div>
+        </div>
+        <!-- //////////////////////////////// -->
+        <div class="row mt-4 bdr container-fluid  ps-0 pe-0  mb-2">
+            <div class="srchbar">
+                <div class="input-group rounded bd d-none d-md-flex  ">
+
+                    <div class="col-12 col-lg-6 col-md-6 be ">
+                        <div class="srch ">
+                            
+                            <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
+                            
+                            <input type="search" class="form-control rounded d-inline srch"
+                                placeholder="Search mission..." aria-label="Search" aria-describedby="search-addon" />
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 col-md-6 ">
+                        <div class="row  ">
+                            <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
+                                <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span>Country&nbsp; &nbsp;</span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">Country-1</a></li>
+                                    <li><a class="dropdown-item" href="#">Country-2</a></li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                </ul>
+                            </div>
+
+                            <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
+                                <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span>City&nbsp; &nbsp;</span>
+                                </a>
+                                <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">City-1</a></li>
+                                    <li><a class="dropdown-item" href="#">City-2 </a></li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                </ul>
+                            </div>
+
+                            <div class="dropdown d-inline col-lg-3  col-md-3 col-6 be text-center">
+                                <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span>Theme &nbsp; &nbsp;</span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">Theme-1</a></li>
+                                    <li><a class="dropdown-item" href="#">Theme-2 </a></li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                </ul>
+                            </div>
+
+                            <div class="dropdown d-inline col-lg-3 col-md-3 col-6 text-center">
+                                <a class="btn  dropdown-toggle p-0 " href="#" role="button" id="dropdownMenuLink"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span>Skills &nbsp; &nbsp;</span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">Skill-1</a></li>
+                                    <li><a class="dropdown-item" href="#">Skills-2</a></li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <!-- ///////////////////// -->
+            <div class="second-nav 	d-md-none w-100">
+                <div class="mob-sidebar mx-auto">
+
+                    <!-- </div> -->
+                    <div id="mySidebar2" class="sidebar d-inline">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">×</a>
+                        <a href="#">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Country
+                                </a>
+                                <ul class="dropdown-menu ">
+                                    <li><a class="dropdown-item " href="#">Country-1</a></li>
+                                    <li><a class="dropdown-item" href="#">Country-2</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                </ul>
+                            </li>
+                        </a>
+                        <a href="#">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    City
+                                </a>
+                                <ul class="dropdown-menu ">
+                                    <li><a class="dropdown-item " href="#">City-1</a></li>
+                                    <li><a class="dropdown-item" href="#">City-2</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                </ul>
+                            </li>
+                        </a>
+                        <a href="#">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Theme
+                                </a>
+                                <ul class="dropdown-menu ">
+                                    <li><a class="dropdown-item " href="#">Theme-1</a></li>
+                                    <li><a class="dropdown-item" href="#">Theme-2</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                </ul>
+                            </li>
+                        </a>
+                        <a href="#">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Skills
+                                </a>
+                                <ul class="dropdown-menu ">
+                                    <li><a class="dropdown-item " href="#">Skills-1</a></li>
+                                    <li><a class="dropdown-item" href="#">Skills-2</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                </ul>
+                            </li>
+                        </a>
+                    </div>
+
+                    <div id="main2" class="d-flex justify-content-end m-2 ">
+                        <input type="search" class="form-control rounded d-inline srch " placeholder="Search mission..."
+                            aria-label="Search" aria-describedby="search-addon" />
+                        <button class="openbtn " onclick="openNav2()">☰ </button>
+                        <!-- <h2>Collapsed Sidebar</h2>
+                                <p>Click on the hamburger menu/bar icon to open the sidebar, and push this content to the right.</p> -->
+                    </div>
+                </div>
+            </div>
+            <!-- ///////////////// -->
+
+            <div class="all-filters d-flex align-items-center flex-wrap mt-4 mgl ">
+                <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1 flex-nowrap">
+                    <p class="filter">Tree Plantation</p>
+                    <i class="bi bi-x"></i>
+                </div>
+                <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
+                    <p class="filter">Canada</p>
+                    <i class="bi bi-x"></i>
+                </div>
+                <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
+                    <p class="filter">Toronto</p>
+                    <i class="bi bi-x"></i>
+                </div>
+                <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
+                    <p class="filter">Montreal</p>
+                    <i class="bi bi-x"></i>
+                </div>
+                <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
+                    <p class="filter">Environment</p>
+                    <i class="bi bi-x"></i>
+                </div>
+                <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
+                    <p class="filter">Nuitrition</p>
+                    <i class="bi bi-x"></i>
+                </div>
+            </div>
+            <!-- <h1 class="mgl mt-2">Explore 72 missions</h1> -->
+
+        </div>
+
+        
+    </div>
+
+    <div class="container mt-5 ">
+        <div class="row ">
+
+            <div class="col-lg-6 col-md-12 col-sm-12 ">
+                <div class="image">
+                    <img src="~/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-2.png" class="imghr" width="100%"
+                        height="50%" id="id12" alt="">
+                    <img src="~/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-2.png" class="imghr" width="100%"
+                        height="50%" id="id1" alt="">
+                    <img src="~/images/img1.png" width="100%" height="50%"  class="imghr" id="id2" alt="">
+                    <img src="~/images/Grow-Trees-On-the-path-to-environment-sustainability-2.png" class="imghr" width="100%"
+                        height="50%" id="id3" alt="">
+                    <img src="~/images/img11.png" width="100%" height="50%" class="imghr" alt="" id="id4">
+                    <img src="~/images/img.png" width="100%"  class="imgh" alt="" id="id5">
+                    <img src="~/images/image2.png" width="100%" class="imgh"  alt="" id="id6">
+                </div>
+                <div id="carouselExampleControls" class="carousel carousel-dark slide mt-0 dn" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+
+
+                            <div class="row ">
+
+                                <div class="col-lg-4 col-md-4  ">
+                                    <div class="card" style="width: 18rem;">
+                                        <a href="#">
+                                            <img src="~/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-5.png"
+                                                class="card-img-top img2" id="i1" alt="..." onclick="show('id1')">
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4  ">
+                                    <div class="card" style="width: 18rem;">
+                                        <a href="#">
+                                            <img src="~/images/img3.png" class="card-img-top img2" alt="..." id="i2"
+                                                onclick="show('id2')">
+                                        </a>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-4 col-md-4  ">
+                                    <div class="card" style="width: 18rem;">
+                                        <a href="#">
+                                            <img src="~/images/Grow-Trees-On-the-path-to-environment-sustainability-5.png"
+                                                class="card-img-top img2" id="i3" alt="..." onclick="show('id3')">
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="carousel-item">
+
+
+
+                            <div class="row ">
+
+                                <div class="col-lg-4 col-md-4  ">
+                                    <div class="card" style="width: 18rem;">
+                                        <a href="#">
+                                            <img src="~/images/img33.png" class="card-img-top img2" alt="..." id="i4"
+                                                onclick="show('id4')">
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4  ">
+                                    <div class="card" style="width: 18rem;">
+                                        <a href="#">
+                                            <img src="~/images/img.png" class="card-img-top img2" alt="..." id="i5"
+                                                onclick="show('id5')">
+                                        </a>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-4 col-md-4  ">
+                                    <div class="card" style="width: 18rem;">
+                                        <a href="#">
+                                            <img src="~/images/image.png" class="card-img-top img2" alt="..." id="i6"
+                                                onclick="show('id6')">
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 ">
+                <h2 class="mt1 justify-content-between ">CSR initiative stands for Coffee & Farmer Equity</h2>
+                <p class="mt1 ">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                <div class="position-relative mt1 ">
+                    <hr style="z-index: -1;">
+                    <div class="dt text-center  position-absolute ">
+                        <span class="fsize"> Plant 10,000 Trees</span>
+                    </div>
+                </div>
+
+                <div class="row mt1 ">
+                    <div class="col-lg-6 col-md-6 col-sm-12  ">
+                        <div>
+                        <table >
+                            <tr>
+                                <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td> Seats Left</td>
+                            </tr>
+                        </table>
+                    </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 ">
+                        <div>
+                        <table >
+                            <tr>
+                                <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
+                                <td class="td6">
+                                    <div class="progress">
+                                        <div class="progress-bar bgw" role="progressbar" style="width: 75%"
+                                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>8000 Achieved</td>
+                            </tr>
+                        </table>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="dt3  text-center p-1">
+                            <img src="~/images/heart1.png" alt="">
+                            <span>Add to Favourite</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 ">
+                        <div class=" dt3 text-center p-1">
+                            <img src="~/images/add1.png" alt="">
+                            <span>Recommend to a Co-Worker</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt1">
+                    <div class="col col-lg-12"></div>
+                    <div class="position-relative ">
+                        <hr style="z-index: -1;">
+                        <div class="dt2 text-center  position-absolute">
+                            <img src="~/images/star-empty.png" alt="">
+                            <img src="~/images/star-empty.png" alt="">
+                            <img src="~/images/star-empty.png" alt="">
+                            <img src="~/images/star-empty.png" alt="">
+                            <img src="~/images/star-empty.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt1">
+                    <div class="col-lg-3 col-md-3 col-sm-6 w-div">
+                        <div class="border">
+                            <img src="~/images/pin1.png" alt="...">
+                            <div class="card-body">
+                                <h6 class="card-title">City</h6>
+                                <p class="card-text f-size">London</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 w-div">
+                        <div class="border">
+                            <img src="~/images/pin1.png" alt="...">
+                            <div class="card-body">
+                                <h6 class="card-title">Theme</h6>
+                                <p class="card-text f-size">Environment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 w-div">
+                        <div class="border">
+                            <img src="~/images/calender.png" alt="...">
+                            <div class="card-body">
+                                <h6 class="card-title">Date </h6>
+                                <p class="card-text f-size">Ongoing Opportunity</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 w-div">
+                        <div class="border">
+                            <img src="~/images/organization.png" alt="...">
+                            <div class="card-body ">
+                                <h6 class="card-title">Organization</h6>
+                                <p class="card-text f-size"> CSE Network</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt1">
+                    <div class="col-lg-12 text-center">
+                        <a class="btn btnlist  text-center" href="#">Go to Homepage <img src="~/images/right-arrow.png"
+                            alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <hr>
+        <h1 class="text-center my-3">Related Missions</h1>
+        <div class="row">
+        <div class="item col-xs-4 col-lg-4">
+            <div class="thumbnail card">
+                <div class="img-event position-relative">
+                    <img class="group list-group-image img-fluid"
+                        src="~/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity.png" alt="" />
+                    <div class="bottom-left justify-content-center">
+                        Environment
+                    </div>
+                    <div class="bottom-right  opacity-50   ">
+                        <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
+                    </div>
+                    <div class="bottom-right2  opacity-50   ">
+                        <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
+                    </div>
+                    <div class="bottom-right3  opacity-50   ">
+                        <img src="~/images/pin.png" class="mx-auto p-1" alt="">
+                        <span>London</span>
+                    </div>
+                </div>
+                <div class="caption card-body">
+                    <h4 class="group card-title inner list-group-item-heading">
+                        CSR initiative stands for Coffee and Farmer Equity</h4>
+                    <p class="group inner list-group-item-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut labore...</p>
+                    <div class="row mb">
+                        <div class="col col-lg-6 col-md-6 col-sm-12">CSE Network</div>
+                        <div class="col col-lg-6 col-md-6 col-sm-12">
+                            <img src="~/images/selected-star.png" class="wdimg" alt="">
+                            <img src="~/images/selected-star.png" class="wdimg" alt="">
+                            <img src="~/images/selected-star.png" class="wdimg" alt="">
+                            <img src="~/images/star.png" class="wdimg" alt="">
+                            <img src="~/images/star.png" class="wdimg" alt="">
+                        </div>
+                    </div>
+                    <div class="position-relative ">
+                        <hr style="z-index: -1;">
+                        <div class="dt text-center  position-absolute">
+                            <span> Ongoing Opportunity</span>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <table>
+                                <tr>
+                                    <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
+                                    <td>250</td>
+                                </tr>
+                                <tr>
+                                    <td class="fsize2">Already volunteered</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6 mx-auto">
+                            <a class="btn btnapp " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 5a -->
+        <div class="item col-xs-4 col-lg-4">
+            <div class="thumbnail card">
+                <div class="img-event position-relative">
+                    <img class="group list-group-image img-fluid"
+                        src="~/images/Animal-welfare-&-save-birds-campaign.png" alt="" />
+                    <div class="bottom-left justify-content-center">
+                        Animals
+                    </div>
+                    <div class="bottom-right  opacity-50   ">
+                        <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
+                    </div>
+                    <div class="bottom-right2  opacity-50   ">
+                        <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
+                    </div>
+                    <div class="bottom-right3  opacity-50   ">
+                        <img src="~/images/pin.png" class="mx-auto p-1" alt="">
+                        <span>Cape Town</span>
+                    </div>
+                </div>
+                <div class="caption card-body">
+                    <h4 class="group card-title inner list-group-item-heading">
+                        Animal welfare & save birds campaign </h4>
+                    <p class="group inner list-group-item-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut labore...</p>
+                    <div class="row mb">
+                        <div class="col col-lg-6 col-md-6 col-sm-12">JR Foundation</div>
+                        <div class="col col-lg-6 col-md-6 col-sm-12">
+                            <img src="~/images/selected-star.png" class="wdimg" alt="">
+                            <img src="~/images/selected-star.png" class="wdimg" alt="">
+                            <img src="~/images/selected-star.png" class="wdimg" alt="">
+                            <img src="~/images/star.png" class="wdimg" alt="">
+                            <img src="~/images/star.png" class="wdimg" alt="">
+                        </div>
+                    </div>
+                    <div class="position-relative ">
+                        <hr style="z-index: -1;">
+                        <div class="dt text-center  position-absolute">
+                            <span> Plant 10,000 Trees</span>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <table>
+                                <tr>
+                                    <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <td class="fsize2">Seats left</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col">
+                            <table>
+                                <tr>
+                                    <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar bgw" role="progressbar" style="width: 75%"
+                                                aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fsize2">8000 Achieved</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6 mx-auto">
+                            <a class="btn btnapp " href="">Apply<img src="~/images/right-arrow.png" alt=""></a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 6a -->
+        <div class="item col-xs-4 col-lg-4">
+            <div class="thumbnail card">
+                <div class="img-event position-relative">
+                    <img class="group list-group-image img-fluid"
+                        src="~/images/Plantation-and-Afforestation-programme.png" alt="" />
+                    <div class="bottom-left justify-content-center">
+                        Health
+                    </div>
+                    <div class="bottom-right  opacity-50   ">
+                        <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
+                    </div>
+                    <div class="bottom-right2  opacity-50   ">
+                        <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
+                    </div>
+                    <div class="bottom-right3  opacity-50   ">
+                        <img src="~/images/pin.png" class="mx-auto p-1" alt="">
+                        <span>Paris</span>
+                    </div>
+                </div>
+                <div class="caption card-body">
+                    <h4 class="group card-title inner list-group-item-heading">
+                        Plantation and Afforestation programme</h4>
+                    <p class="group inner list-group-item-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut labore...</p>
+                    <div class="row mb">
+                        <div class="col col-lg-6 col-md-6 col-sm-12">Amaze Doctors</div>
+                        <div class="col col-lg-6 col-md-6 col-sm-12">
+                            <img src="~/images/selected-star.png" class="wdimg" alt="">
+                            <img src="~/images/selected-star.png" class="wdimg" alt="">
+                            <img src="~/images/selected-star.png" class="wdimg" alt="">
+                            <img src="~/images/star.png" class="wdimg" alt="">
+                            <img src="~/images/star.png" class="wdimg" alt="">
+                        </div>
+                    </div>
+                    <div class="position-relative ">
+                        <hr style="z-index: -1;">
+                        <div class="dt text-center  position-absolute">
+                            <span> Plant 10,000 Trees</span>
+                        </div>
+                    </div>
+                    <div class="row mt-3"></div>
+                    <div class="col ">
+                        <table>
+                            <tr>
+                                <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar bgw" role="progressbar" style="width: 75%"
+                                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fsize2">8000 Achieved</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6 mx-auto">
+                            <a class="btn btnapp " href="#">Apply<img src="~/images/right-arrow.png" alt=""></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+        <script>
+
+            function openNav() {
+                document.getElementById("mySidebar1").style.width = "250px";
+                document.getElementById("main1").style.marginLeft = "250px";
+            }
+    
+            function closeNav() {
+                document.getElementById("mySidebar1").style.width = "0";
+                document.getElementById("main1").style.marginLeft = "0";
+            }
+            function openNav2() {
+                document.getElementById("mySidebar2").style.width = "250px";
+                document.getElementById("main2").style.marginLeft = "250px";
+            }
+    
+            function closeNav2() {
+                document.getElementById("mySidebar2").style.width = "0";
+                document.getElementById("main2").style.marginLeft = "0";
+            }
+            
+    
+            function showView(viewName) {
+                $('.all-view').addClass('d-none')
+    
+                if (viewName == 'grid') {
+                    $('#products').removeClass("d-none")
+                }
+                else if (viewName == "list") {
+                    $('#myListView').removeClass("d-none")
+                }
+            }
+
+            function show(image_id) {
+            console.log("run");
+
+            document.getElementById('id12')
+                .style.display = "none";
+            document.getElementById('id1')
+                .style.display = "none";
+            document.getElementById('id2')
+                .style.display = "none";
+            document.getElementById('id3')
+                .style.display = "none";
+            document.getElementById('id4')
+                .style.display = "none";
+            document.getElementById('id5')
+                .style.display = "none";
+            document.getElementById('id6')
+                .style.display = "none";
+            document.getElementById(image_id)
+                .style.display = "block";
+
+            // document.getElementById('i1')
+            //         .style.display = "block";
+        }
+    
+        </script>
+
+</body>
+
+</html>

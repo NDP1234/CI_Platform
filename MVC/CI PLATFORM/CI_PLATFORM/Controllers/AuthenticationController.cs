@@ -29,5 +29,9 @@ namespace CI_PLATFORM.Controllers
         {
             return View();
         }
+        public IActionResult Volunteering_Mission_Page()
+        {
+            return View();
+        }
     }
 }
