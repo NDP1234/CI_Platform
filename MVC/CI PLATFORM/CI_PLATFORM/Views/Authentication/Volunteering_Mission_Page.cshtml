@@ -4,6 +4,7 @@
 @{
      Layout = null;
 }
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,10 +15,12 @@
     <title>Volunteering Mission Page</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="~/css/vmp.css">
+
 </head>
 
 <body>
-  
+
+    <!-- head Part -->
     <div class="container">
 
         <nav class="navbar navbar-expand-lg navbar-light d-none d-md-block">
@@ -107,10 +110,10 @@
 
                     <div class="col-12 col-lg-6 col-md-6 be ">
                         <div class="srch ">
-                            
+
                             <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
-                            
-                            <input type="search" class="form-control rounded d-inline srch"
+
+                            <input type="search" class="form-control rounded d-inline srch "
                                 placeholder="Search mission..." aria-label="Search" aria-describedby="search-addon" />
                         </div>
                     </div>
@@ -118,7 +121,7 @@
                     <div class="col-12 col-lg-6 col-md-6 ">
                         <div class="row  ">
                             <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
-                                <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                <a class="btn b-filter dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <span>Country&nbsp; &nbsp;</span>
                                 </a>
@@ -130,7 +133,7 @@
                             </div>
 
                             <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
-                                <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                <a class="btn b-filter dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <span>City&nbsp; &nbsp;</span>
                                 </a>
@@ -142,7 +145,7 @@
                             </div>
 
                             <div class="dropdown d-inline col-lg-3  col-md-3 col-6 be text-center">
-                                <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                <a class="btn b-filter dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <span>Theme &nbsp; &nbsp;</span>
                                 </a>
@@ -154,8 +157,8 @@
                             </div>
 
                             <div class="dropdown d-inline col-lg-3 col-md-3 col-6 text-center">
-                                <a class="btn  dropdown-toggle p-0 " href="#" role="button" id="dropdownMenuLink"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="btn b-filter dropdown-toggle p-0 " href="#" role="button"
+                                    id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span>Skills &nbsp; &nbsp;</span>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -167,12 +170,10 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
             <!-- ///////////////////// -->
             <div class="second-nav 	d-md-none w-100">
                 <div class="mob-sidebar mx-auto">
-
-                    <!-- </div> -->
                     <div id="mySidebar2" class="sidebar d-inline">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">×</a>
                         <a href="#">
@@ -241,12 +242,13 @@
                         </a>
                     </div>
 
-                    <div id="main2" class="d-flex justify-content-end m-2 ">
+                    <div id="main2" class="d-flex justify-content-end m-2 w-100 ">
                         <input type="search" class="form-control rounded d-inline srch " placeholder="Search mission..."
                             aria-label="Search" aria-describedby="search-addon" />
-                        <button class="openbtn " onclick="openNav2()">☰ </button>
-                        <!-- <h2>Collapsed Sidebar</h2>
-                                <p>Click on the hamburger menu/bar icon to open the sidebar, and push this content to the right.</p> -->
+
+                        <button class="openbtn bg-light" onclick="openNav2()"><img src="~/images/filter.png" alt="">
+                        </button>
+
                     </div>
                 </div>
             </div>
@@ -278,32 +280,29 @@
                     <i class="bi bi-x"></i>
                 </div>
             </div>
-            <!-- <h1 class="mgl mt-2">Explore 72 missions</h1> -->
-
         </div>
 
-        
+
     </div>
 
-    
-
+    <!-- Slider and mission details -->
     <div class="container mt-5">
         <div class="row">
             <div class="col-lg-6 col-md-12 col-sm-12 ">
                 <div class="image">
-                    <img src="~/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-2.png" class="imghr" width="100%"
-                        height="50%" id="id12" alt="">
-                    <img src="~/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-2.png" class="imghr" width="100%"
-                        height="50%" id="id1" alt="">
-                    <img src="~/images/img1.png" width="100%" height="50%"  class="imghr" id="id2" alt="">
-                    <img src="~/images/Grow-Trees-On-the-path-to-environment-sustainability-2.png" class="imghr" width="100%"
-                        height="50%" id="id3" alt="">
+                    <img src="~/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-2.png" class="imghr"
+                        width="100%" height="50%" id="id12" alt="">
+                    <img src="~/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-2.png" class="imghr"
+                        width="100%" height="50%" id="id1" alt="">
+                    <img src="~/images/img1.png" width="100%" height="50%" class="imghr" id="id2" alt="">
+                    <img src="~/images/Grow-Trees-On-the-path-to-environment-sustainability-2.png" class="imghr"
+                        width="100%" height="50%" id="id3" alt="">
                     <img src="~/images/img11.png" width="100%" height="50%" class="imghr" alt="" id="id4">
-                    <img src="~/images/img.png" width="100%"  class="imgh" alt="" id="id5">
-                    <img src="~/images/image2.png" width="100%" class="imgh"  alt="" id="id6">
+                    <img src="~/images/img.png" width="100%" class="imgh" alt="" id="id5">
+                    <img src="~/images/image2.png" width="100%" class="imgh" alt="" id="id6">
                 </div>
 
-                <div class="container text-center p-0 dn">
+                <div class="container text-center p-0 ">
                     <div class="row  justify-content-center">
                         <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner" role="listbox">
@@ -311,9 +310,10 @@
                                     <div class="col-md-3">
                                         <div class="card">
                                             <div class="card-img">
-                                                <a href="#"><img src="~/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-5.png" class="img-fluid img2 if" id="i1" onclick="show('id1')"></a>
+                                                <img src="~/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-5.png"
+                                                    class="img-fluid img2 if" id="i1" onclick="show('id1')">
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -321,9 +321,10 @@
                                     <div class="col-md-3">
                                         <div class="card">
                                             <div class="card-img">
-                                               <a href="#"><img src="~/images/img3.png" class="img-fluid img2 if" onclick="show('id2')"></a>
+                                                <img src="~/images/img3.png" class="img-fluid img2 if"
+                                                    onclick="show('id2')">
                                             </div>
-                                           
+
                                         </div>
                                     </div>
                                 </div>
@@ -331,7 +332,8 @@
                                     <div class="col-md-3">
                                         <div class="card">
                                             <div class="card-img">
-                                                <a href="#"><img src="~/images/Grow-Trees-On-the-path-to-environment-sustainability-5.png" class="img-fluid img2 if" id="i2" onclick="show('id3')"></a>
+                                                <img src="~/images/Grow-Trees-On-the-path-to-environment-sustainability-5.png"
+                                                    class="img-fluid img2 if" id="i2" onclick="show('id3')">
                                             </div>
                                         </div>
                                     </div>
@@ -340,9 +342,10 @@
                                     <div class="col-md-3">
                                         <div class="card">
                                             <div class="card-img">
-                                                <a href="#"><img src="~/images/img33.png" class="img-fluid img2 if" id="i3" onclick="show('id4')"></a>
+                                                <img src="~/images/img33.png" class="img-fluid img2 if" id="i3"
+                                                    onclick="show('id4')">
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -350,9 +353,10 @@
                                     <div class="col-md-3">
                                         <div class="card">
                                             <div class="card-img">
-                                                <a href="#"><img src="~/images/img.png" class="img-fluid img2 if" id="i4" onclick="show('id5')"></a>
+                                                <img src="~/images/img.png" class="img-fluid img2 if" id="i4"
+                                                    onclick="show('id5')">
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -360,9 +364,10 @@
                                     <div class="col-md-3">
                                         <div class="card">
                                             <div class="card-img">
-                                                <a href="#"><img src="~/images/image.png" class="img-fluid img2 if" id="i5" onclick="show('id6')"></a>
+                                                <img src="~/images/image.png" class="img-fluid img2 if" id="i5"
+                                                    onclick="show('id6')">
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -380,61 +385,62 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 ">
-                <h2 class="mt1 justify-content-between ">CSR initiative stands for Coffee & Farmer Equity</h2>
-                <p class="mt1 ">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                <h2 class=" justify-content-between mt10">CSR initiative stands for Coffee & Farmer Equity</h2>
+                <p class="mt1 p-text ">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore
                     et dolore magna aliqua. Ut enim ad minim veniam.</p>
                 <div class="position-relative mt1 ">
-                    <hr style="z-index: -1;">
-                    <div class="dt text-center  position-absolute ">
+                    <hr style="z-index: -1;" class="hrt">
+                    <div class="dt dt5 text-center  position-absolute ">
                         <span class="fsize"> Plant 10,000 Trees</span>
                     </div>
                 </div>
 
-                <div class="row mt1 ">
-                    <div class="col-lg-6 col-md-6 col-sm-12  ">
+                <div class="row mt1 mt7 justify-content-between">
+                    <div class="col-auto ">
                         <div>
-                        <table >
-                            <tr>
-                                <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
-                                <td>10</td>
-                            </tr>
-                            <tr>
-                                <td> Seats Left</td>
-                            </tr>
-                        </table>
+                            <table>
+                                <tr>
+                                    <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <td> Seats Left</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 ">
+                    <div class="col-auto w-50 ">
                         <div>
-                        <table >
-                            <tr>
-                                <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
-                                <td class="td6">
-                                    <div class="progress">
-                                        <div class="progress-bar bgw" role="progressbar" style="width: 75%"
-                                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>8000 Achieved</td>
-                            </tr>
-                        </table>
-                    </div>
+                            <table>
+                                <tr>
+                                    <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
+                                    <td class="td6">
+                                        <div class="progress">
+                                            <div class="progress-bar bgw" role="progressbar" style="width: 75%"
+                                                aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>8000 Achieved</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row mt-2">
-                    <div class="col-lg-6 col-md-6">
+                <div class="row mt-2 ">
+                    <div class="col-lg-6 col-md-6 text-center">
                         <div class="dt3  text-center p-1">
                             <img src="~/images/heart1.png" alt="">
                             <span>Add to Favourite</span>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6 ">
+                    <div class="col-lg-6 col-md-6 text-center">
                         <div class=" dt3 text-center p-1">
                             <img src="~/images/add1.png" alt="">
-                            <span>Recommend to a Co-Worker</span>
+                            <span>Recommend to a <span class="db5">Co-Worker</span> </span>
                         </div>
                     </div>
                 </div>
@@ -492,269 +498,558 @@
                 <div class="row mt1">
                     <div class="col-lg-12 text-center">
                         <a class="btn btnlist  text-center" href="#">Go to Homepage <img src="~/images/right-arrow.png"
-                            alt=""></a>
+                                alt=""></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Mission, Organization, Comments, Info and Recent Volunteers -->
     <div class="container mt-5">
-        <hr>
-        <h1 class="text-center my-3">Related Missions</h1>
         <div class="row">
-        <div class="item col-xs-4 col-lg-4">
-            <div class="thumbnail card">
-                <div class="img-event position-relative">
-                    <img class="group list-group-image img-fluid "
-                        src="~/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity.png" alt="" />
-                    <div class="bottom-left justify-content-center">
-                        Environment
-                    </div>
-                    <div class="bottom-right  opacity-50   ">
-                        <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right2  opacity-50   ">
-                        <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right3  opacity-50   ">
-                        <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                        <span>London</span>
-                    </div>
-                </div>
-                <div class="caption card-body">
-                    <h4 class="group card-title inner list-group-item-heading">
-                        CSR initiative stands for Coffee and Farmer Equity</h4>
-                    <p class="group inner list-group-item-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore...</p>
-                    <div class="row mb">
-                        <div class="col col-lg-6 col-md-6 col-sm-12">CSE Network</div>
-                        <div class="col col-lg-6 col-md-6 col-sm-12">
-                            <img src="~/images/selected-star.png" class="wdimg" alt="">
-                            <img src="~/images/selected-star.png" class="wdimg" alt="">
-                            <img src="~/images/selected-star.png" class="wdimg" alt="">
-                            <img src="~/images/star.png" class="wdimg" alt="">
-                            <img src="~/images/star.png" class="wdimg" alt="">
+            <div class="col-lg-6">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link nl fs" id="pills-home-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                            aria-selected="true">Mission</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link nl fs" id="pills-profile-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                            aria-selected="false">Organization</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link nl fs" id="pills-contact-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                            aria-selected="false">Comments</button>
+                    </li>
+                </ul>
+                <hr style="margin-top: -18px;">
+                <div class="tab-content " id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                        aria-labelledby="pills-home-tab">
+                        <h3>Introduction</h3>
+                        <p class="p-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                            sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                            laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor
+                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                            sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                            laborum.</p>
+
+                        <h3>Challenge</h3>
+                        <p class="p-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem
+                            ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <div class="doc">
+                            <h3>Documents</h3>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4  btn width-btn rounded-pill border"><img
+                                        src="~/images/doc.png" alt=""><span
+                                        style="font-size: 14px;">&nbsp;lorem-ipsum.pdf</span></div>
+                                <div class="col-lg-5 col-md-4 btn width-btn rounded-pill border"><img
+                                        src="~/images/doc.png" alt=""><span
+                                        style="font-size: 14px;">&nbsp;at_vero_eos_accusamus.doc</span></div>
+                                <div class="col-lg-3 col-md-4 btn width-btn rounded-pill border"><img
+                                        src="~/images/doc.png" alt=""><span
+                                        style="font-size: 14px;">&nbsp;important_doc.xls</span></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="position-relative ">
-                        <hr style="z-index: -1;">
-                        <div class="dt text-center  position-absolute">
-                            <span> Ongoing Opportunity</span>
+                    <!-- ------------------------------------------------------ -->
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        <div class="my-5">
+                            <h3 class="text-center ">Industrial Solutions Network</h3>
+                            <span>Melvin A. Sawyer, Managing Director</span>
                         </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col">
-                            <table>
-                                <tr>
-                                    <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
-                                    <td>250</td>
-                                </tr>
-                                <tr>
-                                    <td class="fsize2">Already volunteered</td>
-                                </tr>
-                            </table>
+
+
+                        <div class="p-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco..
+                            <a href="#" style="color: #F88634;"> See more</a>
                         </div>
-                        <hr>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6 mx-auto">
-                            <a class="btn btnapp " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
+
+                        <div class="info my-5">
+                            <div><span>4456 Illinois Avenue, Oregon City, OR97045</span> </div>
+
+                            <div><span> +1 503-742-7810</span></div>
+
+                            <div><span>melvinasawyer@yahoo.com</span> </div>
+
+                            <div> <span> www.cesnetworksolution.com</span></div>
                         </div>
+
+                        <h4 class="text-center">About Organization</h4>
+                        <p class="p-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut eram ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
+                            <br><br>
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                            mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                            essmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud
+                            exercitation ullamco tations n quip ex ea commodo consequat.
+                        </p>
                     </div>
-                </div>
-            </div>
-        </div>
-        <!-- 5a -->
-        <div class="item col-xs-4 col-lg-4">
-            <div class="thumbnail card">
-                <div class="img-event position-relative">
-                    <img class="group list-group-image img-fluid "
-                        src="~/images/Animal-welfare-&-save-birds-campaign.png" alt="" />
-                    <div class="bottom-left justify-content-center">
-                        Animals
-                    </div>
-                    <div class="bottom-right  opacity-50   ">
-                        <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right2  opacity-50   ">
-                        <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right3  opacity-50   ">
-                        <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                        <span>Cape Town</span>
-                    </div>
-                </div>
-                <div class="caption card-body">
-                    <h4 class="group card-title inner list-group-item-heading">
-                        Animal welfare & save birds campaign </h4>
-                    <p class="group inner list-group-item-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore...</p>
-                    <div class="row mb">
-                        <div class="col col-lg-6 col-md-6 col-sm-12">JR Foundation</div>
-                        <div class="col col-lg-6 col-md-6 col-sm-12">
-                            <img src="~/images/selected-star.png" class="wdimg" alt="">
-                            <img src="~/images/selected-star.png" class="wdimg" alt="">
-                            <img src="~/images/selected-star.png" class="wdimg" alt="">
-                            <img src="~/images/star.png" class="wdimg" alt="">
-                            <img src="~/images/star.png" class="wdimg" alt="">
+                    <!-- ------------------------------------------------------- -->
+                    <div class="tab-pane fade " id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Comments</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                placeholder="Enter your comments.."></textarea>
                         </div>
-                    </div>
-                    <div class="position-relative ">
-                        <hr style="z-index: -1;">
-                        <div class="dt text-center  position-absolute">
-                            <span> Plant 10,000 Trees</span>
+                        <div>
+                            <a class="btn btnpc my-2  text-center" href="#">Post comment <img
+                                    src="~/images/right-arrow.png" alt=""></a>
                         </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col">
-                            <table>
-                                <tr>
-                                    <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <td class="fsize2">Seats left</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="col">
-                            <table>
-                                <tr>
-                                    <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar bgw" role="progressbar" style="width: 75%"
-                                                aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        <!--  -->
+                        <div class="container bg-light p-2 ">
+                            <div class="cmt mt-1 bdr bg-white p-2">
+                                <div class="section fs ">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0">
+                                            <img src="~/images/volunteer3.png" class="rounded-pill imgh-pf" alt="...">
                                         </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="fsize2">8000 Achieved</td>
-                                </tr>
-                            </table>
+                                        <div class="flex-grow-1 ms-3">
+                                            <div>Margaret Walsh</div>
+                                            <div class="fs2">Monday, October 21, 2019, 04:37PM</div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 p-text">
+                                        Nice mission great opportunity to peoples
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cmt mt-3  bdr bg-white  p-2">
+                                <div class="section fs">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0">
+                                            <img src="~/images/volunteer2.png" class="rounded-pill imgh-pf" alt="...">
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <div>kane Williamson</div>
+                                            <div class="fs2">Monday, October 21, 2019, 11:13AM</div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 p-text">
+                                        This is helpful mission.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cmt mt-3 bdr bg-white  p-2">
+                                <div class="section fs">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0">
+                                            <img src="~/images/volunteer3.png" class="rounded-pill imgh-pf" alt="...">
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <div>Ian McCallam</div>
+                                            <div class="fs2">Monday, October 21, 2019, 10:32AM</div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 p-text">
+                                        I linke this mission.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cmt mt-3 bdr bg-white p-2">
+                                <div class="section fs">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0">
+                                            <img src="~/images/volunteer3.png" class="rounded-pill imgh-pf" alt="...">
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <div>Ronald Korb</div>
+                                            <div class="fs2">Wednesday, October 09, 2019, 06:16PM</div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 p-text">
+                                        Good opportunity.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="info border mtd">
+                    <div class="head my-3 pinfo pinfo2">
+                        <h4>Information</h4>
+                    </div>
+                    <div class="row border-top pinfo">
+                        <div class="col-lg-3 col-md-3 col-3">Skills</div>
+                        <div class="col-lg-9 col-md-9 col-9">Cool, Easy Going, Math, Computer</div>
+                    </div>
+                    <div class="row border-top pinfo">
+                        <div class="col-lg-3 col-md-3 col-3">Days</div>
+                        <div class="col-lg-9 col-md-9 col-9">Weekend only</div>
+                    </div>
+                    <div class="row border-top pinfo">
+                        <div class="col-lg-3 col-md-3 col-3">Rating</div>
+                        <div class="col-lg-9 col-md-9 col-9">
+                            <img src="~/images/selected-star.png" alt="">
+                            <img src="~/images/selected-star.png" alt="">
+                            <img src="~/images/selected-star.png" alt="">
+                            <img src="~/images/selected-star.png" alt="">
+                            <img src="~/images/selected-star.png" alt="">
+                            <span class="db1">(By 125 volunteers)</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="rv border  mtd2 ">
+                    <div class="head mx-3 pinfo">
+                        <h4>Recent Volunteers</h4>
+                    </div>
+                    <div class="profile text-center">
+                        <div class="row py-1">
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <img src="~/images/volunteer1.png" class="rounded-pill imgrv" alt="">
+                                <div> <span class="rvname">Andrew Jhonson </span></div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <img src="~/images/volunteer2.png" class="rounded-pill imgrv" alt="">
+                                <div> <span class="rvname">Charles Vigue </span></div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <img src="~/images/volunteer3.png" class="rounded-pill imgrv" alt="">
+                                <div> <span class="rvname">Kathryn Roberts </span></div>
+                            </div>
+                        </div>
+                        <div class="row py-1">
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <img src="~/images/volunteer4.png" class="rounded-pill imgrv" alt="">
+                                <div> <span class="rvname">Estella Fowles </span></div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <img src="~/images/volunteer5.png" class="rounded-pill imgrv" alt="">
+                                <div> <span class="rvname">Rose Lewis </span></div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <img src="~/images/volunteer6.png" class="rounded-pill imgrv" alt="">
+                                <div> <span class="rvname">Raymond Pabon </span></div>
+                            </div>
+                        </div>
+                        <div class="row py-1">
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <img src="~/images/volunteer7.png" class="rounded-pill imgrv" alt="">
+                                <div> <span class="rvname">Travis Steen </span></div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <img src="~/images/volunteer8.png" class="rounded-pill imgrv" alt="">
+                                <div> <span class="rvname">Sarah Santillan </span></div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <img src="~/images/volunteer9.png" class="rounded-pill imgrv" alt="">
+                                <div> <span class="rvname">Linda Richards </span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container mt-3 w-100 border-top pt-3">
+                        <ul class="pagination w-100">
+                            <li class="page-item "><a class="page-link" href="#"><img src="~/images/left.png" alt=""></a>
+                            </li>
+                            <li class="page-item mx-auto my-auto"><span class="fs3"> 1 to 9 of 15 Recent
+                                    Volunteers</span></li>
+                            <li class="page-item"><a class="page-link" href="#"><img src="~/images/right-arrow1.png"
+                                        alt=""></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Missions -->
+    <div class="container mt-3">
+        <hr>
+        <h2 class="text-center my-3">Related Missions</h2>
+        <div class="row">
+            <!-- 1a -->
+            <div class="item col-xs-4 col-lg-4">
+                <div class="thumbnail card">
+                    <div class="img-event position-relative">
+                        <img class="group list-group-image img-fluid "
+                            src="~/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity.png" alt="" />
+                        <div class="bottom-left justify-content-center">
+                            Environment
+                        </div>
+                        <div class="bottom-right  opacity-50   ">
+                            <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
+                        </div>
+                        <div class="bottom-right2  opacity-50   ">
+                            <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
+                        </div>
+                        <div class="bottom-right3  opacity-50   ">
+                            <img src="~/images/pin.png" class="mx-auto p-1" alt="">
+                            <span>London</span>
+                        </div>
+                    </div>
+                    <div class="caption card-body cb2">
+                        <h4 class="group card-title inner list-group-item-heading">
+                            CSR initiative stands for Coffee and Farmer Equity</h4>
+                        <p class="group inner list-group-item-text p-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore...</p>
+                        <div class="row mb  justify-content-between">
+                            <div class="col-auto ">CSE Network</div>
+                            <div class="col-auto ">
+                                <img src="~/images/selected-star.png" class="wdimg" alt="">
+                                <img src="~/images/selected-star.png" class="wdimg" alt="">
+                                <img src="~/images/selected-star.png" class="wdimg" alt="">
+                                <img src="~/images/star.png" class="wdimg" alt="">
+                                <img src="~/images/star.png" class="wdimg" alt="">
+                            </div>
+                        </div>
+                        <div class="position-relative ">
+                            <hr style="z-index: -1;" class="hrt hrt2">
+                            <div class="dt text-center  position-absolute dtn">
+                                <span> Ongoing Opportunity</span>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <table>
+                                    <tr>
+                                        <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
+                                        <td>250</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fsize2">Already volunteered</td>
+                                    </tr>
+                                </table>
+                            </div>
+
                         </div>
                         <hr>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6 mx-auto">
-                            <a class="btn btnapp " href="">Apply<img src="~/images/right-arrow.png" alt=""></a>
-
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6 mx-auto">
+                                <a class="btn btnapp " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- 6a -->
-        <div class="item col-xs-4 col-lg-4">
-            <div class="thumbnail card">
-                <div class="img-event position-relative">
-                    <img class="group list-group-image img-fluid "
-                        src="~/images/Plantation-and-Afforestation-programme.png" alt="" />
-                    <div class="bottom-left justify-content-center">
-                        Health
+            <!-- 2a -->
+            <div class="item col-xs-4 col-lg-4">
+                <div class="thumbnail card">
+                    <div class="img-event position-relative">
+                        <img class="group list-group-image img-fluid "
+                            src="~/images/Animal-welfare-&-save-birds-campaign.png" alt="" />
+                        <div class="bottom-left justify-content-center">
+                            Animals
+                        </div>
+                        <div class="bottom-right  opacity-50   ">
+                            <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
+                        </div>
+                        <div class="bottom-right2  opacity-50   ">
+                            <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
+                        </div>
+                        <div class="bottom-right3  opacity-50   ">
+                            <img src="~/images/pin.png" class="mx-auto p-1" alt="">
+                            <span>Cape Town</span>
+                        </div>
                     </div>
-                    <div class="bottom-right  opacity-50   ">
-                        <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right2  opacity-50   ">
-                        <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right3  opacity-50   ">
-                        <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                        <span>Paris</span>
+                    <div class="caption card-body cb2">
+                        <h4 class="group card-title inner list-group-item-heading">
+                            Animal welfare & save birds campaign </h4>
+                        <p class="group inner list-group-item-text p-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore...</p>
+                        <div class="row mb justify-content-between">
+                            <div class="col-auto">JR Foundation</div>
+                            <div class="col-auto">
+                                <img src="~/images/selected-star.png" class="wdimg" alt="">
+                                <img src="~/images/selected-star.png" class="wdimg" alt="">
+                                <img src="~/images/selected-star.png" class="wdimg" alt="">
+                                <img src="~/images/star.png" class="wdimg" alt="">
+                                <img src="~/images/star.png" class="wdimg" alt="">
+                            </div>
+                        </div>
+                        <div class="position-relative ">
+                            <hr style="z-index: -1;" class="hrt hrt2">
+                            <div class="dt text-center  position-absolute dtn">
+                                <span> Plant 10,000 Trees</span>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <table>
+                                    <tr>
+                                        <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
+                                        <td>10</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fsize2">Seats left</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col">
+                                <table>
+                                    <tr>
+                                        <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar bgw" role="progressbar" style="width: 75%"
+                                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fsize2">8000 Achieved</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6 mx-auto">
+                                <a class="btn btnapp " href="">Apply<img src="~/images/right-arrow.png" alt=""></a>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="caption card-body">
-                    <h4 class="group card-title inner list-group-item-heading">
-                        Plantation and Afforestation programme</h4>
-                    <p class="group inner list-group-item-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore...</p>
-                    <div class="row mb">
-                        <div class="col col-lg-6 col-md-6 col-sm-12">Amaze Doctors</div>
-                        <div class="col col-lg-6 col-md-6 col-sm-12">
-                            <img src="~/images/selected-star.png" class="wdimg" alt="">
-                            <img src="~/images/selected-star.png" class="wdimg" alt="">
-                            <img src="~/images/selected-star.png" class="wdimg" alt="">
-                            <img src="~/images/star.png" class="wdimg" alt="">
-                            <img src="~/images/star.png" class="wdimg" alt="">
+            </div>
+            <!-- 3a -->
+            <div class="item col-xs-4 col-lg-4">
+                <div class="thumbnail card">
+                    <div class="img-event position-relative">
+                        <img class="group list-group-image img-fluid "
+                            src="~/images/Plantation-and-Afforestation-programme.png" alt="" />
+                        <div class="bottom-left justify-content-center">
+                            Health
+                        </div>
+                        <div class="bottom-right  opacity-50   ">
+                            <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
+                        </div>
+                        <div class="bottom-right2  opacity-50   ">
+                            <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
+                        </div>
+                        <div class="bottom-right3  opacity-50   ">
+                            <img src="~/images/pin.png" class="mx-auto p-1" alt="">
+                            <span>Paris</span>
                         </div>
                     </div>
-                    <div class="position-relative ">
-                        <hr style="z-index: -1;">
-                        <div class="dt text-center  position-absolute">
-                            <span> Plant 10,000 Trees</span>
+                    <div class="caption card-body cb2">
+                        <h4 class="group card-title inner list-group-item-heading">
+                            Plantation and Afforestation programme</h4>
+                        <p class="group inner list-group-item-text p-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore...</p>
+                        <div class="row mb justify-content-between">
+                            <div class="col-auto">Amaze Doctors</div>
+                            <div class="col-auto">
+                                <img src="~/images/selected-star.png" class="wdimg" alt="">
+                                <img src="~/images/selected-star.png" class="wdimg" alt="">
+                                <img src="~/images/selected-star.png" class="wdimg" alt="">
+                                <img src="~/images/star.png" class="wdimg" alt="">
+                                <img src="~/images/star.png" class="wdimg" alt="">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row mt-3"></div>
-                    <div class="col ">
-                        <table>
-                            <tr>
-                                <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bgw" role="progressbar" style="width: 75%"
-                                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fsize2">8000 Achieved</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6 mx-auto">
-                            <a class="btn btnapp " href="#">Apply<img src="~/images/right-arrow.png" alt=""></a>
+                        <div class="position-relative ">
+                            <hr style="z-index: -1;" class="hrt hrt2">
+                            <div class="dt text-center  position-absolute dtn">
+                                <span> Plant 10,000 Trees</span>
+                            </div>
                         </div>
-                    </div>
+                        <div class="row mt-3">
+                            <div class="col mt-3 ">
+                                <table>
+                                    <tr>
+                                        <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar bgw" role="progressbar" style="width: 75%"
+                                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fsize2">8000 Achieved</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6 mx-auto">
+                                <a class="btn btnapp " href="#">Apply<img src="~/images/right-arrow.png" alt=""></a>
+                            </div>
+                        </div>
 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Footer (Privacy Policy) -->
+    <div class="container">
+        <hr>
+        <div class="privacy-policy mt-3 mb-3">
+            <a href="#"> Privacy Policy</a>
+        </div>
     </div>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"
         integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-        <script>
+    <script>
 
-            function openNav() {
-                document.getElementById("mySidebar1").style.width = "250px";
-                document.getElementById("main1").style.marginLeft = "250px";
-            }
-    
-            function closeNav() {
-                document.getElementById("mySidebar1").style.width = "0";
-                document.getElementById("main1").style.marginLeft = "0";
-            }
-            function openNav2() {
-                document.getElementById("mySidebar2").style.width = "250px";
-                document.getElementById("main2").style.marginLeft = "250px";
-            }
-    
-            function closeNav2() {
-                document.getElementById("mySidebar2").style.width = "0";
-                document.getElementById("main2").style.marginLeft = "0";
-            }
-            
-    
-            function showView(viewName) {
-                $('.all-view').addClass('d-none')
-    
-                if (viewName == 'grid') {
-                    $('#products').removeClass("d-none")
-                }
-                else if (viewName == "list") {
-                    $('#myListView').removeClass("d-none")
-                }
-            }
+        function openNav() {
+            document.getElementById("mySidebar1").style.width = "250px";
+            document.getElementById("main1").style.marginLeft = "250px";
+        }
 
-            function show(image_id) {
+        function closeNav() {
+            document.getElementById("mySidebar1").style.width = "0";
+            document.getElementById("main1").style.marginLeft = "0";
+        }
+        function openNav2() {
+            document.getElementById("mySidebar2").style.width = "250px";
+            document.getElementById("main2").style.marginLeft = "250px";
+        }
+
+        function closeNav2() {
+            document.getElementById("mySidebar2").style.width = "0";
+            document.getElementById("main2").style.marginLeft = "0";
+        }
+
+
+        function showView(viewName) {
+            $('.all-view').addClass('d-none')
+
+            if (viewName == 'grid') {
+                $('#products').removeClass("d-none")
+            }
+            else if (viewName == "list") {
+                $('#myListView').removeClass("d-none")
+            }
+        }
+
+        function show(image_id) {
             console.log("run");
 
             document.getElementById('id12')
@@ -774,26 +1069,26 @@
             document.getElementById(image_id)
                 .style.display = "block";
 
-            
-            
+
+
         }
         let items = document.querySelectorAll('.carousel .carousel-item')
 
-            items.forEach((el) => {
-                const minPerSlide = 4
-                let next = el.nextElementSibling
-                for (var i = 1; i < minPerSlide; i++) {
-                    if (!next) {
-                        next = items[0]
-                    }
-                    let cloneChild = next.cloneNode(true)
-                    el.appendChild(cloneChild.children[0])
-                    next = next.nextElementSibling
+        items.forEach((el) => {
+            const minPerSlide = 4
+            let next = el.nextElementSibling
+            for (var i = 1; i < minPerSlide; i++) {
+                if (!next) {
+                    next = items[0]
                 }
-            })
-        
-    
-        </script>
+                let cloneChild = next.cloneNode(true)
+                el.appendChild(cloneChild.children[0])
+                next = next.nextElementSibling
+            }
+        })
+
+
+    </script>
 
 </body>
 
