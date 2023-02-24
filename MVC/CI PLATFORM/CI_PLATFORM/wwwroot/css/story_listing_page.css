@@ -1,0 +1,469 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+
+ul, li   {
+    list-style-type: none;
+  }
+ 
+  .b-filter:focus {
+    outline: 0;
+    box-shadow: none;
+}
+.ra{
+    filter: grayscale(100%);
+    
+}
+
+.img-event:hover .imghv {
+    filter: brightness(35%);
+    background-image: linear-gradient(180deg, rgba(13, 13, 15, 0.5) 40%, rgba(0, 0, 0, 0.7));
+  }
+  
+  .img-event:hover .middle {
+    opacity: 1;
+  }
+  .text {
+    background: transparent;
+    color: white;
+    font-size: 16px;
+    padding: 16px 32px;
+  }
+  .middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .vd-btn {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    border-radius: 20px;
+    padding: 10px;
+    width: 100%;
+}
+
+.sys-btn {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    border-radius: 20px;
+    padding: 10px;
+    width: 15%;
+}
+.detail{
+    
+    margin: auto ;
+}
+
+.prof-img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+}
+
+.img-large{
+    background-image: linear-gradient(180deg, rgba(13, 13, 15, 0.5) 40%, rgba(0, 0, 0, 0.7)), url(../images/Grow-Trees-On-the-path-to-environment-sustainability-login.png);
+    height: 38vh;
+    margin-bottom: 3rem;
+    background-position: 5% 38%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+
+.srch{
+    width: 85%;
+    margin: auto;
+    border: none;
+}
+
+.input-group-text{
+    display: flex;
+    flex: none;
+}
+
+.input-group .btn {
+    position: relative;
+    z-index: 2;
+    height: 35px;
+}
+.filter-wrapper{
+    border: 1px solid gray;
+}
+.filter{
+    margin: 0;
+}
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color:#f4f4f4;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: black;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #f4f4f4;
+    color: black;
+    padding: 10px 15px;
+    border: none;
+  }
+  
+  .openbtn:hover {
+    background-color: #444;
+  }
+  
+  #main1 {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+  #main2 {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+
+
+.input-group-text {
+    display: flex;
+    flex: none;
+}
+
+.srch {
+    width: 85%;
+    margin: auto;
+    border: none;
+}
+
+
+.col-lg-6 {
+    height: 45px;
+}
+
+.col-lg-3 {
+    height: 45px;
+}
+
+.img-fluid {
+    max-width: 100%;
+    max-height: 200px;
+    height: auto;
+}
+
+.view-group {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.thumbnail {
+    margin-bottom: 30px;
+    padding: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.item.list-group-item {
+    float: none;
+    width: 100%;
+    background-color: #fff;
+    margin-bottom: 30px;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0 1rem;
+    border: 0;
+}
+
+    .item.list-group-item .img-event {
+        float: left;
+        width: 30%;
+    }
+
+    .item.list-group-item .list-group-image {
+        margin-right: 10px;
+    }
+
+    .item.list-group-item .thumbnail {
+        margin-bottom: 0px;
+        display: inline-block;
+    }
+
+    .item.list-group-item .caption {
+        float: left;
+        width: 70%;
+        margin: 0;
+    }
+
+    .item.list-group-item:before, .item.list-group-item:after {
+        display: table;
+        content: " ";
+    }
+
+    .item.list-group-item:after {
+        clear: both;
+    }
+
+    .bottom-center {
+        position: absolute;
+        bottom: -10px;
+        /* top: -20px; */
+        left: 16px;
+        background-color: white;
+        color: black;
+        width: 40%;
+        left: 30%;
+        text-align: center;
+        border-radius: 20px;
+    }
+
+.filter-wrapper {
+    border: 1px solid gray;
+}
+
+.filter {
+    margin: 0;
+}
+
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    justify-content: center;
+}
+.page-link{
+    color: black;
+}
+
+.page-link:hover {
+    background-color: #F88634;
+    color: white;
+}
+
+.thumbimg {
+    width: 100%;
+    height: 100%;
+}
+.privacy-policy a {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+@media (min-width:769px) {
+    .mrg-start {
+        margin-left: 30%;
+    }
+
+    .be {
+        border-right: 1px solid #dee2e6
+    }
+
+    .bd {
+        border: 1px solid #dee2e6
+    }
+}
+
+@media (min-width:769px) and ( max-width:1024px) {
+    .bottom-center {
+        width: 60%;
+        left: 20%;
+    }
+    .img-fluid {
+        height: 200px;
+    }
+
+    h4 {
+        font-size: 20px;
+    }
+
+    .mb {
+        margin-bottom: 20%;
+    }
+    .mt1 {
+        margin-top: -1.75rem;
+    }
+
+    /* 24-02 */
+    .middle{
+        left: 50%;
+    }
+    .text{
+        padding: 0 0;
+    }
+    .sys-btn {
+        width: 20%;
+    }
+     .card{
+        height: 501px;
+    }
+    .pn{
+        margin-top: 40px;
+    }
+}
+
+@media ( max-width:768px) {
+    .bottom-center {
+        width: 35%;
+    }
+
+    .img-fluid {
+        height: 40%;
+        width: 200%;
+        max-height: 300px;
+    }
+
+
+    h4 {
+        font-size: 20px;
+    }
+
+    .mb {
+        margin-bottom: 2%;
+    }
+
+    .mt1 {
+        margin-top: 0.75rem;
+    }
+
+    table {
+        margin: auto;
+    }
+    .sys-btn {
+        width: 25%;
+    }
+}
+
+@media (min-width:376px) and ( max-width:425px) {
+    .sys-btn {
+        width: 45%;
+    }
+    .bottom-center {
+        width: 44%;
+        left: 27%;
+    }
+    .vd-btn{
+        margin-left: 0%;
+        padding: 7px;
+    }
+    .text{
+        padding: 0;
+    }
+}
+
+@media (min-width:321px) and ( max-width:375px) {
+    .sys-btn {
+        width: 50%;
+    }
+    .bottom-center {
+        width: 50%;
+        left: 25%;
+    }
+    .text{
+        padding: 0;
+    }
+}
+
+@media (max-width:320px) {
+
+
+    .mb {
+        margin-bottom: 10%;
+    }
+
+    .mt5 {
+        margin-top: 50px;
+    }
+
+    .navigation {
+        font-size: 10px;
+    }
+    .sys-btn {
+        width: 65%;
+        padding: 6px 15px;
+    }
+    .bottom-center {
+        width: 56%;
+        margin-left: -8%;
+    }
+    .text{
+        padding: 0;
+    }
+    
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 15px;
+    }
+    .sidebar a {
+        font-size: 18px;
+    }
+}
+
+
+
+
+@media (max-width: 425px) {
+    #list {
+        display: none;
+    }
+}
+  
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }
+
+@media (min-width:769px){
+    .mrg-start{
+        margin-left: 30%;
+    }
+    .border-end{
+        border: none;
+    }
+    .be{
+        border-right: 1px solid #dee2e6;
+    }
+    .bd{
+        border: 1px solid #dee2e6;
+    }
+}
