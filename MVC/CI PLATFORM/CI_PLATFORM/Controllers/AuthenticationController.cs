@@ -1,13 +1,51 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CI_PLATFORM.Data;
+using CI_PLATFORM.Models;
+using CI_PLATFORM.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CI_PLATFORM.Controllers
 {
+    //[Route("Authentication")]
     public class AuthenticationController : Controller
     {
+
+        private readonly CiPlatformContext _db;
+            
+        public AuthenticationController(CiPlatformContext db)
+        {
+            _db = db;
+        }
+        [Route("Authentication/login", Name = "UserLogin2")]    
         public IActionResult login()
         {
             return View();
         }
+
+        [HttpPost]
+        [Route("Authentication/login", Name = "UserLogin1")]
+        public IActionResult login(loginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Check if a user with the provided email and password exists in the database
+                var userExists = _db.Users.Any(u => u.Email == model.Email && u.Password == model.Password);
+                if (userExists)
+                {
+                   // User exists
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    // User does not exist, adding a model error
+                    ModelState.AddModelError("", "Invalid email or password");
+                }
+            }
+
+            // ModelState is invalid, or user does not exist, return to the login view with errors
+            return View(model);
+        }
+
+
         public IActionResult Forgot_Password()
         {
             return View();
@@ -20,22 +58,33 @@ namespace CI_PLATFORM.Controllers
         {
             return View();
         }
-        public IActionResult Platform_Landing_Page()
+        [HttpPost]
+        [Route("Authentication/Registration", Name = "UserRegistration1")]
+        public IActionResult Registration(RegistrationViewModel model)
         {
-            return View();
+           
 
-        }
-        public IActionResult No_mission_found()
-        {
-            return View();
-        }
-        public IActionResult Volunteering_Mission_Page()
-        {
-            return View();
-        }
-        public IActionResult Story_Listing_Page()
-        {
-            return View();
+
+            if (ModelState.IsValid)
+            {
+                
+                var user = new User
+                {
+                   
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    Password = model.Password
+                };
+
+                _db.Users.Add(user);
+                _db.SaveChanges();
+                TempData["SuccessMessage"] = "Registration successful. Please login to continue.";
+                return RedirectToAction("login");
+            }
+
+            return View(model);
         }
     }
 }

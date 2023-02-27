@@ -1,7 +1,13 @@
+using CI_PLATFORM.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<CiPlatformContext>(options => options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+    ));
 
 var app = builder.Build();
 
@@ -27,5 +33,9 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "Authentication",
     pattern: "{controller=Authentication}/{action=login}");
+
+app.MapControllerRoute(
+    name: "Content",
+    pattern: "{controller=Content}/{action=Platform_Landing_Page}");
 
 app.Run();

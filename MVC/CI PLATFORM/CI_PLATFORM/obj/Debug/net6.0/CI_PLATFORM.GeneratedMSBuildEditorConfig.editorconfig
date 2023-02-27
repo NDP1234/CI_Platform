@@ -23,14 +23,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aGVudGljYXRpb25cbG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pci120/Desktop/CI platform/CIP/MVC/CI PLATFORM/CI_PLATFORM/Views/Authentication/No_mission_found.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aGVudGljYXRpb25cTm9fbWlzc2lvbl9mb3VuZC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/pci120/Desktop/CI platform/CIP/MVC/CI PLATFORM/CI_PLATFORM/Views/Authentication/Platform_Landing_Page.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aGVudGljYXRpb25cUGxhdGZvcm1fTGFuZGluZ19QYWdlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/pci120/Desktop/CI platform/CIP/MVC/CI PLATFORM/CI_PLATFORM/Views/Authentication/Registration.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aGVudGljYXRpb25cUmVnaXN0cmF0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -39,12 +31,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aGVudGljYXRpb25cUmVzZXRfUGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pci120/Desktop/CI platform/CIP/MVC/CI PLATFORM/CI_PLATFORM/Views/Authentication/Story_Listing_Page.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aGVudGljYXRpb25cU3RvcnlfTGlzdGluZ19QYWdlLmNzaHRtbA==
+[C:/Users/pci120/Desktop/CI platform/CIP/MVC/CI PLATFORM/CI_PLATFORM/Views/Content/No_mission_found.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudFxOb19taXNzaW9uX2ZvdW5kLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pci120/Desktop/CI platform/CIP/MVC/CI PLATFORM/CI_PLATFORM/Views/Authentication/Volunteering_Mission_Page.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aGVudGljYXRpb25cVm9sdW50ZWVyaW5nX01pc3Npb25fUGFnZS5jc2h0bWw=
+[C:/Users/pci120/Desktop/CI platform/CIP/MVC/CI PLATFORM/CI_PLATFORM/Views/Content/Platform_Landing_Page.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudFxQbGF0Zm9ybV9MYW5kaW5nX1BhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pci120/Desktop/CI platform/CIP/MVC/CI PLATFORM/CI_PLATFORM/Views/Content/Story_Listing_Page.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudFxTdG9yeV9MaXN0aW5nX1BhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pci120/Desktop/CI platform/CIP/MVC/CI PLATFORM/CI_PLATFORM/Views/Content/Volunteering_Mission_Page.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudFxWb2x1bnRlZXJpbmdfTWlzc2lvbl9QYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/pci120/Desktop/CI platform/CIP/MVC/CI PLATFORM/CI_PLATFORM/Views/Home/Index.cshtml]
@@ -69,6 +69,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/pci120/Desktop/CI platform/CIP/MVC/CI PLATFORM/CI_PLATFORM/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pci120/Desktop/CI platform/CIP/MVC/CI PLATFORM/CI_PLATFORM/wwwroot/css/login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d3d3cm9vdFxjc3NcbG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/pci120/Desktop/CI platform/CIP/MVC/CI PLATFORM/CI_PLATFORM/Views/Shared/_Layout.cshtml]

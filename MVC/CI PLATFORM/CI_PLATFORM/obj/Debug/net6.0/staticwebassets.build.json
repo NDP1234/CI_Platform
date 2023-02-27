@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "pP5DahbMCvN1nyHC2gKOjW+85w5fsHpJSD8VMYgKO84=",
+  "Hash": "z22nLvk0zYrCm/xk4/e73wy3Rk2CAPJOQMp49gfoKAs=",
   "Source": "CI_PLATFORM",
   "BasePath": "_content/CI_PLATFORM",
   "Mode": "Default",
@@ -66,6 +66,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\f_pwd.css"
+    },
+    {
+      "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\css\\login.cshtml",
+      "SourceId": "CI_PLATFORM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\",
+      "BasePath": "_content/CI_PLATFORM",
+      "RelativePath": "css/login.cshtml",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "wwwroot\\css\\login.cshtml"
     },
     {
       "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\css\\login.css",

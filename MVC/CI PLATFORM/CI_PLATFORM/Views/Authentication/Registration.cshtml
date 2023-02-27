@@ -1,4 +1,7 @@
-﻿@*
+﻿@using CI_PLATFORM.Models.ViewModels
+@model RegistrationViewModel
+
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -62,42 +65,49 @@
 
        <div class=" col-12 col-xs-12 col-sm-12 col-md-12 col-xl-3 ">
            <div class=" h-100  d-flex align-items-center ">
-                <form class="w-100 p-2">            
+                <form class="w-100 p-2" method= "post">            
+                  
                   <div class="form-outline mb-3 mt-4 align-items-center d">
-                    <label class="form-label w" for="form3Example1cg">First Name</label>
-                    <input type="text" id="form3Example1cg" class="form-control form-control-sm w " placeholder="evan" />
+                      <span asp-validation-for="FirstName" class="text-danger"></span>
+                    <label class="form-label w" for="fn-form">First Name</label>
+                    <input asp-for="FirstName" type="text" id="fn-form" class="form-control form-control-sm w "/>
                   </div>
                   <div class="form-outline mb-3 d">
-                    <label class="form-label " for="form3Example1cg">Last Name</label>
-                    <input type="text" id="form3Example1cg" class="form-control form-control-sm w" placeholder="donohue" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                    <label class="form-label " for="ln-form">Last Name</label>
+                    <input asp-for="LastName" type="text" id="ln-form" class="form-control form-control-sm w"  />
                   </div>
                   <div class="form-outline mb-3 d">
-                    <label class="form-label " for="phoneNumber">Phone Number</label>
-                    <input type="tel" id="phoneNumber" class="form-control form-control-sm w" placeholder="8923454615" />
-                  </div>
-  
-                  <div class="form-outline mb-3 d">
-                    <label class="form-label " for="form3Example3cg">Email Address</label>
-                    <input type="email" id="form3Example3cg" class="form-control form-control-sm w" placeholder="evan.donohue@gmail.com"/>
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    <label class="form-label " for="pnumber">Phone Number</label>
+                    <input asp-for="PhoneNumber" type="tel" id="pnumber" class="form-control form-control-sm w"  />
                   </div>
   
                   <div class="form-outline mb-3 d">
-                    <label class="form-label " for="form3Example4cg">Password</label>
-                    <input type="password" id="form3Example4cg" class="form-control form-control-sm w" placeholder="**********" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <label class="form-label " for="emailadd">Email Address</label>
+                    <input  asp-for="Email" type="email" id="emailadd" class="form-control form-control-sm w" />
                   </div>
   
                   <div class="form-outline mb-3 d">
-                    <label class="form-label " for="form3Example4cdg">Confirm Password</label>
-                    <input type="password" id="form3Example4cdg" class="form-control form-control-sm w" placeholder="**********"/>
+                      <span asp-validation-for="Password" class="text-danger"></span>
+                    <label class="form-label " for="pwd">Password</label>
+                    <input asp-for="Password" type="password" id="pwd" class="form-control form-control-sm w" />
+                  </div>
+  
+                  <div class="form-outline mb-3 d">
+                      <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    <label class="form-label " for="c-pwd">Confirm Password</label>
+                    <input asp-for="ConfirmPassword" type="password" id="c-pwd" class="form-control form-control-sm w" />
                   </div>
                   <div class="d-grid gap-2 mb-3 mx-auto ">
-                        <button class="btn btn-primary btn-login"  type="button">Login</button>
+                        <button class="btn btn-primary btn-login"  type="submit">Login</button>
                   </div>
                   <div class="mb-2 center_link ">
-                    <a class="text-center link-secondary td" href="./Forgot_Password">Lost your password?</a>
+                    <a class="text-center link-secondary td" asp-controller="Authentication" asp-action="Forgot_Password">Lost your password?</a>
                   </div>
                   <div class="center_link ">
-                      <p class=" pb-lg-2 fsize">Already registered? <a href="./login" class="td2">Login now</a></p>
+                      <p class=" pb-lg-2 fsize">Already registered? <a  asp-controller="Authentication" asp-action="login" class="td2">Login now</a></p>
                   </div>
                   <div class="center_link " ><a  href="#!" class="td small text-muted">Privacy policy</a></div>
                 </form>

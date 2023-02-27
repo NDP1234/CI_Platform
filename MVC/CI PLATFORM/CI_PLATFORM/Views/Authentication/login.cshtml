@@ -1,4 +1,6 @@
-﻿@*
+﻿@using CI_PLATFORM.Models.ViewModels
+@model loginViewModel
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -90,35 +92,37 @@
 
           <div class="card-body p-4 p-lg-5 text-black">
 
-            <form>
+            <form  method="post">
 
-
+                @*<div asp-validation-summary="All" class="text-danger"></div>*@
               <div class="form-outline mb-4">
-                <label class="form-label" for="form2Example17">Email address</label>
-                <input type="email" id="form2Example17" class="form-control form-control-lg"
-                  placeholder="evan.donohue@gmail.com" />
+                <label asp-for="Email" class="form-label" for="inputEmail">Email address</label>
+                <input asp-for="Email" type="email" id="inputEmail" class="form-control form-control-lg" aria-describedby="emailHelp"
+                  placeholder="Enter mail" />
+                  <span asp-validation-for="Email" class="text-danger"></span>
               </div>
 
               <div class="form-outline mb-4">
-                <label class="form-label" for="form2Example27">Password</label>
-                <input type="password" id="form2Example27" placeholder="**********"
+                <label asp-for="Password" class="form-label" for="exampleInputPassword">Password</label>
+                <input asp-for="Password" type="password" id="exampleInputPassword" placeholder="Password"
                   class="form-control form-control-lg" />
+                <span asp-validation-for="Password" class="text-danger"></span>
               </div>
 
               <div class="d-grid gap-2 mb-4">
              
-                <button class="btn btn-primary btn-login" type="button">Login</button>
+                <button class="btn btn-primary btn-login" type="submit">Login</button>
 
               </div>
 
              
               <div class="mb-2 center_link ">
-                <a class="text-center link-secondary td" href="./Forgot_Password">Lost your password?</a>
+                <a class="text-center link-secondary td"  asp-controller="Authentication" asp-action="Forgot_Password">Lost your password?</a>
               </div>
            
               <div class="center_link ">
                 <p class=" pb-lg-2 fsize" style="color: #393f81;">Don't have an account?<span class="bluecl"><a
-                      href="./Registration" class="td2">Create an account</a></p>
+                      asp-controller="Authentication" asp-action="Registration" class="td2">Create an account</a></p>
               </div>
              
               <div class="center_link mgt"><a class="td " href="#!" class="small text-muted">Privacy policy</a></div>
