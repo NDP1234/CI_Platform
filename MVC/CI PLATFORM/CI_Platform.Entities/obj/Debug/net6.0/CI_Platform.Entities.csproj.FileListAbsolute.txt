@@ -1,0 +1,14 @@
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_Platform.Entities\bin\Debug\net6.0\CI_Platform.Entities.deps.json
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_Platform.Entities\bin\Debug\net6.0\CI_Platform.Entities.runtimeconfig.json
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_Platform.Entities\bin\Debug\net6.0\CI_Platform.Entities.dll
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_Platform.Entities\bin\Debug\net6.0\ref\CI_Platform.Entities.dll
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_Platform.Entities\bin\Debug\net6.0\CI_Platform.Entities.pdb
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_Platform.Entities\obj\Debug\net6.0\CI_Platform.Entities.csproj.AssemblyReference.cache
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_Platform.Entities\obj\Debug\net6.0\CI_Platform.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_Platform.Entities\obj\Debug\net6.0\CI_Platform.Entities.AssemblyInfoInputs.cache
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_Platform.Entities\obj\Debug\net6.0\CI_Platform.Entities.AssemblyInfo.cs
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_Platform.Entities\obj\Debug\net6.0\CI_Platform.Entities.csproj.CoreCompileInputs.cache
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_Platform.Entities\obj\Debug\net6.0\CI_Platform.Entities.dll
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_Platform.Entities\obj\Debug\net6.0\ref\CI_Platform.Entities.dll
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_Platform.Entities\obj\Debug\net6.0\CI_Platform.Entities.pdb
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_Platform.Entities\obj\Debug\net6.0\CI_Platform.Entities.genruntimeconfig.cache

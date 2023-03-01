@@ -1,7 +1,11 @@
-﻿using CI_PLATFORM.Data;
+﻿using CI_Platform.Entities.Data;
+using CI_Platform.Entities.Models;
+//using CI_PLATFORM.Data;
 using CI_PLATFORM.Models;
 using CI_PLATFORM.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.Net.Mail;
 
 namespace CI_PLATFORM.Controllers
 {
@@ -45,15 +49,130 @@ namespace CI_PLATFORM.Controllers
             return View(model);
         }
 
-
+        [Route("Authentication/Forgot_Password")]
         public IActionResult Forgot_Password()
         {
             return View();
         }
-        public IActionResult Reset_Password()
+        //------
+        [HttpPost]
+        [Route("Authentication/Forgot_Password")]
+        public IActionResult Forgot_Password(ForgotViewModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                var userExists = _db.Users.Any(u => u.Email == model.Email);
+
+                if (userExists)
+                {
+
+                    Random random = new Random();
+
+                    int capitalCharCode = random.Next(65, 91);
+                    char randomCapitalChar = (char)capitalCharCode;
+
+
+                    int randomint = random.Next();
+
+
+                    int SmallcharCode = random.Next(97, 123);
+                    char randomChar = (char)SmallcharCode;
+
+                    String token = "";
+                    token += randomCapitalChar.ToString();
+                    token += randomint.ToString();
+                    token += randomChar.ToString();
+
+
+                    var PasswordResetLink = Url.Action("Reset_Password", "User", new { Email = model.Email, Token = token }, Request.Scheme);
+
+                    var ResetPasswordInfo = new CI_Platform.Entities.Models.PasswordReset()
+                    {
+                        Email = model.Email,
+                        Token = token
+                    };
+                    _db.PasswordResets.Add(ResetPasswordInfo);
+                    _db.SaveChanges();
+
+
+                    var fromEmail = new MailAddress("niravdpatel632@gmail.com");
+                    var toEmail = new MailAddress(model.Email);
+                    var fromEmailPassword = "hflzawnzmsaqrkrj";
+                    string subject = "Reset Password";
+                    string body = PasswordResetLink;
+
+                    var smtp = new SmtpClient
+                    {
+
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+                    };
+
+                    MailMessage message = new MailMessage(fromEmail, toEmail);
+                    message.Subject = subject;
+                    message.Body = body;
+                    message.IsBodyHtml = true;
+                    smtp.Send(message);
+
+                    ViewBag.EmailSent = "Mail Is Sent Successfully, Check Your Inbox!";
+                }
+                else
+                {
+
+                    ModelState.AddModelError("", "User not exist.. please enter correct email address");
+                }
+            }
+            return View(model);
         }
+        //----
+
+        public IActionResult Reset_Password(string email, string token)
+        {
+            return View(new ResetPwdModel
+            {
+                email = email,
+                Token = token
+            });
+        }
+
+
+
+        [HttpPost]
+
+        public IActionResult resetpassword(ResetPwdModel model)
+        {
+            CiPlatformContext context = new CiPlatformContext();
+
+            var ResetPasswordData = context.PasswordResets.Any(e => e.Email == model.email && e.Token == model.Token);
+
+
+            if (ResetPasswordData)
+            {
+                var x = context.Users.FirstOrDefault(e => e.Email == model.email);
+
+
+                x.Password = model.NewPassword;
+
+                Console.WriteLine(x.Password);
+
+                context.Users.Update(x);
+                context.SaveChanges();
+            }
+            else
+            {
+                ModelState.AddModelError("Token", "Reset Passwordword Link is Invalid");
+            }
+            return View(model);
+        }
+
+
+
+
+
         public IActionResult Registration()
         {
             return View();
@@ -62,13 +181,14 @@ namespace CI_PLATFORM.Controllers
         [Route("Authentication/Registration", Name = "UserRegistration1")]
         public IActionResult Registration(RegistrationViewModel model)
         {
-           
+
+            
 
 
             if (ModelState.IsValid)
             {
                 
-                var user = new User
+                var user = new CI_Platform.Entities.Models.User
                 {
                    
                     FirstName = model.FirstName,

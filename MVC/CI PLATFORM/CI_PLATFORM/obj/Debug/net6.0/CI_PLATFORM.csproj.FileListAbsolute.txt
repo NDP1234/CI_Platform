@@ -80,3 +80,8 @@ C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_PLATFORM\bin\Debug\ne
 C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_PLATFORM\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_PLATFORM\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_PLATFORM\obj\Debug\net6.0\CI_PLATFORM.csproj.CopyComplete
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_PLATFORM\bin\Debug\net6.0\CI_Platform.Entities.dll
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_PLATFORM\bin\Debug\net6.0\CI_Platform.Repository.dll
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_PLATFORM\bin\Debug\net6.0\CI_Platform.Entities.pdb
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_PLATFORM\bin\Debug\net6.0\CI_Platform.Repository.pdb
+C:\Users\pci120\Desktop\CI platform\CIP\MVC\CI PLATFORM\CI_PLATFORM\obj\Debug\net6.0\CI_PLATFORM.MvcApplicationPartsAssemblyInfo.cs
