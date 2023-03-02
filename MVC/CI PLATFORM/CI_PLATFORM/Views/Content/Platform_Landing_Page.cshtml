@@ -124,9 +124,13 @@
                                     <span>Country&nbsp; &nbsp;</span>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">Country-1</a></li>
+                                   @* <li><a class="dropdown-item" href="#">Country-1</a></li>
                                     <li><a class="dropdown-item" href="#">Country-2</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>*@
+                                    @foreach (var item in @ViewBag.Country)
+                                    {
+                                    <li><a class="dropdown-item" href="#">@item.Name</a></li>
+                                    }
                                 </ul>
                             </div>
 
@@ -136,9 +140,13 @@
                                     <span>City&nbsp; &nbsp;</span>
                                 </a>
                                 <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">City-1</a></li>
+                                    @*<li><a class="dropdown-item" href="#">City-1</a></li>
                                     <li><a class="dropdown-item" href="#">City-2 </a></li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>*@
+                                     @foreach (var item in @ViewBag.City)
+                                    {
+                                    <li><a class="dropdown-item" href="#">@item.Name</a></li>
+                                    }
                                 </ul>
                             </div>
 
@@ -148,9 +156,13 @@
                                     <span>Theme &nbsp; &nbsp;</span>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">Theme-1</a></li>
+                                    @*<li><a class="dropdown-item" href="#">Theme-1</a></li>
                                     <li><a class="dropdown-item" href="#">Theme-2 </a></li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>*@
+                                    @foreach (var item in @ViewBag.MissionTheme)
+                                    {
+                                    <li><a class="dropdown-item" href="#">@item.Name</a></li>
+                                    }
                                 </ul>
                             </div>
 
@@ -183,12 +195,16 @@
                                     Country
                                 </a>
                                 <ul class="dropdown-menu ">
-                                    <li><a class="dropdown-item " href="#">Country-1</a></li>
+        @*                            <li><a class="dropdown-item " href="#">Country-1</a></li>
                                     <li><a class="dropdown-item" href="#">Country-2</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>*@
+                                    @foreach (var item in @ViewBag.Country)
+                                    {
+                                    <li><a class="dropdown-item" href="#">@item.Name</a></li>
+                                    }
                                 </ul>
                             </li>
                         </a>
@@ -199,12 +215,10 @@
                                     City
                                 </a>
                                 <ul class="dropdown-menu ">
-                                    <li><a class="dropdown-item " href="#">City-1</a></li>
-                                    <li><a class="dropdown-item" href="#">City-2</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                    @foreach (var item in @ViewBag.City)
+                                    {
+                                    <li><a class="dropdown-item" href="#">@item.Name</a></li>
+                                    }
                                 </ul>
                             </li>
                         </a>
@@ -215,12 +229,16 @@
                                     Theme
                                 </a>
                                 <ul class="dropdown-menu ">
-                                    <li><a class="dropdown-item " href="#">Theme-1</a></li>
+                                    @*<li><a class="dropdown-item " href="#">Theme-1</a></li>
                                     <li><a class="dropdown-item" href="#">Theme-2</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>*@
+                                     @foreach (var item in @ViewBag.MissionTheme)
+                                    {
+                                    <li><a class="dropdown-item" href="#">@item.Name</a></li>
+                                    }
                                 </ul>
                             </li>
                         </a>

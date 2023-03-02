@@ -1,4 +1,6 @@
 using CI_Platform.Entities.Data;
+using CI_Platform.Repository.Interface;
+using CI_Platform.Repository.Repository;
 //using CI_PLATFORM.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +12,12 @@ builder.Services.AddDbContext<CiPlatformContext>(options => options.UseSqlServer
         builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 
+builder.Services.AddScoped<ICountryRepository, CountryRepository>();
+builder.Services.AddScoped<ICityRepository, CityRepository>();
+builder.Services.AddScoped<IThemeRepository, ThemeRepository>();
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
