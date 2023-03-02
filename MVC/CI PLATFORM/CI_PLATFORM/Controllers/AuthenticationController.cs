@@ -33,15 +33,16 @@ namespace CI_PLATFORM.Controllers
             {
                 // Check if a user with the provided email and password exists in the database
                 var userExists = _db.Users.Any(u => u.Email == model.Email && u.Password == model.Password);
+          
                 if (userExists)
                 {
-                   // User exists
-                    return RedirectToAction("Index", "Home");
+                    // User exists
+                    return RedirectToAction("Platform_Landing_Page", "Content");
                 }
                 else
                 {
                     // User does not exist, adding a model error
-                    ModelState.AddModelError("", "Invalid email or password");
+                    ModelState.AddModelError("password", "Invalid email or password");
                 }
             }
 
@@ -84,7 +85,7 @@ namespace CI_PLATFORM.Controllers
                     token += randomChar.ToString();
 
 
-                    var PasswordResetLink = Url.Action("Reset_Password", "User", new { Email = model.Email, Token = token }, Request.Scheme);
+                    var PasswordResetLink = Url.Action("Reset_Password", "Authentication", new { Email = model.Email, Token = token }, Request.Scheme);
 
                     var ResetPasswordInfo = new CI_Platform.Entities.Models.PasswordReset()
                     {
@@ -143,30 +144,34 @@ namespace CI_PLATFORM.Controllers
 
         [HttpPost]
 
-        public IActionResult resetpassword(ResetPwdModel model)
+        public IActionResult Reset_Password(ResetPwdModel model)
         {
             CiPlatformContext context = new CiPlatformContext();
 
             var ResetPasswordData = context.PasswordResets.Any(e => e.Email == model.email && e.Token == model.Token);
 
-
-            if (ResetPasswordData)
+            if (ModelState.IsValid)
             {
-                var x = context.Users.FirstOrDefault(e => e.Email == model.email);
+                if (model.NewPassword==model.ConfirmPassword)
+                {
+                    var x = context.Users.FirstOrDefault(e => e.Email == model.email);
+                    x.Password = model.NewPassword;
+                    _db.Users.Update(x);
+                    _db.SaveChanges();
+                    ViewBag.PassChange = "Password Changed Successfully!";
 
-
-                x.Password = model.NewPassword;
-
-                Console.WriteLine(x.Password);
-
-                context.Users.Update(x);
-                context.SaveChanges();
+                }
+                else
+                {
+                    ModelState.AddModelError("Token", "Reset Passwordword Link is Invalid");
+                    return View(); 
+                }
             }
             else
             {
-                ModelState.AddModelError("Token", "Reset Passwordword Link is Invalid");
+                return View();
             }
-            return View(model);
+            return View();
         }
 
 

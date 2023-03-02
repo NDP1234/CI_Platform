@@ -68,37 +68,37 @@
                 <form class="w-100 p-2" method= "post">            
                   
                   <div class="form-outline mb-3 mt-4 align-items-center d">
-                      <span asp-validation-for="FirstName" class="text-danger"></span>
                     <label class="form-label w" for="fn-form">First Name</label>
                     <input asp-for="FirstName" type="text" id="fn-form" class="form-control form-control-sm w "/>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
                   </div>
                   <div class="form-outline mb-3 d">
-                    <span asp-validation-for="LastName" class="text-danger"></span>
                     <label class="form-label " for="ln-form">Last Name</label>
                     <input asp-for="LastName" type="text" id="ln-form" class="form-control form-control-sm w"  />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
                   </div>
                   <div class="form-outline mb-3 d">
-                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                     <label class="form-label " for="pnumber">Phone Number</label>
                     <input asp-for="PhoneNumber" type="tel" id="pnumber" class="form-control form-control-sm w"  />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                   </div>
   
                   <div class="form-outline mb-3 d">
-                    <span asp-validation-for="Email" class="text-danger"></span>
                     <label class="form-label " for="emailadd">Email Address</label>
                     <input  asp-for="Email" type="email" id="emailadd" class="form-control form-control-sm w" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
                   </div>
   
                   <div class="form-outline mb-3 d">
-                      <span asp-validation-for="Password" class="text-danger"></span>
                     <label class="form-label " for="pwd">Password</label>
                     <input asp-for="Password" type="password" id="pwd" class="form-control form-control-sm w" />
+                     <span asp-validation-for="Password" class="text-danger"></span>
                   </div>
   
                   <div class="form-outline mb-3 d">
-                      <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     <label class="form-label " for="c-pwd">Confirm Password</label>
                     <input asp-for="ConfirmPassword" type="password" id="c-pwd" class="form-control form-control-sm w" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                   </div>
                   <div class="d-grid gap-2 mb-3 mx-auto ">
                         <button class="btn btn-primary btn-login"  type="submit">Register</button>

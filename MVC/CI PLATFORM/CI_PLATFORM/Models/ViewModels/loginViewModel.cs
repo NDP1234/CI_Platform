@@ -10,6 +10,7 @@ namespace CI_PLATFORM.Models.ViewModels
         public string Email { get; set; } = null!;
 
         [Required(ErrorMessage = "Password is required")]
+        //[Password(ErrorMessage = "Invalid Password")]
         [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
     }
