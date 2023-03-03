@@ -14,6 +14,9 @@ namespace CI_PLATFORM.Models.ViewModels
 
         [Compare("NewPassword")]
         public string ConfirmPassword { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
         //[Required, DataType(DataType.Password)]
 
 

@@ -19,6 +19,10 @@ namespace CI_PLATFORM.Controllers
         {
             _db = db;
         }
+
+
+
+        //login
         [Route("Authentication/login", Name = "UserLogin2")]    
         public IActionResult login()
         {
@@ -50,6 +54,9 @@ namespace CI_PLATFORM.Controllers
             return View(model);
         }
 
+
+
+        //ForgotViewModel Password
         [Route("Authentication/Forgot_Password")]
         public IActionResult Forgot_Password()
         {
@@ -84,8 +91,8 @@ namespace CI_PLATFORM.Controllers
                     token += randomint.ToString();
                     token += randomChar.ToString();
 
-
-                    var PasswordResetLink = Url.Action("Reset_Password", "Authentication", new { Email = model.Email, Token = token }, Request.Scheme);
+                    
+                    var PasswordResetLink = Url.Action("Reset_Password", "Authentication", new {  Token = token }, Request.Scheme);
 
                     var ResetPasswordInfo = new CI_Platform.Entities.Models.PasswordReset()
                     {
@@ -131,13 +138,45 @@ namespace CI_PLATFORM.Controllers
         }
         //----
 
-        public IActionResult Reset_Password(string email, string token)
+
+
+        //Reset Password
+        //public IActionResult Reset_Password(string email, string token)
+        //{
+
+
+
+        //    return View(new ResetPwdModel
+        //    {
+        //        email = email,
+        //        Token = token
+        //    });
+        //}
+
+        public IActionResult Reset_Password( string token)
         {
-            return View(new ResetPwdModel
+
+            var temail = _db.PasswordResets.FirstOrDefault(m => m.Token == token);
+            var CreatedAt = temail.CreateAt;
+            var ExpiredAt = CreatedAt.AddMinutes(40);
+            var details = new ResetPwdModel()
             {
-                email = email,
-                Token = token
-            });
+                email = temail.Email,
+                Token = token,
+                CreatedAt = temail.CreateAt,
+                
+            };
+            var curTime = DateTime.Now;
+            if (ExpiredAt.CompareTo(curTime)<0) {
+                return RedirectToAction("Forgot_Password");
+            }
+            //return View(new ResetPwdModel
+            //{
+            //    email = temail.Email,
+            //    Token = token
+            //});
+            ViewBag.emailDetails = temail.Email;
+            return View();
         }
 
 
@@ -177,7 +216,7 @@ namespace CI_PLATFORM.Controllers
 
 
 
-
+        //Regisration
         public IActionResult Registration()
         {
             return View();
