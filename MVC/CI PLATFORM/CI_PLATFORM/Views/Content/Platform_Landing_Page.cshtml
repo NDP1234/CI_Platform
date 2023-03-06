@@ -53,7 +53,7 @@
                     <form class="d-flex" role="search">
 
                         <div class="dropdown">
-                            <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                            <a class="btn  dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLink"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="~/images/user-img.png" alt="" style="border-radius: 50%;" height="30px"
                                     width="30px">
@@ -119,7 +119,7 @@
                     <div class="col-12 col-lg-6 col-md-6 ">
                         <div class="row  ">
                             <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
-                                <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                <a class="btn  dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLink"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <span>Country&nbsp; &nbsp;</span>
                                 </a>
@@ -135,7 +135,7 @@
                             </div>
 
                             <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
-                                <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                <a class="btn  dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLink"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <span>City&nbsp; &nbsp;</span>
                                 </a>
@@ -151,7 +151,7 @@
                             </div>
 
                             <div class="dropdown d-inline col-lg-3  col-md-3 col-6 be text-center">
-                                <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                <a class="btn  dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLink"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <span>Theme &nbsp; &nbsp;</span>
                                 </a>
@@ -167,14 +167,18 @@
                             </div>
 
                             <div class="dropdown d-inline col-lg-3 col-md-3 col-6 text-center">
-                                <a class="btn  dropdown-toggle p-0 " href="#" role="button" id="dropdownMenuLink"
+                                <a class="btn  dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLink"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <span>Skills &nbsp; &nbsp;</span>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">Skill-1</a></li>
+                                    @*<li><a class="dropdown-item" href="#">Skill-1</a></li>
                                     <li><a class="dropdown-item" href="#">Skills-2</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>*@
+                                    @foreach (var item in @ViewBag.Skill)
+                                    {
+                                    <li><a class="dropdown-item" href="#">@item.SkillName</a></li>
+                                    }
                                 </ul>
                             </div>
                         </div>
@@ -189,8 +193,8 @@
                     <div id="mySidebar2" class="sidebar d-inline">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">×</a>
                         <a href="#">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                            <li class="nav-item dropdown ">
+                                <a class="nav-link dropdown-toggle b-filter" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     Country
                                 </a>
@@ -210,7 +214,7 @@
                         </a>
                         <a href="#">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                                <a class="nav-link dropdown-toggle b-filter" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     City
                                 </a>
@@ -224,7 +228,7 @@
                         </a>
                         <a href="#">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                                <a class="nav-link dropdown-toggle b-filter " href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     Theme
                                 </a>
@@ -244,17 +248,22 @@
                         </a>
                         <a href="#">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                                <a class="nav-link dropdown-toggle b-filter" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     Skills
                                 </a>
                                 <ul class="dropdown-menu ">
-                                    <li><a class="dropdown-item " href="#">Skills-1</a></li>
+                                    @*<li><a class="dropdown-item " href="#">Skills-1</a></li>
                                     <li><a class="dropdown-item" href="#">Skills-2</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
+                                    <li><a class="dropdown-item" href="#">Something else </a></li>*@
+                                    @foreach (var item in @ViewBag.Skill)
+                                    {
+                                    <li><a class="dropdown-item" href="#">@item.SkillName</a></li>
+                                    }
+
                                 </ul>
                             </li>
                         </a>
@@ -359,17 +368,20 @@
             </div>
         </nav>
 
-        <!-- -------------------------------------------------------------------- -->
-        <!-- Grid view -->
+            @*Grid-view*@
         <div id="products" class="row view-group all-view">
-            <!-- 1a -->
+           @foreach (var item in ViewBag.Mission)
+                {
             <div class="item col-xs-4 col-lg-4">
+               
+                    
+                
                 <div class="thumbnail card">
                     <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid W-100 "
-                            src="~/images/Grow-Trees-On-the-path-to-environment-sustainability.png" alt="" />
+                        <img class="group list-group-image img-fluid w-100"
+                            src="@item.image?.MediaPath" alt="unable to load img" />
                         <div class="bottom-left justify-content-center">
-                            Environment
+                            @item.Missions?.Theme.Title
                         </div>
                         <div class="bottom-right  opacity-50   ">
                             <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
@@ -379,17 +391,16 @@
                         </div>
                         <div class="bottom-right3  opacity-50   ">
                             <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                            <span>Toranto</span>
+                            <span>@item.Missions?.City.Name</span>
                         </div>
                     </div>
                     <div class="caption card-body">
                         <h4 class="group card-title inner list-group-item-heading">
-                            Grow Trees-On the path to environment sustainability</h4>
+                            @item.Missions.Title</h4>
                         <p class="group inner list-group-item-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore...</p>
+                           @item.Missions.ShortDescription</p>
                         <div class="row mb">
-                            <div class="col col-lg-6 col-md-6 col-sm-12">Tree Canada</div>
+                            <div class="col col-lg-6 col-md-6 col-sm-12">@item.Missions.OrganizationName</div>
                             <div class="col col-lg-6 col-md-6 col-sm-12 ">
                                 <img src="~/images/selected-star.png" class="wdimg" alt="">
                                 <img src="~/images/selected-star.png" class="wdimg" alt="">
@@ -400,13 +411,27 @@
                         </div>
                         <div class="position-relative ">
                             <hr style="z-index: -1;">
+                            @if (item.Missions.MissionType=="TIME")
+                            {
                             <div class="dt text-center  position-absolute">
-                                <span class="fsize"> From 10/01/2019 until 25/02/2019</span>
+                                <span class="fsize"> From  @item.Missions.StartDate.ToString().Substring(0, 10)  until @item.Missions.EndDate.ToString().Substring(0, 10)</span>
                             </div>
+                                }
+                            else
+                            {
+                            <div class="dt text-center  position-absolute">
+                                <span class="fsize"> Ongoing Opportunity</span>
+                            </div>
+                                    
+                            }
+
                         </div>
                         <div class="row mt-4 ">
+                               @if (item.Missions.MissionType=="TIME")
+                                {
                             <div class="col">
-                                <table>
+                             
+                                    <table>
                                     <tr>
                                         <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
                                         <td>10</td>
@@ -426,66 +451,11 @@
                                         <td class="fsize">Deadline</td>
                                     </tr>
                                 </table>
-                            </div>
-                            <hr>
-                        </div>
-
-                        <div class="row">
-                            <!-- <div class="col-xs-12 col-md-6">
-                                    <p class="lead">
-                                        $21.000</p>
-                                </div> -->
-                            <div class="col-xs-12 col-md-6 mx-auto">
-                                <a class="btn btnapp " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 2a -->
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid " width="100%"
-                            src="~/images/Education-Supplies-for-Every--Pair-of-Shoes-Sold-2.png" alt="" />
-                        <div class="bottom-left justify-content-center">
-                            Children
-                        </div>
-                        <div class="bottom-right  opacity-50   ">
-                            <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right2  opacity-50   ">
-                            <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right3  opacity-50   ">
-                            <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                            <span>Melbourne</span>
-                        </div>
-                    </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            Education Supplies for Every Pair of Shoes Sold</h4>
-                        <p class="group inner list-group-item-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore...</p>
-                        <div class="row mb">
-                            <div class="col col-lg-6 col-md-6 col-sm-12"> Australian Paradise</div>
-                            <div class="col col-lg-6 col-md-6 col-sm-12">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
-                        </div>
-                        <div class="position-relative ">
-                            <hr style="z-index: -1;">
-                            <div class="dt text-center  position-absolute">
-                                <span class="fsize"> From 10/01/2019 until 25/02/2019</span>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col">
+                                        </div>
+                                    }
+                                    else
+                                    {
+                        <div class="col">
                                 <table>
                                     <tr>
                                         <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
@@ -495,234 +465,8 @@
                                         <td class="fsize2">Already volunteered</td>
                                     </tr>
                                 </table>
-                            </div>
-                            <div class="col">
-                                <table>
-                                    <tr>
-                                        <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
-                                        <td>09/01/2019 </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fsize">Deadline</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <hr>
                         </div>
-                        <div class="row">
-                            <!-- <div class="col-xs-12 col-md-6">
-                                    <p class="lead">
-                                        $21.000</p>
-                                </div> -->
-                            <div class="col-xs-12 col-md-6 mx-auto">
-                                <a class="btn btnapp " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 3a -->
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid" width="100%"
-                            src="~/images/Nourish-the-Children-in--African-country.png" alt="" />
-                        <div class="bottom-left justify-content-center">
-                            Nutrition
-                        </div>
-                        <div class="bottom-right  opacity-50   ">
-                            <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right2  opacity-50   ">
-                            <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right3  opacity-50   ">
-                            <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                            <span>Barcelona</span>
-                        </div>
-                    </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            Nourish the Children in African country</h4>
-                        <p class="group inner list-group-item-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore...</p>
-                        <div class="row mb">
-                            <div class="col col-lg-6 col-md-6 col-sm-12">The Hunger</div>
-                            <div class="col col-lg-6 col-md-6 col-sm-12">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
-                        </div>
-                        <div class="position-relative ">
-                            <hr style="z-index: -1;">
-                            <div class="dt text-center  position-absolute">
-                                <span> Ongoing Opportunity</span>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <table>
-                                    <tr>
-                                        <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fsize2"> Seats Left</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col">
-                                <table>
-                                    <tr>
-                                        <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
-                                        <td>09/01/2019 </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fsize">Deadline</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <hr>
-                        </div>
-                        <div class="row">
-                            <!-- <div class="col-xs-12 col-md-6">
-                                    <p class="lead">
-                                        $21.000</p>
-                                </div> -->
-                            <div class="col-xs-12 col-md-6 mx-auto">
-                                <a class="btn btnapp " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 4a -->
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid"
-                            src="~/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity.png" alt="" />
-                        <div class="bottom-left justify-content-center">
-                            Environment
-                        </div>
-                        <div class="bottom-right  opacity-50   ">
-                            <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right2  opacity-50   ">
-                            <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right3  opacity-50   ">
-                            <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                            <span>London</span>
-                        </div>
-                    </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            CSR initiative stands for Coffee and Farmer Equity</h4>
-                        <p class="group inner list-group-item-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore...</p>
-                        <div class="row mb">
-                            <div class="col col-lg-6 col-md-6 col-sm-12">CSE Network</div>
-                            <div class="col col-lg-6 col-md-6 col-sm-12">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
-                        </div>
-                        <div class="position-relative ">
-                            <hr style="z-index: -1;">
-                            <div class="dt text-center  position-absolute">
-                                <span> Ongoing Opportunity</span>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <table>
-                                    <tr>
-                                        <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
-                                        <td>250</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fsize2">Already volunteered</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <hr>
-                        </div>
-                        <div class="row">
-                            <!-- <div class="col-xs-12 col-md-6">
-                                    <p class="lead">
-                                        $21.000</p>
-                                </div> -->
-                            <div class="col-xs-12 col-md-6 mx-auto">
-                                <a class="btn btnapp " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 5a -->
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid"
-                            src="~/images/Animal-welfare-&-save-birds-campaign.png" alt="" />
-                        <div class="bottom-left justify-content-center">
-                            Animals
-                        </div>
-                        <div class="bottom-right  opacity-50   ">
-                            <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right2  opacity-50   ">
-                            <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right3  opacity-50   ">
-                            <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                            <span>Cape Town</span>
-                        </div>
-                    </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            Animal welfare & save birds campaign </h4>
-                        <p class="group inner list-group-item-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore...</p>
-                        <div class="row mb">
-                            <div class="col col-lg-6 col-md-6 col-sm-12">JR Foundation</div>
-                            <div class="col col-lg-6 col-md-6 col-sm-12">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
-                        </div>
-                        <div class="position-relative ">
-                            <hr style="z-index: -1;">
-                            <div class="dt text-center  position-absolute">
-                                <span> Plant 10,000 Trees</span>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <table>
-                                    <tr>
-                                        <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fsize2">Seats left</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col">
+                        <div class="col">
                                 <table>
                                     <tr>
                                         <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
@@ -737,67 +481,162 @@
                                         <td class="fsize2">8000 Achieved</td>
                                     </tr>
                                 </table>
+                        </div> 
+
+                         }
+
                             </div>
-                            <hr>
-                        </div>
+
                         <div class="row">
-                            <!-- <div class="col-xs-12 col-md-6">
-                                    <p class="lead">
-                                        $21.000</p>
-                                </div> -->
-
                             <div class="col-xs-12 col-md-6 mx-auto">
-                                <a class="btn btnapp " href="">Apply<img src="~/images/right-arrow.png" alt=""></a>
-
+                                <a class="btn btnapp " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
                             </div>
                         </div>
                     </div>
                 </div>
+               
             </div>
-            <!-- 6a -->
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid"
-                            src="~/images/Plantation-and-Afforestation-programme.png" alt="" />
-                        <div class="bottom-left justify-content-center">
-                            Health
+            }
+        </div>
+
+        @*list view*@ 
+        <div class="container all-view d-none" id="myListView">
+    <div class="row border">
+        <!-- 1 -->
+        @foreach (var item in ViewBag.Mission)
+        {
+        <div class="col col-lg-4  col-md-12 col-xs-12 position-relative  my-3  ">
+            <img src="@item.image?.MediaPath" class="thumbimg" alt="" />
+            <div class="bl1 justify-content-center">
+                @item.Missions?.Theme.Title
+            </div>
+            <div class="bottom-right4  opacity-50   ">
+                <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
+            </div>
+            <div class="bottom-right5  opacity-50   ">
+                <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
+            </div>
+            <div class="bottom-right6  opacity-50   ">
+                <img src="~/images/pin.png" class="mx-auto p-1" alt="">
+                <span>@item.Missions?.City.Name</span>
+            </div>
+        </div>
+        <div class="col col-lg-8 col-md-12 col-sm-12">
+            <h4 class="group card-title inner list-group-item-heading mtop">
+                @item.Missions.Title </h4>
+            <p class="group inner list-group-item-text">
+                @item.Missions.ShortDescription.</p>
+
+            <div class="row">
+                <div class="col col-lg-6 col-md-6 col-sm-12">
+                    <div class="d-inline">@item.Missions.OrganizationName</div>
+                    <div class="d-inline">
+                        <img src="~/images/selected-star.png" class="wdimg" alt="">
+                        <img src="~/images/selected-star.png" class="wdimg" alt="">
+                        <img src="~/images/selected-star.png" class="wdimg" alt="">
+                        <img src="~/images/star.png" class="wdimg" alt="">
+                        <img src="~/images/star.png" class="wdimg" alt="">
+                    </div>
+                </div>
+
+                @*
+                <hr style="z-index: -1;">*@
+                @if (item.Missions.MissionType=="TIME")
+                {
+                <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds ">
+                    <span class="fsize"> From @item.Missions.StartDate.ToString().Substring(0, 10) until
+                        @item.Missions.EndDate.ToString().Substring(0, 10)</span>
+                </div>
+                }
+                else
+                {
+                <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds  ">
+                    <span class="fsize"> Ongoing Opportunity</span>
+                </div>
+
+                }
+
+                @* <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds ">
+                    <span> From 10/01/2019 until 25/02/2019</span>
+                </div>*@
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-6 mx-auto">
+                    <a class="btn btnlist mt-3 " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
+                </div>
+
+
+
+                @*<div class="col-xs-12 col-md-6 mx-auto">
+                    <div class="row mt-4 ">
+                        <div class="col">
+                            <table>
+                                <tr>
+                                    <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <td> Seats Left</td>
+                                </tr>
+                            </table>
                         </div>
-                        <div class="bottom-right  opacity-50   ">
-                            <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right2  opacity-50   ">
-                            <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right3  opacity-50   ">
-                            <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                            <span>Paris</span>
+                        <div class="col">
+                            <table>
+                                <tr>
+                                    <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
+                                    <td>09/01/2019 </td>
+                                </tr>
+                                <tr>
+                                    <td>Deadline</td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            Plantation and Afforestation programme</h4>
-                        <p class="group inner list-group-item-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore...</p>
-                        <div class="row mb">
-                            <div class="col col-lg-6 col-md-6 col-sm-12">Amaze Doctors</div>
-                            <div class="col col-lg-6 col-md-6 col-sm-12">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
+                </div>*@
+
+                <div class="col-xs-12 col-md-6 mx-auto">
+                    <div class="row mt-4 ">
+                        @if (item.Missions.MissionType=="TIME")
+                        {
+                        <div class="col">
+
+                            <table>
+                                <tr>
+                                    <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <td class="fsize2"> Seats Left</td>
+                                </tr>
+                            </table>
                         </div>
-                        <div class="position-relative ">
-                            <hr style="z-index: -1;">
-                            <div class="dt text-center  position-absolute">
-                                <span> Plant 10,000 Trees</span>
-                            </div>
+                        <div class="col">
+                            <table>
+                                <tr>
+                                    <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
+                                    <td>09/01/2019 </td>
+                                </tr>
+                                <tr>
+                                    <td class="fsize">Deadline</td>
+                                </tr>
+                            </table>
                         </div>
-                        <div class="row mt-3"></div>
-                        <div class="col ">
+                        }
+                        else
+                        {
+                        <div class="col">
+                            <table>
+                                <tr>
+                                    <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
+                                    <td>250</td>
+                                </tr>
+                                <tr>
+                                    <td class="fsize2">Already volunteered</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col">
                             <table>
                                 <tr>
                                     <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
@@ -813,899 +652,22 @@
                                 </tr>
                             </table>
                         </div>
-                        <hr>
-                        <div class="row">
-                            <!-- <div class="col-xs-12 col-md-6">
-                                    <p class="lead">
-                                        $21.000</p>
-                                </div> -->
-                            <div class="col-xs-12 col-md-6 mx-auto">
-                                <a class="btn btnapp " href="#">Apply<img src="~/images/right-arrow.png" alt=""></a>
-                            </div>
-                        </div>
-
+                        }
                     </div>
+
                 </div>
+
             </div>
-            <!-- 7a -->
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid W-100"
-                            src="~/images/Grow-Trees-On-the-path-to-environment-sustainability.png" alt="" />
-                        <div class="bottom-left justify-content-center">
-                            Environment
-                        </div>
-                        <div class="bottom-right  opacity-50   ">
-                            <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right2  opacity-50   ">
-                            <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right3  opacity-50   ">
-                            <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                            <span> Toranto</span>
-                        </div>
-                    </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            Grow Trees-On the path to environment sustainability</h4>
-                        <p class="group inner list-group-item-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore... </p>
-                        <div class="row mb">
-                            <div class="col col-lg-6 col-md-6 col-sm-12">Tree Canada</div>
-                            <div class="col col-lg-6 col-md-6 col-sm-12">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
-                            <div class="row">
-                                <br><br><br><br>
-                            </div>
-                            <hr>
-                        </div>
-                        <div class="row">
-                            <!-- <div class="col-xs-12 col-md-6">
-                                    <p class="lead">
-                                        $21.000</p>
-                                </div> -->
-                            <div class="col-xs-12 col-md-6 mx-auto mt1">
-                                <a class="btn btnapp " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 8a -->
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid" width="100%"
-                            src="~/images/Education-Supplies-for-Every--Pair-of-Shoes-Sold.png" alt="" />
-                        <div class="bottom-left justify-content-center">
-                            Nutrition
-                        </div>
-                        <div class="bottom-right  opacity-50   ">
-                            <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right2  opacity-50   ">
-                            <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right3  opacity-50   ">
-                            <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                            <span>Barcelona</span>
-                        </div>
-                    </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            Education Supplies for Every Pair of Shoes Sold</h4>
-                        <p class="group inner list-group-item-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore...</p>
-                        <div class="row mb">
-                            <div class="col col-lg-6 col-md-6 col-sm-12">Tree Canada</div>
-                            <div class="col col-lg-6 col-md-6 col-sm-12">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
-                        </div>
-                        <div class="position-relative ">
-                            <hr style="z-index: -1;">
-                            <div class="dt text-center  position-absolute">
-                                <span class="fsize">From 10/01/2019 until 25/02/2019</span>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <table>
-                                    <tr>
-                                        <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
-                                        <td>250</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fsize2">Already volunteered</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col">
-                                <table>
-                                    <tr>
-                                        <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
-                                        <td>09/01/2019 </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fsize">Deadline</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <hr>
-                        </div>
-                        <div class="row">
-                            <!-- <div class="col-xs-12 col-md-6">
-                                    <p class="lead">
-                                        $21.000</p>
-                                </div> -->
-                            <div class="col-xs-12 col-md-6 mx-auto">
-                                <a class="btn btnapp " href="http://www.jquery2dotnet.com">Apply <img
-                                        src="~/images/right-arrow.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 9a -->
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid" width="100%"
-                            src="~/images/Nourish-the-Children-in--African-country.png" alt="" />
-                        <div class="bottom-left justify-content-center">
-                            Nutrition
-                        </div>
-                        <div class="bottom-right  opacity-50   ">
-                            <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right2  opacity-50   ">
-                            <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right3  opacity-50   ">
-                            <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                            <span>Barcelona</span>
-                        </div>
-                    </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            Nourish the Children in African country</h4>
-                        <p class="group inner list-group-item-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore...</p>
-                        <div class="row mb">
-                            <div class="col col-lg-6 col-md-6 col-sm-12">Junior Charity</div>
-                            <div class="col col-lg-6 col-md-6 col-sm-12">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
-                        </div>
-                        <div class="position-relative ">
-                            <hr style="z-index: -1;">
-                            <div class="dt text-center  position-absolute">
-                                <span> Ongoing Opportunity</span>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <table>
-                                    <tr>
-                                        <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fsize2"> Seats Left</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col">
-                                <table>
-                                    <tr>
-                                        <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
-                                        <td>09/01/2019 </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fsize">Deadline</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <hr>
-                        </div>
-                        <div class="row">
-                            <!-- <div class="col-xs-12 col-md-6">
-                                    <p class="lead">
-                                        $21.000</p>
-                                </div> -->
-                            <div class="col-xs-12 col-md-6 mx-auto">
-                                <a class="btn btnapp " href="http://www.jquery2dotnet.com">Apply <img
-                                        src="images/right-arrow.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
 
         </div>
-
-        <!-- list view -->
-        <div class="container all-view d-none" id="myListView">
-            <div class="row border">
-                <!-- 1 -->
-                <div class="col col-lg-4  col-md-12 col-xs-12 position-relative ">
-                    <img src="~/images/Grow-Trees-On-the-path-to-environment-sustainability.png" class="thumbimg"
-                        alt="" />
-                    <div class="bl1 justify-content-center">
-                        Environment
-                    </div>
-                    <div class="bottom-right4  opacity-50   ">
-                        <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right5  opacity-50   ">
-                        <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right6  opacity-50   ">
-                        <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                        <span>Toranto</span>
-                    </div>
-                </div>
-                <div class="col col-lg-8 col-md-12 col-sm-12">
-                    <h4 class="group card-title inner list-group-item-heading mtop">
-                        Grow Trees-On the path to environment sustainability</h4>
-                    <p class="group inner list-group-item-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore...</p>
-
-                    <div class="row">
-                        <div class="col col-lg-6 col-md-6 col-sm-12">
-                            <div class="d-inline">Tree Canada</div>
-                            <div class="d-inline">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
-                        </div>
-                        <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds ">
-                            <span> From 10/01/2019 until 25/02/2019</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6 mx-auto">
-                            <a class="btn btnlist mt-3 " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
-                        </div>
-                        <div class="col-xs-12 col-md-6 mx-auto">
-                            <div class="row mt-4 ">
-                                <div class="col">
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Seats Left</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="col">
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
-                                            <td>09/01/2019 </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Deadline</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <!-- 2 -->
-            <div class="row mt-3 border">
-                <div class="col col-lg-4  col-md-12 col-xs-12 position-relative ">
-                    <img src="~/images/Education-Supplies-for-Every--Pair-of-Shoes-Sold-2.png" class="thumbimg" alt="" />
-                    <div class="bl1 justify-content-center">
-                        Children
-                    </div>
-                    <div class="bottom-right4  opacity-50   ">
-                        <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right5  opacity-50   ">
-                        <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right6  opacity-50   ">
-                        <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                        <span>Melbourne</span>
-                    </div>
-                </div>
-                <div class="col col-lg-8 col-md-12 col-sm-12 ">
-                    <h4 class="group card-title inner list-group-item-heading mtop">
-                        Education Supplies for Every Pair of Shoes Sold</h4>
-                    <p class="group inner list-group-item-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore...</p>
-
-                    <div class="row">
-                        <div class="col col-lg-6 col-md-6 col-sm-12">
-                            <div class="d-inline">Australian Paradise </div>
-                            <div class="d-inline">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
-                        </div>
-                        <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds ">
-                            <span> From 10/01/2019 until 25/02/2019</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6 mx-auto">
-                            <a class="btn btnlist mt-3 " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
-                        </div>
-                        <div class="col-xs-12 col-md-6 mx-auto">
-                            <div class="row mt-4 ">
-                                <div class="col">
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
-                                            <td>250</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Already volunteered</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="col">
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
-                                            <td>09/01/2019 </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Deadline</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <!-- 3 -->
-            <div class="row mt-3 border">
-                <div class="col col-lg-4  col-md-12 col-xs-12 position-relative ">
-                    <img src="~/images/Nourish-the-Children-in--African-country.png" class="thumbimg" alt="" />
-                    <div class="bl1 justify-content-center">
-                        Nutrition
-                    </div>
-                    <div class="bottom-right4  opacity-50   ">
-                        <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right5  opacity-50   ">
-                        <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right6  opacity-50   ">
-                        <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                        <span>Barcelona</span>
-                    </div>
-                </div>
-                <div class="col col-lg-8 col-md-12 col-sm-12 ">
-                    <h4 class="group card-title inner list-group-item-heading mtop">
-                        Nourish the Children in African country</h4>
-                    <p class="group inner list-group-item-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore...</p>
-
-                    <div class="row">
-                        <div class="col col-lg-6 col-md-6 col-sm-12">
-                            <div class="d-inline">The Hunger </div>
-                            <div class="d-inline">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
-                        </div>
-                        <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds ">
-                            <span> Ongoing Opportunity</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6 mx-auto">
-                            <a class="btn btnlist mt-3 " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
-                        </div>
-                        <div class="col-xs-12 col-md-6 mx-auto">
-                            <div class="row mt-4 ">
-                                <div class="col">
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Seats Left</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="col">
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
-                                            <td>09/01/2019 </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Deadline</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- 4 -->
-            <div class="row mt-3 border">
-                <div class="col col-lg-4  col-md-12 col-xs-12 position-relative ">
-                    <img src="~/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity.png" class="thumbimg" alt="" />
-                    <div class="bl1 justify-content-center">
-                        Environment
-                    </div>
-                    <div class="bottom-right4  opacity-50   ">
-                        <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right5  opacity-50   ">
-                        <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right6  opacity-50   ">
-                        <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                        <span>London</span>
-                    </div>
-                </div>
-                <div class="col col-lg-8 col-md-12 col-sm-12 ">
-                    <h4 class="group card-title inner list-group-item-heading mtop">
-                        CSR initiative stands for Coffee and Farmer Equity</h4>
-                    <p class="group inner list-group-item-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore...</p>
-
-                    <div class="row">
-                        <div class="col col-lg-6 col-md-6 col-sm-12">
-                            <div class="d-inline">CSE Network </div>
-                            <div class="d-inline">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
-                        </div>
-                        <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds ">
-                            <span> Ongoing Opportunity</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6 mx-auto">
-                            <a class="btn btnlist mt-3 " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
-                        </div>
-                        <div class="col-xs-12 col-md-6 mx-auto ">
-                            <div class="row mt-4 ">
-                                <div class="col">
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
-                                            <td>250</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Already volunteered</td>
-                                        </tr>
-                                    </table>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
+    }
+    </div>
+    </div>
 
 
-            <!-- 5 -->
-            <div class="row mt-3 border">
-                <div class="col col-lg-4  col-md-12 col-xs-12 position-relative ">
-                    <img src="~/images/Animal-welfare-&-save-birds-campaign.png" class="thumbimg" alt="" />
-                    <div class="bl1 justify-content-center">
-                        Animals
-                    </div>
-                    <div class="bottom-right4  opacity-50   ">
-                        <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right5  opacity-50   ">
-                        <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right6  opacity-50   ">
-                        <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                        <span>Cap Town</span>
-                    </div>
-                </div>
-                <div class="col col-lg-8 col-md-12 col-sm-12 ">
-                    <h4 class="group card-title inner list-group-item-heading mtop">
-                        Animal welfare & save birds campaign </h4>
-                    <p class="group inner list-group-item-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore...</p>
-
-                    <div class="row">
-                        <div class="col col-lg-6 col-md-6 col-sm-12">
-                            <div class="d-inline">JR Foundation</div>
-                            <div class="d-inline">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
-                        </div>
-                        <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds ">
-                            <span> Plant 10,000 Trees</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6 mx-auto">
-                            <a class="btn btnlist mt-3 " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
-                        </div>
-                        <div class="col-xs-12 col-md-6 mx-auto">
-                            <div class="row mt-4 ">
-                                <div class="col">
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Seats Left</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="col">
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
-                                            <td>
-                                                <div class="progress">
-                                                    <div class="progress-bar bgw1" role="progressbar" style="width: 75%"
-                                                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>8000 Achieved</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
 
 
-            <!-- 6 -->
-            <div class="row mt-3 border">
-                <div class="col col-lg-4  col-md-12 col-xs-12 position-relative ">
-                    <img src="~/images/Plantation-and-Afforestation-programme.png" class="thumbimg" alt="" />
-                    <div class="bl1 justify-content-center">
-                        Health
-                    </div>
-                    <div class="bottom-right4  opacity-50   ">
-                        <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right5  opacity-50   ">
-                        <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right6  opacity-50   ">
-                        <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                        <span>Paris</span>
-                    </div>
-                </div>
-                <div class="col col-lg-8 col-md-12 col-sm-12 ">
-                    <h4 class="group card-title inner list-group-item-heading mtop">
-                        Plantation and Afforestation programme</h4>
-                    <p class="group inner list-group-item-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore...</p>
-
-                    <div class="row">
-                        <div class="col col-lg-6 col-md-6 col-sm-12">
-                            <div class="d-inline">Amaze Doctors</div>
-                            <div class="d-inline">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
-                        </div>
-                        <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds ">
-                            <span> Plant 10,000 Trees</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6 mx-auto">
-                            <a class="btn btnlist mt-3 " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
-                        </div>
-                        <div class="col-xs-12 col-md-6 mx-auto">
-                            <div class="row mt-4 ">
-
-                                <div class="col">
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
-                                            <td>
-                                                <div class="progress">
-                                                    <div class="progress-bar bgw1" role="progressbar" style="width: 75%"
-                                                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="fsize2">8000 Achieved</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="row mt-3 border">
-                <!-- 7 -->
-                <div class="col col-lg-4  col-md-12 col-xs-12 position-relative ">
-                    <img src="~/images/Grow-Trees-On-the-path-to-environment-sustainability.png" class="thumbimg"
-                        alt="" />
-                    <div class="bl1 justify-content-center">
-                        Environment
-                    </div>
-                    <div class="bottom-right4  opacity-50   ">
-                        <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right5  opacity-50   ">
-                        <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right6  opacity-50   ">
-                        <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                        <span>New York</span>
-                    </div>
-                </div>
-                <div class="col col-lg-8 col-md-12 col-sm-12">
-                    <h4 class="group card-title inner list-group-item-heading mtop">
-                        Grow Trees-On the path to environment sustainability</h4>
-                    <p class="group inner list-group-item-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore...</p>
-
-                    <div class="row">
-                        <div class="col col-lg-12 col-md-12 col-sm-12">
-                            <div class="d-inline">Tree Canada</div>
-                            <div class="d-inline">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="row ">
-                        <div class="col-xs-12 col-md-12 mx-auto">
-                            <a class="btn btnlist mt-3 " href="#">View Details <img src="images/right-arrow.png"
-                                    alt=""></a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <!-- 8 -->
-            <div class="row mt-3 border">
-                <div class="col col-lg-4  col-md-12 col-xs-12 position-relative ">
-                    <img src="~/images/Education-Supplies-for-Every--Pair-of-Shoes-Sold-2.png" class="thumbimg" alt="" />
-                    <div class="bl1 justify-content-center">
-                        Children
-                    </div>
-                    <div class="bottom-right4  opacity-50   ">
-                        <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right5  opacity-50   ">
-                        <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right6  opacity-50   ">
-                        <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                        <span>Melbourne</span>
-                    </div>
-                </div>
-                <div class="col col-lg-8 col-md-12 col-sm-12 ">
-                    <h4 class="group card-title inner list-group-item-heading mtop">
-                        Education Supplies for Every Pair of Shoes Sold</h4>
-                    <p class="group inner list-group-item-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore...</p>
-
-                    <div class="row">
-                        <div class="col col-lg-6 col-md-6 col-sm-12">
-                            <div class="d-inline">Junior Charity </div>
-                            <div class="d-inline">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
-                        </div>
-                        <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds ">
-                            <span> From 10/01/2019 until 25/02/2019</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6 mx-auto">
-                            <a class="btn btnlist mt-3 " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
-                        </div>
-                        <div class="col-xs-12 col-md-6 mx-auto">
-                            <div class="row mt-4 ">
-                                <div class="col">
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
-                                            <td>250</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Already volunteered</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="col">
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
-                                            <td>09/01/2019 </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Deadline</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <!-- 9 -->
-            <div class="row mt-3 border">
-                <div class="col col-lg-4  col-md-12 col-xs-12 position-relative ">
-                    <img src="~/images/Nourish-the-Children-in--African-country.png" class="thumbimg" alt="" />
-                    <div class="bl1 justify-content-center">
-                        Nutrition
-                    </div>
-                    <div class="bottom-right4  opacity-50   ">
-                        <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right5  opacity-50   ">
-                        <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                    </div>
-                    <div class="bottom-right6  opacity-50   ">
-                        <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                        <span>Barcelona</span>
-                    </div>
-                </div>
-                <div class="col col-lg-8 col-md-12 col-sm-12 ">
-                    <h4 class="group card-title inner list-group-item-heading mtop">
-                        Nourish the Children in African country</h4>
-                    <p class="group inner list-group-item-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore...</p>
-
-                    <div class="row">
-                        <div class="col col-lg-6 col-md-6 col-sm-12">
-                            <div class="d-inline">Australian Paradise </div>
-                            <div class="d-inline">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
-                        </div>
-                        <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds ">
-                            <span> Ongoing Opportunity</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6 mx-auto">
-                            <a class="btn btnlist mt-3 " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
-                        </div>
-                        <div class="col-xs-12 col-md-6 mx-auto">
-                            <div class="row mt-4 ">
-                                <div class="col">
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Seats Left</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="col">
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
-                                            <td>09/01/2019 </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Deadline</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-
-
-        </div>
+        
 
         <nav aria-label="Page navigation example justify-content-center">
             <ul class="pagination mt-3">

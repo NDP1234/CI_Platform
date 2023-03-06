@@ -5,6 +5,15 @@
     flex: none;
 }
 
+ul, li {
+    list-style-type: none;
+}
+
+.b-filter:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
 .srch {
     width: 85%;
     margin: auto;

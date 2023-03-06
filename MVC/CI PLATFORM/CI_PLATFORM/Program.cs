@@ -15,6 +15,8 @@ builder.Services.AddDbContext<CiPlatformContext>(options => options.UseSqlServer
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<IThemeRepository, ThemeRepository>();
+builder.Services.AddScoped<ISkillsRepository, SkillsRepository>();
+builder.Services.AddScoped<IMissionListingRepository, MissionListingRepository>();
 
 var app = builder.Build();
 
