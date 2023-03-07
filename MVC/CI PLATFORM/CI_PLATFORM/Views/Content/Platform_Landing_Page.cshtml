@@ -1,4 +1,7 @@
-﻿@*
+﻿@using CI_Platform.Entities.Models.VM
+
+@model List<PlatformLandingViewModel>;
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -57,13 +60,14 @@
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="~/images/user-img.png" alt="" style="border-radius: 50%;" height="30px"
                                     width="30px">
-                                <span>Evan Donohue</span>
+                                <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                                <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                                <li><a class="dropdown-item" href="#">My Account</a></li>
+                                <li><a class="dropdown-item" href="#">Help Center</a></li>
+                                <li><a class="dropdown-item" href="#">Logout </a></li>
                             </ul>
                         </div>
                     </form>
@@ -111,8 +115,11 @@
                             <!-- <span class="input-group-text  border-0" id="search-addon"> -->
                             <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
                             <!-- </span> -->
-                            <input type="search" class="form-control rounded d-inline srch"
-                                placeholder="Search mission..." aria-label="Search" aria-describedby="search-addon" />
+@*                            <input type="search" class="form-control rounded d-inline srch"
+                                placeholder="Search mission..." aria-label="Search" aria-describedby="search-addon" />*@
+                         <form id="search-form" method="get" class="d-inline">
+                                <input type="search" class="form-control rounded d-inline srch" id="search-input" name="query" placeholder="Search mission..." aria-label="Search" aria-describedby="search-addon" >
+                         </form>
                         </div>
                     </div>
 
@@ -145,7 +152,11 @@
                                     <li><a class="dropdown-item" href="#">Something else </a></li>*@
                                      @foreach (var item in @ViewBag.City)
                                     {
-                                    <li><a class="dropdown-item" href="#">@item.Name</a></li>
+                                    @*<li><a class="dropdown-item" href="#">@item.Name</a></li>*@
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+                                     <label class="form-check-label" for="flexCheckChecked">
+                                        @item.Name
+                                     </label><br>
                                     }
                                 </ul>
                             </div>
@@ -161,7 +172,12 @@
                                     <li><a class="dropdown-item" href="#">Something else </a></li>*@
                                     @foreach (var item in @ViewBag.MissionTheme)
                                     {
-                                    <li><a class="dropdown-item" href="#">@item.Title</a></li>
+                                    @*<li><a class="dropdown-item" href="#">@item.Title</a></li>*@
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+                                     <label class="form-check-label" for="flexCheckChecked">
+                                        @item.Title
+                                     </label><br>
+                                    
                                     }
                                 </ul>
                             </div>
@@ -177,7 +193,11 @@
                                     <li><a class="dropdown-item" href="#">Something else </a></li>*@
                                     @foreach (var item in @ViewBag.Skill)
                                     {
-                                    <li><a class="dropdown-item" href="#">@item.SkillName</a></li>
+                                    @*<li><a class="dropdown-item" href="#">@item.SkillName</a></li>*@
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+                                     <label class="form-check-label" for="flexCheckChecked">
+                                        @item.SkillName
+                                     </label><br>
                                     }
                                 </ul>
                             </div>
@@ -270,7 +290,7 @@
                     </div>
 
                     <div id="main2" class="d-flex justify-content-end m-2 ">
-                        <input type="search" class="form-control rounded d-inline srch " placeholder="Search mission..."
+                        <input type="search" class="form-control rounded d-inline srch" id="search_small" placeholder="Search mission..."
                             aria-label="Search" aria-describedby="search-addon" />
                         <button class="openbtn " onclick="openNav2()">☰ </button>
                         <!-- <h2>Collapsed Sidebar</h2>
@@ -327,7 +347,7 @@
                 </div>
             </div> -->
         <!-- -------------------------------------------------------------- -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light " id="mission-list">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
                     <h1>Explore 72 missions</h1>
@@ -340,7 +360,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                     <form class="d-flex ms-auto">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+@*                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                             <li class="nav-item dropdown ">
                                 <a class="nav-link dropdown-toggle border border-dark" href="#" id="navbarDropdown"
@@ -348,15 +368,24 @@
                                     Sort By
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    <li><a class="dropdown-item" href="#">Newest</a></li>
+                                    <li><a class="dropdown-item" href="#">Oldest</a></li>
+                                    <li><a class="dropdown-item" href="#">Lowest Available Seats</a></li>
+                                    <li><a class="dropdown-item" href="#">Highest Available Seats</a></li>
+                                    <li><a class="dropdown-item" href="#">Sort By My favourites</a></li>
+                                    <li><a class="dropdown-item" href="#">Sort By Deadline</a></li>
                                 </ul>
                             </li>
-                        </ul>
+                        </ul>*@
+                        <select id="sort-select">
+                          <option value="-1" selected>Sort by</option>
+                          <option value="newest">Newest</option>
+                          <option value="oldest">Oldest</option>
+                          <option value="lowest-seats">Lowest Available Seats</option>
+                          <option value="highest-seats">Highest Available Seats</option>
+                          <option value="favourites">Favourites</option>
+                          <option value="deadline">Deadline</option>
+                        </select>
 
                         <button class="btn " id="grid" onclick="showView('grid')"><img src="~/images/grid.png"
                                 alt=""></button>
@@ -370,12 +399,12 @@
 
             @*Grid-view*@
         <div id="products" class="row view-group all-view">
-           @foreach (var item in ViewBag.Mission)
+           @foreach (var item in Model)
                 {
             <div class="item col-xs-4 col-lg-4">
                
                     
-                
+         
                 <div class="thumbnail card">
                     <div class="img-event position-relative">
                         <img class="group list-group-image img-fluid w-100"
@@ -501,11 +530,13 @@
 
         @*list view*@ 
         <div class="container all-view d-none" id="myListView">
-    <div class="row border">
+    
         <!-- 1 -->
-        @foreach (var item in ViewBag.Mission)
+        @foreach (var item in Model)
         {
-        <div class="col col-lg-4  col-md-12 col-xs-12 position-relative  my-3  ">
+        <div class="row border mt-3 item ">
+            
+        <div class="col col-lg-4  col-md-12 col-xs-12 position-relative border-light  ">
             <img src="@item.image?.MediaPath" class="thumbimg" alt="" />
             <div class="bl1 justify-content-center">
                 @item.Missions?.Theme.Title
@@ -544,8 +575,7 @@
                 @if (item.Missions.MissionType=="TIME")
                 {
                 <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds ">
-                    <span class="fsize"> From @item.Missions.StartDate.ToString().Substring(0, 10) until
-                        @item.Missions.EndDate.ToString().Substring(0, 10)</span>
+                    <span class="fsize"> From @item.Missions.StartDate.ToString().Substring(0, 10) until @item.Missions.EndDate.ToString().Substring(0, 10)</span>
                 </div>
                 }
                 else
@@ -660,12 +690,22 @@
             </div>
 
         </div>
+    
+        </div>
     }
     </div>
-    </div>
 
 
+        @*nmf*@
+     <div class="content mt-5 text-center hidden" id="NoMissionFound">
+            <div class="head w-100 text-center">
+                <h5>No mission found</h5>
+            </div>
+            <a class="btn btnlist mt-3 " href="#">Go to Homepage <img src="~/images/right-arrow.png"
+                    alt=""></a>
 
+     </div>
+      @*nmf*@
 
         
 
@@ -694,7 +734,11 @@
 
     </div>
     </div>
+
+
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/searching.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"
         integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script>
@@ -736,6 +780,23 @@
                 $('#myListView').removeClass("d-none")
             }
         }
+
+        //
+        $(function() {
+            var searchTimer;
+            $('#search-input').on('input', function() {
+                clearTimeout(searchTimer);
+                searchTimer = setTimeout(sendSearchRequest, 500); // debounce search requests
+            });
+
+            function sendSearchRequest() {
+                var query = $('#search-input').val();
+                $.get('/Search', { query: query }, function(result) {
+                    $('#search-results').html(result);
+                });
+            }
+        });
+        //
 
     </script>
 </body>

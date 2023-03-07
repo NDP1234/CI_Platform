@@ -4,6 +4,9 @@
     display: flex;
     flex: none;
 }
+.hidden {
+    display: none;
+}
 
 ul, li {
     list-style-type: none;
@@ -127,7 +130,7 @@ ul, li {
     width: 30%;
     left: 34%;
     text-align: center;
-    border-radius: 25%;
+    border-radius: 20px;
 }
 
 /* 17/02/2023 */
@@ -603,7 +606,7 @@ ul, li {
     width: 30%;
     left: 34%;
     text-align: center;
-    border-radius: 25%;
+    border-radius: 20px;
 }
 
 .thumbimg {

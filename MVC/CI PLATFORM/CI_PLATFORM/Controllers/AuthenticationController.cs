@@ -33,14 +33,16 @@ namespace CI_PLATFORM.Controllers
         [Route("Authentication/login", Name = "UserLogin1")]
         public IActionResult login(loginViewModel model)
         {
+            
             if (ModelState.IsValid)
             {
                 // Check if a user with the provided email and password exists in the database
-                var userExists = _db.Users.Any(u => u.Email == model.Email && u.Password == model.Password);
+                var userExists = _db.Users.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
           
-                if (userExists)
+                if (userExists!=null)
                 {
                     // User exists
+                    HttpContext.Session.SetString("Login", userExists.Email);
                     return RedirectToAction("Platform_Landing_Page", "Content");
                 }
                 else
@@ -50,6 +52,7 @@ namespace CI_PLATFORM.Controllers
                 }
             }
 
+            
             // ModelState is invalid, or user does not exist, return to the login view with errors
             return View(model);
         }

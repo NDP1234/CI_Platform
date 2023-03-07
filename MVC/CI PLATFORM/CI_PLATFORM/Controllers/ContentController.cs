@@ -15,18 +15,26 @@ namespace CI_PLATFORM.Controllers
         private readonly IThemeRepository _theme;
         private readonly ISkillsRepository _skill;
         private readonly IMissionListingRepository _db;
+        private readonly IUserList _users;
 
         //private readonly IMissionListingRepository _missiondetails;
-        public ContentController(ICountryRepository country, ICityRepository city, IThemeRepository theme, ISkillsRepository skill, IMissionListingRepository db) {
+        public ContentController(ICountryRepository country, ICityRepository city, IThemeRepository theme, ISkillsRepository skill, IMissionListingRepository db, IUserList users) {
             _country = country;
             _city = city;
             _theme = theme;
             _skill = skill;
             _db = db;
+            _users = users;
             //_missiondetails = missiondetails;
         }
         public IActionResult Platform_Landing_Page()
         {
+            var session_details = HttpContext.Session.GetString("Login");
+            if(session_details == null)
+            {
+                return RedirectToAction("login", "Authentication");
+            }
+
             List<Country> country = _country.GetCountryDetails();
             ViewBag.Country = country;
             List<City> city = _city.GetCityDetails();
@@ -38,10 +46,16 @@ namespace CI_PLATFORM.Controllers
             //List<Mission> missiondetails = _missiondetails.GetMission();
             //ViewBag.Mission = missiondetails;
 
-            List<PlatformLandingViewModel> missions = _db.GetAllMission();
-            ViewBag.Mission = missions;
+            List<User> users = _users.GetUserList();
+            var profile = users.FirstOrDefault(m => m.Email == session_details);
+            ViewBag.UserDetails = profile;
             //return View(missions);
-            return View();
+            //return View();
+            List<PlatformLandingViewModel> missions = _db.GetAllMission();
+            //ViewBag.Mission = missions;
+            return View(missions);
+
+            
 
         }
 

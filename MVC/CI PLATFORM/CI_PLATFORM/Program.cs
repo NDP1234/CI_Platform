@@ -5,6 +5,10 @@ using CI_Platform.Repository.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(120);
+}); 
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -17,6 +21,7 @@ builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<IThemeRepository, ThemeRepository>();
 builder.Services.AddScoped<ISkillsRepository, SkillsRepository>();
 builder.Services.AddScoped<IMissionListingRepository, MissionListingRepository>();
+builder.Services.AddScoped<IUserList, UserList>();
 
 var app = builder.Build();
 
@@ -33,7 +38,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -49,3 +54,4 @@ app.MapControllerRoute(
     pattern: "{controller=Content}/{action=Platform_Landing_Page}");
 
 app.Run();
+
