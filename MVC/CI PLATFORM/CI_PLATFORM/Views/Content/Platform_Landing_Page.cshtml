@@ -17,7 +17,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="~/css/pl.css">
-  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -136,7 +136,11 @@
                                     <li><a class="dropdown-item" href="#">Something else </a></li>*@
                                     @foreach (var item in @ViewBag.Country)
                                     {
-                                    <li><a class="dropdown-item" href="#">@item.Name</a></li>
+                                   @* <li><a class="dropdown-item" href="#">@item.Name</a></li>*@
+                                   <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked1" >
+                                    <label class="form-check-label" for="flexCheckChecked1">
+                                        @item.Name
+                                     </label><br>
                                     }
                                 </ul>
                             </div>
@@ -153,8 +157,8 @@
                                      @foreach (var item in @ViewBag.City)
                                     {
                                     @*<li><a class="dropdown-item" href="#">@item.Name</a></li>*@
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
-                                     <label class="form-check-label" for="flexCheckChecked">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" >
+                                     <label class="form-check-label" for="flexCheckChecked2">
                                         @item.Name
                                      </label><br>
                                     }
@@ -173,8 +177,8 @@
                                     @foreach (var item in @ViewBag.MissionTheme)
                                     {
                                     @*<li><a class="dropdown-item" href="#">@item.Title</a></li>*@
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
-                                     <label class="form-check-label" for="flexCheckChecked">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked3" >
+                                     <label class="form-check-label" for="flexCheckChecked3">
                                         @item.Title
                                      </label><br>
                                     
@@ -194,8 +198,8 @@
                                     @foreach (var item in @ViewBag.Skill)
                                     {
                                     @*<li><a class="dropdown-item" href="#">@item.SkillName</a></li>*@
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
-                                     <label class="form-check-label" for="flexCheckChecked">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked4" >
+                                     <label class="form-check-label" for="flexCheckChecked4">
                                         @item.SkillName
                                      </label><br>
                                     }
@@ -253,12 +257,6 @@
                                     Theme
                                 </a>
                                 <ul class="dropdown-menu ">
-                                    @*<li><a class="dropdown-item " href="#">Theme-1</a></li>
-                                    <li><a class="dropdown-item" href="#">Theme-2</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>*@
                                      @foreach (var item in @ViewBag.MissionTheme)
                                     {
                                     <li><a class="dropdown-item" href="#">@item.Title</a></li>
@@ -273,12 +271,6 @@
                                     Skills
                                 </a>
                                 <ul class="dropdown-menu ">
-                                    @*<li><a class="dropdown-item " href="#">Skills-1</a></li>
-                                    <li><a class="dropdown-item" href="#">Skills-2</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>*@
                                     @foreach (var item in @ViewBag.Skill)
                                     {
                                     <li><a class="dropdown-item" href="#">@item.SkillName</a></li>
@@ -332,20 +324,7 @@
 
     </div>
     <div class="container mt5">
-        <!-- <div class="row">
-                <div class="col-lg-12 my-3">
-                    <div class="pull-right">
-                        <div class="btn-group">
-                            <button class="btn btn-info" id="list">
-                                List View
-                            </button>
-                            <button class="btn btn-danger" id="grid">
-                                Grid View
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+
         <!-- -------------------------------------------------------------- -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light " id="mission-list">
             <div class="container-fluid">
@@ -360,38 +339,23 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                     <form class="d-flex ms-auto">
-@*                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                            <li class="nav-item dropdown ">
-                                <a class="nav-link dropdown-toggle border border-dark" href="#" id="navbarDropdown"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Sort By
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Newest</a></li>
-                                    <li><a class="dropdown-item" href="#">Oldest</a></li>
-                                    <li><a class="dropdown-item" href="#">Lowest Available Seats</a></li>
-                                    <li><a class="dropdown-item" href="#">Highest Available Seats</a></li>
-                                    <li><a class="dropdown-item" href="#">Sort By My favourites</a></li>
-                                    <li><a class="dropdown-item" href="#">Sort By Deadline</a></li>
-                                </ul>
-                            </li>
-                        </ul>*@
-                        <select id="sort-select">
+                        <select id="sortSelect">
                           <option value="-1" selected>Sort by</option>
                           <option value="newest">Newest</option>
                           <option value="oldest">Oldest</option>
-                          <option value="lowest-seats">Lowest Available Seats</option>
-                          <option value="highest-seats">Highest Available Seats</option>
-                          <option value="favourites">Favourites</option>
-                          <option value="deadline">Deadline</option>
+                          <option value="seats_desc">Lowest Available Seats</option>
+                          <option value="seats_asc">Highest Available Seats</option>
+                          @*<option value="favourites">Favourites</option>*@
+                          <option value="deadline">Deadline(Descending order)</option>
+                          @*<option value="deadline_asc">Deadline(Ascending order)</option>*@
                         </select>
 
                         <button class="btn " id="grid" onclick="showView('grid')"><img src="~/images/grid.png"
                                 alt=""></button>
                         <button class="btn " id="list" onclick="showView('list')"><img src="~/images/list.png"
                                 alt=""></button>
-
+                      
                     </form>
                 </div>
             </div>
@@ -426,7 +390,7 @@
                     <div class="caption card-body">
                         <h4 class="group card-title inner list-group-item-heading">
                             @item.Missions.Title</h4>
-                        <p class="group inner list-group-item-text">
+                        <p class="group inner list-group-item-text sd">
                            @item.Missions.ShortDescription</p>
                         <div class="row mb">
                             <div class="col col-lg-6 col-md-6 col-sm-12">@item.Missions.OrganizationName</div>
@@ -555,7 +519,7 @@
         <div class="col col-lg-8 col-md-12 col-sm-12">
             <h4 class="group card-title inner list-group-item-heading mtop">
                 @item.Missions.Title </h4>
-            <p class="group inner list-group-item-text">
+            <p class="group inner list-group-item-text sd">
                 @item.Missions.ShortDescription.</p>
 
             <div class="row">
@@ -739,6 +703,7 @@
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/searching.js"></script>
+    <script src="/js/sortby.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"
         integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script>

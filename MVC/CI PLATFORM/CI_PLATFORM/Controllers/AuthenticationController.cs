@@ -242,7 +242,9 @@ namespace CI_PLATFORM.Controllers
                     LastName = model.LastName,
                     Email = model.Email,
                     PhoneNumber = model.PhoneNumber,
-                    Password = model.Password
+                    Password = model.Password,
+                    CityId=1,
+                    CountryId=1
                 };
 
                 _db.Users.Add(user);

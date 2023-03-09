@@ -17,7 +17,7 @@ public partial class Country
 
     public DateTime? DeletedAt { get; set; }
 
-    public virtual City? City { get; set; }
+    public virtual ICollection<City> Cities { get; } = new List<City>();
 
     public virtual ICollection<Mission> Missions { get; } = new List<Mission>();
 

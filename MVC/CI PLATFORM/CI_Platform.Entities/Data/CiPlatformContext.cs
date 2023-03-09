@@ -138,9 +138,7 @@ public partial class CiPlatformContext : DbContext
 
             entity.ToTable("city");
 
-            entity.Property(e => e.CityId)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("city_id");
+            entity.Property(e => e.CityId).HasColumnName("city_id");
             entity.Property(e => e.CountryId).HasColumnName("country_id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
@@ -157,8 +155,8 @@ public partial class CiPlatformContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("updated_at");
 
-            entity.HasOne(d => d.CityNavigation).WithOne(p => p.City)
-                .HasForeignKey<City>(d => d.CityId)
+            entity.HasOne(d => d.Country).WithMany(p => p.Cities)
+                .HasForeignKey(d => d.CountryId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_city_country");
         });
@@ -357,6 +355,7 @@ public partial class CiPlatformContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("organization_name");
+            entity.Property(e => e.SeatsVacancy).HasColumnName("seats_vacancy");
             entity.Property(e => e.ShortDescription)
                 .HasColumnType("text")
                 .HasColumnName("short_description");

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_PLATFORM\\CI_PLATFORM.csproj": {}
+    "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\CI_PLATFORM.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_Platform.Entities\\CI_Platform.Entities.csproj": {
+    "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_Platform.Entities\\CI_Platform.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_Platform.Entities\\CI_Platform.Entities.csproj",
+        "projectUniqueName": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_Platform.Entities\\CI_Platform.Entities.csproj",
         "projectName": "CI_Platform.Entities",
-        "projectPath": "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_Platform.Entities\\CI_Platform.Entities.csproj",
+        "projectPath": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_Platform.Entities\\CI_Platform.Entities.csproj",
         "packagesPath": "C:\\Users\\pci120\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_Platform.Entities\\obj\\",
+        "outputPath": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_Platform.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -83,14 +83,14 @@
         }
       }
     },
-    "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_Platform.Repository\\CI_Platform.Repository.csproj": {
+    "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_Platform.Repository\\CI_Platform.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_Platform.Repository\\CI_Platform.Repository.csproj",
+        "projectUniqueName": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_Platform.Repository\\CI_Platform.Repository.csproj",
         "projectName": "CI_Platform.Repository",
-        "projectPath": "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_Platform.Repository\\CI_Platform.Repository.csproj",
+        "projectPath": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_Platform.Repository\\CI_Platform.Repository.csproj",
         "packagesPath": "C:\\Users\\pci120\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_Platform.Repository\\obj\\",
+        "outputPath": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_Platform.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -112,8 +112,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_Platform.Entities\\CI_Platform.Entities.csproj": {
-                "projectPath": "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_Platform.Entities\\CI_Platform.Entities.csproj"
+              "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_Platform.Entities\\CI_Platform.Entities.csproj": {
+                "projectPath": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_Platform.Entities\\CI_Platform.Entities.csproj"
               }
             }
           }
@@ -162,14 +162,14 @@
         }
       }
     },
-    "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_PLATFORM\\CI_PLATFORM.csproj": {
+    "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\CI_PLATFORM.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_PLATFORM\\CI_PLATFORM.csproj",
+        "projectUniqueName": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\CI_PLATFORM.csproj",
         "projectName": "CI_PLATFORM",
-        "projectPath": "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_PLATFORM\\CI_PLATFORM.csproj",
+        "projectPath": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\CI_PLATFORM.csproj",
         "packagesPath": "C:\\Users\\pci120\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_PLATFORM\\obj\\",
+        "outputPath": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -191,11 +191,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_Platform.Entities\\CI_Platform.Entities.csproj": {
-                "projectPath": "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_Platform.Entities\\CI_Platform.Entities.csproj"
+              "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_Platform.Entities\\CI_Platform.Entities.csproj": {
+                "projectPath": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_Platform.Entities\\CI_Platform.Entities.csproj"
               },
-              "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_Platform.Repository\\CI_Platform.Repository.csproj": {
-                "projectPath": "C:\\Users\\pci120\\Desktop\\CI platform\\CIP\\MVC\\CI PLATFORM\\CI_Platform.Repository\\CI_Platform.Repository.csproj"
+              "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_Platform.Repository\\CI_Platform.Repository.csproj": {
+                "projectPath": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_Platform.Repository\\CI_Platform.Repository.csproj"
               }
             }
           }

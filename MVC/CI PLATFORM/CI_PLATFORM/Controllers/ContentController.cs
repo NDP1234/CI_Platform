@@ -1,8 +1,10 @@
-﻿using CI_Platform.Entities.Models;
+﻿using CI_Platform.Entities.Data;
+using CI_Platform.Entities.Models;
 using CI_Platform.Entities.Models.VM;
 using CI_Platform.Repository.Interface;
 using CI_PLATFORM.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CI_PLATFORM.Controllers
 {
@@ -14,20 +16,31 @@ namespace CI_PLATFORM.Controllers
         private readonly ICityRepository _city;
         private readonly IThemeRepository _theme;
         private readonly ISkillsRepository _skill;
-        private readonly IMissionListingRepository _db;
+        private readonly IMissionListingRepository _db2;
         private readonly IUserList _users;
-
+        private readonly CiPlatformContext _db;
         //private readonly IMissionListingRepository _missiondetails;
-        public ContentController(ICountryRepository country, ICityRepository city, IThemeRepository theme, ISkillsRepository skill, IMissionListingRepository db, IUserList users) {
+        public ContentController(ICountryRepository country, ICityRepository city, IThemeRepository theme, ISkillsRepository skill, IMissionListingRepository db2, IUserList users, CiPlatformContext db) {
             _country = country;
             _city = city;
             _theme = theme;
             _skill = skill;
-            _db = db;
+            _db2 = db2;
             _users = users;
+            _db = db;
             //_missiondetails = missiondetails;
         }
-        public IActionResult Platform_Landing_Page()
+
+
+        //public ContentController(CiPlatformContext db)
+        //{
+        //    _db = db;
+        //}
+        //sortby        
+
+        //sortby
+        //public IActionResult Platform_Landing_Page()        
+        public async Task<IActionResult> Platform_Landing_Page()
         {
             var session_details = HttpContext.Session.GetString("Login");
             if(session_details == null)
@@ -51,12 +64,9 @@ namespace CI_PLATFORM.Controllers
             ViewBag.UserDetails = profile;
             //return View(missions);
             //return View();
-            List<PlatformLandingViewModel> missions = _db.GetAllMission();
+            List<PlatformLandingViewModel> missions = _db2.GetAllMission();
             //ViewBag.Mission = missions;
             return View(missions);
-
-            
-
         }
 
 

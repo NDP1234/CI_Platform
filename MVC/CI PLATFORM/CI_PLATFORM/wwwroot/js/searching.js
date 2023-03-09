@@ -5,6 +5,8 @@ let searchbar = document.getElementById("search-input");
 
 let searchsmall = document.getElementById("search_small");
 
+
+
 let cardtitle = document.getElementsByClassName("card-title");  
 
 let notfound = document.getElementById("NoMissionFound");
@@ -22,7 +24,7 @@ function search_mission() {
     input = input.toLowerCase();
 
     for (i = 0; i < totalMissions.length; i++) {
-        if (!cardtitle[i].innerHTML.toLowerCase().includes(input)) {
+        if (!cardtitle[i].innerHTML.toLowerCase().includes(input) ) {
             totalMissions[i].classList.add("hidden");
 
 
@@ -31,6 +33,7 @@ function search_mission() {
             totalMissions[i].classList.remove("hidden");
         }
     }
+
 
 
     for (i = 0; i < totalMissions.length; i++) {
