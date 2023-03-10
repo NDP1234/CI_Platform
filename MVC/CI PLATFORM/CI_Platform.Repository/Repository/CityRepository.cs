@@ -20,7 +20,9 @@ namespace CI_Platform.Repository.Repository
 
         public List<City> GetCityDetails()
         {
+            //List<City> city_details = _db.Cities.ToList();
             List<City> city_details = _db.Cities.ToList();
+
             return city_details;
         }
     }

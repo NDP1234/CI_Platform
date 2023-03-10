@@ -2,6 +2,7 @@
 using CI_Platform.Entities.Models;
 using CI_Platform.Entities.Models.VM;
 using CI_Platform.Repository.Interface;
+using CI_Platform.Repository.Repository;
 using CI_PLATFORM.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -69,7 +70,46 @@ namespace CI_PLATFORM.Controllers
             return View(missions);
         }
 
+        public JsonResult[] DateSort(string sort)
+        {
+            var missiondata = _db2.GetMissionSorting(sort);
+            var missionlist = new JsonResult[missiondata.ToList().Count];
+            int i = 0;
+            
+            foreach (PlatformLandingViewModel y in missiondata)
+            {
+                if (y.Missions == null)
+                {
+                    continue;
+                }
+                var mission = y.Missions;
+                    var missionObj = new JsonResult(new
+                    {
+                        mission.MissionId,
+                        mission.Title,
+                        mission.City.Name,
+                        mission.ShortDescription,
+                        Theme = mission.Theme.Title,
+                        mission.OrganizationName,
+                        //mission.OrganizationDetail,
+                        StartDate = mission.StartDate.Value.ToShortDateString(),
+                        EndDate = mission.EndDate.Value.ToShortDateString(),
+                        Deadline = (mission.StartDate - TimeSpan.FromDays(1)).Value.ToShortDateString(),
+                        mission.SeatsVacancy,
+                        mission.MissionType
+                    });
+                    missionlist[i] = missionObj;
+                    i++;
+                
+            }
+            return missionlist;
 
+        }
+        //public JsonResult DateSort(string sort_by)
+        //{
+        //    List<PlatformLandingViewModel> missions = _db2.GetMissionSorting(sort_by);
+        //    return Json(new { missions, success = true });
+        //}
 
         public IActionResult No_mission_found()
         {

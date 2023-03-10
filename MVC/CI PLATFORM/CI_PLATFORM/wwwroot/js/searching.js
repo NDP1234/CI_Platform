@@ -55,3 +55,23 @@ function search_mission() {
     }
 
 }
+
+//@model IEnumerable < Country >
+
+//    <label for="country">Country:</label>
+//@Html.DropDownList("country", ViewBag.Countries as SelectList, "Select a country", new { id = "country" })
+
+//<label for="city">City:</label>
+//<select name="city" id="city"></select>
+
+//@section Scripts {
+//$('.myDropdown').on('change', function () {
+//    var selectedValues = $('.myDropdown').val();
+//    $('#chips').empty();
+//    for (var i = 0; i < selectedValues.length; i++) {
+//        var optionText = $('.myDropdown option[value="' + selectedValues[i] + '"]').text();
+//        $('#chips').append('<div class="chip">' + optionText + '<span class="close">&times;</span></div>');
+//    }
+//});
+
+

@@ -10,9 +10,10 @@ namespace CI_Platform.Entities.Models.VM
         public Mission? Missions { get; set; }
 
         public MissionMedium? image { get; set; }
-        public List<Country>? Country { get; set; }
-        public List<City>? Cities { get; set; }
-        public List<MissionTheme>? themes { get; set; }
-        public List<Skill>? skills { get; set; }
+        public IEnumerable<Country>? Country { get; set; }
+        public IEnumerable<City>? Cities { get; set; }
+        public IEnumerable<MissionTheme>? themes { get; set; }
+        public IEnumerable<Skill>? skills { get; set; }
+       
     }
 }

@@ -130,14 +130,14 @@
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <span>Country&nbsp; &nbsp;</span>
                                 </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
                                    @* <li><a class="dropdown-item" href="#">Country-1</a></li>
                                     <li><a class="dropdown-item" href="#">Country-2</a></li>
                                     <li><a class="dropdown-item" href="#">Something else </a></li>*@
                                     @foreach (var item in @ViewBag.Country)
                                     {
                                    @* <li><a class="dropdown-item" href="#">@item.Name</a></li>*@
-                                   <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked1" >
+                                   <input class="form-check-input " type="checkbox" value=" " id="flexCheckChecked1" >
                                     <label class="form-check-label" for="flexCheckChecked1">
                                         @item.Name
                                      </label><br>
@@ -291,8 +291,9 @@
                 </div>
             </div>
             <!-- ///////////////// -->
-
-            <div class="all-filters d-flex align-items-center flex-wrap mt-4 mgl ">
+            <div id="chips">
+            </div>
+           @* <div class="all-filters d-flex align-items-center flex-wrap mt-4 mgl ">
                 <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1 flex-nowrap">
                     <p class="filter">Tree Plantation</p>
                     <i class="bi bi-x"></i>
@@ -317,7 +318,7 @@
                     <p class="filter">Nuitrition</p>
                     <i class="bi bi-x"></i>
                 </div>
-            </div>
+            </div>*@
             <!-- <h1 class="mgl mt-2">Explore 72 missions</h1> -->
 
         </div>
@@ -340,15 +341,13 @@
 
                     <form class="d-flex ms-auto">
 
-                        <select id="sortSelect">
+                        <select  id="sortby">
                           <option value="-1" selected>Sort by</option>
                           <option value="newest">Newest</option>
                           <option value="oldest">Oldest</option>
                           <option value="seats_desc">Lowest Available Seats</option>
                           <option value="seats_asc">Highest Available Seats</option>
-                          @*<option value="favourites">Favourites</option>*@
                           <option value="deadline">Deadline(Descending order)</option>
-                          @*<option value="deadline_asc">Deadline(Ascending order)</option>*@
                         </select>
 
                         <button class="btn " id="grid" onclick="showView('grid')"><img src="~/images/grid.png"
@@ -427,7 +426,7 @@
                                     <table>
                                     <tr>
                                         <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
-                                        <td>10</td>
+                                        <td>@item.Missions.SeatsVacancy</td>
                                     </tr>
                                     <tr>
                                         <td class="fsize2"> Seats Left</td>
@@ -534,17 +533,21 @@
                     </div>
                 </div>
 
-                @*
-                <hr style="z-index: -1;">*@
+                
+                
                 @if (item.Missions.MissionType=="TIME")
                 {
+                 @*<hr style="z-index: -1;">*@
                 <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds ">
+                    
                     <span class="fsize"> From @item.Missions.StartDate.ToString().Substring(0, 10) until @item.Missions.EndDate.ToString().Substring(0, 10)</span>
                 </div>
                 }
                 else
                 {
+                   
                 <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds  ">
+                     @*<hr style="z-index: -1;">*@
                     <span class="fsize"> Ongoing Opportunity</span>
                 </div>
 
@@ -552,7 +555,7 @@
 
                 @* <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds ">
                     <span> From 10/01/2019 until 25/02/2019</span>
-                </div>*@
+                </div>
             </div>
 
             <div class="row">
@@ -598,7 +601,7 @@
                             <table>
                                 <tr>
                                     <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
-                                    <td>10</td>
+                                    <td>@item.Missions.SeatsVacancy</td>
                                 </tr>
                                 <tr>
                                     <td class="fsize2"> Seats Left</td>
@@ -700,10 +703,11 @@
     </div>
 
 
-
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/searching.js"></script>
-    <script src="/js/sortby.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*<script src="/js/sortby.js"></script>*@
     <script src="https://code.jquery.com/jquery-3.6.3.js"
         integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script>

@@ -16,7 +16,8 @@ namespace CI_Platform.Repository.Interface
     {
         List<PlatformLandingViewModel> GetAllMission();
 
-        List<PlatformLandingViewModel> GetSorting(String sortString);
+        //10-03
+        List<PlatformLandingViewModel> GetMissionSorting(String sort);
 
     }
 }
