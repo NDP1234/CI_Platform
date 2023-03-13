@@ -7,8 +7,13 @@ using System.Threading.Tasks;
 
 namespace CI_Platform.Repository.Interface
 {
+    //public interface ICountryRepository
+    //{
+    //    public List<Country> GetCountryDetails();
+    //}
     public interface ICountryRepository
     {
-        public List<Country> GetCountryDetails();
+        IEnumerable<Country> GetAllCountries();
+        IEnumerable<City> GetCitiesByCountryId(int countryId);
     }
 }

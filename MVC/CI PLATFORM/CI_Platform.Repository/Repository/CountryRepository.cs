@@ -18,10 +18,19 @@ namespace CI_Platform.Repository.Repository
             _db = db;
         }
 
-        public List<Country> GetCountryDetails()
+        //public List<Country> GetCountryDetails()
+        //{
+        //    List<Country> country_details = _db.Countries.ToList();
+        //    return country_details;
+        //}
+        public IEnumerable<Country> GetAllCountries()
         {
-            List<Country> country_details = _db.Countries.ToList();
-            return country_details;
+            return _db.Countries.ToList();
+        }
+
+        public IEnumerable<City> GetCitiesByCountryId(int countryId)
+        {
+            return _db.Cities.Where(c => c.CountryId == countryId).ToList();
         }
     }
 }

@@ -11,9 +11,9 @@ namespace CI_PLATFORM.Controllers
 {
     public class ContentController : Controller
     {
-       
 
-        private readonly ICountryRepository _country;
+        private readonly ICountryRepository _countryRepository;
+        //private readonly ICountryRepository _country;
         private readonly ICityRepository _city;
         private readonly IThemeRepository _theme;
         private readonly ISkillsRepository _skill;
@@ -21,9 +21,9 @@ namespace CI_PLATFORM.Controllers
         private readonly IUserList _users;
         private readonly CiPlatformContext _db;
         //private readonly IMissionListingRepository _missiondetails;
-        public ContentController(ICountryRepository country, ICityRepository city, IThemeRepository theme, ISkillsRepository skill, IMissionListingRepository db2, IUserList users, CiPlatformContext db) {
-            _country = country;
-            _city = city;
+        public ContentController(ICountryRepository countryRepository,  IThemeRepository theme, ISkillsRepository skill, IMissionListingRepository db2, IUserList users, CiPlatformContext db) {
+            _countryRepository = countryRepository;
+            //_city = city;
             _theme = theme;
             _skill = skill;
             _db2 = db2;
@@ -49,10 +49,10 @@ namespace CI_PLATFORM.Controllers
                 return RedirectToAction("login", "Authentication");
             }
 
-            List<Country> country = _country.GetCountryDetails();
-            ViewBag.Country = country;
-            List<City> city = _city.GetCityDetails();
-            ViewBag.City = city;
+            //List<Country> country = _country.GetCountryDetails();
+            //ViewBag.Country = country;
+            //List<City> city = _city.GetCityDetails();
+            //ViewBag.City = city;
             List<MissionTheme> theme = _theme.GetThemeDetails();
             ViewBag.MissionTheme = theme;
             List<Skill> skill = _skill.GetSkillDetails();
@@ -75,7 +75,7 @@ namespace CI_PLATFORM.Controllers
             var missiondata = _db2.GetMissionSorting(sort);
             var missionlist = new JsonResult[missiondata.ToList().Count];
             int i = 0;
-            
+
             foreach (PlatformLandingViewModel y in missiondata)
             {
                 if (y.Missions == null)
@@ -83,27 +83,81 @@ namespace CI_PLATFORM.Controllers
                     continue;
                 }
                 var mission = y.Missions;
-                    var missionObj = new JsonResult(new
-                    {
-                        mission.MissionId,
-                        mission.Title,
-                        mission.City.Name,
-                        mission.ShortDescription,
-                        Theme = mission.Theme.Title,
-                        mission.OrganizationName,
-                        //mission.OrganizationDetail,
-                        StartDate = mission.StartDate.Value.ToShortDateString(),
-                        EndDate = mission.EndDate.Value.ToShortDateString(),
-                        Deadline = (mission.StartDate - TimeSpan.FromDays(1)).Value.ToShortDateString(),
-                        mission.SeatsVacancy,
-                        mission.MissionType
-                    });
-                    missionlist[i] = missionObj;
-                    i++;
-                
+                var missionObj = new JsonResult(new
+                {
+                    mission.MissionId,
+                    mission.Title,
+                    mission.City.Name,
+                    mission.ShortDescription,
+                    Theme = mission.Theme.Title,
+                    mission.OrganizationName,
+                    //mission.OrganizationDetail,
+                    StartDate = mission.StartDate.Value.ToShortDateString(),
+                    EndDate = mission.EndDate.Value.ToShortDateString(),
+                    Deadline = (mission.StartDate - TimeSpan.FromDays(1)).Value.ToShortDateString(),
+                    mission.SeatsVacancy,
+                    mission.MissionType,
+                    y.image.MediaPath
+
+
+                });
+                missionlist[i] = missionObj;
+                i++;
+
             }
             return missionlist;
 
+        }
+             public JsonResult[] ThemeFilter(int themeid)
+            {
+            var missiondata = _db2.GetItemsBySearchString(themeid);
+            var missionlist = new JsonResult[missiondata.ToList().Count];
+            int i = 0;
+            foreach (PlatformLandingViewModel y in missiondata)
+            {
+                if (y.Missions == null)
+                {
+                    continue;
+                }
+                var mission = y.Missions;
+                var missionObj = new JsonResult(new
+                {
+                    mission.MissionId,
+                    mission.Title,
+                    mission.City.Name,
+                    mission.ShortDescription,
+                    Theme = mission.Theme.Title,
+                    mission.OrganizationName,
+                    //mission.OrganizationDetail,
+                    StartDate = mission.StartDate.Value.ToShortDateString(),
+                    EndDate = mission.EndDate.Value.ToShortDateString(),
+                    Deadline = (mission.StartDate - TimeSpan.FromDays(1)).Value.ToShortDateString(),
+                    mission.SeatsVacancy,
+                    mission.MissionType,
+                    y.image.MediaPath
+
+
+                });
+                missionlist[i] = missionObj;
+                i++;
+
+            }
+            return missionlist;
+            }
+
+    
+        [HttpGet]
+        public JsonResult GetAllCountries()
+        {
+            var countries = _countryRepository.GetAllCountries();
+            return Json(countries);
+        }
+
+        [HttpGet]
+        public JsonResult GetCitiesByCountryId(int countryId)
+        {
+            var cities = _countryRepository.GetCitiesByCountryId(countryId);
+            return Json(cities);
         }
         //public JsonResult DateSort(string sort_by)
         //{

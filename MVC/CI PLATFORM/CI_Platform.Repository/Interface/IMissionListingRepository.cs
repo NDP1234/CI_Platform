@@ -18,6 +18,7 @@ namespace CI_Platform.Repository.Interface
 
         //10-03
         List<PlatformLandingViewModel> GetMissionSorting(String sort);
-
+        //List<PlatformLandingViewModel> GetThemesBySearchString(string searchString);
+        List<PlatformLandingViewModel> GetItemsBySearchString(int themeid);
     }
 }

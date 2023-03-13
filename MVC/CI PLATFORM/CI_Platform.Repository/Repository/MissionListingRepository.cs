@@ -51,13 +51,13 @@ namespace CI_Platform.Repository.Repository
             {
                 return missionsortdata.OrderBy(m => m.Missions.CreatedAt).ToList();
             }
-            else if (sort == "seats_desc")
-            {
-                return missionsortdata.OrderByDescending(m => m.Missions.SeatsVacancy).ToList();
-            }
             else if (sort == "seats_asc")
             {
                 return missionsortdata.OrderByDescending(m => m.Missions.SeatsVacancy).ToList();
+            }
+            else if (sort == "seats_desc")
+            {
+                return missionsortdata.OrderBy(m => m.Missions.SeatsVacancy).ToList();
             }
             else if (sort == "deadline")
             {
@@ -69,5 +69,19 @@ namespace CI_Platform.Repository.Repository
             }
         }
 
+
+        public List<PlatformLandingViewModel> GetItemsBySearchString(int themeid)
+        {
+            //var items = _db.Missions.AsQueryable();
+
+            //if (!string.IsNullOrEmpty(searchString))
+            //{
+            //    items = items.Where(i => i.Title.Contains(searchString));
+            //}
+
+            //return items.ToList();
+            List<PlatformLandingViewModel> missionthemedata = GetAllMission();
+            return missionthemedata.Where(m => m.Missions.ThemeId == themeid).ToList();
+        }
     }
 }
