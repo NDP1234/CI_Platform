@@ -14,6 +14,6 @@ namespace CI_Platform.Entities.Models.VM
         public IEnumerable<City>? Cities { get; set; }
         public IEnumerable<MissionTheme>? themes { get; set; }
         public IEnumerable<Skill>? skills { get; set; }
-       
+        public IEnumerable<MissionSkill>? MissionSkills { get; set; }
     }
 }

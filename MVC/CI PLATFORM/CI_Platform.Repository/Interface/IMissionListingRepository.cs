@@ -17,8 +17,9 @@ namespace CI_Platform.Repository.Interface
         List<PlatformLandingViewModel> GetAllMission();
 
         //10-03
-        List<PlatformLandingViewModel> GetMissionSorting(String sort);
+        List<PlatformLandingViewModel> GetMissionSorting(String sort, List<PlatformLandingViewModel> finalMission);
         //List<PlatformLandingViewModel> GetThemesBySearchString(string searchString);
-        List<PlatformLandingViewModel> GetItemsBySearchString(int themeid);
+        //List<PlatformLandingViewModel> GetItemsBySearchString(int themeid);
+        public List<PlatformLandingViewModel> GetFilterData(string[] country, string[] city, string[] theme, string[] skill, string sort);
     }
 }

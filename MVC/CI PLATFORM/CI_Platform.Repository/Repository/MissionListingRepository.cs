@@ -30,7 +30,9 @@ namespace CI_Platform.Repository.Repository
             List<Country> countries = _db.Countries.ToList();
             List<City> city = _db.Cities.ToList();
             List<Skill> skills = _db.Skills.ToList();
+            List<MissionSkill> missionSkills = _db.MissionSkills.ToList();
             var Missions = (from m in mission
+                            //join S in missionSkills on m.MissionId equals S.MissionId
                             join i in image on m.MissionId equals i.MissionId into data
                             from i in data.DefaultIfEmpty().Take(1)
                             select new PlatformLandingViewModel { image = i, Missions = m, Country = countries, themes = theme, skills = skills }).ToList();
@@ -38,50 +40,281 @@ namespace CI_Platform.Repository.Repository
         }
 
 
-        public List<PlatformLandingViewModel> GetMissionSorting(string sort)
+        //public List<PlatformLandingViewModel> GetMissionSorting(string sort)
+        //{
+        //    List<PlatformLandingViewModel> missionsortdata = GetAllMission();
+
+
+        //    if (sort == "newest")
+        //    {
+        //        return missionsortdata.OrderByDescending(m => m.Missions.CreatedAt).ToList();
+        //    }
+        //    else if (sort == "oldest")
+        //    {
+        //        return missionsortdata.OrderBy(m => m.Missions.CreatedAt).ToList();
+        //    }
+        //    else if (sort == "seats_asc")
+        //    {
+        //        return missionsortdata.OrderByDescending(m => m.Missions.SeatsVacancy).ToList();
+        //    }
+        //    else if (sort == "seats_desc")
+        //    {
+        //        return missionsortdata.OrderBy(m => m.Missions.SeatsVacancy).ToList();
+        //    }
+        //    else if (sort == "deadline")
+        //    {
+        //        return missionsortdata.OrderByDescending(m => m.Missions.EndDate).ToList();
+        //    }
+        //    else
+        //    {
+        //        return missionsortdata.OrderByDescending(m => m.Missions.CreatedAt).ToList();
+        //    }
+        //}
+
+        //14-03
+        public List<PlatformLandingViewModel> GetMissionSorting(string sort, List<PlatformLandingViewModel> finalMission)
         {
-            List<PlatformLandingViewModel> missionsortdata = GetAllMission();
+            //List<PlatformLandingViewModel> missionsortdata = GetAllMission();
 
 
             if (sort == "newest")
             {
-                return missionsortdata.OrderByDescending(m => m.Missions.CreatedAt).ToList();
+                return finalMission.OrderByDescending(m => m.Missions.CreatedAt).ToList();
             }
             else if (sort == "oldest")
             {
-                return missionsortdata.OrderBy(m => m.Missions.CreatedAt).ToList();
+                return finalMission.OrderBy(m => m.Missions.CreatedAt).ToList();
             }
             else if (sort == "seats_asc")
             {
-                return missionsortdata.OrderByDescending(m => m.Missions.SeatsVacancy).ToList();
+                return finalMission.OrderByDescending(m => m.Missions.SeatsVacancy).ToList();
             }
             else if (sort == "seats_desc")
             {
-                return missionsortdata.OrderBy(m => m.Missions.SeatsVacancy).ToList();
+                return finalMission.OrderBy(m => m.Missions.SeatsVacancy).ToList();
             }
             else if (sort == "deadline")
             {
-                return missionsortdata.OrderByDescending(m => m.Missions.EndDate).ToList();
+                return finalMission.OrderByDescending(m => m.Missions.EndDate).ToList();
             }
             else
             {
-                return missionsortdata.OrderByDescending(m => m.Missions.CreatedAt).ToList();
+                //return finalMission.OrderByDescending(m => m.Missions.CreatedAt).ToList();
+                return finalMission.ToList();
+            }
+        }
+        public List<PlatformLandingViewModel> GetFilterData(string[] country, string[] city, string[] theme, string[] skill, string sort)
+        {
+            var GlobalSort = sort;
+            List<PlatformLandingViewModel> filterMission = GetAllMission();
+            List<PlatformLandingViewModel> finalMission = new List<PlatformLandingViewModel>();
+
+            if (true)
+            {
+                if (city.Length != 0 && skill.Length != 0 && country.Length != 0 && skill.Length != 0)
+                {
+                    foreach (string countryname in country)
+                    {
+                        List<PlatformLandingViewModel> missionByFilter = new List<PlatformLandingViewModel>();
+                        foreach (string cityname in city)
+                        {
+                            foreach (string skillname in skill)
+                            {
+                                foreach (string themename in theme)
+                                {
+                                    missionByFilter = filterMission.Where(m => (m.Missions.Country.Name == countryname && m.Missions.City.Name == cityname) && (m.Missions.Theme.Title == themename && m.Missions.MissionSkills.Any(x => x.Skill.SkillName == skillname))).ToList();
+                                    finalMission = finalMission.Concat(missionByFilter).ToList();
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (country.Length != 0 && city.Length != 0 && skill.Length != 0)
+                {
+                    foreach (string countryname in country)
+                    {
+                        List<PlatformLandingViewModel> missionByFilter = new List<PlatformLandingViewModel>();
+                        foreach (string cityname in city)
+                        {
+                            foreach (string skillname in skill)
+                            {
+                                missionByFilter = filterMission.Where(m => (m.Missions.Country.Name == countryname && m.Missions.City.Name == cityname) && (m.Missions.MissionSkills.Any(x => x.Skill.SkillName == skillname))).ToList();
+                                finalMission = finalMission.Concat(missionByFilter).ToList();
+                            }
+                        }
+                    }
+                }
+                else if (city.Length != 0 && skill.Length != 0 && theme.Length != 0)
+                {
+                    foreach (string cityname in city)
+                    {
+                        List<PlatformLandingViewModel> missionByFilter = new List<PlatformLandingViewModel>();
+                        foreach (string skillname in skill)
+                        {
+                            foreach (string themename in theme)
+                            {
+                                missionByFilter = filterMission.Where(m => (m.Missions.City.Name == cityname && (m.Missions.MissionSkills.Any(x => x.Skill.SkillName == skillname) && m.Missions.Theme.Title == themename))).ToList();
+                                finalMission = finalMission.Concat(missionByFilter).ToList();
+                            }
+                        }
+                    }
+                }
+                else if (skill.Length != 0 && theme.Length != 0 && country.Length != 0)
+                {
+                    foreach (string countryname in country)
+                    {
+                        List<PlatformLandingViewModel> missionByFilter = new List<PlatformLandingViewModel>();
+                        foreach (string skillname in skill)
+                        {
+                            foreach (string themename in theme)
+                            {
+                                missionByFilter = filterMission.Where(m => m.Missions.Country.Name == countryname && (m.Missions.MissionSkills.Any(x => x.Skill.SkillName == skillname) && m.Missions.Theme.Title == themename)).ToList();
+                                finalMission = finalMission.Concat(missionByFilter).ToList();
+                            }
+                        }
+                    }
+                }
+                else if (theme.Length != 0 && country.Length != 0 && city.Length != 0)
+                {
+                    foreach (string countryname in country)
+                    {
+                        List<PlatformLandingViewModel> missionByFilter = new List<PlatformLandingViewModel>();
+                        foreach (string cityname in city)
+                        {
+                            foreach (string themename in theme)
+                            {
+                                missionByFilter = filterMission.Where(m => (m.Missions.Country.Name == countryname && m.Missions.City.Name == cityname) && m.Missions.Theme.Title == themename).ToList();
+                                finalMission = finalMission.Concat(missionByFilter).ToList();
+                            }
+                        }
+                    }
+
+                }
+                else if (country.Length != 0 && city.Length != 0)
+                {
+                    foreach (string countryname in country)
+                    {
+                        List<PlatformLandingViewModel> missionByFilter = new List<PlatformLandingViewModel>();
+                        foreach (string cityname in city)
+                        {
+                            missionByFilter = filterMission.Where(m => m.Missions.Country.Name == countryname && m.Missions.City.Name == cityname).ToList();
+                            finalMission = finalMission.Concat(missionByFilter).ToList();
+                        }
+                    }
+                }
+                else if (country.Length != 0 && skill.Length != 0)
+                {
+                    foreach (string countryname in country)
+                    {
+                        List<PlatformLandingViewModel> missionByFilter = new List<PlatformLandingViewModel>();
+                        foreach(string skillname in skill)
+                        {
+                            missionByFilter = filterMission.Where(m => (m.Missions.Country.Name == countryname && m.Missions.MissionSkills.Any(x=>x.Skill.SkillName == skillname))).ToList();
+                            finalMission = finalMission.Concat(missionByFilter).ToList();
+                        }
+                    }
+                }
+                else if (country.Length != 0 && theme.Length != 0)
+                {
+                    foreach (string countryname in country)
+                    {
+                        List<PlatformLandingViewModel> missionByFilter = new List<PlatformLandingViewModel>();
+                        foreach (string themename in theme)
+                        {
+                            missionByFilter = filterMission.Where(m => m.Missions.Country.Name == countryname &&  m.Missions.Theme.Title == themename).ToList();
+                            finalMission = finalMission.Concat(missionByFilter).ToList();
+                        }
+                    }
+                }
+                else if (city.Length != 0 && skill.Length != 0)
+                {
+                    foreach (string cityname in city)
+                    {
+                        List<PlatformLandingViewModel> missionByFilter = new List<PlatformLandingViewModel>();
+                        foreach (string skillname in skill)
+                        {
+                            missionByFilter = filterMission.Where(m => m.Missions.City.Name == cityname && m.Missions.MissionSkills.Any(x => x.Skill.SkillName == skillname)).ToList();
+                            finalMission = finalMission.Concat(missionByFilter).ToList();
+                        }
+                    }
+                }
+                else if (city.Length != 0 && theme.Length != 0)
+                {
+                    foreach (string cityname in city)
+                    {
+                        List<PlatformLandingViewModel> missionByFilter = new List<PlatformLandingViewModel>();
+                        foreach(string themename in theme)
+                        {
+                            missionByFilter = filterMission.Where(m => m.Missions.City.Name == cityname && m.Missions.Theme.Title == themename).ToList();
+                            finalMission = finalMission.Concat(missionByFilter).ToList();
+                        }
+                    }
+                }
+                else if (skill.Length != 0 && theme.Length != 0)
+                {
+                    foreach (string skillname in skill)
+                    {
+                        List<PlatformLandingViewModel> missionByFilter = new List<PlatformLandingViewModel>();
+                        foreach (string themename in theme)
+                        {
+                            missionByFilter = filterMission.Where(m => m.Missions.MissionSkills.Any(x => x.Skill.SkillName == skillname) && m.Missions.Theme.Title == themename).ToList();
+                            finalMission = finalMission.Concat(missionByFilter).ToList();
+                        }
+                    }
+                }
+                else if (country.Length!=0)
+                {
+                    foreach(string countryname in country)
+                    {
+                        IEnumerable<PlatformLandingViewModel> missionByCountry= filterMission.Where(m => m.Missions.Country.Name==countryname);
+                        finalMission = (List<PlatformLandingViewModel>)finalMission.Concat(missionByCountry);
+                    }
+                }
+                else if (city.Length != 0)
+                {
+                    foreach (string cityname in city)
+                    {
+                        IEnumerable<PlatformLandingViewModel> missionByCity = filterMission.Where(m => m.Missions.City.Name == cityname);
+                        finalMission = (List<PlatformLandingViewModel>)finalMission.Concat(missionByCity);
+                    }
+                }
+                else if (skill.Length != 0)
+                {
+                    foreach (string skillname in skill)
+                    {
+                        IEnumerable<PlatformLandingViewModel> missionBySkill = filterMission.Where(m => m.Missions.MissionSkills.Any(x=> x.Skill.SkillName == skillname));
+                        finalMission = (List<PlatformLandingViewModel>)finalMission.Concat(missionBySkill);
+                    }
+                }
+                else if (theme.Length != 0)
+                {
+                    foreach (string themename in theme)
+                    {
+                        IEnumerable<PlatformLandingViewModel> missionByTheme = filterMission.Where(m => m.Missions.Theme.Title == themename);
+                        finalMission = (List<PlatformLandingViewModel>)finalMission.Concat(missionByTheme);
+                    }
+                }
+                else
+                {
+                    finalMission = (List<PlatformLandingViewModel>)finalMission.Concat(filterMission);
+                }
+            }
+            if(sort == null)
+            {
+                return filterMission.Distinct().ToList();
+            }
+            else
+            {
+                return GetMissionSorting(GlobalSort, filterMission.Distinct().ToList());
             }
         }
 
 
-        public List<PlatformLandingViewModel> GetItemsBySearchString(int themeid)
-        {
-            //var items = _db.Missions.AsQueryable();
+        //public List<PlatformLandingViewModel> GetItemsBySearchString(int themeid)
+        //{
 
-            //if (!string.IsNullOrEmpty(searchString))
-            //{
-            //    items = items.Where(i => i.Title.Contains(searchString));
-            //}
-
-            //return items.ToList();
-            List<PlatformLandingViewModel> missionthemedata = GetAllMission();
-            return missionthemedata.Where(m => m.Missions.ThemeId == themeid).ToList();
-        }
+        //    List<PlatformLandingViewModel> missionthemedata = GetAllMission();
+        //    return missionthemedata.Where(m => m.Missions.ThemeId == themeid).ToList();
+        //}
     }
 }

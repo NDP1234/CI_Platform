@@ -120,9 +120,10 @@
                          <form id="search-form" method="get" class="d-inline">
                                 <input type="search" class="form-control rounded d-inline srch" id="search-input" name="query" placeholder="Search mission..." aria-label="Search" aria-describedby="search-addon" >
                          </form>
+                          
                         </div>
                     </div>
-
+                    
                     <div class="col-12 col-lg-6 col-md-6 ">
                         <div class="row  ">
                             <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
@@ -145,22 +146,30 @@
                             </div>
 
                             <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
-                                @*<a class="btn  dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLink"
+                                <a class="btn  dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLink"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <span>City&nbsp; &nbsp;</span>
                                 </a>
-                                <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
-                                     @foreach (var item in @ViewBag.City)
-                                    {
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" >
-                                     <label class="form-check-label" for="flexCheckChecked2">
-                                        @item.Name
+                                <ul class="dropdown-menu " id="cityDropdown" aria-labelledby="dropdownMenuLink">
+                                    @* @foreach (var item in @ViewBag.City) *@
+                                    
+                                    <input class="form-check-input c-dropdown" type="checkbox" value=""  >
+                                     <label class="form-check-label" >
+                                       
                                      </label><br>
-                                    }
-                                </ul>*@
-                                <select id="cityDropdown"  class="border-0" name="CityId">
+          
+                                </ul>
+                                    @*<select id="cityDropdown"  class="border-0" name="CityId">
+                                   
                                     <option value="">City </option>
-                                </select>
+                                
+                                </select>*@
+@*                        <div id="cityCheckboxContainer">
+                        <select id="cityDropdown"  class="border-0" name="CityId">
+                        <input type="checkbox" id="city1" name="city1" value="city1">
+                            <label for="city1">City </label>
+                        </select>
+                        </div>  *@
                             </div>
 
                             <div class="dropdown d-inline col-lg-3  col-md-3 col-6 be text-center">
@@ -168,14 +177,14 @@
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <span>Theme &nbsp; &nbsp;</span>
                                 </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" id="theme">
                                     @*<li><a class="dropdown-item" href="#">Theme-1</a></li>
                                     <li><a class="dropdown-item" href="#">Theme-2 </a></li>
                                     <li><a class="dropdown-item" href="#">Something else </a></li>*@
                                     @foreach (var item in @ViewBag.MissionTheme)
                                     {
                                     @*<li><a class="dropdown-item" href="#">@item.Title</a></li>*@
-                                    <input class="form-check-input themeDropdown" type="checkbox" value="@item.MissionThemeId" onchange="addThemes(@item.MissionThemeId)"  >
+                                    <input class="form-check-input themeDropdown" type="checkbox" value="@item.MissionThemeId"   >
                                      <label class="form-check-label" for="themeDropdown">
                                         @item.Title
                                      </label><br>
@@ -202,6 +211,7 @@
                                      </label><br>
                                     }
                                 </ul>
+                               <div class="d-inline p-2 bg-primary text-white d-none" id="FilterBtn">FilterBtn</div>
                             </div>
                         </div>
                     </div>
@@ -246,7 +256,7 @@
                                  <select id="cityDropdown" name="CityId">
                                     <option value="">City </option>
                                 </select>
-
+    
 
                             </li>
                         </a>
@@ -330,7 +340,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light " id="mission-list">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <h1>Explore 72 missions</h1>
+                    <h1>Explore missions</h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

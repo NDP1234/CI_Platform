@@ -70,13 +70,91 @@ namespace CI_PLATFORM.Controllers
             return View(missions);
         }
 
-        public JsonResult[] DateSort(string sort)
+        ////public JsonResult[] DateSort(string sort)
+        ////{
+        ////    var missiondata = _db2.GetMissionSorting(sort);
+        ////    var missionlist = new JsonResult[missiondata.ToList().Count];
+        ////    int i = 0;
+
+        ////    foreach (PlatformLandingViewModel y in missiondata)
+        ////    {
+        ////        if (y.Missions == null)
+        ////        {
+        ////            continue;
+        ////        }
+        ////        var mission = y.Missions;
+        ////        var missionObj = new JsonResult(new
+        ////        {
+        ////            mission.MissionId,
+        ////            mission.Title,
+        ////            mission.City.Name,
+        ////            mission.ShortDescription,
+        ////            Theme = mission.Theme.Title,
+        ////            mission.OrganizationName,
+        ////            //mission.OrganizationDetail,
+        ////            StartDate = mission.StartDate.Value.ToShortDateString(),
+        ////            EndDate = mission.EndDate.Value.ToShortDateString(),
+        ////            Deadline = (mission.StartDate - TimeSpan.FromDays(1)).Value.ToShortDateString(),
+        ////            mission.SeatsVacancy,
+        ////            mission.MissionType,
+        ////            y.image.MediaPath
+
+
+        ////        });
+        ////        missionlist[i] = missionObj;
+        ////        i++;
+
+        ////    }
+        ////    return missionlist;
+
+        ////}
+            // public JsonResult[] ThemeFilter(int themeid)
+            //{
+            //var missiondata = _db2.GetItemsBySearchString(themeid);
+            //var missionlist = new JsonResult[missiondata.ToList().Count];
+            //int i = 0;
+            //foreach (PlatformLandingViewModel y in missiondata)
+            //{
+            //    if (y.Missions == null)
+            //    {
+            //        continue;
+            //    }
+            //    var mission = y.Missions;
+            //    var missionObj = new JsonResult(new
+            //    {
+            //        mission.MissionId,
+            //        mission.Title,
+            //        mission.City.Name,
+            //        mission.ShortDescription,
+            //        Theme = mission.Theme.Title,
+            //        mission.OrganizationName,
+            //        //mission.OrganizationDetail,
+            //        StartDate = mission.StartDate.Value.ToShortDateString(),
+            //        EndDate = mission.EndDate.Value.ToShortDateString(),
+            //        Deadline = (mission.StartDate - TimeSpan.FromDays(1)).Value.ToShortDateString(),
+            //        mission.SeatsVacancy,
+            //        mission.MissionType,
+            //        y.image.MediaPath
+
+
+            //    });
+            //    missionlist[i] = missionObj;
+            //    i++;
+
+            //}
+            //return missionlist;
+            //}
+
+
+        //14-03
+        public JsonResult[] Filter(string[] country, string[] city , string[] theme, string[] skill, string sort)
         {
-            var missiondata = _db2.GetMissionSorting(sort);
-            var missionlist = new JsonResult[missiondata.ToList().Count];
+            var filter = _db2.GetFilterData(country, city, theme, skill, sort);
+            var filterlist = new JsonResult[filter.ToList().Count];
+
             int i = 0;
 
-            foreach (PlatformLandingViewModel y in missiondata)
+            foreach (PlatformLandingViewModel y in filter)
             {
                 if (y.Missions == null)
                 {
@@ -101,51 +179,14 @@ namespace CI_PLATFORM.Controllers
 
 
                 });
-                missionlist[i] = missionObj;
+                filterlist[i] = missionObj;
                 i++;
 
             }
-            return missionlist;
-
+            return filterlist;
         }
-             public JsonResult[] ThemeFilter(int themeid)
-            {
-            var missiondata = _db2.GetItemsBySearchString(themeid);
-            var missionlist = new JsonResult[missiondata.ToList().Count];
-            int i = 0;
-            foreach (PlatformLandingViewModel y in missiondata)
-            {
-                if (y.Missions == null)
-                {
-                    continue;
-                }
-                var mission = y.Missions;
-                var missionObj = new JsonResult(new
-                {
-                    mission.MissionId,
-                    mission.Title,
-                    mission.City.Name,
-                    mission.ShortDescription,
-                    Theme = mission.Theme.Title,
-                    mission.OrganizationName,
-                    //mission.OrganizationDetail,
-                    StartDate = mission.StartDate.Value.ToShortDateString(),
-                    EndDate = mission.EndDate.Value.ToShortDateString(),
-                    Deadline = (mission.StartDate - TimeSpan.FromDays(1)).Value.ToShortDateString(),
-                    mission.SeatsVacancy,
-                    mission.MissionType,
-                    y.image.MediaPath
+        //14-03
 
-
-                });
-                missionlist[i] = missionObj;
-                i++;
-
-            }
-            return missionlist;
-            }
-
-    
         [HttpGet]
         public JsonResult GetAllCountries()
         {
