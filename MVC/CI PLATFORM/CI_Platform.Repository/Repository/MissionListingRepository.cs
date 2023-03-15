@@ -32,7 +32,7 @@ namespace CI_Platform.Repository.Repository
             List<Skill> skills = _db.Skills.ToList();
             List<MissionSkill> missionSkills = _db.MissionSkills.ToList();
             var Missions = (from m in mission
-                            //join S in missionSkills on m.MissionId equals S.MissionId
+                                //join S in missionSkills on m.MissionId equals S.MissionId
                             join i in image on m.MissionId equals i.MissionId into data
                             from i in data.DefaultIfEmpty().Take(1)
                             select new PlatformLandingViewModel { image = i, Missions = m, Country = countries, themes = theme, skills = skills }).ToList();
@@ -207,9 +207,9 @@ namespace CI_Platform.Repository.Repository
                     foreach (string countryname in country)
                     {
                         List<PlatformLandingViewModel> missionByFilter = new List<PlatformLandingViewModel>();
-                        foreach(string skillname in skill)
+                        foreach (string skillname in skill)
                         {
-                            missionByFilter = filterMission.Where(m => (m.Missions.Country.Name == countryname && m.Missions.MissionSkills.Any(x=>x.Skill.SkillName == skillname))).ToList();
+                            missionByFilter = filterMission.Where(m => (m.Missions.Country.Name == countryname && m.Missions.MissionSkills.Any(x => x.Skill.SkillName == skillname))).ToList();
                             finalMission = finalMission.Concat(missionByFilter).ToList();
                         }
                     }
@@ -221,7 +221,7 @@ namespace CI_Platform.Repository.Repository
                         List<PlatformLandingViewModel> missionByFilter = new List<PlatformLandingViewModel>();
                         foreach (string themename in theme)
                         {
-                            missionByFilter = filterMission.Where(m => m.Missions.Country.Name == countryname &&  m.Missions.Theme.Title == themename).ToList();
+                            missionByFilter = filterMission.Where(m => m.Missions.Country.Name == countryname && m.Missions.Theme.Title == themename).ToList();
                             finalMission = finalMission.Concat(missionByFilter).ToList();
                         }
                     }
@@ -243,7 +243,7 @@ namespace CI_Platform.Repository.Repository
                     foreach (string cityname in city)
                     {
                         List<PlatformLandingViewModel> missionByFilter = new List<PlatformLandingViewModel>();
-                        foreach(string themename in theme)
+                        foreach (string themename in theme)
                         {
                             missionByFilter = filterMission.Where(m => m.Missions.City.Name == cityname && m.Missions.Theme.Title == themename).ToList();
                             finalMission = finalMission.Concat(missionByFilter).ToList();
@@ -262,12 +262,12 @@ namespace CI_Platform.Repository.Repository
                         }
                     }
                 }
-                else if (country.Length!=0)
+                else if (country.Length != 0)
                 {
-                    foreach(string countryname in country)
+                    foreach (string countryname in country)
                     {
-                        IEnumerable<PlatformLandingViewModel> missionByCountry= filterMission.Where(m => m.Missions.Country.Name==countryname);
-                        finalMission = (List<PlatformLandingViewModel>)finalMission.Concat(missionByCountry);
+                        IEnumerable<PlatformLandingViewModel> missionByCountry = filterMission.Where(m => m.Missions.Country.Name == countryname);
+                        finalMission = finalMission.Concat(missionByCountry).ToList();
                     }
                 }
                 else if (city.Length != 0)
@@ -282,7 +282,7 @@ namespace CI_Platform.Repository.Repository
                 {
                     foreach (string skillname in skill)
                     {
-                        IEnumerable<PlatformLandingViewModel> missionBySkill = filterMission.Where(m => m.Missions.MissionSkills.Any(x=> x.Skill.SkillName == skillname));
+                        IEnumerable<PlatformLandingViewModel> missionBySkill = filterMission.Where(m => m.Missions.MissionSkills.Any(x => x.Skill.SkillName == skillname));
                         finalMission = (List<PlatformLandingViewModel>)finalMission.Concat(missionBySkill);
                     }
                 }
@@ -290,22 +290,22 @@ namespace CI_Platform.Repository.Repository
                 {
                     foreach (string themename in theme)
                     {
-                        IEnumerable<PlatformLandingViewModel> missionByTheme = filterMission.Where(m => m.Missions.Theme.Title == themename);
-                        finalMission = (List<PlatformLandingViewModel>)finalMission.Concat(missionByTheme);
+                        IEnumerable<PlatformLandingViewModel> missionByTheme = filterMission.Where(m => m.Missions.Theme.Title == themename).ToList();
+                        finalMission = finalMission.Concat(missionByTheme).ToList();
                     }
                 }
                 else
                 {
-                    finalMission = (List<PlatformLandingViewModel>)finalMission.Concat(filterMission);
+                    finalMission = finalMission.Concat(filterMission).ToList();
                 }
             }
-            if(sort == null)
+            if (sort == null)
             {
-                return filterMission.Distinct().ToList();
+                return finalMission.Distinct().ToList();
             }
             else
             {
-                return GetMissionSorting(GlobalSort, filterMission.Distinct().ToList());
+                return GetMissionSorting(GlobalSort, finalMission.Distinct().ToList());
             }
         }
 

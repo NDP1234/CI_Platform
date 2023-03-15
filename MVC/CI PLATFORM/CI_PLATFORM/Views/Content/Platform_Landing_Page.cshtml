@@ -184,7 +184,7 @@
                                     @foreach (var item in @ViewBag.MissionTheme)
                                     {
                                     @*<li><a class="dropdown-item" href="#">@item.Title</a></li>*@
-                                    <input class="form-check-input themeDropdown" type="checkbox" value="@item.MissionThemeId"   >
+                                        <input class="form-check-input themeDropdown" id="@item.Title" type="checkbox" value="@item.MissionThemeId @item.Title" onclick="misfun(this);">
                                      <label class="form-check-label" for="themeDropdown">
                                         @item.Title
                                      </label><br>
@@ -205,13 +205,14 @@
                                     @foreach (var item in @ViewBag.Skill)
                                     {
                                     @*<li><a class="dropdown-item" href="#">@item.SkillName</a></li>*@
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked4" >
+                                    <input class="form-check-input" type="checkbox" value="@item.SkillId @item.SkillName" id="@item.SkillName" onclick="skillfun(this);" >
                                      <label class="form-check-label" for="flexCheckChecked4">
                                         @item.SkillName
                                      </label><br>
                                     }
                                 </ul>
-                               <div class="d-inline p-2 bg-primary text-white d-none" id="FilterBtn">FilterBtn</div>
+                               @*<button class="d-inline p-2 bg-primary text-white d-none" id="FilterBtn">FilterBtn</button>*@
+
                             </div>
                         </div>
                     </div>
@@ -269,7 +270,7 @@
                                 <ul class="dropdown-menu ">
                                      @foreach (var item in @ViewBag.MissionTheme)
                                     {
-                                    <li><a class="dropdown-item" href="#">@item.Title</a></li>
+                                    <li>@item.Title</li>
                                     }
                                 </ul>
                             </li>
@@ -364,7 +365,8 @@
                                 alt=""></button>
                         <button class="btn " id="list" onclick="showView('list')"><img src="~/images/list.png"
                                 alt=""></button>
-                      
+                        <button class="btn d-none" id="FilterBtn" type="button"></button>
+                        <button class="btn d-none" id="NoMissionId" type="button"></button>
                     </form>
                 </div>
             </div>
@@ -647,7 +649,7 @@
 
         
 
-        <nav aria-label="Page navigation example justify-content-center">
+        @*<nav aria-label="Page navigation example justify-content-center">
             <ul class="pagination mt-3">
                 <li class="page-item">
                     <a class="page-link" href="#" aria-label="Previous">
@@ -666,7 +668,7 @@
                     </a>
                 </li>
             </ul>
-        </nav>
+        </nav>*@
 
 
 
