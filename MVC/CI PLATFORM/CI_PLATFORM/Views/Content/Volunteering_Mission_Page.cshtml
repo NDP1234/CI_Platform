@@ -1,6 +1,10 @@
-﻿@*
+﻿@using CI_Platform.Entities.Models.VM
+
+@model VolunteeringMissionPageViewModel;
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
 @{
      Layout = null;
 }
@@ -385,15 +389,20 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 ">
-                <h2 class=" justify-content-between mt10">CSR initiative stands for Coffee & Farmer Equity</h2>
-                <p class="mt1 p-text ">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                <h2 class=" justify-content-between mt10">@Model.Missions.Title</h2>
+                
+                    
+                      <p class="mt1 p-text "> @Model.Missions.ShortDescription</p>
+                    
+                
                 <div class="position-relative mt1 ">
                     <hr style="z-index: -1;" class="hrt">
                     <div class="dt dt5 text-center  position-absolute ">
+                        <span class="fsize"> From  @Model.Missions.StartDate.ToString().Substring(0, 10)  until @Model.Missions.EndDate.ToString().Substring(0, 10) </span>
+                    </div>                    
+@*                    <div class="dt dt5 text-center  position-absolute ">
                         <span class="fsize"> Plant 10,000 Trees</span>
-                    </div>
+                    </div>*@
                 </div>
 
                 <div class="row mt1 mt7 justify-content-between">
@@ -402,7 +411,7 @@
                             <table>
                                 <tr>
                                     <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
-                                    <td>10</td>
+                                    <td>@Model.Missions.SeatsVacancy</td>
                                 </tr>
                                 <tr>
                                     <td> Seats Left</td>
@@ -432,13 +441,13 @@
 
                 <div class="row mt-2 ">
                     <div class="col-lg-6 col-md-6 text-center">
-                        <div class="dt3  text-center p-1">
+                        <div class="dt3  text-center p-1 btn">
                             <img src="~/images/heart1.png" alt="">
                             <span>Add to Favourite</span>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 text-center">
-                        <div class=" dt3 text-center p-1">
+                        <div class=" dt3 text-center p-1 btn">
                             <img src="~/images/add1.png" alt="">
                             <span>Recommend to a <span class="db5">Co-Worker</span> </span>
                         </div>
@@ -463,7 +472,7 @@
                             <img src="~/images/pin1.png" alt="...">
                             <div class="card-body">
                                 <h6 class="card-title">City</h6>
-                                <p class="card-text f-size">London</p>
+                                <p class="card-text f-size">@Model.Missions.City.Name</p>
                             </div>
                         </div>
                     </div>
@@ -472,7 +481,7 @@
                             <img src="~/images/pin1.png" alt="...">
                             <div class="card-body">
                                 <h6 class="card-title">Theme</h6>
-                                <p class="card-text f-size">Environment</p>
+                                <p class="card-text f-size">@Model.Missions.Theme.Title</p>
                             </div>
                         </div>
                     </div>
@@ -490,14 +499,14 @@
                             <img src="~/images/organization.png" alt="...">
                             <div class="card-body ">
                                 <h6 class="card-title">Organization</h6>
-                                <p class="card-text f-size"> CSE Network</p>
+                                <p class="card-text f-size"> @Model.Missions.OrganizationName</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row mt1">
                     <div class="col-lg-12 text-center">
-                        <a class="btn btnlist  text-center" href="#">Go to Homepage <img src="~/images/right-arrow.png"
+                        <a class="btn btnlist  text-center" asp-action="Platform_Landing_Page" asp-controller="Content">Go to Homepage <img src="~/images/right-arrow.png"
                                 alt=""></a>
                     </div>
                 </div>
@@ -531,7 +540,7 @@
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                         aria-labelledby="pills-home-tab">
                         <h3>Introduction</h3>
-                        <p class="p-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                       @* <p class="p-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                             exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
                             in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
@@ -553,7 +562,8 @@
                             ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non
-                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>*@
+                            @Model.Missions.Description
                         <div class="doc">
                             <h3>Documents</h3>
                             <div class="row">

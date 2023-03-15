@@ -22,6 +22,7 @@ builder.Services.AddScoped<IThemeRepository, ThemeRepository>();
 builder.Services.AddScoped<ISkillsRepository, SkillsRepository>();
 builder.Services.AddScoped<IMissionListingRepository, MissionListingRepository>();
 builder.Services.AddScoped<IUserList, UserList>();
+builder.Services.AddScoped<IMissionDetail, MissionDetail>();
 
 var app = builder.Build();
 
