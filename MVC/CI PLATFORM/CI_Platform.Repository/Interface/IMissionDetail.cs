@@ -10,6 +10,7 @@ namespace CI_Platform.Repository.Interface
     public interface IMissionDetail
     {
         public VolunteeringMissionPageViewModel GetMissionDetaiil(int id);
-        
+
+        //public List<VolunteeringMissionPageViewModel> GetRelatedMission(int id);
     }
 }

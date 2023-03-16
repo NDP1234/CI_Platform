@@ -114,10 +114,59 @@ namespace CI_PLATFORM.Controllers
         }
         public IActionResult Volunteering_Mission_Page(int id)
         {
+            var session_details = HttpContext.Session.GetString("Login");
+            if (session_details == null)
+            {
+                return RedirectToAction("login", "Authentication");
+            }
+            List<User> users = _users.GetUserList();
+            var profile = users.FirstOrDefault(m => m.Email == session_details);
+            int userId = (int)profile.UserId;
+            ViewBag.UserDetails = profile;
+            
+
             VolunteeringMissionPageViewModel missiondetails = _im.GetMissionDetaiil( id);
             return View(missiondetails);
         }
-        public IActionResult Story_Listing_Page()
+
+
+        [HttpGet]
+        [Route("Content/AddToFavorites", Name = "favorites")]
+        public IActionResult AddToFavorites(int missionId, int userId)
+        {
+            var existingFavorite = _db.FavouriteMissions.FirstOrDefault(m => m.MissionId == missionId && m.UserId == userId);
+
+            if (existingFavorite == null)
+            {
+                if (ModelState.IsValid)
+                {
+                    FavouriteMission favourite = new FavouriteMission()
+                    {
+                        MissionId = missionId,
+                        UserId = userId,
+                        CreatedAt = DateTime.UtcNow,
+                    };
+
+                    _db.FavouriteMissions.Add(favourite);
+                    _db.SaveChanges();
+                    return Ok(new { success = true, message = "Favorite added successfully" });
+                }
+
+                else
+                {
+                    return View();
+                }
+            }
+            else
+            {
+                _db.FavouriteMissions.Remove(existingFavorite);
+                _db.SaveChanges();
+                return Ok(new { success = true, message = "Favorite removed successfully" });
+            }
+
+        }
+    
+    public IActionResult Story_Listing_Page()
         {
             return View();
         }

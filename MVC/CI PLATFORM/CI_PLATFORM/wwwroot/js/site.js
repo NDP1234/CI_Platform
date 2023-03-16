@@ -487,5 +487,37 @@ $('#NoMissionId').on('click', function () {
     $('#mission-list').css('display', 'none');
 });
 
+//for add to favourites
+                      
+function addtofav() {
+    var missionId = $('#myfavbtn').data('mission-id');
+    var userId = $('#myfavbtn').data('user-id');
+    const heartIcon = document.querySelector('.bi-heart');
+    var isFavorite = heartIcon.classList.contains('filled-heart')
+    console.log(missionId);
+    console.log(userId);
+    $.ajax({
+        type: "GET",
+        url: "/Content/AddToFavorites",
+        data: { missionId: missionId, userId: userId },
+
+        success: function (data) {
+            if (data.success) {
+                console.log("successfully added to favorite")
+                if (isFavorite) {
+                    $(heartIcon).removeClass("filled-heart");
+                    $("#spanforfav").text("Add To favourite");
+                }
+                else {
+                    $(heartIcon).addClass("filled-heart");
+                    $("#spanforfav").text("Remove from favourite");
+                }
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error adding favorite: " + error);
+        }
+    });
+};
 
 

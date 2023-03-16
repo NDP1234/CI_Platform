@@ -17,6 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Volunteering Mission Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="~/css/vmp.css">
 
@@ -26,7 +27,10 @@
 
     <!-- head Part -->
     <div class="container">
-
+@*        <div class="d-none">
+           <span> @Model.Missions.MissionId</span> 
+           <span> @ViewBag.UserDetails.Userid</span> 
+        </div>*@
         <nav class="navbar navbar-expand-lg navbar-light d-none d-md-block">
             <div class="container">
                 <button class="navbar-toggler bg-light " type="button" data-bs-toggle="collapse"
@@ -63,7 +67,7 @@
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="~/images/user-img.png" alt="" style="border-radius: 50%;" height="30px"
                                     width="30px">
-                                <span>Evan Donohue</span>
+                                <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName  </span>
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -108,7 +112,7 @@
             </div>
         </div>
         <!-- //////////////////////////////// -->
-        <div class="row mt-4 bdr container-fluid  ps-0 pe-0  mb-2">
+@*        <div class="row mt-4 bdr container-fluid  ps-0 pe-0  mb-2">
             <div class="srchbar">
                 <div class="input-group rounded bd d-none d-md-flex  ">
 
@@ -284,7 +288,7 @@
                     <i class="bi bi-x"></i>
                 </div>
             </div>
-        </div>
+        </div>*@
 
 
     </div>
@@ -392,7 +396,7 @@
                 <h2 class=" justify-content-between mt10">@Model.Missions.Title</h2>
                 
                     
-                      <p class="mt1 p-text "> @Model.Missions.ShortDescription</p>
+                      <p class="mt1 p-text"> @Model.Missions.ShortDescription</p>
                     
                 
                 <div class="position-relative mt1 ">
@@ -441,10 +445,16 @@
 
                 <div class="row mt-2 ">
                     <div class="col-lg-6 col-md-6 text-center">
-                        <div class="dt3  text-center p-1 btn">
-                            <img src="~/images/heart1.png" alt="">
-                            <span>Add to Favourite</span>
+                        
+                        <div class="dt3  text-center">
+                            @*if(Model)*@
+                           <button id="myfavbtn" data-mission-id="@Model.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 "  style="border-radius:20px" onclick="addtofav();">
+                                @*<img src="~/images/heart1.png" alt="">*@
+                                <i class="bi bi-heart"></i>
+                           </button>
+                           <span id="spanforfav">Add to Favourite</span>
                         </div>
+                         
                     </div>
                     <div class="col-lg-6 col-md-6 text-center">
                         <div class=" dt3 text-center p-1 btn">
@@ -540,6 +550,7 @@
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                         aria-labelledby="pills-home-tab">
                         <h3>Introduction</h3>
+                        <p  class="p-text"> @Model.Missions.Description</p>
                        @* <p class="p-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                             exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
@@ -563,7 +574,7 @@
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non
                             proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>*@
-                            @Model.Missions.Description
+                           
                         <div class="doc">
                             <h3>Documents</h3>
                             <div class="row">
@@ -581,7 +592,7 @@
                     </div>
                     <!-- ------------------------------------------------------ -->
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                        <div class="my-5">
+                        @*<div class="my-5">
                             <h3 class="text-center ">Industrial Solutions Network</h3>
                             <span>Melvin A. Sawyer, Managing Director</span>
                         </div>
@@ -601,20 +612,11 @@
                             <div><span>melvinasawyer@yahoo.com</span> </div>
 
                             <div> <span> www.cesnetworksolution.com</span></div>
-                        </div>
+                        </div>*@
 
-                        <h4 class="text-center">About Organization</h4>
+                        <h4 class="text-center">About Organization(@Model.Missions.OrganizationName)</h4>
                         <p class="p-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut eram ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat.
-                            <br><br>
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                            essmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud
-                            exercitation ullamco tations n quip ex ea commodo consequat.
+                            @Model.Missions.OrganizationDetail
                         </p>
                     </div>
                     <!-- ------------------------------------------------------- -->
@@ -706,11 +708,17 @@
                     </div>
                     <div class="row border-top pinfo">
                         <div class="col-lg-3 col-md-3 col-3">Skills</div>
-                        <div class="col-lg-9 col-md-9 col-9">Cool, Easy Going, Math, Computer</div>
+                        @*<div class="col-lg-9 col-md-9 col-9">Cool, Easy Going, Math, Computer</div>*@
+                        <div class="col-lg-9 col-md-9 col-9">
+                            @foreach(var item in @Model.Missions.MissionSkills)
+                                {
+                                <span>@item.Skill.SkillName </span>
+                                }
+                        </div>
                     </div>
                     <div class="row border-top pinfo">
                         <div class="col-lg-3 col-md-3 col-3">Days</div>
-                        <div class="col-lg-9 col-md-9 col-9">Weekend only</div>
+                        <div class="col-lg-9 col-md-9 col-9">@Model.Missions.Availability</div>
                     </div>
                     <div class="row border-top pinfo">
                         <div class="col-lg-3 col-md-3 col-3">Rating</div>
@@ -1022,10 +1030,12 @@
         </div>
     </div>
 
-
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"
         integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+     <script src="~/js/site.js" asp-append-version="true"></script>
+
     <script>
 
         function openNav() {
@@ -1096,6 +1106,18 @@
                 next = next.nextElementSibling
             }
         })
+
+//  function toggleColor() {
+//  var button = document.getElementById("myButton");
+//  if (button.classList.contains("white")) {
+//    button.classList.remove("white");
+//    button.classList.add("red");
+//  } else {
+//    button.classList.remove("red");
+//    button.classList.add("white");
+//  }
+//}
+
 
 
     </script>

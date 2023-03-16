@@ -4,12 +4,33 @@ ul, li {
     list-style-type: none;
 }
 
+i.filled-heart {
+    font-size: 2.5rem;
+    / Set a font size for the heart icon /
+}
+
+i.filled-heart::before {
+        content: "\2665";
+        / Use a Unicode character for the filled heart symbol / top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        color: red;
+        font-size: inherit;
+}
+
 .b-filter:focus {
     outline: 0;
     box-shadow: none;
 }
 
+.white {
+    background-color: white;
+}
 
+.red {
+    background-color: red;
+}
 
 .srch {
     width: 85%;
