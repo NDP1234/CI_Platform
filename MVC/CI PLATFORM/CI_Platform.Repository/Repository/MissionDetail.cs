@@ -19,7 +19,7 @@ namespace CI_Platform.Repository.Repository
         {
             _db = db;
         }
-        public VolunteeringMissionPageViewModel GetMissionDetaiil(int id)
+        public VolunteeringMissionPageViewModel GetMissionDetaiil(int id, int userID)
         {
             
             //var userId = 
@@ -30,6 +30,7 @@ namespace CI_Platform.Repository.Repository
             List<City> city = _db.Cities.ToList();
             List<Skill> skills = _db.Skills.ToList();
             List<MissionSkill> missionSkills = _db.MissionSkills.ToList();
+            List<User> users = _db.Users.ToList();
 
 
             var Missionsdetail = (from m in mission
@@ -38,10 +39,22 @@ namespace CI_Platform.Repository.Repository
                                   join s in missionSkills on m.MissionId equals s.MissionId into data1
                                   from i in data.DefaultIfEmpty().Take(1)
                                   from s in data1.DefaultIfEmpty().Take(1)
-                                  select new VolunteeringMissionPageViewModel { image = i, Missions = m, Country = countries, themes = theme, skills = skills }).First();
-            //, isValid = _db.FavouriteMissions.FirstOrDefault(m => m.UserId ==)
+                                  select new VolunteeringMissionPageViewModel { image = i, Missions = m, Country = countries, themes = theme, skills = skills,UserDetail = users, isValid = _db.FavouriteMissions.Any(f => f.UserId == userID && f.MissionId == m.MissionId) }).First();
+
+            //var relatedMissions = _db.Missions
+            //.Where(m => (m.City.Name == Missionsdetail.Missions.City.Name || m.Theme.Title == Missionsdetail.Missions.Theme.Title) && m.MissionId != id).ToList();
+
+            //Missionsdetail.RelatedMissions = relatedMissions;
+            var relatedMissions = _db.Missions
+            .Where(m => (m.City.Name == Missionsdetail.Missions.City.Name || m.Theme.Title == Missionsdetail.Missions.Theme.Title) && m.MissionId != id)
+            .Join(_db.MissionMedia, m => m.MissionId, i => i.MissionId, (m, i) => new { Mission = m, Image = i })
+            .ToList();
+
+            Missionsdetail.RelatedMissions = relatedMissions.Select(x => x.Mission).ToList();
+
 
             return Missionsdetail;
+
         }
 
 

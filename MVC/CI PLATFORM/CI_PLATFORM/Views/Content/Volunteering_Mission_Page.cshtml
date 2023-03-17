@@ -446,22 +446,40 @@
                 <div class="row mt-2 ">
                     <div class="col-lg-6 col-md-6 text-center">
                         
-                        <div class="dt3  text-center">
-                            @*if(Model)*@
-                           <button id="myfavbtn" data-mission-id="@Model.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 "  style="border-radius:20px" onclick="addtofav();">
+                        <div class="dt3  text-center w-100 py-2">
+                            @if (Model.isValid)
+                            {
+                                <button id="myfavbtn" data-mission-id="@Model.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 "  style="border-radius:20px" onclick="addtofav();">
+                                @*<img src="~/images/heart1.png" alt="">*@
+                                <i class="bi bi-heart filled-heart"></i>
+                           </button>
+                                <span id="spanforfav" >Remove from favourite</span>
+                            }
+                            else
+                            {
+                                <button id="myfavbtn" data-mission-id="@Model.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 "  style="border-radius:20px" onclick="addtofav();">
                                 @*<img src="~/images/heart1.png" alt="">*@
                                 <i class="bi bi-heart"></i>
                            </button>
-                           <span id="spanforfav">Add to Favourite</span>
+                           <span id="spanforfav">Add To favourite</span>
+                            }
+                            
                         </div>
                          
                     </div>
-                    <div class="col-lg-6 col-md-6 text-center">
-                        <div class=" dt3 text-center p-1 btn">
+   @*                 <div class="col-lg-6 col-md-6 text-center">
+                        <div class=" dt3 text-center p-1 ">
                             <img src="~/images/add1.png" alt="">
                             <span>Recommend to a <span class="db5">Co-Worker</span> </span>
                         </div>
+                    </div>*@
+                    <div class="col-lg-6 col-md-6 text-center">
+                        <div class=" dt3 text-center p-1 w-100" >
+                            <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#RecommendModel"><img src="~/images/add1.png" alt="">
+                            <span>Recommend to a <span class="db5">Co-Worker</span></span></button>
+                        </div>
                     </div>
+
                 </div>
                 <div class="row mt1">
                     <div class="col col-lg-12"></div>
@@ -803,13 +821,18 @@
         <h2 class="text-center my-3">Related Missions</h2>
         <div class="row">
             <!-- 1a -->
+            @foreach (var item in Model.RelatedMissions)
+                {
             <div class="item col-xs-4 col-lg-4">
+               
+                    
+         
                 <div class="thumbnail card">
                     <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid "
-                            src="~/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity.png" alt="" />
+                        <img class="group list-group-image img-fluid w-100"
+                            src="@Model.image.MediaPath" alt="unable to load img" />
                         <div class="bottom-left justify-content-center">
-                            Environment
+                            @item.Theme.Title
                         </div>
                         <div class="bottom-right  opacity-50   ">
                             <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
@@ -819,18 +842,17 @@
                         </div>
                         <div class="bottom-right3  opacity-50   ">
                             <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                            <span>London</span>
+                            <span>@item.City.Name</span>
                         </div>
                     </div>
-                    <div class="caption card-body cb2">
+                    <div class="caption card-body">
                         <h4 class="group card-title inner list-group-item-heading">
-                            CSR initiative stands for Coffee and Farmer Equity</h4>
-                        <p class="group inner list-group-item-text p-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore...</p>
-                        <div class="row mb  justify-content-between">
-                            <div class="col-auto ">CSE Network</div>
-                            <div class="col-auto ">
+                            @item.Title</h4>
+                        <p class="group inner list-group-item-text sd">
+                           @item.ShortDescription</p>
+                        <div class="row mb">
+                            <div class="col col-lg-6 col-md-6 col-sm-12">@item.OrganizationName</div>
+                            <div class="col col-lg-6 col-md-6 col-sm-12 ">
                                 <img src="~/images/selected-star.png" class="wdimg" alt="">
                                 <img src="~/images/selected-star.png" class="wdimg" alt="">
                                 <img src="~/images/selected-star.png" class="wdimg" alt="">
@@ -839,13 +861,52 @@
                             </div>
                         </div>
                         <div class="position-relative ">
-                            <hr style="z-index: -1;" class="hrt hrt2">
-                            <div class="dt text-center  position-absolute dtn">
-                                <span> Ongoing Opportunity</span>
+                            <hr style="z-index: -1;">
+                            @if (item.MissionType=="TIME")
+                            {
+                            <div class="dt text-center  position-absolute">
+                                <span class="fsize"> From  @item.StartDate.ToString().Substring(0, 10)  until @item.EndDate.ToString().Substring(0, 10)</span>
                             </div>
+                                }
+                            else
+                            {
+                            <div class="dt text-center  position-absolute">
+                                <span class="fsize"> Ongoing Opportunity</span>
+                            </div>
+                                    
+                            }
+
                         </div>
-                        <div class="row mt-4">
+                        <div class="row mt-4 ">
+                               @if (item.MissionType=="TIME")
+                                {
                             <div class="col">
+                             
+                                    <table>
+                                    <tr>
+                                        <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
+                                        <td>@item.SeatsVacancy</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fsize2"> Seats Left</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col">
+                                <table>
+                                    <tr>
+                                        <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
+                                        <td>09/01/2019 </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fsize">Deadline</td>
+                                    </tr>
+                                </table>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                        <div class="col">
                                 <table>
                                     <tr>
                                         <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
@@ -855,73 +916,8 @@
                                         <td class="fsize2">Already volunteered</td>
                                     </tr>
                                 </table>
-                            </div>
-
                         </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6 mx-auto">
-                                <a class="btn btnapp " href="#">Apply <img src="~/images/right-arrow.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 2a -->
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid "
-                            src="~/images/Animal-welfare-&-save-birds-campaign.png" alt="" />
-                        <div class="bottom-left justify-content-center">
-                            Animals
-                        </div>
-                        <div class="bottom-right  opacity-50   ">
-                            <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right2  opacity-50   ">
-                            <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right3  opacity-50   ">
-                            <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                            <span>Cape Town</span>
-                        </div>
-                    </div>
-                    <div class="caption card-body cb2">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            Animal welfare & save birds campaign </h4>
-                        <p class="group inner list-group-item-text p-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore...</p>
-                        <div class="row mb justify-content-between">
-                            <div class="col-auto">JR Foundation</div>
-                            <div class="col-auto">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
-                        </div>
-                        <div class="position-relative ">
-                            <hr style="z-index: -1;" class="hrt hrt2">
-                            <div class="dt text-center  position-absolute dtn">
-                                <span> Plant 10,000 Trees</span>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <table>
-                                    <tr>
-                                        <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fsize2">Seats left</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col">
+                        <div class="col">
                                 <table>
                                     <tr>
                                         <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
@@ -936,90 +932,55 @@
                                         <td class="fsize2">8000 Achieved</td>
                                     </tr>
                                 </table>
+                        </div> 
+
+                         }
+
                             </div>
 
-                        </div>
-                        <hr>
                         <div class="row">
                             <div class="col-xs-12 col-md-6 mx-auto">
-                                <a class="btn btnapp " href="">Apply<img src="~/images/right-arrow.png" alt=""></a>
-
+                                <a class="btn btnapp " asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id="@item.MissionId">Apply <img src="~/images/right-arrow.png" alt=""></a>
                             </div>
                         </div>
                     </div>
                 </div>
+               
             </div>
-            <!-- 3a -->
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid "
-                            src="~/images/Plantation-and-Afforestation-programme.png" alt="" />
-                        <div class="bottom-left justify-content-center">
-                            Health
-                        </div>
-                        <div class="bottom-right  opacity-50   ">
-                            <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right2  opacity-50   ">
-                            <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right3  opacity-50   ">
-                            <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                            <span>Paris</span>
-                        </div>
-                    </div>
-                    <div class="caption card-body cb2">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            Plantation and Afforestation programme</h4>
-                        <p class="group inner list-group-item-text p-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore...</p>
-                        <div class="row mb justify-content-between">
-                            <div class="col-auto">Amaze Doctors</div>
-                            <div class="col-auto">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/selected-star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                                <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
-                        </div>
-                        <div class="position-relative ">
-                            <hr style="z-index: -1;" class="hrt hrt2">
-                            <div class="dt text-center  position-absolute dtn">
-                                <span> Plant 10,000 Trees</span>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col mt-3 ">
-                                <table>
-                                    <tr>
-                                        <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bgw" role="progressbar" style="width: 75%"
-                                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fsize2">8000 Achieved</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6 mx-auto">
-                                <a class="btn btnapp " href="#">Apply<img src="~/images/right-arrow.png" alt=""></a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            }
+           
         </div>
+        @*Modal for Recommand to co-worker*@
+                    <div class="modal fade" id="RecommendModel" tabindex="-1" aria-hidden="true" aria-labelledby="exampleModalLabel">
+                      <div class="modal-dialog modal-dialog-centered" >
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title" id="exampleModalLabel">Select coworkers to recommend to</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                          </div>
+                          <div class="modal-body">
+                              @foreach (var coworker in Model.UserDetail)
+                              {
+                                @*<li>@coworker.FirstName @coworker.LastName <button class="btn btn-primary" onclick="recommendToCoworker('@coworker.UserId')">Send</button></li>*@
+                                <div  class="d-flex flex-row justify-content-between border-bottom mt-1 py-1">
+                                     <div class="d-flex flex-row gap-2">
+                                        <img src="~/Images/volunteer1.png" class="rounded-circle" width="40px" height="40px"/>
+                                        <span>@coworker.FirstName @coworker.LastName </span>
+                                    </div>
+                                     <div id="RecommandationBtn">
+                                         <button type="button" class="btn btn-success" id="@coworker.UserId" value="@Model.Missions.MissionId @ViewBag.UserDetails.UserId @coworker.UserId @coworker.Email">
+                                             <img src="~/Images/user.png" class="rounded-circle" width="35px" height="35px"/>Recommanded</button>
+                                    </div>
+                                </div>
+                              }
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
     </div>
 
     <!-- Footer (Privacy Policy) -->

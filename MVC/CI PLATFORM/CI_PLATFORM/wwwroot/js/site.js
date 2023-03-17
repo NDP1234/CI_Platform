@@ -521,3 +521,24 @@ function addtofav() {
 };
 
 
+
+$('#RecommandationBtn button').on('click', function(){
+    var udetails = $(this).attr('value');
+    var arr = udetails.split(" ");
+    var Recommanded = {
+        MId: arr[0],
+        FromUid: arr[1],
+        Uid: arr[2],
+        Uemail: arr[3]
+    };
+    console.log(Recommanded);
+    var url = "/Content/RecommandToCoWorker?Recommanded=" + JSON.stringify(Recommanded);
+
+    $.ajax({
+        url : url,
+        success : function (data) {
+            window.location.reload();
+        },
+    });
+})
+

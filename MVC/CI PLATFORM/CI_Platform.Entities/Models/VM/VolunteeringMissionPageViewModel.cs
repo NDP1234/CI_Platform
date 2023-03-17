@@ -17,23 +17,12 @@ namespace CI_Platform.Entities.Models.VM
         public List<Skill>? skills { get; set; }
         public List<MissionSkill>? MissionSkills { get; set; }
 
-        public List<Mission>? RelatedMissions { get; set; }
+        public List<Mission>? RelatedMissions { get; set; } = new List<Mission>();
+        //added at below
 
         public IEnumerable<User> UserDetail { get; set; }
+        public bool isValid { get; set; }
     }
-    //public class VolunteeringMissionPageViewModel
-    //{
-    //    public Mission Missions { get; set; }
-    //    public GoalMission Goals { get; set; }
-    //    public MissionMedium image { get; set; }
-    //    public List<Country> Country { get; set; }
-    //    public List<City> Cities { get; set; }
-    //    public List<MissionTheme> themes { get; set; }
-    //    public List<Skill> skills { get; set; }
-    //    public List<MissionSkill> MissionSkills { get; set; }
-
-    //    public List<Mission> RelatedMissions { get; set; }
-    //        = new List<Mission>();
-    //}
+    
 
 }

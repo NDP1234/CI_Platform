@@ -2,16 +2,22 @@
 using CI_Platform.Entities.Models;
 using CI_Platform.Entities.Models.VM;
 using CI_Platform.Repository.Interface;
+using CI_PLATFORM.Models;
 using CI_Platform.Repository.Repository;
 using CI_PLATFORM.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MimeKit;
+using Newtonsoft.Json.Linq;
+using System.Text;
+using MailKit.Net.Smtp;
+using Microsoft.Extensions.Options;
 
 namespace CI_PLATFORM.Controllers
 {
     public class ContentController : Controller
     {
-
+        private IConfiguration _configuration;
         private readonly ICountryRepository _countryRepository;
         private readonly ICityRepository _city;
         private readonly IThemeRepository _theme;
@@ -20,7 +26,8 @@ namespace CI_PLATFORM.Controllers
         private readonly IUserList _users;
         private readonly CiPlatformContext _db;
         private readonly IMissionDetail _im;
-        public ContentController(ICountryRepository countryRepository, IThemeRepository theme, ISkillsRepository skill, IMissionListingRepository db2, IUserList users, CiPlatformContext db, IMissionDetail im)
+        private readonly SMTPConfigModel _smtpconfig;
+        public ContentController(ICountryRepository countryRepository, IThemeRepository theme, ISkillsRepository skill, IMissionListingRepository db2, IUserList users, CiPlatformContext db, IMissionDetail im, IConfiguration configuration, IOptions<SMTPConfigModel> smtpconfig)
         {
             _countryRepository = countryRepository;;
             _theme = theme;
@@ -29,6 +36,9 @@ namespace CI_PLATFORM.Controllers
             _users = users;
             _db = db;
             _im = im;
+            _configuration = configuration;
+            _smtpconfig = smtpconfig.Value;
+
         }
      
         public async Task<IActionResult> Platform_Landing_Page()
@@ -125,7 +135,7 @@ namespace CI_PLATFORM.Controllers
             ViewBag.UserDetails = profile;
             
 
-            VolunteeringMissionPageViewModel missiondetails = _im.GetMissionDetaiil( id);
+            VolunteeringMissionPageViewModel missiondetails = _im.GetMissionDetaiil( id, userId);
             return View(missiondetails);
         }
 
@@ -165,8 +175,70 @@ namespace CI_PLATFORM.Controllers
             }
 
         }
-    
-    public IActionResult Story_Listing_Page()
+
+        // Get the list of user IDs for the selected coworker
+        public void RecommandToCoWorker(string Recommanded)
+        {
+            var parseObject = JObject.Parse(Recommanded);
+            var uMissionId = parseObject.Value<long>("MId");
+            var uId = parseObject.Value<long>("Uid");
+            var SessionUId = parseObject.Value<long>("FromUid");
+            var EmailAdd = parseObject.Value<string>("Uemail");
+            var recObj = new MissionInvite()
+            {
+                MissionId = uMissionId,
+                FromUserId = SessionUId,
+                ToUserId = uId,
+            };
+            if(EmailAdd != null)
+            {
+                var MissionDetailLink = Url.Action("Volunteering_Mission_Page", "Content", new { id = uMissionId }, Request.Scheme);
+
+                UserEmailOptions userEmailOptions = new UserEmailOptions()
+                {
+                    Subject = "Recommandation For Mission",
+                    Body = "Community Investment platform welcomes you! </br> this mission is recommanded From </br>" + SessionUId + "</br>" + MissionDetailLink
+                };
+                _db.MissionInvites.Add(recObj);
+                _db.SaveChanges();
+                EmailSend(EmailAdd, userEmailOptions);
+            }
+
+        }
+
+        //to send the email:
+        public void EmailSend(string EmailAdd, UserEmailOptions userEmailOptions)
+        {
+            var email = new MimeMessage();
+
+            email.From.Add(new MailboxAddress(_smtpconfig.SenderDisplayName, _smtpconfig.SenderAddress));
+            //email.From.Add(new MailboxAddress("no-reply@bookstoreapp.com", "CI_PLATFORM"));
+            email.To.Add(new MailboxAddress("", EmailAdd));
+
+            email.Subject = userEmailOptions.Subject;
+            var bBuilder = new BodyBuilder();
+
+            bBuilder.HtmlBody = userEmailOptions.Body;
+            email.Body = bBuilder.ToMessageBody();
+
+            using (var smtp = new SmtpClient())
+            {
+                smtp.Connect("smtp.gmail.com", 465, true);
+
+                smtp.Authenticate(_smtpconfig.UserName, _smtpconfig.Password);
+                //smtp.Authenticate("niravdpatel632@gmail.com", "hflzawnzmsaqrkrj");
+
+                smtp.Send(email);
+
+                smtp.Disconnect(true);
+            }
+        }
+
+
+      
+
+
+        public IActionResult Story_Listing_Page()
         {
             return View();
         }
