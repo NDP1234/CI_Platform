@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "6Y+k977NPcNbVe3sWpPReR9S2oQD+zFAyuks+jGgo2k=",
+  "Hash": "Tad7MSFX/objzUC7bQS/fbOew0X9zLrDgyfUbz+9GMg=",
   "Source": "CI_PLATFORM",
   "BasePath": "_content/CI_PLATFORM",
   "Mode": "Default",
@@ -219,6 +219,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\vmp.css"
+    },
+    {
+      "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\documents\\ClimateChangemapping15-August.docx",
+      "SourceId": "CI_PLATFORM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\",
+      "BasePath": "_content/CI_PLATFORM",
+      "RelativePath": "documents/ClimateChangemapping15-August.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\documents\\ClimateChangemapping15-August.docx"
+    },
+    {
+      "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\documents\\Organization _about_Environment.pdf",
+      "SourceId": "CI_PLATFORM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\",
+      "BasePath": "_content/CI_PLATFORM",
+      "RelativePath": "documents/Organization _about_Environment.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\documents\\Organization _about_Environment.pdf"
     },
     {
       "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\favicon.ico",

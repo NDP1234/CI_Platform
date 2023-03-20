@@ -302,34 +302,17 @@
                 </div>
             </div>
             <!-- ///////////////// -->
-            <div id="chips">
+            <div class="d-flex flex-row">
+                <div class="all-filters d-flex align-items-center flex-wrap flex-row mt-4 mgl " id="chips">
+                    @*<div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1 flex-nowrap">
+                        <p class="filter">Tree </p>
+                        <i class="bi bi-x"></i>
+                    </div>*@
+                </div>
+                <button type="button"  id="clrbtn">Clear All</button>
             </div>
-           @* <div class="all-filters d-flex align-items-center flex-wrap mt-4 mgl ">
-                <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1 flex-nowrap">
-                    <p class="filter">Tree Plantation</p>
-                    <i class="bi bi-x"></i>
-                </div>
-                <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
-                    <p class="filter">Canada</p>
-                    <i class="bi bi-x"></i>
-                </div>
-                <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
-                    <p class="filter">Toronto</p>
-                    <i class="bi bi-x"></i>
-                </div>
-                <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
-                    <p class="filter">Montreal</p>
-                    <i class="bi bi-x"></i>
-                </div>
-                <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
-                    <p class="filter">Environment</p>
-                    <i class="bi bi-x"></i>
-                </div>
-                <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
-                    <p class="filter">Nuitrition</p>
-                    <i class="bi bi-x"></i>
-                </div>
-            </div>*@
+            
+            
             <!-- <h1 class="mgl mt-2">Explore 72 missions</h1> -->
 
         </div>
@@ -564,7 +547,10 @@
                 </div>
 
                 }
-
+                
+                <div class="col-xs-12 col-md-6 mx-auto">
+                       <a class="btn btnapp " asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id="@item.Missions.MissionId">Apply <img src="~/images/right-arrow.png" alt=""></a>
+                </div>
                 <div class="col-xs-12 col-md-6 mx-auto">
                     <div class="row mt-4 ">
                         @if (item.Missions.MissionType=="TIME")

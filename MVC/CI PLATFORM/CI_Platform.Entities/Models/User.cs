@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace CI_Platform.Entities.Models;
 
 public partial class User
 {
-
     public long UserId { get; set; }
 
     public string? FirstName { get; set; }
@@ -27,11 +25,8 @@ public partial class User
 
     public string? Department { get; set; }
 
-
-    [ValidateNever]
     public long CityId { get; set; }
 
-    [ValidateNever]
     public long CountryId { get; set; }
 
     public string? ProfileText { get; set; }
@@ -48,12 +43,10 @@ public partial class User
 
     public DateTime? DeletedAt { get; set; }
 
-    //[ValidateNever]
     public virtual City City { get; set; } = null!;
 
     public virtual ICollection<Comment> Comments { get; } = new List<Comment>();
 
-    //[ValidateNever]
     public virtual Country Country { get; set; } = null!;
 
     public virtual ICollection<FavouriteMission> FavouriteMissions { get; } = new List<FavouriteMission>();

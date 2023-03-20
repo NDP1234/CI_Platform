@@ -3,6 +3,16 @@
 
 // Write your JavaScript code.
 
+//for click on cross icon
+function clearall() {
+    var divs = document.getElementById("chipclear");
+    divs.classList.add('hide');
+
+    $('#FilterBtn').click();
+    console.log("helllllo");
+}
+
+
 //for loading country list
 $(document).ready(function () {
     $.ajax({
@@ -30,14 +40,39 @@ $("#countryDropdown ").on("change", function () {
     var countryIndex = countrychip.indexOf(countryname);
     console.log(countryid);
     console.log(countryname);
-
+    var filterchipCountry = 1 + countryname;
     if (countryIndex == -1) {
         countrychip.push(countryname);
+        $('#chips').append($(`<div id="chip${countryname}" class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1 flex-nowrap">
+                        <p class="filter">`+ countryname + `</p>
+                        <button class="border-0 bg-white"  onclick="clear1(this);" value="${filterchipCountry}"> <i class="bi bi-x" ></i> </button>
+                    </div>`));
     }
     console.log(countrychip);
     $("#FilterBtn").click();
-})
+});
 
+
+function clear1(clearnow) {
+    //alert("calling clear");
+    var arrayId = clearnow.value[0];
+    var arrlength = clearnow.length;
+    var data = clearnow.value.substring(1, arrlength);
+    //alert(arrayId);
+    //alert(data);
+    var idname = clearnow.value;
+    if (arrayId == 1) {
+        console.log("nirav", countrychip);
+        var name = countrychip.indexOf(data);
+        //alert(name);
+        countrychip.splice(name, 1);
+        $("#chip" + data).remove();
+        console.log("patel", countrychip);
+        console.log("#" + data);
+        $("#" + data).css('display', 'none');
+        $("#FilterBtn").click();
+    }
+};
 
 
 
@@ -45,12 +80,12 @@ $("#countryDropdown ").on("change", function () {
 //related city list
 $("#countryDropdown").on("click", function () {
     var countryId = $("#countryDropdown").val()[0];
-    
+
 
     console.log(countryId);
 
 
- // Remove any existing cities
+    // Remove any existing cities
     $("#cityDropdown").empty();
 
     if (countryId) {
@@ -96,13 +131,42 @@ function cityfun(city) {
     console.log(cityid);
     console.log(cityname);
 
+    
+    var filterchipCity = 2 + cityname;
     if (cityIndex == -1) {
         citychip.push(cityname);
+        $('#chips').append($(`<div id="chip${cityname}" class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1 flex-nowrap">
+                        <p class="filter">`+ cityname + `</p>
+                        <button class="border-0 bg-white"  onclick="clear2(this);" value="${filterchipCity}"> <i class="bi bi-x" ></i> </button>
+                    </div>`));
     }
     console.log(citychip);
     $("#FilterBtn").click();
+   
 }
 
+ 
+function clear2(clearnow) {
+    //alert("calling clear");
+    var arrayId = clearnow.value[0];
+    var arrlength = clearnow.length;
+    var data = clearnow.value.substring(1, arrlength);
+    //alert(arrayId);
+    //alert(data);
+    var idname = clearnow.value;
+    if (arrayId == 2) {
+        console.log("nirav", citychip);
+        var name = citychip.indexOf(data);
+        //alert(name);
+        citychip.splice(name, 1);
+        $("#chip" + data).remove();
+        console.log("patel", citychip);
+        console.log("#" + data);
+        $("#" + data).css('display', 'none');
+        $("#FilterBtn").click();
+    }
+};
+ 
 
 
 //14-03
@@ -128,12 +192,43 @@ function misfun(theme) {
     console.log(themeid);
     console.log(themename);
 
+    
+    var filterchipTheme = 3 + themename;
     if (themeIndex == -1) {
         themechip.push(themename);
+        $('#chips').append($(`<div id="chip${themename}" class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1 flex-nowrap">
+                        <p class="filter">`+ themename + `</p>
+                        <button class="border-0 bg-white"  onclick="clear3(this);" value="${filterchipTheme}"> <i class="bi bi-x" ></i> </button>
+                    </div>`));
     }
     console.log(themechip);
     $("#FilterBtn").click();
+     
 }
+
+
+function clear3(clearnow) {
+    //alert("calling clear");
+    var arrayId = clearnow.value[0];
+    var arrlength = clearnow.length;
+    var data = clearnow.value.substring(1, arrlength);
+    //alert(arrayId);
+    //alert(data);
+    var idname = clearnow.value;
+    if (arrayId == 3) {
+        console.log("nirav", themechip);
+        var name = themechip.indexOf(data);
+        //alert(name);
+        themechip.splice(name, 1);
+        $("#chip" + data).remove();
+        console.log("patel", themechip);
+        console.log("#" + data);
+        $("#" + data).css('display', 'none');
+        $("#FilterBtn").click();
+    }
+};
+ 
+
 
 //for pushing selected skill in array
 function skillfun(skill) {
@@ -147,12 +242,42 @@ function skillfun(skill) {
     console.log(skillid);
     console.log(skillname);
 
+    
+    var filterchipSkill = 4 + skillname;
     if (skillIndex == -1) {
-        themechip.push(skillname);
+        skillchip.push(skillname);
+        $('#chips').append($(`<div id="chip${skillname}" class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1 flex-nowrap">
+                        <p class="filter">`+ skillname + `</p>
+                        <button class="border-0 bg-white"  onclick="clear4(this);" value="${filterchipSkill}"> <i class="bi bi-x" ></i> </button>
+                    </div>`));
     }
     console.log(skillchip);
     $("#FilterBtn").click();
+    
 }
+
+
+function clear4(clearnow) {
+    //alert("calling clear");
+    var arrayId = clearnow.value[0];
+    var arrlength = clearnow.length;
+    var data = clearnow.value.substring(1, arrlength);
+    //alert(arrayId);
+    //alert(data);
+    var idname = clearnow.value;
+    if (arrayId == 3) {
+        console.log("nirav", skillchip);
+        var name = skillchip.indexOf(data);
+        //alert(name);
+        skillchip.splice(name, 1);
+        $("#chip" + data).remove();
+        console.log("patel", skillchip);
+        console.log("#" + data);
+        $("#" + data).css('display', 'none');
+        $("#FilterBtn").click();
+    }
+};
+ 
 
 
 
@@ -164,7 +289,7 @@ $("#sortby").on('change', function () {
 });
 
 
-//common method calling for filter and sortby 
+//common method calling for filter and sortby
 $("#FilterBtn").on('click', function () {
     console.log(countrychip);
     console.log(citychip);
@@ -242,6 +367,7 @@ $("#FilterBtn").on('click', function () {
 
 
                     `</div>
+                     
 
                         <div class="row mt-4 clb ">`+
 
@@ -253,7 +379,7 @@ $("#FilterBtn").on('click', function () {
 
                         <div class="row">
                             <div class="col-xs-12 col-md-6 mx-auto">
-                                <a class="btn btnapp " href="#">Apply <img src="/images/right-arrow.png" alt=""></a>
+                                <a class="btn btnapp " asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id=`+ item.value.missionId +`>Apply <img src="/images/right-arrow.png" alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -475,9 +601,9 @@ $('#clrbtn').on('click', function () {
     themechip.length = 0;
     skillchip.length = 0;
 
-    $('#chipdiv').css('display', 'none');
+    $('#chips').css('display', 'none');
     $('#clrbtn').css('display', 'none');
-
+    location.reload(true);
 });
 
 
@@ -488,7 +614,7 @@ $('#NoMissionId').on('click', function () {
 });
 
 //for add to favourites
-                      
+
 function addtofav() {
     var missionId = $('#myfavbtn').data('mission-id');
     var userId = $('#myfavbtn').data('user-id');
@@ -521,8 +647,8 @@ function addtofav() {
 };
 
 
-
-$('#RecommandationBtn button').on('click', function(){
+//for recommandation
+$('#RecommandationBtn button').on('click', function () {
     var udetails = $(this).attr('value');
     var arr = udetails.split(" ");
     var Recommanded = {
@@ -535,10 +661,147 @@ $('#RecommandationBtn button').on('click', function(){
     var url = "/Content/RecommandToCoWorker?Recommanded=" + JSON.stringify(Recommanded);
 
     $.ajax({
-        url : url,
-        success : function (data) {
+        url: url,
+        success: function (data) {
             window.location.reload();
         },
     });
 })
 
+//for star rating
+$(function () {
+    var missionId = $('#ratingMission').data('mission-id');
+    var userId = $('#ratingMission').data('user-id');
+    // Get the current rating from the database and highlight the corresponding stars
+    $.ajax({
+        type: 'GET',
+        url: '/Content/GetMissionRating',
+        data: { missionId: missionId, userId: userId },
+        success: function (data) {
+            if (data != null) {
+                $('.star-icon').each(function () {
+                    if ($(this).data('value') <= data.rating) {
+                        $(this).addClass('filled');
+                    }
+                });
+            }
+        }
+    });
+
+    // Handle the star rating clicks
+    $('.star-icon').on('click', function () {
+        // Remove the filled class from all stars
+        $('.star-icon').removeClass('filled');
+        var missionId = $('#ratingMission').data('mission-id');
+        var userId = $('#ratingMission').data('user-id');
+        // Add the filled class to the clicked star and all stars before it
+        var rating = $(this).data('value');
+        for (var i = 1; i <= rating; i++) {
+            $('.star-icon[data-value="' + i + '"]').addClass('filled');
+        }
+
+        // Save the rating to the database using Ajax
+        $.ajax({
+            type: 'POST',
+            url: '/Content/SaveMissionRating',
+            data: { missionId: missionId, userId: userId, rating: rating },
+            success: function () {
+                console.log('Rating saved successfully.');
+            }
+        });
+    });
+});
+
+
+//For displaying the comments
+$(function () {
+    var missionId = $('#post-comment').data('mission-id');
+
+        function refreshComments() {
+
+            $.get('/Content/DisplayComments', { missionId: missionId }, function (comments) {
+                $('#comments').empty();
+                console.log(comments)
+                $.each(comments, function (i, comment) {
+                    var cAt = comment.value.createdAt;
+                    var formattedDateTime = formatDateTime(cAt);
+                    var html = ' <div class="cmt mt-1 bdr bg-white p-2" id="comments">' +
+                        '<div class="section fs ">' +
+                        '<div class="d-flex">' +
+                        ' <div class="flex-shrink-0">' +
+                        '<img src="/images/volunteer3.png" class="rounded-pill imgh-pf" alt="...">' +
+                        '</div>' +
+                        '<div class="flex-grow-1 ms-3">' +
+                        '<div>' + comment.value.firstName + " " + comment.value.lastName +  '</div>' +
+                        '<div class="fs2">' + formattedDateTime + '</div>' +
+                        '</div>' +
+                        ' </div>' +
+                        '<div class="mt-3 p-text">' +
+                        comment.value.commentText +
+                        ' </div>' +
+                        ' </div>' +
+                        '</div>';
+
+                    $('#comments').append(html);
+                });
+            });
+        }
+   
+
+
+
+    //for storing comment in database
+    $('#post-comment').on('click', function () {
+        var text = $('#comment-text').val();
+        var missionId = $('#post-comment').data('mission-id');
+        var userId = $('#post-comment').data('user-id');
+
+        $.post('/Content/Create', { missionId: missionId, userId: userId, text: text }, function (comment) {
+            refreshComments();
+        });
+
+        $('#comment-text').val('');
+    });
+
+    refreshComments();
+});
+
+//converting datetime type to specific field(day, month date, year, time, AM or PM).
+function formatDateTime(dateTimeStr) {
+    var date = new Date(dateTimeStr);
+    var dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var dayName = dayNames[date.getDay()];
+    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var monthName = monthNames[date.getMonth()];
+    var day = date.getDate();
+    var year = date.getFullYear();
+    var time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    return dayName + ", " + monthName + " " + day + ", " + year + " " + time;
+}
+
+//for displaying average rating
+$(function () {
+    // Get the average mission rating from the server
+    var mId= $('#avg-rating').data('mission-id');
+    $.ajax({
+        type: 'GET',
+        url: '/Content/GetAverageMissionRating',
+        
+        data: { missionId: mId  },
+        success: function (avgRating) {
+            // Create the star rating HTML based on the average rating
+            var starsHtml = '';
+            for (var i = 1; i <= 5; i++) {
+                if (i <= Math.round(avgRating)) {
+                    starsHtml += '<i class="bi bi-star filled"></i>';
+                } else {
+                    starsHtml += '<i class="bi bi-star"></i>';
+                }
+            }
+
+            // Set the star rating HTML in the container
+            $('#avg-rating').html(starsHtml);
+        }
+    });
+});

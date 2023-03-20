@@ -12,6 +12,8 @@ using Newtonsoft.Json.Linq;
 using System.Text;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CI_PLATFORM.Controllers
 {
@@ -29,7 +31,7 @@ namespace CI_PLATFORM.Controllers
         private readonly SMTPConfigModel _smtpconfig;
         public ContentController(ICountryRepository countryRepository, IThemeRepository theme, ISkillsRepository skill, IMissionListingRepository db2, IUserList users, CiPlatformContext db, IMissionDetail im, IConfiguration configuration, IOptions<SMTPConfigModel> smtpconfig)
         {
-            _countryRepository = countryRepository;;
+            _countryRepository = countryRepository; ;
             _theme = theme;
             _skill = skill;
             _db2 = db2;
@@ -40,7 +42,7 @@ namespace CI_PLATFORM.Controllers
             _smtpconfig = smtpconfig.Value;
 
         }
-     
+
         public async Task<IActionResult> Platform_Landing_Page()
         {
             var session_details = HttpContext.Session.GetString("Login");
@@ -133,13 +135,13 @@ namespace CI_PLATFORM.Controllers
             var profile = users.FirstOrDefault(m => m.Email == session_details);
             int userId = (int)profile.UserId;
             ViewBag.UserDetails = profile;
-            
 
-            VolunteeringMissionPageViewModel missiondetails = _im.GetMissionDetaiil( id, userId);
+
+            VolunteeringMissionPageViewModel missiondetails = _im.GetMissionDetaiil(id, userId);
             return View(missiondetails);
         }
 
-
+        //for add to favourites
         [HttpGet]
         [Route("Content/AddToFavorites", Name = "favorites")]
         public IActionResult AddToFavorites(int missionId, int userId)
@@ -190,7 +192,7 @@ namespace CI_PLATFORM.Controllers
                 FromUserId = SessionUId,
                 ToUserId = uId,
             };
-            if(EmailAdd != null)
+            if (EmailAdd != null)
             {
                 var MissionDetailLink = Url.Action("Volunteering_Mission_Page", "Content", new { id = uMissionId }, Request.Scheme);
 
@@ -211,8 +213,8 @@ namespace CI_PLATFORM.Controllers
         {
             var email = new MimeMessage();
 
-            email.From.Add(new MailboxAddress(_smtpconfig.SenderDisplayName, _smtpconfig.SenderAddress));
-            //email.From.Add(new MailboxAddress("no-reply@bookstoreapp.com", "CI_PLATFORM"));
+            //email.From.Add(new MailboxAddress(_smtpconfig.SenderDisplayName, _smtpconfig.SenderAddress));
+            email.From.Add(new MailboxAddress("no-reply@bookstoreapp.com", "CI_PLATFORM"));
             email.To.Add(new MailboxAddress("", EmailAdd));
 
             email.Subject = userEmailOptions.Subject;
@@ -225,8 +227,8 @@ namespace CI_PLATFORM.Controllers
             {
                 smtp.Connect("smtp.gmail.com", 465, true);
 
-                smtp.Authenticate(_smtpconfig.UserName, _smtpconfig.Password);
-                //smtp.Authenticate("niravdpatel632@gmail.com", "hflzawnzmsaqrkrj");
+                //smtp.Authenticate(_smtpconfig.UserName, _smtpconfig.Password);
+                smtp.Authenticate("niravdpatel632@gmail.com", "hflzawnzmsaqrkrj");
 
                 smtp.Send(email);
 
@@ -234,8 +236,122 @@ namespace CI_PLATFORM.Controllers
             }
         }
 
+        //for getting already exist rating
+        [HttpGet]
+        public JsonResult GetMissionRating(int missionId, int userId)
+        {
+            var rating = _db.MissionRatings
+                .FirstOrDefault(r => r.MissionId == missionId && r.UserId == userId);
+            return Json(rating);
+        }
 
-      
+        //for storing updated rating
+        [HttpPost]
+        public IActionResult SaveMissionRating(int missionId, int userId, int rating)
+        {
+            var existingRating = _db.MissionRatings
+                .FirstOrDefault(r => r.MissionId == missionId && r.UserId == userId);
+
+            if (existingRating != null)
+            {
+                existingRating.Rating = rating;
+            }
+            else
+            {
+                var newRating = new MissionRating
+                {
+                    MissionId = missionId,
+                    UserId = userId,
+                    Rating = rating
+                };
+
+                _db.MissionRatings.Add(newRating);
+            }
+
+            // Save the changes to the database
+            _db.SaveChanges();
+
+            // Return an empty result to indicate success
+            return new EmptyResult();
+        }
+
+
+        //for storing details in database schema
+        [HttpPost]
+        public IActionResult Create(int userId, int missionId, string text)
+        {
+            var comment = new Comment
+            {
+                UserId = userId,
+                MissionId = missionId,
+                CommentText = text
+                //CreatedAt = DateTime.Now
+            };
+
+            _db.Comments.Add(comment);
+            _db.SaveChanges();
+
+            return Json(comment);
+        }
+
+        
+        //for displaying comments 
+        [HttpGet]
+        public JsonResult[] DisplayComments(int missionId)
+        {
+            var comments = _db.Comments
+                .Where(c => c.MissionId == missionId)
+                .OrderByDescending(c => c.CreatedAt)
+                .Take(5)
+                .Join(_db.Users, c => c.UserId, u => u.UserId, (c, u) => new { Comment = c, User = u })
+                .ToList();
+
+            var commentlist = new JsonResult[comments.Count];
+            int i = 0;
+
+            foreach (var comment in comments)
+            {
+                var commentObj = new JsonResult(new
+                {
+                    comment.Comment.MissionId,
+                    comment.Comment.CommentText,
+                    comment.Comment.CreatedAt,
+                    comment.Comment.UserId,
+                    comment.Comment.ApprovalStatus,
+                    comment.User.FirstName,
+                    comment.User.LastName,
+                    comment.User.Avatar
+                });
+                commentlist[i] = commentObj;
+                i++;
+            }
+
+            return commentlist;
+        }
+
+
+        //for displaying average rating for specific mission
+        [HttpGet]
+        public JsonResult GetAverageMissionRating(int missionId)
+        {
+           
+            var avgRating = _db.MissionRatings
+            .Where(r => r.MissionId == missionId)
+            .GroupBy(r => r.MissionId)
+            .Select(g => new {
+                AvgRating = g.Average(r => r.Rating)
+            })
+            .FirstOrDefault();
+
+                    if (avgRating != null)
+                    {
+                        return Json(avgRating.AvgRating);
+                    }
+                    else
+                    {
+                        return Json(null);
+                    }
+        }
 
 
         public IActionResult Story_Listing_Page()

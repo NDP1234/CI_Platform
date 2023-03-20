@@ -18,9 +18,20 @@ namespace CI_Platform.Entities.Models.VM
         public List<MissionSkill>? MissionSkills { get; set; }
 
         public List<Mission>? RelatedMissions { get; set; } = new List<Mission>();
+      
         //added at below
-
+        public List<Comment> Comments { get; set; }
+        public List<User> Users { get; set; }
         public IEnumerable<User> UserDetail { get; set; }
+
+        public List<MissionDocument>? MissionRelatedDoc { get; set; }
+        public string DocumentName { get; set; } = null!;
+
+        public string DocumentType { get; set; } = null!;
+
+        public string? DocumentPath { get; set; } 
+      
+
         public bool isValid { get; set; }
     }
     
