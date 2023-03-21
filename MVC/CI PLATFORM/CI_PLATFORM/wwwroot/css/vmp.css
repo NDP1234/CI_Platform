@@ -1,22 +1,33 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+.scrollable {
+    overflow-y: scroll; /* Add a vertical scrollbar */
+    height: 530px; /* Set a fixed height for the element */
+}
+
 .bi-star.filled {
-    color: gold;
+    color: gold !important;
+    /*fill: gold !important;*/
+}
+.star-icon.filled {
+    color: gold !important;
+    /*fill: yellow !important;*/
 }
 .star-icon {
     margin-right: 10px;
 }
 
-    .star-icon.filled {
-        color: gold;
-    }
+    /*.star-icon.filled {
+        color: gold !important;
+        fill: red !important;
+    }*/
 
 ul, li {
     list-style-type: none;
 }
 
 i.filled-heart {
-    font-size: 14px;
-    /*font-size: 1.5rem;*/
+    /*font-size: 14px;*/
+    font-size: 2.0rem;
     / Set a font size for the heart icon /
 }
 
@@ -202,6 +213,7 @@ i.filled-heart {
     bottom: -11px;
     left: 10%;
     background-color: white;
+    height:90% ;
 }
 /*
 .dt2 {
@@ -213,9 +225,9 @@ i.filled-heart {
 }*/
 .dt2 {
     border: none;
-    width: 22%;
+    width: 18%;
     bottom: -9px;
-    left: 37%;
+    left: 41%;
     background-color: white;
 }
 

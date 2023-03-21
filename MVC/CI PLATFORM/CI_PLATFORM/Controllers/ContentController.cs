@@ -302,7 +302,7 @@ namespace CI_PLATFORM.Controllers
             var comments = _db.Comments
                 .Where(c => c.MissionId == missionId)
                 .OrderByDescending(c => c.CreatedAt)
-                .Take(5)
+                //.Take(5)
                 .Join(_db.Users, c => c.UserId, u => u.UserId, (c, u) => new { Comment = c, User = u })
                 .ToList();
 
@@ -334,24 +334,58 @@ namespace CI_PLATFORM.Controllers
         [HttpGet]
         public JsonResult GetAverageMissionRating(int missionId)
         {
-           
+
             var avgRating = _db.MissionRatings
             .Where(r => r.MissionId == missionId)
             .GroupBy(r => r.MissionId)
-            .Select(g => new {
+            .Select(g => new
+            {
                 AvgRating = g.Average(r => r.Rating)
             })
             .FirstOrDefault();
 
-                    if (avgRating != null)
-                    {
-                        return Json(avgRating.AvgRating);
-                    }
-                    else
-                    {
-                        return Json(null);
-                    }
+            if (avgRating != null)
+            {
+                return Json(avgRating.AvgRating);
+            }
+            else
+            {
+                return Json(null);
+            }
         }
+
+        //for getting status from database
+        [HttpGet]
+        public IActionResult GetApplicationStatus(int missionId, int userId)
+        {
+            var application = _db.MissionApplications.SingleOrDefault(m => m.UserId == userId && m.MissionId == missionId);
+            return Json(new { applied = application != null });
+        }
+
+        //storing  and checking details in database for applying in specific mission
+        [HttpPost]
+        public IActionResult Apply(int missionId, int userId)
+        {
+            // Check if the user has already applied for the mission
+            var application = _db.MissionApplications.SingleOrDefault(m => m.UserId == userId && m.MissionId == missionId);
+            if (application != null)
+            {
+                return Json(new { success = false });
+            }
+
+            // Create a new application record
+            var newApplication = new MissionApplication
+            {
+                UserId = userId,
+                MissionId = missionId,
+                AppliedAt = DateTime.Now
+            };
+            _db.MissionApplications.Add(newApplication);
+            _db.SaveChanges();
+
+            return Json(new { success = true });
+        }
+
 
 
         public IActionResult Story_Listing_Page()

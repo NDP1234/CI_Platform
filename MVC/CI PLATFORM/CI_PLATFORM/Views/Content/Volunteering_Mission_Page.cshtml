@@ -535,9 +535,14 @@
                 </div>
                 <div class="row mt1">
                     <div class="col-lg-12 text-center">
-                        <a class="btn btnlist  text-center" asp-action="Platform_Landing_Page" asp-controller="Content">Go to Homepage <img src="~/images/right-arrow.png"
-                                alt=""></a>
+                        
+                        <a type="button" class="btn btnlist  text-center missionApplyBtn" data-mission-id="@Model.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId">Apply now <img src="~/images/right-arrow.png" alt=""></a>
+
+
+                      @*  <button type="button" class="btn btnlist  text-center" data-mission-id="@Model.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId">Apply now <img src="~/images/right-arrow.png"
+                                alt=""></button>*@
                     </div>
+                  
                 </div>
             </div>
         </div>
@@ -598,7 +603,7 @@
                             <h3>Documents</h3>
                             @*<div class="row">*@
                             <div class="d-flex align-items-center  ">
-                                @foreach (var item in @Model.MissionRelatedDoc){
+                                @foreach (var item in @Model.MissionDocuments){
 
                                 if (item.DocumentType == "docx")
                                 {
@@ -674,7 +679,7 @@
                         </div>
                     </form>
                         <!--  -->
-                        <div class="container bg-light p-2 " id="comments">
+                        <div class="container bg-light p-2 scrollable" id="comments">
                             
                         </div>
                     </div>
@@ -704,11 +709,7 @@
                         <div class="col-lg-3 col-md-3 col-3">Rating</div>
                         <div class="col-lg-9 col-md-9 col-9">
                             <div class="d-inline" id="avg-rating" data-mission-id="@Model.Missions.MissionId" ></div>
-                            @*<img src="~/images/selected-star.png" alt="">
-                            <img src="~/images/selected-star.png" alt="">
-                            <img src="~/images/selected-star.png" alt="">
-                            <img src="~/images/selected-star.png" alt="">
-                            <img src="~/images/selected-star.png" alt="">*@
+                           
                             <span class="db1">(average Rating)</span>
                         </div>
                     </div>
@@ -716,63 +717,61 @@
 
 
                 <div class="rv border  mtd2 ">
-                    <div class="head mx-3 pinfo">
+                    @*<div class="head mx-3 pinfo">
                         <h4>Recent Volunteers</h4>
                     </div>
                     <div class="profile text-center">
                         <div class="row py-1">
-                            <div class="col-lg-4 col-md-4 col-4">
-                                <img src="~/images/volunteer1.png" class="rounded-pill imgrv" alt="">
-                                <div> <span class="rvname">Andrew Jhonson </span></div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-4">
-                                <img src="~/images/volunteer2.png" class="rounded-pill imgrv" alt="">
-                                <div> <span class="rvname">Charles Vigue </span></div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-4">
-                                <img src="~/images/volunteer3.png" class="rounded-pill imgrv" alt="">
-                                <div> <span class="rvname">Kathryn Roberts </span></div>
-                            </div>
+                            @foreach(var item in @Model.MissionApplications)
+                            {
+                              <div class="col-lg-4 col-md-4 col-4">
+                                <img src="@item.User.Avatar" class="rounded-pill imgrv" alt="">
+                                <div> <span class="rvname">@item.User.FirstName @item.User.LastName </span></div>
+                            </div>  
+                            }
                         </div>
-                        <div class="row py-1">
-                            <div class="col-lg-4 col-md-4 col-4">
-                                <img src="~/images/volunteer4.png" class="rounded-pill imgrv" alt="">
-                                <div> <span class="rvname">Estella Fowles </span></div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-4">
-                                <img src="~/images/volunteer5.png" class="rounded-pill imgrv" alt="">
-                                <div> <span class="rvname">Rose Lewis </span></div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-4">
-                                <img src="~/images/volunteer6.png" class="rounded-pill imgrv" alt="">
-                                <div> <span class="rvname">Raymond Pabon </span></div>
-                            </div>
-                        </div>
-                        <div class="row py-1">
-                            <div class="col-lg-4 col-md-4 col-4">
-                                <img src="~/images/volunteer7.png" class="rounded-pill imgrv" alt="">
-                                <div> <span class="rvname">Travis Steen </span></div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-4">
-                                <img src="~/images/volunteer8.png" class="rounded-pill imgrv" alt="">
-                                <div> <span class="rvname">Sarah Santillan </span></div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-4">
-                                <img src="~/images/volunteer9.png" class="rounded-pill imgrv" alt="">
-                                <div> <span class="rvname">Linda Richards </span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container mt-3 w-100 border-top pt-3">
+                    </div>*@
+                    @*<div class="container mt-3 w-100 border-top pt-3">
                         <ul class="pagination w-100">
                             <li class="page-item "><a class="page-link" href="#"><img src="~/images/left.png" alt=""></a>
                             </li>
-                            <li class="page-item mx-auto my-auto"><span class="fs3"> 1 to 9 of 15 Recent
-                                    Volunteers</span></li>
+                            <li class="page-item mx-auto my-auto"><span class="fs3">
+                                    </span></li>
                             <li class="page-item"><a class="page-link" href="#"><img src="~/images/right-arrow1.png"
                                         alt=""></a></li>
                         </ul>
-                    </div>
+                    </div>*@
+                    <div class="recent__volunteer border mt-3 p-lg-3 p-sm-1">
+                <h4 class="mt-2 ms-4 ">Recent Volunteers</h4>
+                <hr>
+
+                <div class="row row-cols-3 ">
+
+                 @foreach (var item in Model.MissionApplications)
+                {
+                <div class="col d-flex flex-column align-items-center justify-content-center recent-vol my-3">
+                <img src="@item.User.Avatar" class="rounded-circle " width="70px" height="70px" />
+                <span class="text-center">@item.User.FirstName @item.User.LastName</span>
+                </div>
+                }
+                </div>
+
+                <div>
+                <nav aria-label="Page navigation example my-3 py-2">
+                    <ul class="pagination justify-content-between border border-1" style="margin : 0px; align-items : center;">
+                        <li class="page-item disabled">
+                            <button id = "prev-vol" style="border : none; background : none;"><img
+                            src="~/images/left.png" alt=""></button>
+                        </li>
+                        <li class="page-item" id="recentvolpagenumber"></li>
+                        <li class="page-item">
+                            <button id = "next-vol" style="border : none; background : none;"><img src="~/images/right-arrow1.png" alt=""></button>
+                        </li>
+                    </ul>
+                </nav>
+                </div>
+                </div>
+                    
                 </div>
             </div>
         </div>
