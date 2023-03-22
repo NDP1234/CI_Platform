@@ -44,7 +44,7 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mrg-start">
 
                         <li class="nav-item ">
-                            <a class="nav-link text-dark" href="#">Stories</a>
+                            <a class="nav-link text-dark" asp-action="Story_Listing_Page" asp-controller="StoryRelated">Stories</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
@@ -67,7 +67,7 @@
                         <div class="dropdown">
                             <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="~/images/user-img.png" alt="" style="border-radius: 50%;" height="30px"
+                                <img src="@ViewBag.UserDetails.Avatar" alt="" style="border-radius: 50%;" height="30px"
                                     width="30px">
                                 <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName  </span>
                             </a>
@@ -87,7 +87,7 @@
         <div class="first-nav d-md-none ">
             <div id="mySidebar1" class="sidebar d-inline">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-                <a href="#">
+                <a asp-action="Story_Listing_Page" asp-controller="StoryRelated">
                     Stories
                 </a>
 
@@ -669,10 +669,7 @@
                                 placeholder="Enter your comments.."></textarea>
                         </div>
                         <div>
-@*                            <a class="btn btnpc my-2  text-center" href="#">Post comment <img
-                                    src="~/images/right-arrow.png" alt=""></a>*@
-                                @*<input type="hidden" id="user-id" name="userId" value="@ViewBag.UserDetails.UserId" />
-                                <input type="hidden" id="mission-id" name="missionId" value="@Model.Missions.MissionId" />*@
+
 
                                 <button class="btn btnpc my-2  text-center" id="post-comment" type="button" data-mission-id="@Model.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId">
                                     Post comment <img src="~/images/right-arrow.png" alt=""></button>
@@ -682,6 +679,11 @@
                         <div class="container bg-light p-2 scrollable" id="comments">
                             
                         </div>
+                        @*<button class="btn btn-primary" id="read-more">Read More</button>*@
+                        @*<button class="btn btnpc my-2 text-center" id="read-more" type="button" ">
+                            Read More 
+                        </button>*@
+
                     </div>
                 </div>
             </div>

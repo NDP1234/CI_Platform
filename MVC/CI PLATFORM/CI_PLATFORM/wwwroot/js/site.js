@@ -717,36 +717,36 @@ $(function () {
 $(function () {
     var missionId = $('#post-comment').data('mission-id');
 
-        function refreshComments() {
+    function refreshComments() {
 
-            $.get('/Content/DisplayComments', { missionId: missionId }, function (comments) {
-                $('#comments').empty();
-                console.log(comments)
-                $.each(comments, function (i, comment) {
-                    var cAt = comment.value.createdAt;
-                    var formattedDateTime = formatDateTime(cAt);
-                    var html = ' <div class="cmt my-2 bdr bg-white p-2" id="comments">' +
-                        '<div class="section fs ">' +
-                        '<div class="d-flex">' +
-                        ' <div class="flex-shrink-0">' +
-                        '<img src=' + comment.value.avatar + ' class="rounded-pill imgh-pf" alt = "..." > ' +
-                        '</div>' +
-                        '<div class="flex-grow-1 ms-3">' +
-                        '<div>' + comment.value.firstName + " " + comment.value.lastName +  '</div>' +
-                        '<div class="fs2">' + formattedDateTime + '</div>' +
-                        '</div>' +
-                        ' </div>' +
-                        '<div class="mt-3 p-text">' +
-                        comment.value.commentText +
-                        ' </div>' +
-                        ' </div>' +
-                        '</div>';
+        $.get('/Content/DisplayComments', { missionId: missionId }, function (comments) {
+            $('#comments').empty();
+            console.log(comments)
+            $.each(comments, function (i, comment) {
+                var cAt = comment.value.createdAt;
+                var formattedDateTime = formatDateTime(cAt);
+                var html = ' <div class="cmt my-2 bdr bg-white p-2" id="comments">' +
+                    '<div class="section fs ">' +
+                    '<div class="d-flex">' +
+                    ' <div class="flex-shrink-0">' +
+                    '<img src=' + comment.value.avatar + ' class="rounded-pill imgh-pf" alt = "..." > ' +
+                    '</div>' +
+                    '<div class="flex-grow-1 ms-3">' +
+                    '<div>' + comment.value.firstName + " " + comment.value.lastName + '</div>' +
+                    '<div class="fs2">' + formattedDateTime + '</div>' +
+                    '</div>' +
+                    ' </div>' +
+                    '<div class="mt-3 p-text">' +
+                    comment.value.commentText +
+                    ' </div>' +
+                    ' </div>' +
+                    '</div>';
 
-                    $('#comments').append(html);
-                });
+                $('#comments').append(html);
             });
-        }
-   
+        });
+    }
+
 
 
 

@@ -23,6 +23,7 @@ builder.Services.AddScoped<ISkillsRepository, SkillsRepository>();
 builder.Services.AddScoped<IMissionListingRepository, MissionListingRepository>();
 builder.Services.AddScoped<IUserList, UserList>();
 builder.Services.AddScoped<IMissionDetail, MissionDetail>();
+builder.Services.AddScoped<IStoryListingRepository, StoryListingRepository>();
 
 var app = builder.Build();
 
@@ -53,6 +54,9 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "Content",
     pattern: "{controller=Content}/{action=Platform_Landing_Page}");
+app.MapControllerRoute(
+    name: "StoryRelated",
+    pattern: "{controller=StoryRelated}/{action=Story_Listing_Page}");
 
 app.Run();
 

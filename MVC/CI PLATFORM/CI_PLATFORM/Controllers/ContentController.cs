@@ -294,7 +294,7 @@ namespace CI_PLATFORM.Controllers
             return Json(comment);
         }
 
-        
+
         //for displaying comments 
         [HttpGet]
         public JsonResult[] DisplayComments(int missionId)
@@ -388,9 +388,6 @@ namespace CI_PLATFORM.Controllers
 
 
 
-        public IActionResult Story_Listing_Page()
-        {
-            return View();
-        }
+       
     }
 }

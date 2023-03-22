@@ -170,7 +170,6 @@ C:\Users\pci120\Desktop\CI platform\CI_Platform\MVC\CI PLATFORM\CI_PLATFORM\obj\
 C:\Users\pci120\Desktop\CI platform\CI_Platform\MVC\CI PLATFORM\CI_PLATFORM\obj\Debug\net6.0\ref\CI_PLATFORM.dll
 C:\Users\pci120\Desktop\CI platform\CI_Platform\MVC\CI PLATFORM\CI_PLATFORM\obj\Debug\net6.0\CI_PLATFORM.pdb
 C:\Users\pci120\Desktop\CI platform\CI_Platform\MVC\CI PLATFORM\CI_PLATFORM\obj\Debug\net6.0\CI_PLATFORM.genruntimeconfig.cache
-C:\Users\pci120\Desktop\CI platform\CI_Platform\MVC\CI PLATFORM\CI_PLATFORM\obj\Debug\net6.0\CI_PLATFORM.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\pci120\Desktop\CI platform\CI_Platform\MVC\CI PLATFORM\CI_PLATFORM\bin\Debug\net6.0\MailKit.dll
 C:\Users\pci120\Desktop\CI platform\CI_Platform\MVC\CI PLATFORM\CI_PLATFORM\bin\Debug\net6.0\MimeKit.dll
 C:\Users\pci120\Desktop\CI platform\CI_Platform\MVC\CI PLATFORM\CI_PLATFORM\bin\Debug\net6.0\Newtonsoft.Json.dll

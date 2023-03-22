@@ -1,4 +1,8 @@
-﻿@*
+﻿@using CI_Platform.Entities.Models.VM
+
+@model StoryViewModel;
+
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -54,9 +58,9 @@
                         <div class="dropdown">
                             <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="~/images/user-img.png" alt="" style="border-radius: 50%;" height="30px"
+                                <img src="@ViewBag.UserDetails.Avatar" alt="" style="border-radius: 50%;" height="30px"
                                     width="30px">
-                                <span>Evan Donohue</span>
+                                <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -101,7 +105,7 @@
             </div>
         </div>
         <!-- //////////////////////////////// -->
-        <div class="row mt-4 bdr container-fluid  ps-0 pe-0  mb-2 mx-auto " style="width: 95%;">
+@*        <div class="row mt-4 bdr container-fluid  ps-0 pe-0  mb-2 mx-auto " style="width: 95%;">
             <div class="srchbar ">
                 <div class="input-group rounded bd d-none d-md-flex  ">
 
@@ -251,12 +255,12 @@
             </div>
             <!-- ///////////////// -->
 
-        </div>
+        </div>*@
 
     </div>
 
     <!-- chips -->
-    <div class="container mb-3">
+@*    <div class="container mb-3">
         <div class="all-filters d-flex align-items-center flex-wrap mt-4 mgl ">
             <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1 flex-nowrap">
                 <p class="filter">Tree Plantation</p>
@@ -283,7 +287,7 @@
                 <i class="bi bi-x"></i>
             </div>
         </div>
-    </div>
+    </div>*@
 
     <!-- large-image -->
     <div class="img-large text-center d-flex">
@@ -299,13 +303,18 @@
     <div class="container mt-5">
         <div id="products" class="row view-group all-view">
             <!-- 1a -->
-            <div class="item col-xs-4 col-lg-4">
+            @foreach(var item in Model.Stories)
+            {
+               <div class="item col-xs-4 col-lg-4">
                 <div class="thumbnail card">
                     <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid W-100 imghv"
-                            src="~/images/Grow-Trees-On-the-path-to-environment-sustainability.png" alt="" />
+                        @*<img class="group list-group-image img-fluid W-100 imghv"
+                            src="~/images/Grow-Trees-On-the-path-to-environment-sustainability.png" alt="" />*@
+                            <img class="group list-group-image img-fluid w-100 imghv"
+                            src="@item.StoryMedia.FirstOrDefault(m=> m.StoryId == @item.StoryId).Path" alt="" />
                         <div class="bottom-center justify-content-center">
-                            Customer Experience
+                            @Model.MissionThemes.FirstOrDefault(m => m.MissionThemeId == @item.Mission.ThemeId).Title
+                          
                         </div>
                         <div class="middle">
                             <div class="text">
@@ -315,18 +324,19 @@
                     </div>
                     <div class="caption card-body">
                         <h4 class="group card-title inner list-group-item-heading">
-                            10 User and Customer Engagement Statergies for 2019</h4>
+                         @item.Title   </h4>
                         <p class="group inner list-group-item-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore...</p>
+                           @item.Description</p>
                         <div class="profile-name">
-                            <img src="~/images/volunteer1.png" class="rounded-pill prof-img" alt="">
-                            <span>Andrew Jhonson</span>
+                            <img src="@item.User.Avatar" class="rounded-pill prof-img" alt="">
+                            <span>@item.User.FirstName @item.User.LastName </span>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- 2a -->
+            </div> 
+            }
+            
+@*            <!-- 2a -->
             <div class="item col-xs-4 col-lg-4">
                 <div class="thumbnail card">
                     <div class="img-event position-relative">
@@ -551,7 +561,7 @@
                     </div>
                 </div>
             </div>
-
+*@
 
 
 

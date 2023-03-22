@@ -60,11 +60,3 @@ namespace CI_Platform.Repository.Repository
 
     }
 }
-//var relatedDocuments = _db.Missions.Join(_db.MissionDocuments, m => m.MissionId, j => j.MissionId, (m, j) => new { Missison = m, MissionDocuments = j })
-//            .ToList();
-
-//Missionsdetail.RelatedMissions = relatedMissions.Select(x => x.Mission).ToList();
-//Missionsdetail.MissionRelatedDoc = relatedDocuments.Select(x => x.MissionDocuments).ToList();
-//List<MissionDocument> misdoc = _db.MissionDocuments.ToList();
-//join d in misdoc on m.MissionId equals d.MissionId into data2
-//from d in data2.DefaultIfEmpty().Take(1)
