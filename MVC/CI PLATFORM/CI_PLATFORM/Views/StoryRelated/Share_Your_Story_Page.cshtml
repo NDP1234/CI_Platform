@@ -1,0 +1,251 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+     Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Your Story Page</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/sys.css">
+    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light d-none d-md-block">
+            <div class="container">
+                <button class="navbar-toggler bg-light " type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 mrg-start">
+
+                        <li class="nav-item ">
+                            <a class="nav-link text-dark" asp-action="Story_Listing_Page" asp-controller="StoryRelated">Stories</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Policy
+                            </a>
+                            <ul class="dropdown-menu ">
+                                <li><a class="dropdown-item " href="#">Policy-1</a></li>
+                                <li><a class="dropdown-item" href="#">Policy-2</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <form class="d-flex" role="search">
+
+                        <div class="dropdown">
+                            <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="@ViewBag.UserDetails.Avatar" alt="" style="border-radius: 50%;" height="30px"
+                                    width="30px">
+                                <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ////////////////////////////////// -->
+        <div class="first-nav d-md-none ">
+            <div id="mySidebar1" class="sidebar d-inline">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+                <a href="#">
+                    Stories
+                </a>
+
+                <a href="#">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Policy
+                        </a>
+                        <ul class="dropdown-menu ">
+                            <li><a class="dropdown-item " href="#">Policy-1</a></li>
+                            <li><a class="dropdown-item" href="#">Policy-2</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else </a></li>
+                        </ul>
+                    </li>
+                </a>
+            </div>
+            <div id="main1" class="d-flex justify-content-between m-2">
+                <button class="openbtn " onclick="openNav()">☰ </button>
+                <img src="/Images/volunteer1.png" class="rounded-pill  " height="40px" width="40px" alt="">
+            </div>
+        </div>
+        <!-- //////////////////////////////// -->
+
+
+    </div>
+    <hr class="hr" />
+    <div class="container">
+        <p class="my-3 fs-1">
+            Share your story
+        </p>
+        <div class="row">
+            <div class="col col-lg-4 col-md-6 col-12 padforcol">
+                <label for="myInputSelect" class="form-label">Select Mission</label>
+                <select class="form-select" id="myInputSelect" aria-label="Select your mission" data-user-id="@ViewBag.UserDetails.UserId">
+                    <option selected>Select your mission</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div class="col col-lg-4 col-md-6 col-12 padforcol">
+                <label for="storyTitle" class="form-label">My Story Title</label>
+                <input type="text" class="form-control" id="storyTitle" placeholder="Enter story title">
+            </div>
+
+            <div class="col col-lg-4 col-md-12 col-12 padforcol">
+                <label for="myStoryDate" class="form-label">Date</label>
+                <input type="date" class="form-control" id="myStoryDate" placeholder="Select date">
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <textarea cols="80" id="editor1" name="editor1" rows="4">&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href=&quot;https://ckeditor.com/&quot;&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <label for="myStoryVideo" class="form-label">Enter Video URL</label>
+                <input type="text" class="form-control" id="myStoryVideo" placeholder="Enter your url">
+            </div>
+        </div>
+        <div class="row mt-3">
+            <label for="dragAndDrop" class="form-label">Upload your photos</label>
+            <div class="col">
+                <div id="dragAndDrop" class="border text-center">
+                    <label for="fileInput">
+                      <img class="mx-auto d-block my-3" src="~/Images/drag-and-drop.png" alt="unable to load">
+                    </label>
+                    <input type="file" multiple id="fileInput" style="display: none;">
+                </div>
+                <div class="selectedImage">
+                    
+                </div>
+            </div> 
+        </div>
+        
+        <div class="row mt-3">
+            <div class="col">
+                <button class="btn btn-danger cancelBtn float-start " type="button">Cancel</button>
+                <button class="btn btn-primary SaveOrSubmitBtn float-end mx-2" type="button">Save</button>
+                <button class="btn btn-success SaveOrSubmitBtn float-end " type="button">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.21.0/basic/ckeditor.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+      
+//for displaying header in mobile view
+// -----------------------------------------------------------------------------------------------------------------
+        function openNav() {
+            document.getElementById("mySidebar1").style.width = "250px";
+            document.getElementById("main1").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar1").style.width = "0";
+            document.getElementById("main1").style.marginLeft = "0";
+        }
+        function openNav2() {
+            document.getElementById("mySidebar2").style.width = "250px";
+            document.getElementById("main2").style.marginLeft = "250px";
+        }
+
+        function closeNav2() {
+            document.getElementById("mySidebar2").style.width = "0";
+            document.getElementById("main2").style.marginLeft = "0";
+        }
+// -----------------------------------------------------------------------------------------------------------------
+
+// for select images or videos and displayed at below      
+// -----------------------------------------------------------------------------------------------------------------  
+// Get the selectedImage div
+const selectedImage = document.querySelector('.selectedImage');
+
+// Handle the change event for the file input element
+const fileInput = document.getElementById('fileInput');
+fileInput.addEventListener('change', function(event) {
+  for (const file of event.target.files) {
+    // Create a new image element for each selected file
+    if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
+      const newImage = document.createElement(file.type.startsWith('image/') ? 'img' : 'video');
+      newImage.src = URL.createObjectURL(file);
+      newImage.controls = true; // show controls for video element
+      // Create a new remove icon for each selected image
+      const removeIcon = document.createElement('span');
+      removeIcon.innerHTML = 'x';
+      removeIcon.className = 'remove';
+      // Add the new image and remove icon to the selectedImage div
+      const newDiv = document.createElement('div');
+      newDiv.className = 'selectedImageItem';
+      newDiv.appendChild(newImage);
+      newDiv.appendChild(removeIcon);
+      selectedImage.appendChild(newDiv);
+      // Add a horizontal line between images
+      selectedImage.appendChild(document.createElement('hr'));
+    }
+  }
+  // Call the function to handle remove icon clicks
+  handleRemoveIconClick();
+});
+
+// Handle remove icon clicks
+function handleRemoveIconClick() {
+  const removeIcons = document.querySelectorAll('.selectedImageItem .remove');
+  removeIcons.forEach(icon => {
+    icon.addEventListener('click', function() {
+      this.parentElement.remove();
+    });
+  });
+}
+// -----------------------------------------------------------------------------------------------------------------
+
+// for ckeditor
+// -----------------------------------------------------------------------------------------------------------------
+CKEDITOR.replace('editor1', {
+      height: 200,
+      baseFloatZIndex: 10005,
+      removeButtons: 'PasteFromWord,Cut,Copy,Paste,PasteText,Undo,Redo,Link,Unlink,Scayt,HorizontalRule,SpecialChar,NumberedList,BulletedList,Outdent,Indent,Blockquote,Anchor,Image,Table,Maximize,Source'
+    });
+
+// -----------------------------------------------------------------------------------------------------------------
+
+    </script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

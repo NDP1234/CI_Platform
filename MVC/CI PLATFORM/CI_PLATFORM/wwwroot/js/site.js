@@ -924,5 +924,43 @@ else {
 }
 
 
+//$(document).ready(function () {
+//    var userId = $("#myInputSelect").data("user-id");
+//    if (userId) {
+//        $.ajax({
+//            type: "GET",
+//            url: "/StoryRelated/GetMissionTitles?userId=" + userId,
+//            success: function (data) {
+//                $.each(data, function (i, title) {
+//                    $("#myInputSelect").append("<option value='" + title + "'>" + title + "</option>");
+//                });
+//            },
+//            error: function (xhr, textStatus, errorThrown) {
+//                console.log(xhr.responseText);
+//            }
+//        });
+//    }
+//});
+$(document).ready(function () {
+    $("#myInputSelect").change(function () {
+        var userId = $(this).data("user-id");
+        
+        $.ajax({
+            type: "GET",
+            url: "/YourController/GetMissionTitles",
+            data: { userId: userId },
+            
+            success: function (data) {
+                
+                var select = $("#myInputSelect");
+                console.log(data);
+                select.empty().append('<option selected>Select your mission</option>');
+                $.each(data, function (index, item) {
+                    select.append('<option value="' + item + '">' + item + '</option>');
+                });
+            }
+        });
+    });
+});
 
 

@@ -24,6 +24,7 @@ builder.Services.AddScoped<IMissionListingRepository, MissionListingRepository>(
 builder.Services.AddScoped<IUserList, UserList>();
 builder.Services.AddScoped<IMissionDetail, MissionDetail>();
 builder.Services.AddScoped<IStoryListingRepository, StoryListingRepository>();
+builder.Services.AddScoped<IMissionApplicationListingRepository, MissionApplicationListingRepository>();
 
 var app = builder.Build();
 

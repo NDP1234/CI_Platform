@@ -1,0 +1,141 @@
+.selectedImage {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.selectedImageItem {
+    display: inline-block;
+    position: relative;
+    max-width: 200px;
+    margin: 10px;
+}
+.selectedImageItem img {
+      
+     height:150px;
+     width:150px;
+     margin: 0px 12px;
+     object-fit: cover;
+    }
+  .selectedImageItem .remove {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    cursor: pointer;
+  }
+  
+  /* Style the horizontal line between images */
+  .selectedImage hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 5px 0;
+  }
+  
+
+ul, li   {
+    list-style-type: none;
+  }
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color:#f4f4f4;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: black;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #f4f4f4;
+    color: black;
+    padding: 10px 15px;
+    border: none;
+  }
+  
+  .openbtn:hover {
+    background-color: #444;
+  }
+  
+  #main1 {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+  #main2 {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+  .cancelBtn{
+    border-radius: 20px;
+    border: 2px solid #757575;
+    color: #757575;
+    background-color: white;
+    padding:10px 5px;
+    width: 130px;
+  }
+  .SaveOrSubmitBtn{
+    border-radius: 20px;
+    border: 2px solid #F88634;
+    color: #F88634;
+    background-color: white;
+    padding:10px 5px;
+    width: 130px;
+  }
+
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }
+
+  @media (max-width:768px){
+    .padforcol{
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+  }
+  @media (max-width:425px){
+    .cancelBtn{
+
+        width: 70px;
+      }
+      .SaveOrSubmitBtn{
+
+        width: 70px;
+      }
+      .selectedImageItem img {
+        /* max-width: 100%; */
+        max-width: 100px;
+        max-height: 100px;
+
+      }
+
+  }
