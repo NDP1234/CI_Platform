@@ -49,14 +49,24 @@ namespace CI_PLATFORM.Controllers
             List<User> users = _users.GetUserList();
             var profile = users.FirstOrDefault(m => m.Email == session_details);
             ViewBag.UserDetails = profile;
-            return View();
-        }
-        [HttpGet]
-        public IActionResult GetMissionTitles(int userId)
-        {
-            var missionTitles = _listingRepository.GetMissionTitlesByUserId(userId);
-            return Json(missionTitles);
+            int userId = (int)profile.UserId;
+            List<Mission> missionTitles = _listingRepository.GetMissionTitlesByUserId(userId);
+            return View(missionTitles);
+           
         }
 
+      [HttpPost]
+        public IActionResult DraftStory(int userid, int missionid, string title, DateTime publishedAt, string description, string status)
+        {
+            var draft = _listingRepository.DraftStory(userid, missionid, title, publishedAt, description, status);
+            return Ok(new { message = "Draft stored successfully." });
+        }
+
+        [HttpPost]
+        public IActionResult SubmitStory(int userid, int missionid, string title, DateTime publishedAt, string description, string status)
+        {
+            var submit = _listingRepository.SubmitStory(userid, missionid, title, publishedAt, description, status);
+            return Ok();
+        }
     }
 }

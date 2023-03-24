@@ -1,9 +1,14 @@
-﻿@*
+﻿
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
      Layout = null;
 }
+@using CI_Platform.Entities.Models
+
+@model List<Mission>;
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -112,11 +117,13 @@
         <div class="row">
             <div class="col col-lg-4 col-md-6 col-12 padforcol">
                 <label for="myInputSelect" class="form-label">Select Mission</label>
-                <select class="form-select" id="myInputSelect" aria-label="Select your mission" data-user-id="@ViewBag.UserDetails.UserId">
-                    <option selected>Select your mission</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                <select class="form-select myMissionTitles" id="myInputSelect" aria-label="Select your mission" data-user-id="@ViewBag.UserDetails.UserId">
+                    <option selected value="-1">Select your mission</option>
+                    @foreach (Mission  item in Model)
+                    {
+                        <option value="@item.MissionId">@item.Title</option>
+                    }
+
                 </select>
             </div>
             <div class="col col-lg-4 col-md-6 col-12 padforcol">
@@ -157,16 +164,28 @@
         
         <div class="row mt-3">
             <div class="col">
-                <button class="btn btn-danger cancelBtn float-start " type="button">Cancel</button>
-                <button class="btn btn-primary SaveOrSubmitBtn float-end mx-2" type="button">Save</button>
-                <button class="btn btn-success SaveOrSubmitBtn float-end " type="button">Submit</button>
+                <a class="btn btn-danger cancelBtn float-start" asp-action="Story_Listing_Page" asp-controller="StoryRelated" type="button">Cancel</a>
+                <button class="btn btn-primary SaveOrSubmitBtn float-end mx-2"  id="submitBtn" type="button">Submit</button>
+                <button class="btn btn-success SaveOrSubmitBtn float-end " id="SaveBtn"> Save</button>
             </div>
         </div>
     </div>
 
+    <hr class="hr mt-5" />
+
+        <div class="container">
+        
+        <div class="privacy-policy mt-3 mb-3">
+            <a href="#" style="text-decoration:none;"> Privacy Policy</a>
+        </div>
+    </div>
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.ckeditor.com/4.21.0/basic/ckeditor.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/story.js"></script>
+
     <script>
       
 //for displaying header in mobile view
@@ -245,7 +264,6 @@ CKEDITOR.replace('editor1', {
 // -----------------------------------------------------------------------------------------------------------------
 
     </script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

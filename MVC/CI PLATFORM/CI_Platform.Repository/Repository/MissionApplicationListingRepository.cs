@@ -1,5 +1,6 @@
 ﻿using CI_Platform.Entities.Data;
 using CI_Platform.Entities.Models;
+using CI_Platform.Entities.Models.VM;
 using CI_Platform.Repository.Interface;
 using System;
 using System.Collections.Generic;
@@ -20,11 +21,65 @@ namespace CI_Platform.Repository.Repository
 
         public List<Mission> GetMissionTitlesByUserId(int userId)
         {
-            var data = _db.MissionApplications
+            return _db.MissionApplications
                 .Where(m => m.UserId == userId)
                 .Select(m => m.Mission)
                 .ToList();
-            return data;
+            
+        }
+
+        public ShareMyStoryViewModel.ForSaveDraft DraftStory(int userid ,int missionid,string title, DateTime publishedAt, string description, string status)
+        {
+            CI_Platform.Entities.Models.Story storydraft = new Story()
+            {
+                UserId = userid,
+                MissionId = missionid,
+                Status = status,
+                Title = title,
+                PublishedAt = publishedAt,
+                //CreatedAt = DateTime.UtcNow,
+                Description = description,
+            };
+
+            _db.Stories.Add(storydraft);
+            _db.SaveChanges();
+
+            return new ShareMyStoryViewModel.ForSaveDraft()
+            {
+                UserId = userid,
+                MissionId = missionid,
+                Status = status,
+                Title = title,
+                PublishedAt = publishedAt,
+                Description = description,
+            };
+        }
+        public ShareMyStoryViewModel.ForSubmit SubmitStory(int userid,int missionid,string title, DateTime publishedAt, string description, string status)
+        {
+           
+            CI_Platform.Entities.Models.Story storySave = new Story()
+            {
+                UserId = userid,
+                MissionId = missionid,
+                Status = status,
+                Title = title,
+                PublishedAt = publishedAt,
+                Description = description,
+            };
+
+            _db.Stories.Add(storySave);
+            _db.SaveChanges();
+
+            return new ShareMyStoryViewModel.ForSubmit()
+            {
+                UserId = userid,
+                MissionId = missionid,
+                Status = status,
+                Title = title,
+                PublishedAt = publishedAt,
+                Description = description,
+            };
         }
     }
-}
+    }
+
