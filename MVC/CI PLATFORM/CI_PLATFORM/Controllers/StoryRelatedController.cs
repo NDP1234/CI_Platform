@@ -56,9 +56,9 @@ namespace CI_PLATFORM.Controllers
         }
 
       [HttpPost]
-        public IActionResult DraftStory(int userid, int missionid, string title, DateTime publishedAt, string description, string status)
+        public IActionResult DraftStory(int userid, int missionid, string title, DateTime publishedAt, string description, string status, List<string> pathlist)
         {
-            var draft = _listingRepository.DraftStory(userid, missionid, title, publishedAt, description, status);
+            var draft = _listingRepository.DraftStory(userid, missionid, title, publishedAt, description, status, pathlist);
             return Ok(new { message = "Draft stored successfully." });
         }
 
@@ -68,5 +68,7 @@ namespace CI_PLATFORM.Controllers
             var submit = _listingRepository.SubmitStory(userid, missionid, title, publishedAt, description, status);
             return Ok();
         }
+        
+
     }
 }

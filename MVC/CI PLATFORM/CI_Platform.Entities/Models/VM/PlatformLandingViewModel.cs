@@ -7,6 +7,8 @@ namespace CI_Platform.Entities.Models.VM
 {
     public class PlatformLandingViewModel
     {
+        public bool isValid;
+
         public Mission? Missions { get; set; }
 
         public MissionMedium? image { get; set; }
@@ -15,5 +17,6 @@ namespace CI_Platform.Entities.Models.VM
         public IEnumerable<MissionTheme>? themes { get; set; }
         public IEnumerable<Skill>? skills { get; set; }
         public IEnumerable<MissionSkill>? MissionSkills { get; set; }
+        public List<User> Users { get; set; }
     }
 }

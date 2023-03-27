@@ -12,7 +12,9 @@ namespace CI_Platform.Repository.Interface
     {
          List<Mission> GetMissionTitlesByUserId(int userId);
 
-        public ShareMyStoryViewModel.ForSaveDraft DraftStory(int userid, int missionid, string title, DateTime publishedAt, string description, string status);
+        public ShareMyStoryViewModel.ForSaveDraft DraftStory(int userid, int missionid, string title, DateTime publishedAt, string description, string status, List<string> pathlist);
         public ShareMyStoryViewModel.ForSubmit SubmitStory(int userid, int missionid, string title, DateTime publishedAt, string description, string status);
+        
+
     }
 }

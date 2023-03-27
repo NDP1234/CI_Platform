@@ -1,4 +1,30 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+/*i.filled-heart {*/
+    /*font-size: 14px;*/
+    /*font-size: 2.0rem;
+    / Set a font size for the heart icon /
+}
+
+    i.filled-heart::before {
+        content: "\2665";
+        / Use a Unicode character for the filled heart symbol / top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        color: red;
+        font-size: inherit;
+    }*/
+i.filled-heart {
+    font-size: 2.0rem; /* Set a font size for the heart icon */
+    vertical-align: middle; /* Keep the icon in its original position */
+}
+
+    i.filled-heart::before {
+        content: "\2665"; /* Use a Unicode character for the filled heart symbol */
+        color: red;
+        font-size: inherit;
+    }
+
 
 .chip {
     display: inline-block;

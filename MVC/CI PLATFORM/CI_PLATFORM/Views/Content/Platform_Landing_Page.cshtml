@@ -348,7 +348,7 @@
                                 alt=""></button>
                         <button class="btn " id="list" onclick="showView('list')"><img src="~/images/list.png"
                                 alt=""></button>
-                        <button class="btn d-none" id="FilterBtn" type="button"></button>
+                        <button class="btn d-none" id="FilterBtn" type="button"  data-user-id="@ViewBag.UserDetails.UserId"></button>
                         <button class="btn d-none" id="NoMissionId" type="button"></button>
                     </form>
                 </div>
@@ -371,7 +371,19 @@
                             @item.Missions?.Theme.Title
                         </div>
                         <div class="bottom-right  opacity-50   ">
-                            <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
+                           @* <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">*@
+                           @if(item.isValid){
+                               <button  data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2"  style="border-radius:20px;" >
+                                <i class="bi bi-heart filled-heart"></i>
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button  data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2"  style="border-radius:20px;">
+                                <i class="bi bi-heart"></i>
+                           </button>
+                                }
+
                         </div>
                         <div class="bottom-right2  opacity-50   ">
                             <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">

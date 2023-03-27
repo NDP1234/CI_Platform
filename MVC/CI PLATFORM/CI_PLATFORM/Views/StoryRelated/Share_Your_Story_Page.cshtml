@@ -210,47 +210,9 @@
         }
 // -----------------------------------------------------------------------------------------------------------------
 
-// for select images or videos and displayed at below      
-// -----------------------------------------------------------------------------------------------------------------  
-// Get the selectedImage div
-const selectedImage = document.querySelector('.selectedImage');
+   
 
-// Handle the change event for the file input element
-const fileInput = document.getElementById('fileInput');
-fileInput.addEventListener('change', function(event) {
-  for (const file of event.target.files) {
-    // Create a new image element for each selected file
-    if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
-      const newImage = document.createElement(file.type.startsWith('image/') ? 'img' : 'video');
-      newImage.src = URL.createObjectURL(file);
-      newImage.controls = true; // show controls for video element
-      // Create a new remove icon for each selected image
-      const removeIcon = document.createElement('span');
-      removeIcon.innerHTML = 'x';
-      removeIcon.className = 'remove';
-      // Add the new image and remove icon to the selectedImage div
-      const newDiv = document.createElement('div');
-      newDiv.className = 'selectedImageItem';
-      newDiv.appendChild(newImage);
-      newDiv.appendChild(removeIcon);
-      selectedImage.appendChild(newDiv);
-      // Add a horizontal line between images
-      selectedImage.appendChild(document.createElement('hr'));
-    }
-  }
-  // Call the function to handle remove icon clicks
-  handleRemoveIconClick();
-});
 
-// Handle remove icon clicks
-function handleRemoveIconClick() {
-  const removeIcons = document.querySelectorAll('.selectedImageItem .remove');
-  removeIcons.forEach(icon => {
-    icon.addEventListener('click', function() {
-      this.parentElement.remove();
-    });
-  });
-}
 // -----------------------------------------------------------------------------------------------------------------
 
 // for ckeditor

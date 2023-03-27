@@ -288,7 +288,24 @@
             </div>
         </div>
     </div>*@
+ 
+@*    <div id="stories-container" class="row view-group all-view">
+        <!-- Stories will be dynamically added here -->
+    </div>*@
+</div>
+        <div class="row container my-2  w-100 mx-auto">
+            <div class="col-12 w-100 ">
+              <div class="srch ">
 
+                   <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
+ 
+                   <form id="search-form" method="get" class="d-inline">
+                         <input type="search" class="form-control rounded d-inline srch" id="search-input" name="query" placeholder="Search stories..." aria-label="Search" aria-describedby="search-addon" >
+                   </form>
+              </div>
+            </div>
+        </div>
+        
     <!-- large-image -->
     <div class="img-large text-center d-flex">
         <div class="detail ">
@@ -300,20 +317,20 @@
 
 
     <!-- Story-listing -->
-    <div class="container mt-5">
+    <div class="container mt-5" id="stories-container">
+        
         <div id="products" class="row view-group all-view">
             <!-- 1a -->
             @foreach(var item in Model.Stories)
             {
-               <div class="item col-xs-4 col-lg-4">
+              <div class="item col-xs-4 col-lg-4">
                 <div class="thumbnail card">
                     <div class="img-event position-relative">
-                        @*<img class="group list-group-image img-fluid W-100 imghv"
-                            src="~/images/Grow-Trees-On-the-path-to-environment-sustainability.png" alt="" />*@
+
                             <img class="group list-group-image img-fluid w-100 imghv"
                             src="@item.StoryMedia.FirstOrDefault(m=> m.StoryId == @item.StoryId).Path" alt="" />
-                        <div class="bottom-center justify-content-center">
-                            @*@Model.MissionThemes.FirstOrDefault(m => m.MissionThemeId == @item.Mission.ThemeId).Title*@
+                        <div class="bottom-center justify-content-center missiontheme">
+
                             @item.Mission.Theme.Title
                           
                         </div>
@@ -335,244 +352,17 @@
                     </div>
                 </div>
             </div> 
+
+
+
             }
             
-@*            <!-- 2a -->
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid imghv" width="100%"
-                            src="~/images/Education-Supplies-for-Every--Pair-of-Shoes-Sold-2.png" alt="" />
-                        <div class="bottom-center justify-content-center">
-                            Children
-                        </div>
-                        <div class="middle">
-                            <div class="text">
-                                <button type="button" class="btn btn-light vd-btn"> <span>View Details &nbsp;</span> <img class="ra" src="~/images/right-arrow.png" alt=""></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            Overhead in Product: Good Products, the End of Failure.</h4>
-                        <p class="group inner list-group-item-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore...</p>
-                        <div class="profile-name pn">
-                            <img src="~/images/volunteer2.png" class="rounded-pill prof-img" alt="">
-                            <span>Charles Vigue</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 3a -->
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid imghv" width="100%"
-                            src="~/images/Nourish-the-Children-in--African-country.png" alt="" />
-                        <div class="bottom-center justify-content-center">
-                            Customer Experience
-                        </div>
-                        <div class="middle">
-                            <div class="text">
-                                <button type="button" class="btn btn-light vd-btn"> <span>View Details &nbsp;</span> <img class="ra" src="~/images/right-arrow.png" alt=""></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            10 User and Customer Engagement Statergies for 2019</h4>
-                        <p class="group inner list-group-item-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore...</p>
-                            <div class="profile-name">
-                                <img src="~/images/volunteer7.png" class="rounded-pill prof-img" alt="">
-                                <span>Travis Steen</span>
-                            </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 4a -->
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid imghv"
-                            src="~/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity.png" alt="" />
-                        <div class="bottom-center justify-content-center">
-                            Customer Experience
-                        </div>
-                        <div class="middle">
-                            <div class="text">
-                                <button type="button" class="btn btn-light vd-btn"> <span>View Details &nbsp;</span> <img class="ra" src="~/images/right-arrow.png" alt=""></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            10 User and Customer Engagement Statergies for 2019</h4>
-                        <p class="group inner list-group-item-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore...</p>
-                        <div class="profile-name">
-                                <img src="~/images/volunteer1.png" class="rounded-pill prof-img" alt="">
-                                <span>Andrew Jhonson</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 5a -->
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid imghv"
-                            src="~/images/Animal-welfare-&-save-birds-campaign.png" alt="" />
-                        <div class="bottom-center justify-content-center">
-                            Animals
-                        </div>
-                        <div class="middle">
-                            <div class="text">
-                                <button type="button" class="btn btn-light vd-btn"> <span>View Details &nbsp;</span> <img class="ra" src="~/images/right-arrow.png" alt=""></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            Overhead in Product: Good Products, the End of Failure. </h4>
-                        <p class="group inner list-group-item-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore...</p>
-                        <div class="profile-name pn">
-                                <img src="~/images/volunteer2.png" class="rounded-pill prof-img" alt="">
-                                <span>Charles Vigue</span>
-                        </div>    
-                    </div>
-                </div>
-            </div>
-            <!-- 6a -->
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid imghv"
-                            src="~/images/Plantation-and-Afforestation-programme.png" alt="" />
-                        <div class="bottom-center justify-content-center">
-                            Customer Experience
-                        </div>
-                        <div class="middle">
-                            <div class="text">
-                                <button type="button" class="btn btn-light vd-btn"> <span>View Details &nbsp;</span> <img class="ra" src="~/images/right-arrow.png" alt=""></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            10 User and Customer Engagement Statergies for 2019</h4>
-                        <p class="group inner list-group-item-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore...
-                        </p>
-                        <div class="profile-name">
-                            <img src="~/images/volunteer7.png" class="rounded-pill prof-img" alt="">
-                            <span>Travis Steen</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 7a -->
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid W-100 imghv"
-                            src="~/images/Grow-Trees-On-the-path-to-environment-sustainability.png" alt="" />
-                        <div class="bottom-center justify-content-center">
-                            Customer Experience
-                        </div>
-                        <div class="middle">
-                            <div class="text">
-                                <button type="button" class="btn btn-light vd-btn"> <span>View Details &nbsp;</span> <img  class="ra" src="~/images/right-arrow.png" alt=""></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            10 User and Customer Engagement Statergies for 2019</h4>
-                        <p class="group inner list-group-item-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore... </p>
-                            <div class="profile-name">
-                                <img src="~/images/volunteer1.png" class="rounded-pill prof-img" alt="">
-                                <span>Andrew Jhonson</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 8a -->
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid imghv" width="100%"
-                            src="~/images/Education-Supplies-for-Every--Pair-of-Shoes-Sold.png" alt="" />
-                        <div class="bottom-center justify-content-center">
-                            Nutrition
-                        </div>
-                        <div class="middle">
-                            <div class="text">
-                                <button type="button" class="btn btn-light vd-btn"> <span>View Details &nbsp;</span> <img class="ra" src="~/images/right-arrow.png" alt=""></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            Overhead in Product: Good Products, the End of Failure.</h4>
-                        <p class="group inner list-group-item-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore...</p>
-                            <div class="profile-name pn">
-                                <img src="~/images/volunteer2.png" class="rounded-pill prof-img" alt="">
-                                <span>Charles Vigue</span>
-                        </div>   
-                    </div>
-                </div>
-            </div>
-            <!-- 9a -->
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
-                        <img class="group list-group-image img-fluid imghv" width="100%"
-                            src="~/images/Nourish-the-Children-in--African-country.png" alt="" />
-                        <div class="bottom-center justify-content-center">
-                            Customer Experience
-                        </div>
-                        <div class="middle">
-                            <div class="text">
-                                <button type="button" class="btn btn-light vd-btn"> <span>View Details &nbsp;</span> <img class="ra" src="~/images/right-arrow.png" alt=""></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            10 User and Customer Engagement Statergies for 2019</h4>
-                        <p class="group inner list-group-item-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore...</p>
-                        <div class="profile-name">
-                                <img src="~/images/volunteer7.png" class="rounded-pill prof-img" alt="">
-                                <span>Travis Steen</span>
-                            </div>
-                    </div>
-                </div>
-            </div>
-*@
-
-
-
-
 
         </div>
     </div>
 
     <!-- Pagenation  -->
-    <nav aria-label="Page navigation example justify-content-center">
+    @*<nav aria-label="Page navigation example justify-content-center">
         <ul class="pagination mt-3">
             <li class="page-item">
                 <a class="page-link" href="#" aria-label="Previous">
@@ -591,17 +381,26 @@
                 </a>
             </li>
         </ul>
-    </nav>
+    </nav>*@
+     <div class="content mt-5 text-center hidden" id="NoMissionFound">
+            <div class="head w-100 text-center">
+                <h5>No Story found</h5>
+            </div>
+            <a class="btn btnlist  mt-3 " asp-action="Story_Listing_Page" asp-controller="StoryRelated">Go to Homepage <img src="~/images/right-arrow.png"
+                    alt=""></a>
 
+     </div>
     <!-- Footer (Privacy Policy) -->
     <div class="container">
+
         <hr>
         <div class="privacy-policy mt-3 mb-3">
             <a href="#"> Privacy Policy</a>
         </div>
     </div>
-
+     <script src="~/js/story_listing.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
         function openNav() {
             document.getElementById("mySidebar1").style.width = "250px";

@@ -22,7 +22,7 @@ namespace CI_Platform.Repository.Repository
             _db = db;
         }
 
-        public List<PlatformLandingViewModel> GetAllMission()
+        public List<PlatformLandingViewModel> GetAllMission(int userId)
         {
             List<Mission> mission = _db.Missions.ToList();
             List<MissionMedium> image = _db.MissionMedia.ToList();
@@ -31,11 +31,12 @@ namespace CI_Platform.Repository.Repository
             List<City> city = _db.Cities.ToList();
             List<Skill> skills = _db.Skills.ToList();
             List<MissionSkill> missionSkills = _db.MissionSkills.ToList();
+            List<User> users = _db.Users.ToList();
             var Missions = (from m in mission
                                 //join S in missionSkills on m.MissionId equals S.MissionId
                             join i in image on m.MissionId equals i.MissionId into data
                             from i in data.DefaultIfEmpty().Take(1)
-                            select new PlatformLandingViewModel { image = i, Missions = m, Country = countries, themes = theme, skills = skills }).ToList();
+                            select new PlatformLandingViewModel { image = i, Missions = m, Country = countries, themes = theme, skills = skills, isValid = _db.FavouriteMissions.Any(f => f.UserId == userId && f.MissionId == m.MissionId) }).ToList();
             return Missions;
         }
 
@@ -103,10 +104,10 @@ namespace CI_Platform.Repository.Repository
                 return finalMission.ToList();
             }
         }
-        public List<PlatformLandingViewModel> GetFilterData(string[] country, string[] city, string[] theme, string[] skill, string sort)
+        public List<PlatformLandingViewModel> GetFilterData(int userId, string[] country, string[] city, string[] theme, string[] skill, string sort)
         {
             var GlobalSort = sort;
-            List<PlatformLandingViewModel> filterMission = GetAllMission();
+            List<PlatformLandingViewModel> filterMission = GetAllMission(userId);
             List<PlatformLandingViewModel> finalMission = new List<PlatformLandingViewModel>();
 
             if (true)

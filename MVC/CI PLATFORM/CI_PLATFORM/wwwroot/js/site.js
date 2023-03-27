@@ -295,12 +295,14 @@ $("#FilterBtn").on('click', function () {
     console.log(citychip);
     console.log(themechip);
     console.log(skillchip);
+    var userId = $('#FilterBtn').data('user-id');
     $('#NoMissionFound').css('display', 'none');
     $.ajax({
         url: '/Content/Filter',
         type: 'GET',
         traditional: true,
         data: {
+            userId : userId,
             country: countrychip,
             city: citychip,
             theme: themechip,
@@ -645,6 +647,38 @@ function addtofav() {
         }
     });
 };
+
+$('.myfavbtn2').on('click', function() {
+    var favBtn = this;
+    var missionId = $(favBtn).data('mission-id');
+    var userId = $(favBtn).data('user-id');
+  /*  const heartIcon = document.querySelector('.bi-heart');*/
+    var isFavorite = $(favBtn).find("i")[0].classList.contains('filled-heart');
+    console.log(missionId);
+    console.log(userId);
+    $.ajax({
+        type: "GET",
+        url: "/Content/AddToFavorites2",
+        data: { missionId: missionId, userId: userId },
+
+        success: function (data) {
+            if (data.success) {
+                console.log("successfully added to favorite")
+                if (isFavorite) {
+                    $(favBtn).find("i").removeClass("filled-heart");
+                 /*   $("#spanforfav2").text("Add To favourite");*/
+                }
+                else {
+                    $(favBtn).find("i").addClass("filled-heart");
+                    //$("#spanforfav2").text("Remove from favourite");
+                }
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error adding favorite: " + error);
+        }
+    });
+});
 
 
 //for recommandation

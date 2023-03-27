@@ -1,4 +1,71 @@
-﻿console.log("hello");
+﻿// -----------------------------------------------------------------------------------------------------------------  
+// for select images or videos and displayed at below      
+// -----------------------------------------------------------------------------------------------------------------  
+// Global array for storing selected image paths in base64 format
+const selectedImagesBase64 = [];
+
+// Get the selectedImage div
+const selectedImage = document.querySelector('.selectedImage');
+
+// Handle the change event for the file input element
+const fileInput = document.getElementById('fileInput');
+fileInput.addEventListener('change', function (event) {
+    for (const file of event.target.files) {
+        // Create a new image element for each selected file
+        if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
+            const newImage = document.createElement(file.type.startsWith('image/') ? 'img' : 'video');
+            newImage.src = URL.createObjectURL(file);
+            newImage.controls = true; // show controls for video element
+
+            // Convert the file to base64 and add it to the selectedImagesBase64 array
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                const base64Image = reader.result;
+                selectedImagesBase64.push(base64Image);
+            };
+
+            // Create a new remove icon for each selected image
+            const removeIcon = document.createElement('span');
+            removeIcon.innerHTML = 'x';
+            removeIcon.className = 'remove';
+
+            // Add the new image and remove icon to the selectedImage div
+            const newDiv = document.createElement('div');
+            newDiv.className = 'selectedImageItem';
+            newDiv.appendChild(newImage);
+            newDiv.appendChild(removeIcon);
+            selectedImage.appendChild(newDiv);
+
+            // Add a horizontal line between images
+            selectedImage.appendChild(document.createElement('hr'));
+        }
+    }
+    console.log(selectedImagesBase64);
+    // Call the function to handle remove icon clicks
+    handleRemoveIconClick();
+});
+
+// Handle remove icon clicks
+function handleRemoveIconClick() {
+    const removeIcons = document.querySelectorAll('.selectedImageItem .remove');
+    removeIcons.forEach(icon => {
+        icon.addEventListener('click', function () {
+            // Remove the image path from the selectedImagesBase64 array
+            const imageElement = this.previousSibling;
+            const index = selectedImagesBase64.indexOf(imageElement.src);
+            if (index !== -1) {
+                selectedImagesBase64.splice(index, 1);
+            }
+            
+            // Remove the selected image item from the selectedImage div
+            this.parentElement.remove();
+        });
+    });
+}
+
+
+/*for save draft*/
 $("#SaveBtn").on('click', function () {
     var userid = $("#myInputSelect").data('user-id');
     var missionid = $("#myInputSelect").val();
@@ -7,6 +74,7 @@ $("#SaveBtn").on('click', function () {
     var publisheddate = $("#myStoryDate").val();
     var status = "DRAFT";
     var description = CKEDITOR.instances.editor1.editable().getText();
+    var pathlist = selectedImagesBase64;
 
     console.log("User ID:", userid);
     console.log("Mission ID:", missionid);
@@ -28,6 +96,7 @@ $("#SaveBtn").on('click', function () {
             publishedAt: publisheddate,
             description: description,
             status: status,
+            pathlist: pathlist
 
         },
         success: function (data) {
@@ -42,6 +111,7 @@ $("#SaveBtn").on('click', function () {
     });
 });
 
+/*for submit story*/
 $("#submitBtn").on('click', function () {
     var userid = $("#myInputSelect").data('user-id');
     var missionid = $("#myInputSelect").val();
@@ -78,8 +148,12 @@ $("#submitBtn").on('click', function () {
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log('failed while storing: ' + textStatus + ', ' + errorThrown);
-
         }
 
     });
 });
+
+
+
+ 
+

@@ -2,6 +2,7 @@
 using CI_Platform.Entities.Models;
 using CI_Platform.Entities.Models.VM;
 using CI_Platform.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,22 +29,78 @@ namespace CI_Platform.Repository.Repository
             
         }
 
-        public ShareMyStoryViewModel.ForSaveDraft DraftStory(int userid ,int missionid,string title, DateTime publishedAt, string description, string status)
+        public ShareMyStoryViewModel.ForSaveDraft DraftStory(int userid, int missionid, string title, DateTime publishedAt, string description, string status, List<string> pathlist)
         {
-            CI_Platform.Entities.Models.Story storydraft = new Story()
+            var isExistStory = _db.Stories.Where(u => u.UserId == userid && u.MissionId == missionid).FirstOrDefault();
+
+            if (isExistStory != null)
             {
-                UserId = userid,
-                MissionId = missionid,
-                Status = status,
-                Title = title,
-                PublishedAt = publishedAt,
-                //CreatedAt = DateTime.UtcNow,
-                Description = description,
-            };
+                isExistStory.UserId = userid;
+                isExistStory.MissionId = missionid;
+                isExistStory.Status = status;
+                isExistStory.Title = title;
+                isExistStory.PublishedAt = publishedAt;
+                //isExistStory.CreatedAt = DateTime.UtcNow;
+                isExistStory.Description = description;
 
-            _db.Stories.Add(storydraft);
-            _db.SaveChanges();
+                _db.Stories.Update(isExistStory);
+                _db.SaveChanges();
+                var storyid = isExistStory.StoryId;
 
+                foreach (var path in pathlist)
+                {
+                    var isExistMedia = _db.StoryMedia.Where(s => s.StoryId == isExistStory.StoryId).FirstOrDefault();
+
+                    isExistMedia.Path = path;
+                    isExistMedia.StoryId = storyid;
+                    isExistMedia.CreatedAt = DateTime.UtcNow;
+                    isExistMedia.Type = ".png";
+
+
+                    _db.StoryMedia.Update(isExistMedia);
+                }
+
+
+                _db.SaveChanges();
+
+            }
+            else
+            {
+                CI_Platform.Entities.Models.Story storydraft = new Story()
+                {
+                    UserId = userid,
+                    MissionId = missionid,
+                    Status = status,
+                    Title = title,
+                    PublishedAt = publishedAt,
+                    //CreatedAt = DateTime.UtcNow,
+                    Description = description,
+                };
+
+                _db.Stories.Add(storydraft);
+                _db.SaveChanges();
+
+
+                var storyid = storydraft.StoryId;
+
+                foreach (var path in pathlist)
+                {
+                    CI_Platform.Entities.Models.StoryMedium image = new StoryMedium()
+                    {
+
+                        Path = path,
+                        StoryId = storyid,
+                        CreatedAt = DateTime.UtcNow,
+                        Type = ".png",
+
+
+                    };
+                    _db.StoryMedia.Add(image);
+                }
+
+
+                _db.SaveChanges();
+            }
             return new ShareMyStoryViewModel.ForSaveDraft()
             {
                 UserId = userid,
@@ -53,7 +110,7 @@ namespace CI_Platform.Repository.Repository
                 PublishedAt = publishedAt,
                 Description = description,
             };
-        }
+        }  
         public ShareMyStoryViewModel.ForSubmit SubmitStory(int userid,int missionid,string title, DateTime publishedAt, string description, string status)
         {
            
@@ -80,6 +137,7 @@ namespace CI_Platform.Repository.Repository
                 Description = description,
             };
         }
+        
     }
     }
 

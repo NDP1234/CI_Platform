@@ -60,16 +60,23 @@ namespace CI_PLATFORM.Controllers
             List<User> users = _users.GetUserList();
             var profile = users.FirstOrDefault(m => m.Email == session_details);
             ViewBag.UserDetails = profile;
+            int userId = (int)profile.UserId;
 
-            List<PlatformLandingViewModel> missions = _db2.GetAllMission();
+            List<PlatformLandingViewModel> missions = _db2.GetAllMission(userId);
 
             return View(missions);
         }
 
         //14-03
-        public JsonResult[] Filter(string[] country, string[] city, string[] theme, string[] skill, string sort)
+        public JsonResult[] Filter(int userId, string[] country, string[] city, string[] theme, string[] skill, string sort)
         {
-            var filter = _db2.GetFilterData(country, city, theme, skill, sort);
+            var session_details = HttpContext.Session.GetString("Login");
+            //if (session_details == null)
+            //{
+            //    return RedirectToAction("login", "Authentication");
+            //}
+
+            var filter = _db2.GetFilterData(userId,country, city, theme, skill, sort);
             var filterlist = new JsonResult[filter.ToList().Count];
 
             int i = 0;
@@ -145,6 +152,41 @@ namespace CI_PLATFORM.Controllers
         [HttpGet]
         [Route("Content/AddToFavorites", Name = "favorites")]
         public IActionResult AddToFavorites(int missionId, int userId)
+        {
+            var existingFavorite = _db.FavouriteMissions.FirstOrDefault(m => m.MissionId == missionId && m.UserId == userId);
+
+            if (existingFavorite == null)
+            {
+                if (ModelState.IsValid)
+                {
+                    FavouriteMission favourite = new FavouriteMission()
+                    {
+                        MissionId = missionId,
+                        UserId = userId,
+                        CreatedAt = DateTime.UtcNow,
+                    };
+
+                    _db.FavouriteMissions.Add(favourite);
+                    _db.SaveChanges();
+                    return Ok(new { success = true, message = "Favorite added successfully" });
+                }
+
+                else
+                {
+                    return View();
+                }
+            }
+            else
+            {
+                _db.FavouriteMissions.Remove(existingFavorite);
+                _db.SaveChanges();
+                return Ok(new { success = true, message = "Favorite removed successfully" });
+            }
+
+        }
+        [HttpGet]
+        [Route("Content/AddToFavorites2", Name = "favorites2")]
+        public IActionResult AddToFavorites2(int missionId, int userId)
         {
             var existingFavorite = _db.FavouriteMissions.FirstOrDefault(m => m.MissionId == missionId && m.UserId == userId);
 
