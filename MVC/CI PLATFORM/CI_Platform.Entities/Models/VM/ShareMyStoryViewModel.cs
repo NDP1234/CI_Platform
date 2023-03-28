@@ -43,6 +43,7 @@ namespace CI_Platform.Entities.Models.VM
             public DateTime PublishedAt { get; set; }
 
             public DateTime CreatedAt { get; set; }
+            public bool isStoryExist { get; set; }
         }
     }
 }

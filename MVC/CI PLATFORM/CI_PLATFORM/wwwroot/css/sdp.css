@@ -1,0 +1,239 @@
+.img2 {
+    height: 180px;
+    width: 350px;
+}
+
+#id1,
+#id2,
+#id3,
+#id4,
+#id5,
+#id6 {
+    display: none;
+}
+/* ul, li   {
+    list-style-type: none;
+  } */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color:#f4f4f4;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: black;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #f4f4f4;
+    color: black;
+    padding: 10px 15px;
+    border: none;
+  }
+  
+  .openbtn:hover {
+    background-color: #444;
+  }
+  
+  #main1 {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+  #main2 {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+  .cancelBtn{
+    border-radius: 20px;
+    border: 2px solid #757575;
+    color: #757575;
+    background-color: white;
+    padding:10px 5px;
+    width: 130px;
+  }
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }
+
+  @media (max-width:768px){
+    .padforcol{
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+  }
+  @media (max-width:425px){
+    .cancelBtn{
+
+        width: 70px;
+      }
+      .SaveOrSubmitBtn{
+
+        width: 70px;
+      }
+      .selectedImageItem img {
+        /* max-width: 100%; */
+        max-width: 100px;
+        max-height: 100px;
+
+      }
+      .mob-margin{
+        margin: 5px 0px;
+      }
+
+  }
+@media (min-width:1025px) {
+    .img2 {
+        height: 155px;
+        width: 178px;
+    }
+}
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+/* medium and up screens */
+/* @media (min-width: 768px) { */
+
+    .carousel-inner .carousel-item-end.active,
+    .carousel-inner .carousel-item-next {
+        transform: translateX(25%);
+    }
+
+    .carousel-inner .carousel-item-start.active,
+    .carousel-inner .carousel-item-prev {
+        transform: translateX(-25%);
+    }
+/* } */
+
+.carousel-inner .carousel-item-end,
+.carousel-inner .carousel-item-start {
+    transform: translateX(0);
+}
+.p-text {
+    text-align: justify;
+}
+.btnlist{
+    color: #F88634;
+    border: 2px solid #F88634;
+    border-radius: 20px;
+}
+@media (min-width:1025px) {
+    .img2 {
+        height: 155px;
+        width: 178px;
+    }
+}
+@media(min-width:769px) and (max-width:1024px){
+    
+    .img2 {
+        height: 115px;
+        width: 126px;
+    }
+    .imghr{
+        height: 420px;
+    }
+
+    /* related mission */
+
+    .img-fluid {
+        height:200px;
+    }
+    .if {
+        height: 120px;
+    }
+}
+@media(min-width:426px) and (max-width:768px){
+
+    .img2 {
+        height: 160px;
+        width: 200px;
+    }    
+}
+@media(min-width:320px) and (max-width:425px){
+.row .btnlist {
+    margin-left: 0%;
+}
+
+    .img2 {
+        height: 160px;
+        width: 250px;
+    }
+}
+@media (min-width:376px) and ( max-width:425px){
+.row .btnlist {
+    margin-left: 0%;
+}
+
+
+.imgh{
+    height: 238.25px;
+    width: 376px;
+}
+.img2 {
+    height: 70px;
+    width: 100px;
+}
+
+}
+@media (min-width:321px) and ( max-width:375px){
+.row .btnlist {
+    margin-left: 0%;
+}
+
+
+.imgh{
+    height: 208.531px;
+    width: 327px;
+}
+.img2 {
+    height: 70px;
+    width: 100px;
+}
+
+}
+@media (max-width:320px) {
+
+.views{
+    font-size: 14px;
+}
+
+.imgh{
+    height: 175.859px;
+    width: 272px;
+}
+.img2 {
+    height: 70px;
+    width: 73px;
+}
+
+}

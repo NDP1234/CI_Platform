@@ -109,24 +109,22 @@ namespace CI_Platform.Repository.Repository
                 Title = title,
                 PublishedAt = publishedAt,
                 Description = description,
+                
             };
         }  
         public ShareMyStoryViewModel.ForSubmit SubmitStory(int userid,int missionid,string title, DateTime publishedAt, string description, string status)
         {
-           
-            CI_Platform.Entities.Models.Story storySave = new Story()
+            var isExistStory = _db.Stories.Where(s => s.UserId == userid && s.MissionId == missionid).FirstOrDefault();
+            if (isExistStory != null)
             {
-                UserId = userid,
-                MissionId = missionid,
-                Status = status,
-                Title = title,
-                PublishedAt = publishedAt,
-                Description = description,
-            };
+                isExistStory.Title = title;
+                isExistStory.Status = status;
+                isExistStory.PublishedAt = publishedAt;
+                isExistStory.CreatedAt = DateTime.UtcNow;
 
-            _db.Stories.Add(storySave);
-            _db.SaveChanges();
-
+                _db.Stories.Update(isExistStory);
+                _db.SaveChanges();
+            }
             return new ShareMyStoryViewModel.ForSubmit()
             {
                 UserId = userid,
@@ -136,8 +134,9 @@ namespace CI_Platform.Repository.Repository
                 PublishedAt = publishedAt,
                 Description = description,
             };
+            
         }
-        
+
     }
     }
 

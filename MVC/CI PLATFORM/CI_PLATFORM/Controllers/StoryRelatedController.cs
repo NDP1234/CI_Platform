@@ -68,7 +68,28 @@ namespace CI_PLATFORM.Controllers
             var submit = _listingRepository.SubmitStory(userid, missionid, title, publishedAt, description, status);
             return Ok();
         }
-        
+        [HttpGet]
+        [Route("isStoryExist", Name = "isStoryExist")]
+
+        public ShareMyStoryViewModel.ForSubmit isStoryExist(int userId, int missionId)
+        {
+            bool result = _db.Stories.Any(r => r.MissionId == missionId && r.UserId == userId && r.Status == "DRAFT");
+
+            ShareMyStoryViewModel.ForSubmit storystatus = new ShareMyStoryViewModel.ForSubmit()
+            {
+                isStoryExist = result,
+
+            };
+
+
+            return storystatus;
+
+        }
+
+        public IActionResult Story_detail_page()
+        {
+            return View();
+        }
 
     }
 }

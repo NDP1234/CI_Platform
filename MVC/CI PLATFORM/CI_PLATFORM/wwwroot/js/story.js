@@ -143,7 +143,9 @@ $("#submitBtn").on('click', function () {
 
         },
         success: function (data) {
+         
 
+            
             alert("data is successfully stored");
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -153,7 +155,38 @@ $("#submitBtn").on('click', function () {
     });
 });
 
+//For disable the submit button if story is not saved as draft in database 
 
 
- 
+    var missionSelect = document.getElementById("myInputSelect");
+    missionSelect.addEventListener("change", function () {
+        var userid = $("#myInputSelect").data('user-id');
+        var missionid = $("#myInputSelect").val();
 
+        $.ajax({
+            type: "GET",
+            url: "/isStoryExist",
+            data: {
+                missionId: missionid,
+                userId: userid,
+            },
+            success: function (data) {
+                if (data.isStoryExist) {
+                    
+                    console.log("Story exists in DRAFT status");
+                    $("#submitBtn").removeClass('btn-primary');
+                    $("#submitBtn").prop("disabled", false);
+                    $("#SaveBtn").prop("disabled", false);
+                } else {
+                    
+                    console.log("No story exists or story exists in PUBLISHED status");
+                    $("#submitBtn").addClass('btn-primary');
+                    $("#submitBtn").prop("disabled", true);
+                    $("#SaveBtn").prop("disabled", false);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('failed while storing: ' + textStatus + ', ' + errorThrown);
+            }
+        });
+    });

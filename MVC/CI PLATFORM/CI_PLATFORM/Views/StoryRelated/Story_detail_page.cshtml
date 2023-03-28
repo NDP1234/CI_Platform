@@ -1,0 +1,354 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+       Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story_detail_page </title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/sdp.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light d-none d-md-block">
+            <div class="container">
+                <button class="navbar-toggler bg-light " type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 mrg-start">
+
+                        <li class="nav-item ">
+                            <a class="nav-link text-dark" asp-action="Story_Listing_Page" asp-controller="StoryRelated">Stories</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Policy
+                            </a>
+                            <ul class="dropdown-menu ">
+                                <li><a class="dropdown-item " href="#">Policy-1</a></li>
+                                <li><a class="dropdown-item" href="#">Policy-2</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <form class="d-flex" role="search">
+
+                        <div class="dropdown">
+                            <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="/images/volunteer1.png" alt="" style="border-radius: 50%;" height="30px"
+                                    width="30px">
+                                <span>Nirav Patel</span>
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ////////////////////////////////// -->
+        <div class="first-nav d-md-none ">
+            <div id="mySidebar1" class="sidebar d-inline">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+                <a href="#">
+                    Stories
+                </a>
+
+                <a href="#">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Policy
+                        </a>
+                        <ul class="dropdown-menu ">
+                            <li><a class="dropdown-item " href="#">Policy-1</a></li>
+                            <li><a class="dropdown-item" href="#">Policy-2</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else </a></li>
+                        </ul>
+                    </li>
+                </a>
+            </div>
+            <div id="main1" class="d-flex justify-content-between m-2">
+                <button class="openbtn " onclick="openNav()">☰ </button>
+                <img src="/images/volunteer1.png" class="rounded-pill  " height="40px" width="40px" alt="">
+            </div>
+        </div>
+        <!-- //////////////////////////////// -->
+        <hr class="hr" />
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12 ">
+                    <div class="image">
+                        <img src="/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-2.png" class="imghr"
+                            width="100%" height="50%" id="id12" alt="">
+                        <img src="/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-2.png" class="imghr"
+                            width="100%" height="50%" id="id1" alt="">
+                        <img src="/images/img1.png" width="100%" height="50%" class="imghr" id="id2" alt="">
+                        <img src="/images/Grow-Trees-On-the-path-to-environment-sustainability-2.png" class="imghr"
+                            width="100%" height="50%" id="id3" alt="">
+                        <img src="/images/img11.png" width="100%" height="50%" class="imghr" alt="" id="id4">
+                        <img src="/images/img.png" width="100%" class="imgh" alt="" id="id5">
+                        <img src="/images/image2.png" width="100%" class="imgh" alt="" id="id6">
+                    </div>
+    
+                    <div class="container text-center p-0 ">
+                        <div class="row  justify-content-center">
+                            <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner" role="listbox">
+                                    <div class="carousel-item active">
+                                        <div class="col-md-3">
+                                            <div class="card">
+                                                <div class="card-img">
+                                                    <img src="/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-5.png"
+                                                        class="img-fluid img2 if" id="i1" onclick="show('id1')">
+                                                </div>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="col-md-3">
+                                            <div class="card">
+                                                <div class="card-img">
+                                                    <img src="/images/img3.png" class="img-fluid img2 if"
+                                                        onclick="show('id2')">
+                                                </div>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="col-md-3">
+                                            <div class="card">
+                                                <div class="card-img">
+                                                    <img src="/images/Grow-Trees-On-the-path-to-environment-sustainability-5.png"
+                                                        class="img-fluid img2 if" id="i2" onclick="show('id3')">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="col-md-3">
+                                            <div class="card">
+                                                <div class="card-img">
+                                                    <img src="/images/img33.png" class="img-fluid img2 if" id="i3"
+                                                        onclick="show('id4')">
+                                                </div>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="col-md-3">
+                                            <div class="card">
+                                                <div class="card-img">
+                                                    <img src="/images/img.png" class="img-fluid img2 if" id="i4"
+                                                        onclick="show('id5')">
+                                                </div>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="col-md-3">
+                                            <div class="card">
+                                                <div class="card-img">
+                                                    <img src="/images/image.png" class="img-fluid img2 if" id="i5"
+                                                        onclick="show('id6')">
+                                                </div>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel" role="button"
+                                    data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                </a>
+                                <a class="carousel-control-next bg-transparent w-aut" href="#recipeCarousel" role="button"
+                                    data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 ">
+                    <div class="d-flex  mb-3">
+                        <div class="p-2 ">
+                            <img src="/images/volunteer3.png" class="rounded-pill" alt="unable to load an image">
+                            <div>Charles Vigue</div> 
+                        </div>
+                        <div class="ms-auto  mt-auto p-2">
+                            <div class="rounded-pill border p-1 px-3">
+                                <img src="/images/eye.png" alt="">
+                                <span class="views" >12,000 Views</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="p-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </p>
+                        <p class="p-text">Ut enim ad minim veniam. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.
+                        </p>
+                        <p class="p-text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.
+                        </p> 
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7 mob-margin">
+                            <button class="rounded-pill px-2 pt-2 pb-2 bg-white w-100">
+                                <img src="/images/add1.png" alt="">
+                                <span >Recommanded To Co-Worker</span>
+                            </button>
+                        </div>
+                        <div class="col-md-5  mob-margin">
+                            <a class="btn btnlist pt-2 pb-2  text-center w-100" href="#">Open Mission <img src="/images/right-arrow.png"
+                                alt="unable to load an image">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5">
+                <h4>
+                    Grow Trees On the path to environment sustainability
+                </h4>
+                <hr class="hr" />
+                <P class="p-text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi provident ad laboriosam officiis voluptates sit rerum doloremque quis atque facere iure, recusandae pariatur voluptas vitae fugiat obcaecati consectetur sed minus.
+                </P>
+                <P class="p-text">
+                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis est facilis consectetur qui quasi, neque officiis? Rem, laudantium quaerat blanditiis saepe cum repellendus vitae beatae consectetur dolorum! Laboriosam, nesciunt magni.
+                </P>
+                <P class="p-text">
+                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit saepe totam inventore harum quod pariatur accusamus mollitia cum itaque expedita ullam incidunt rerum facere illum nihil deleniti, omnis laborum ad eos minus id sapiente vero exercitationem molestiae. Recusandae iure voluptas earum ipsa! Necessitatibus a accusamus debitis quas in assumenda labore.
+                </P>
+                <p class="p-text">
+                    We use these technologies for a number of purposes, such as:
+                </p>
+                <ul>
+                    <li>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain. </li>
+                    <li>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi.  </li>   
+                    <li> On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized </li>  
+                    <li>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain. </li>  
+                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore</li> 
+                </ul>
+                <P class="p-text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi provident ad laboriosam officiis voluptates sit rerum doloremque quis atque facere iure, recusandae pariatur voluptas vitae fugiat obcaecati consectetur sed minus.
+                </P>
+            </div>
+        </div>
+    </div>
+    <hr class="hr mt-5" />
+
+        <div class="container">
+        
+        <div class="privacy-policy mt-3 mb-3">
+            <a href="#" style="text-decoration:none;"> Privacy Policy</a>
+        </div>
+    </div>
+     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+        <script src="~/js/story.js"></script>
+    <script>
+
+        function openNav() {
+            document.getElementById("mySidebar1").style.width = "250px";
+            document.getElementById("main1").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar1").style.width = "0";
+            document.getElementById("main1").style.marginLeft = "0";
+        }
+        function openNav2() {
+            document.getElementById("mySidebar2").style.width = "250px";
+            document.getElementById("main2").style.marginLeft = "250px";
+        }
+
+        function closeNav2() {
+            document.getElementById("mySidebar2").style.width = "0";
+            document.getElementById("main2").style.marginLeft = "0";
+        }
+
+
+        function showView(viewName) {
+            $('.all-view').addClass('d-none')
+
+            if (viewName == 'grid') {
+                $('#products').removeClass("d-none")
+            }
+            else if (viewName == "list") {
+                $('#myListView').removeClass("d-none")
+            }
+        }
+
+        function show(image_id) {
+            console.log("run");
+
+            document.getElementById('id12')
+                .style.display = "none";
+            document.getElementById('id1')
+                .style.display = "none";
+            document.getElementById('id2')
+                .style.display = "none";
+            document.getElementById('id3')
+                .style.display = "none";
+            document.getElementById('id4')
+                .style.display = "none";
+            document.getElementById('id5')
+                .style.display = "none";
+            document.getElementById('id6')
+                .style.display = "none";
+            document.getElementById(image_id)
+                .style.display = "block";
+
+
+
+        }
+        let items = document.querySelectorAll('.carousel .carousel-item')
+
+        items.forEach((el) => {
+            const minPerSlide = 4
+            let next = el.nextElementSibling
+            for (var i = 1; i < minPerSlide; i++) {
+                if (!next) {
+                    next = items[0]
+                }
+                let cloneChild = next.cloneNode(true)
+                el.appendChild(cloneChild.children[0])
+                next = next.nextElementSibling
+            }
+        })
+
+
+    </script>
+
+</body>
+</html>
