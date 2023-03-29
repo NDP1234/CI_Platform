@@ -20,15 +20,15 @@
 </head>
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="~/css/story_listing_page.css">
-
+ <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
 <body>
 
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light d-none d-md-block">
             <div class="container">
                 <button class="navbar-toggler bg-light " type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -39,7 +39,7 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                               data-bs-toggle="dropdown" aria-expanded="false">
                                 Policy
                             </a>
                             <ul class="dropdown-menu ">
@@ -57,9 +57,9 @@
 
                         <div class="dropdown">
                             <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                               data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="@ViewBag.UserDetails.Avatar" alt="" style="border-radius: 50%;" height="30px"
-                                    width="30px">
+                                     width="30px">
                                 <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
                             </a>
 
@@ -85,7 +85,7 @@
                 <a href="#">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                           aria-expanded="false">
                             Policy
                         </a>
                         <ul class="dropdown-menu ">
@@ -105,291 +105,300 @@
             </div>
         </div>
         <!-- //////////////////////////////// -->
-@*        <div class="row mt-4 bdr container-fluid  ps-0 pe-0  mb-2 mx-auto " style="width: 95%;">
+        @*        <div class="row mt-4 bdr container-fluid  ps-0 pe-0  mb-2 mx-auto " style="width: 95%;">
             <div class="srchbar ">
-                <div class="input-group rounded bd d-none d-md-flex  ">
+            <div class="input-group rounded bd d-none d-md-flex  ">
 
-                    <div class="col-12 col-lg-6 col-md-6 be ">
-                        <div class="srch ">
+            <div class="col-12 col-lg-6 col-md-6 be ">
+            <div class="srch ">
 
-                            <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
+            <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
 
-                            <input type="search" class="form-control rounded d-inline srch "
-                                placeholder="Search mission..." aria-label="Search" aria-describedby="search-addon" />
-                        </div>
-                    </div>
+            <input type="search" class="form-control rounded d-inline srch "
+            placeholder="Search mission..." aria-label="Search" aria-describedby="search-addon" />
+            </div>
+            </div>
 
-                    <div class="col-12 col-lg-6 col-md-6 ">
-                        <div class="row  ">
-                            <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
-                                <a class="btn b-filter dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span>Country&nbsp; &nbsp;</span>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">Country-1</a></li>
-                                    <li><a class="dropdown-item" href="#">Country-2</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
-                                </ul>
-                            </div>
+            <div class="col-12 col-lg-6 col-md-6 ">
+            <div class="row  ">
+            <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
+            <a class="btn b-filter dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <span>Country&nbsp; &nbsp;</span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Country-1</a></li>
+            <li><a class="dropdown-item" href="#">Country-2</a></li>
+            <li><a class="dropdown-item" href="#">Something else </a></li>
+            </ul>
+            </div>
 
-                            <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
-                                <a class="btn b-filter dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span>City&nbsp; &nbsp;</span>
-                                </a>
-                                <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">City-1</a></li>
-                                    <li><a class="dropdown-item" href="#">City-2 </a></li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
-                                </ul>
-                            </div>
+            <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
+            <a class="btn b-filter dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <span>City&nbsp; &nbsp;</span>
+            </a>
+            <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" href="#">City-1</a></li>
+            <li><a class="dropdown-item" href="#">City-2 </a></li>
+            <li><a class="dropdown-item" href="#">Something else </a></li>
+            </ul>
+            </div>
 
-                            <div class="dropdown d-inline col-lg-3  col-md-3 col-6 be text-center">
-                                <a class="btn b-filter dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span>Theme &nbsp; &nbsp;</span>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">Theme-1</a></li>
-                                    <li><a class="dropdown-item" href="#">Theme-2 </a></li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
-                                </ul>
-                            </div>
+            <div class="dropdown d-inline col-lg-3  col-md-3 col-6 be text-center">
+            <a class="btn b-filter dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <span>Theme &nbsp; &nbsp;</span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Theme-1</a></li>
+            <li><a class="dropdown-item" href="#">Theme-2 </a></li>
+            <li><a class="dropdown-item" href="#">Something else </a></li>
+            </ul>
+            </div>
 
-                            <div class="dropdown d-inline col-lg-3 col-md-3 col-6 text-center">
-                                <a class="btn b-filter dropdown-toggle p-0 " href="#" role="button"
-                                    id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span>Skills &nbsp; &nbsp;</span>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">Skill-1</a></li>
-                                    <li><a class="dropdown-item" href="#">Skills-2</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="dropdown d-inline col-lg-3 col-md-3 col-6 text-center">
+            <a class="btn b-filter dropdown-toggle p-0 " href="#" role="button"
+            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <span>Skills &nbsp; &nbsp;</span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Skill-1</a></li>
+            <li><a class="dropdown-item" href="#">Skills-2</a></li>
+            <li><a class="dropdown-item" href="#">Something else </a></li>
+            </ul>
+            </div>
+            </div>
+            </div>
+            </div>
             </div>
             <!-- ///////////////////// -->
             <div class="second-nav 	d-md-none w-100">
-                <div class="mob-sidebar mx-auto">
-                    <div id="mySidebar2" class="sidebar d-inline">
-                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">×</a>
-                        <a href="#">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Country
-                                </a>
-                                <ul class="dropdown-menu ">
-                                    <li><a class="dropdown-item " href="#">Country-1</a></li>
-                                    <li><a class="dropdown-item" href="#">Country-2</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
-                                </ul>
-                            </li>
-                        </a>
-                        <a href="#">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    City
-                                </a>
-                                <ul class="dropdown-menu ">
-                                    <li><a class="dropdown-item " href="#">City-1</a></li>
-                                    <li><a class="dropdown-item" href="#">City-2</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
-                                </ul>
-                            </li>
-                        </a>
-                        <a href="#">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Theme
-                                </a>
-                                <ul class="dropdown-menu ">
-                                    <li><a class="dropdown-item " href="#">Theme-1</a></li>
-                                    <li><a class="dropdown-item" href="#">Theme-2</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
-                                </ul>
-                            </li>
-                        </a>
-                        <a href="#">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Skills
-                                </a>
-                                <ul class="dropdown-menu ">
-                                    <li><a class="dropdown-item " href="#">Skills-1</a></li>
-                                    <li><a class="dropdown-item" href="#">Skills-2</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
-                                </ul>
-                            </li>
-                        </a>
-                    </div>
+            <div class="mob-sidebar mx-auto">
+            <div id="mySidebar2" class="sidebar d-inline">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">×</a>
+            <a href="#">
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Country
+            </a>
+            <ul class="dropdown-menu ">
+            <li><a class="dropdown-item " href="#">Country-1</a></li>
+            <li><a class="dropdown-item" href="#">Country-2</a></li>
+            <li>
+            <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Something else </a></li>
+            </ul>
+            </li>
+            </a>
+            <a href="#">
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            City
+            </a>
+            <ul class="dropdown-menu ">
+            <li><a class="dropdown-item " href="#">City-1</a></li>
+            <li><a class="dropdown-item" href="#">City-2</a></li>
+            <li>
+            <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Something else </a></li>
+            </ul>
+            </li>
+            </a>
+            <a href="#">
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Theme
+            </a>
+            <ul class="dropdown-menu ">
+            <li><a class="dropdown-item " href="#">Theme-1</a></li>
+            <li><a class="dropdown-item" href="#">Theme-2</a></li>
+            <li>
+            <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Something else </a></li>
+            </ul>
+            </li>
+            </a>
+            <a href="#">
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Skills
+            </a>
+            <ul class="dropdown-menu ">
+            <li><a class="dropdown-item " href="#">Skills-1</a></li>
+            <li><a class="dropdown-item" href="#">Skills-2</a></li>
+            <li>
+            <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Something else </a></li>
+            </ul>
+            </li>
+            </a>
+            </div>
 
-                    <div id="main2" class="d-flex justify-content-end m-2 w-100 ">
-                        <input type="search" class="form-control rounded d-inline srch " placeholder="Search mission..."
-                            aria-label="Search" aria-describedby="search-addon" />
+            <div id="main2" class="d-flex justify-content-end m-2 w-100 ">
+            <input type="search" class="form-control rounded d-inline srch " placeholder="Search mission..."
+            aria-label="Search" aria-describedby="search-addon" />
 
-                        <button class="openbtn bg-light" onclick="openNav2()"><img src="~/images/filter.png" alt="">
-                        </button>
+            <button class="openbtn bg-light" onclick="openNav2()"><img src="~/images/filter.png" alt="">
+            </button>
 
-                    </div>
-                </div>
+            </div>
+            </div>
             </div>
             <!-- ///////////////// -->
 
-        </div>*@
+            </div>*@
 
     </div>
 
     <!-- chips -->
-@*    <div class="container mb-3">
+    @*    <div class="container mb-3">
         <div class="all-filters d-flex align-items-center flex-wrap mt-4 mgl ">
-            <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1 flex-nowrap">
-                <p class="filter">Tree Plantation</p>
-                <i class="bi bi-x"></i>
-            </div>
-            <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
-                <p class="filter">Canada</p>
-                <i class="bi bi-x"></i>
-            </div>
-            <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
-                <p class="filter">Toronto</p>
-                <i class="bi bi-x"></i>
-            </div>
-            <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
-                <p class="filter">Montreal</p>
-                <i class="bi bi-x"></i>
-            </div>
-            <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
-                <p class="filter">Environment</p>
-                <i class="bi bi-x"></i>
-            </div>
-            <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
-                <p class="filter">Nuitrition</p>
-                <i class="bi bi-x"></i>
-            </div>
+        <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1 flex-nowrap">
+        <p class="filter">Tree Plantation</p>
+        <i class="bi bi-x"></i>
         </div>
-    </div>*@
- 
-@*    <div id="stories-container" class="row view-group all-view">
-        <!-- Stories will be dynamically added here -->
-    </div>*@
-</div>
-        <div class="row container my-2  w-100 mx-auto">
-            <div class="col-12 w-100 ">
-              <div class="srch ">
+        <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
+        <p class="filter">Canada</p>
+        <i class="bi bi-x"></i>
+        </div>
+        <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
+        <p class="filter">Toronto</p>
+        <i class="bi bi-x"></i>
+        </div>
+        <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
+        <p class="filter">Montreal</p>
+        <i class="bi bi-x"></i>
+        </div>
+        <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
+        <p class="filter">Environment</p>
+        <i class="bi bi-x"></i>
+        </div>
+        <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
+        <p class="filter">Nuitrition</p>
+        <i class="bi bi-x"></i>
+        </div>
+        </div>
+        </div>*@
 
-                   <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
- 
-                   <form id="search-form" method="get" class="d-inline">
-                         <input type="search" class="form-control rounded d-inline srch" id="search-input" name="query" placeholder="Search stories..." aria-label="Search" aria-describedby="search-addon" >
-                   </form>
-              </div>
+    @*    <div id="stories-container" class="row view-group all-view">
+        <!-- Stories will be dynamically added here -->
+        </div>*@
+    </div>
+    <div class="row container my-2  w-100 mx-auto">
+        <div class="col-12 w-100 ">
+            <div class="srch ">
+
+                <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
+
+                <form id="search-form" method="get" class="d-inline">
+                    <input type="search" class="form-control rounded d-inline srch" id="search-input" name="query" placeholder="Search stories..." aria-label="Search" aria-describedby="search-addon">
+                </form>
             </div>
         </div>
-        
+    </div>
+
     <!-- large-image -->
     <div class="img-large text-center d-flex">
         <div class="detail ">
-            <p class="w-50 mx-auto text-light ">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex accusantium commodi porro excepturi tempore libero animi velit enim assumenda, consectetur sint debitis culpa adipisci officiis consequatur.</p> 
+            <p class="w-50 mx-auto text-light ">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex accusantium commodi porro excepturi tempore libero animi velit enim assumenda, consectetur sint debitis culpa adipisci officiis consequatur.</p>
             <a type="button" class="btn btn-light sys-btn" asp-controller="StoryRelated" asp-action="Share_Your_Story_Page"><span>Share your story &nbsp; &nbsp;</span><img src="~/images/right-arrow.png" class="ra" alt=""></a>
         </div>
-    
+
     </div>
 
 
     <!-- Story-listing -->
     <div class="container mt-5" id="stories-container">
-        
+
         <div id="products" class="row view-group all-view">
             <!-- 1a -->
-            @foreach(var item in Model.Stories)
+            @foreach (var item in Model.Stories)
             {
-              <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event position-relative">
+                <div class="item col-xs-4 col-lg-4">
+                    <div class="thumbnail card">
+                        <div class="img-event position-relative">
 
                             <img class="group list-group-image img-fluid w-100 imghv"
-                            src="@item.StoryMedia.FirstOrDefault(m=> m.StoryId == @item.StoryId).Path" alt="" />
-                        <div class="bottom-center justify-content-center missiontheme">
+                             src="@item.StoryMedia.FirstOrDefault(m=> m.StoryId == @item.StoryId).Path" alt="" />
+                            <div class="bottom-center justify-content-center missiontheme">
 
-                            @item.Mission.Theme.Title
-                          
-                        </div>
-                        <div class="middle">
-                            <div class="text">
-                                <a type="button" class="btn btn-light vd-btn" asp-action="Story_detail_page" asp-controller="StoryRelated"> <span>View Details &nbsp;</span> <img class="ra" src="~/images/right-arrow.png" alt=""></a>
+                                @item.Mission.Theme.Title
+
+                            </div>
+                            <div class="middle">
+                                <div class="text">
+                                    <a type="button" class="btn btn-light vd-btn" asp-action="Story_detail_page" asp-controller="StoryRelated"> <span>View Details &nbsp;</span> <img class="ra" src="~/images/right-arrow.png" alt=""></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                         @item.Title   </h4>
-                        <p class="group inner list-group-item-text">
-                           @item.Description</p>
-                        <div class="profile-name">
-                            <img src="@item.User.Avatar" class="rounded-pill prof-img" alt="">
-                            <span>@item.User.FirstName @item.User.LastName </span>
+                        <div class="caption card-body">
+                            <h4 class="group card-title inner list-group-item-heading">
+                                @item.Title
+                            </h4>
+                            <p class="group inner list-group-item-text">
+                                @item.Description
+                            </p>
+                            <div class="row">
+                                <div class="profile-name ">
+                                    <img src="@item.User.Avatar" class="rounded-pill prof-img" alt="">
+                                    <span>@item.User.FirstName @item.User.LastName </span>
+                                </div>
+                                
+                            </div>
+
                         </div>
                     </div>
                 </div>
-            </div> 
 
 
 
             }
-            
 
         </div>
+
+           
     </div>
 
     <!-- Pagenation  -->
     @*<nav aria-label="Page navigation example justify-content-center">
         <ul class="pagination mt-3">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span class="sr-only">Next</span>
-                    <span aria-hidden="true">&raquo;</span>
+        <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+        </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+        <span class="sr-only">Next</span>
+        <span aria-hidden="true">&raquo;</span>
 
-                </a>
-            </li>
+        </a>
+        </li>
         </ul>
-    </nav>*@
-     <div class="content mt-5 text-center hidden" id="NoMissionFound">
-            <div class="head w-100 text-center">
-                <h5>No Story found</h5>
-            </div>
-            <a class="btn btnlist  mt-3 " asp-action="Story_Listing_Page" asp-controller="StoryRelated">Go to Homepage <img src="~/images/right-arrow.png"
-                    alt=""></a>
+        </nav>*@
+    <div class="content mt-5 text-center hidden" id="NoMissionFound">
+        <div class="head w-100 text-center">
+            <h5>No Story found</h5>
+        </div>
+        <a class="btn btnlist  mt-3 " asp-action="Story_Listing_Page" asp-controller="StoryRelated">
+            Go to Homepage <img src="~/images/right-arrow.png"
+                                alt="">
+        </a>
 
-     </div>
+    </div>
     <!-- Footer (Privacy Policy) -->
     <div class="container">
 
@@ -398,9 +407,10 @@
             <a href="#"> Privacy Policy</a>
         </div>
     </div>
-     <script src="~/js/story_listing.js"></script>
+    <script src="https://cdn.ckeditor.com/4.21.0/basic/ckeditor.js"></script>
+    <script src="~/js/story_listing.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <script>
         function openNav() {
             document.getElementById("mySidebar1").style.width = "250px";
@@ -432,6 +442,11 @@
                 $('#myListView').removeClass("d-none")
             }
         }
+        CKEDITOR.replace('editor1', {
+      height: 200,
+      baseFloatZIndex: 10005,
+      removeButtons: 'PasteFromWord,Cut,Copy,Paste,PasteText,Undo,Redo,Link,Unlink,Scayt,HorizontalRule,SpecialChar,NumberedList,BulletedList,Outdent,Indent,Blockquote,Anchor,Image,Table,Maximize,Source'
+    });
     </script>
 
 </body>

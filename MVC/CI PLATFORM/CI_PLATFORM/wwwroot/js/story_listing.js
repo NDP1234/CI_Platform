@@ -3,7 +3,7 @@ let totalStories = document.getElementsByClassName("item");
 
 let searchbar = document.getElementById("search-input");
 
-/*let searchsmall = document.getElementById("search_small");*/
+
 
 
 
@@ -14,13 +14,13 @@ let notfound = document.getElementById("NoMissionFound");
 let storydata = document.getElementById("mission-list");
 
 searchbar.addEventListener("input", search_mission);
-//searchsmall.addEventListener("input", search_mission);
+
 
 
 
 function search_mission() {
     let count = 0;
-    let input = searchbar.value/* || searchsmall.value;*/
+    let input = searchbar.value;
     input = input.toLowerCase();
 
     for (i = 0; i < totalStories.length; i++) {
@@ -46,11 +46,11 @@ function search_mission() {
 
     if (count == totalStories.length) {
         notfound.classList.remove('hidden');
-        storydata.classList.add('hidden');
+       
     }
     else {
         notfound.classList.add('hidden');
-        storydata.classList.remove('hidden');
+   
 
     }
 

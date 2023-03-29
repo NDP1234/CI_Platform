@@ -652,7 +652,7 @@ $('.myfavbtn2').on('click', function() {
     var favBtn = this;
     var missionId = $(favBtn).data('mission-id');
     var userId = $(favBtn).data('user-id');
-  /*  const heartIcon = document.querySelector('.bi-heart');*/
+
     var isFavorite = $(favBtn).find("i")[0].classList.contains('filled-heart');
     console.log(missionId);
     console.log(userId);
@@ -666,11 +666,11 @@ $('.myfavbtn2').on('click', function() {
                 console.log("successfully added to favorite")
                 if (isFavorite) {
                     $(favBtn).find("i").removeClass("filled-heart");
-                 /*   $("#spanforfav2").text("Add To favourite");*/
+                 
                 }
                 else {
                     $(favBtn).find("i").addClass("filled-heart");
-                    //$("#spanforfav2").text("Remove from favourite");
+                   
                 }
             }
         },

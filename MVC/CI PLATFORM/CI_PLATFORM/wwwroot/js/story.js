@@ -15,7 +15,7 @@ fileInput.addEventListener('change', function (event) {
         if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
             const newImage = document.createElement(file.type.startsWith('image/') ? 'img' : 'video');
             newImage.src = URL.createObjectURL(file);
-            newImage.controls = true; // show controls for video element
+            newImage.controls = true; 
 
             // Convert the file to base64 and add it to the selectedImagesBase64 array
             const reader = new FileReader();
@@ -190,3 +190,68 @@ $("#submitBtn").on('click', function () {
             }
         });
     });
+
+
+//for getting data if draft is exist or not
+$(document).ready(function () {
+    $('#myInputSelect').change(function () {
+        var userId = $(this).data('user-id');
+        var missionId = $(this).val();
+        $.ajax({
+            url: '/StoryRelated/GetStoryDraft',
+            type: 'GET',
+            data: { userId: userId, missionId: missionId },
+            success: function (data) {
+                // handle the returned data here
+                if (data.length > 0) {
+                    console.log(data);
+
+                    CKEDITOR.instances.editor1.editable().setText(data[0].description);
+                    $("#storyTitle").val(data[0].title);
+                    /*$("#myStoryDate").val(data[0].publishedAt);*/
+                    var publishedDate = data[0].publishedAt;
+                    var yyyymmdd = formatedate(publishedDate);
+                    $("#myStoryDate").val(yyyymmdd);
+                    var paths = data[0].paths;
+                    var imagesHtml = '';
+                    for (var i = 0; i < paths.length; i++) {
+                        imagesHtml += '<img class="selectedImageItem" src="' + paths[i] + '" />';
+                        
+                    }
+                    $(".selectedImage").html(imagesHtml);
+                    
+                }
+                else {
+                    CKEDITOR.instances.editor1.editable().setText('');
+                    $("#storyTitle").val('');
+                    $("#myStoryDate").val('');
+                    $(".selectedImage").html('');
+                    //alert('there  is no any drfts is stored with this storyid and userid so you can save draft at now');
+                }
+                
+                
+
+            },
+            error: function () {
+               
+                alert('there  is no any drfts is stored with this storyid and userid so you can save draft at now');
+                
+            }
+            
+        });
+    });
+});
+
+/*function that converts datetime to yyyy-mm-dd format*/
+function formatedate(datetime){
+    const inputDateStr = datetime;
+    const date = new Date(inputDateStr);
+
+    const day = date.getDate();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
+    const year = date.getFullYear();
+    const outputDateStr = `${year}-${month}-${day}`;
+    console.log(outputDateStr); 
+    return outputDateStr;
+
+}

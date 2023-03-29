@@ -1,9 +1,8 @@
-﻿
-@*
+﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-     Layout = null;
+    Layout = null;
 }
 @using CI_Platform.Entities.Models
 
@@ -28,8 +27,8 @@
         <nav class="navbar navbar-expand-lg navbar-light d-none d-md-block">
             <div class="container">
                 <button class="navbar-toggler bg-light " type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -40,7 +39,7 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                               data-bs-toggle="dropdown" aria-expanded="false">
                                 Policy
                             </a>
                             <ul class="dropdown-menu ">
@@ -58,9 +57,9 @@
 
                         <div class="dropdown">
                             <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                               data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="@ViewBag.UserDetails.Avatar" alt="" style="border-radius: 50%;" height="30px"
-                                    width="30px">
+                                     width="30px">
                                 <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
                             </a>
 
@@ -86,7 +85,7 @@
                 <a href="#">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                           aria-expanded="false">
                             Policy
                         </a>
                         <ul class="dropdown-menu ">
@@ -117,14 +116,15 @@
         <div class="row">
             <div class="col col-lg-4 col-md-6 col-12 padforcol">
                 <label for="myInputSelect" class="form-label">Select Mission</label>
+                
                 <select class="form-select myMissionTitles" id="myInputSelect" aria-label="Select your mission" data-user-id="@ViewBag.UserDetails.UserId">
                     <option selected value="-1">Select your mission</option>
-                    @foreach (Mission  item in Model)
+                    @foreach (Mission item in Model)
                     {
-                        <option value="@item.MissionId">@item.Title</option>
+                        <option value="@item.MissionId" data-user-id="@ViewBag.UserDetails.UserId">@item.Title</option>
                     }
-
                 </select>
+
             </div>
             <div class="col col-lg-4 col-md-6 col-12 padforcol">
                 <label for="storyTitle" class="form-label">My Story Title</label>
@@ -152,20 +152,19 @@
             <div class="col">
                 <div id="dragAndDrop" class="border text-center">
                     <label for="fileInput">
-                      <img class="mx-auto d-block my-3" src="~/Images/drag-and-drop.png" alt="unable to load">
+                        <img class="mx-auto d-block my-3" src="~/Images/drag-and-drop.png" alt="unable to load">
                     </label>
                     <input type="file" multiple id="fileInput" style="display: none;">
                 </div>
                 <div class="selectedImage">
-                    
                 </div>
-            </div> 
+            </div>
         </div>
-        
+
         <div class="row mt-3">
             <div class="col">
                 <a class="btn btn-danger cancelBtn float-start" asp-action="Story_Listing_Page" asp-controller="StoryRelated" type="button">Cancel</a>
-                <button class="btn btn-primary SaveOrSubmitBtn float-end mx-2"  id="submitBtn" type="button">Submit</button>
+                <button class="btn btn-primary SaveOrSubmitBtn float-end mx-2" id="submitBtn" type="button">Submit</button>
                 <button class="btn btn-success SaveOrSubmitBtn float-end " id="SaveBtn"> Save</button>
             </div>
         </div>
@@ -173,13 +172,13 @@
 
     <hr class="hr mt-5" />
 
-        <div class="container">
-        
+    <div class="container">
+
         <div class="privacy-policy mt-3 mb-3">
             <a href="#" style="text-decoration:none;"> Privacy Policy</a>
         </div>
     </div>
-    
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.ckeditor.com/4.21.0/basic/ckeditor.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -187,43 +186,43 @@
     <script src="~/js/story.js"></script>
 
     <script>
-      
-//for displaying header in mobile view
-// -----------------------------------------------------------------------------------------------------------------
-        function openNav() {
-            document.getElementById("mySidebar1").style.width = "250px";
-            document.getElementById("main1").style.marginLeft = "250px";
-        }
 
-        function closeNav() {
-            document.getElementById("mySidebar1").style.width = "0";
-            document.getElementById("main1").style.marginLeft = "0";
-        }
-        function openNav2() {
-            document.getElementById("mySidebar2").style.width = "250px";
-            document.getElementById("main2").style.marginLeft = "250px";
-        }
+        //for displaying header in mobile view
+        // -----------------------------------------------------------------------------------------------------------------
+                function openNav() {
+                    document.getElementById("mySidebar1").style.width = "250px";
+                    document.getElementById("main1").style.marginLeft = "250px";
+                }
 
-        function closeNav2() {
-            document.getElementById("mySidebar2").style.width = "0";
-            document.getElementById("main2").style.marginLeft = "0";
-        }
-// -----------------------------------------------------------------------------------------------------------------
+                function closeNav() {
+                    document.getElementById("mySidebar1").style.width = "0";
+                    document.getElementById("main1").style.marginLeft = "0";
+                }
+                function openNav2() {
+                    document.getElementById("mySidebar2").style.width = "250px";
+                    document.getElementById("main2").style.marginLeft = "250px";
+                }
 
-   
+                function closeNav2() {
+                    document.getElementById("mySidebar2").style.width = "0";
+                    document.getElementById("main2").style.marginLeft = "0";
+                }
+        // -----------------------------------------------------------------------------------------------------------------
 
 
-// -----------------------------------------------------------------------------------------------------------------
 
-// for ckeditor
-// -----------------------------------------------------------------------------------------------------------------
-CKEDITOR.replace('editor1', {
-      height: 200,
-      baseFloatZIndex: 10005,
-      removeButtons: 'PasteFromWord,Cut,Copy,Paste,PasteText,Undo,Redo,Link,Unlink,Scayt,HorizontalRule,SpecialChar,NumberedList,BulletedList,Outdent,Indent,Blockquote,Anchor,Image,Table,Maximize,Source'
-    });
 
-// -----------------------------------------------------------------------------------------------------------------
+        // -----------------------------------------------------------------------------------------------------------------
+
+        // for ckeditor
+        // -----------------------------------------------------------------------------------------------------------------
+        CKEDITOR.replace('editor1', {
+              height: 200,
+              baseFloatZIndex: 10005,
+              removeButtons: 'PasteFromWord,Cut,Copy,Paste,PasteText,Undo,Redo,Link,Unlink,Scayt,HorizontalRule,SpecialChar,NumberedList,BulletedList,Outdent,Indent,Blockquote,Anchor,Image,Table,Maximize,Source'
+            });
+
+        // -----------------------------------------------------------------------------------------------------------------
 
     </script>
 </body>

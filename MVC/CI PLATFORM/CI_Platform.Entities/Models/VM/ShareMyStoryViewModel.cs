@@ -26,6 +26,8 @@ namespace CI_Platform.Entities.Models.VM
             public DateTime PublishedAt { get; set; }
 
             public DateTime CreatedAt { get; set; }
+
+            public List<string> paths { get; set; }
         }
 
         public class ForSubmit
