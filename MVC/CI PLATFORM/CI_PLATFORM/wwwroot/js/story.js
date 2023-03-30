@@ -74,8 +74,10 @@ $("#SaveBtn").on('click', function () {
     var publisheddate = $("#myStoryDate").val();
     var status = "DRAFT";
     var description = CKEDITOR.instances.editor1.editable().getText();
-    var pathlist = selectedImagesBase64;
 
+    var pathlist = selectedImagesBase64;
+    
+    console.log(pathlist)
     console.log("User ID:", userid);
     console.log("Mission ID:", missionid);
     console.log("Story Title:", storytitle);
@@ -144,8 +146,6 @@ $("#submitBtn").on('click', function () {
         },
         success: function (data) {
          
-
-            
             alert("data is successfully stored");
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -155,42 +155,41 @@ $("#submitBtn").on('click', function () {
     });
 });
 
-//For disable the submit button if story is not saved as draft in database 
+//for appear or disappear perticular buttons
+var missionSelect = document.getElementById("myInputSelect");
+missionSelect.addEventListener("change", function () {
+    var userid = $("#myInputSelect").data('user-id');
+    var missionid = $("#myInputSelect").val();
 
-
-    var missionSelect = document.getElementById("myInputSelect");
-    missionSelect.addEventListener("change", function () {
-        var userid = $("#myInputSelect").data('user-id');
-        var missionid = $("#myInputSelect").val();
-
-        $.ajax({
-            type: "GET",
-            url: "/isStoryExist",
-            data: {
-                missionId: missionid,
-                userId: userid,
-            },
-            success: function (data) {
-                if (data.isStoryExist) {
-                    
-                    console.log("Story exists in DRAFT status");
-                    $("#submitBtn").removeClass('btn-primary');
-                    $("#submitBtn").prop("disabled", false);
-                    $("#SaveBtn").prop("disabled", false);
-                } else {
-                    
-                    console.log("No story exists or story exists in PUBLISHED status");
-                    $("#submitBtn").addClass('btn-primary');
-                    $("#submitBtn").prop("disabled", true);
-                    $("#SaveBtn").prop("disabled", false);
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log('failed while storing: ' + textStatus + ', ' + errorThrown);
+    $.ajax({
+        type: "GET",
+        url: "/StoryRelated/isStoryExist",
+        data: {
+            missionId: missionid,
+            userId: userid,
+        },
+        success: function (data) {
+            console.log(data);
+            if (data.status == "DRAFT") {
+                $("#submitBtn").prop("disabled", false);
+                $("#SaveBtn").prop("disabled", false);
             }
-        });
+            else if (data.status == "PUBLISHED") {
+                $("#submitBtn").prop("disabled", true);
+                $("#SaveBtn").prop("disabled", true);
+            }
+            else {
+                $("#submitBtn").prop("disabled", true);
+                $("#SaveBtn").prop("disabled", false);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('failed while storing: ' + textStatus + ', ' + errorThrown);
+            $("#submitBtn").prop("disabled", true);
+            $("#SaveBtn").prop("disabled", false);
+        }
     });
-
+});
 
 //for getting data if draft is exist or not
 $(document).ready(function () {
@@ -228,8 +227,6 @@ $(document).ready(function () {
                     $(".selectedImage").html('');
                     //alert('there  is no any drfts is stored with this storyid and userid so you can save draft at now');
                 }
-                
-                
 
             },
             error: function () {
@@ -255,3 +252,25 @@ function formatedate(datetime){
     return outputDateStr;
 
 }
+console.log("jdfdsjf")
+//for recommended to co-worker functionality
+$("#RecommandationBtn").on('click', function () {
+    cosole.log("click");
+    var udetails = $(this).attr('value');
+    var arr = udetails.split(" ");
+    var Recommanded = {
+        SId: arr[0],
+        FromUid: arr[1],
+        Uid: arr[2],
+        Uemail: arr[3]
+    };
+    console.log(Recommanded);
+    var url = "/StoryRelated/RecommandToCoWorker?Recommanded=" + JSON.stringify(Recommanded);
+
+    $.ajax({
+        url: url,
+        success: function (data) {
+            window.location.reload();
+        },
+    });
+})

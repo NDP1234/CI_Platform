@@ -1,9 +1,12 @@
-﻿@*
+﻿@using CI_Platform.Entities.Models.VM
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
        Layout = null;
 }
+@model StoryDetailViewModel;
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,9 +53,9 @@
                         <div class="dropdown">
                             <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="/images/volunteer1.png" alt="" style="border-radius: 50%;" height="30px"
+                                <img src="@ViewBag.UserDetails.Avatar" alt="" style="border-radius: 50%;" height="30px"
                                     width="30px">
-                                <span>Nirav Patel</span>
+                                <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -199,34 +202,35 @@
                 <div class="col-lg-6 col-md-12 col-sm-12 ">
                     <div class="d-flex  mb-3">
                         <div class="p-2 ">
-                            <img src="/images/volunteer3.png" class="rounded-pill" alt="unable to load an image">
-                            <div>Charles Vigue</div> 
+                            <img src="@Model.Avatar" class="rounded-pill" alt="unable to load an image">
+                            <div>@Model.FirstName @Model.LastName</div> 
                         </div>
                         <div class="ms-auto  mt-auto p-2">
                             <div class="rounded-pill border p-1 px-3">
                                 <img src="/images/eye.png" alt="">
-                                <span class="views" >12,000 Views</span>
+                                <span class="views" >@Model.Views Views</span>
                             </div>
                         </div>
                     </div>
                     <div>
                         <p class="p-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            @*Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.*@
+                            @Model.WhyIVolunteer                        
                         </p>
-                        <p class="p-text">Ut enim ad minim veniam. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.
+                        @*<p class="p-text">Ut enim ad minim veniam. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.
                         </p>
                         <p class="p-text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.
-                        </p> 
+                        </p> *@
                     </div>
                     <div class="row">
                         <div class="col-md-7 mob-margin">
-                            <button class="rounded-pill px-2 pt-2 pb-2 bg-white w-100">
+                            <button class="rounded-pill px-2 pt-2 pb-2 bg-white w-100" data-bs-toggle="modal" data-bs-target="#RecommendModel" type="button">
                                 <img src="/images/add1.png" alt="">
                                 <span >Recommanded To Co-Worker</span>
                             </button>
                         </div>
                         <div class="col-md-5  mob-margin">
-                            <a class="btn btnlist pt-2 pb-2  text-center w-100" href="#">Open Mission <img src="/images/right-arrow.png"
+                            <a class="btn btnlist pt-2 pb-2  text-center w-100" asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id ="@Model.MissionId">Open Mission <img src="/images/right-arrow.png"
                                 alt="unable to load an image">
                             </a>
                         </div>
@@ -235,16 +239,19 @@
             </div>
             <div class="mt-5">
                 <h4>
-                    Grow Trees On the path to environment sustainability
+                    @*Grow Trees On the path to environment sustainability*@
+                    @Model.Title
                 </h4>
                 <hr class="hr" />
                 <P class="p-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi provident ad laboriosam officiis voluptates sit rerum doloremque quis atque facere iure, recusandae pariatur voluptas vitae fugiat obcaecati consectetur sed minus.
-                </P>
+                   @* Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi provident ad laboriosam officiis voluptates sit rerum doloremque quis atque facere iure, recusandae pariatur voluptas vitae fugiat obcaecati consectetur sed minus.*@
+                    @Model.Description 
+               </P>
                 <P class="p-text">
-                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis est facilis consectetur qui quasi, neque officiis? Rem, laudantium quaerat blanditiis saepe cum repellendus vitae beatae consectetur dolorum! Laboriosam, nesciunt magni.
-                </P>
-                <P class="p-text">
+                   @*Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis est facilis consectetur qui quasi, neque officiis? Rem, laudantium quaerat blanditiis saepe cum repellendus vitae beatae consectetur dolorum! Laboriosam, nesciunt magni.*@
+                     @Model.Description 
+               </P>
+                @*<P class="p-text">
                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit saepe totam inventore harum quod pariatur accusamus mollitia cum itaque expedita ullam incidunt rerum facere illum nihil deleniti, omnis laborum ad eos minus id sapiente vero exercitationem molestiae. Recusandae iure voluptas earum ipsa! Necessitatibus a accusamus debitis quas in assumenda labore.
                 </P>
                 <p class="p-text">
@@ -259,9 +266,39 @@
                 </ul>
                 <P class="p-text">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi provident ad laboriosam officiis voluptates sit rerum doloremque quis atque facere iure, recusandae pariatur voluptas vitae fugiat obcaecati consectetur sed minus.
-                </P>
+                </P>*@
             </div>
         </div>
+                @*Modal for Recommand to co-worker*@
+                    <div class="modal fade" id="RecommendModel" tabindex="-1" aria-hidden="true" aria-labelledby="exampleModalLabel">
+                      <div class="modal-dialog modal-dialog-centered" >
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title" id="exampleModalLabel">Select coworkers for recommendation </h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                          </div>
+                          <div class="modal-body">
+                              @foreach (var coworker in Model.Users)
+                              {
+                                @*<li>@coworker.FirstName @coworker.LastName <button class="btn btn-primary" onclick="recommendToCoworker('@coworker.UserId')">Send</button></li>*@
+                                <div  class="d-flex flex-row justify-content-between border-bottom mt-1 py-1">
+                                     <div class="d-flex flex-row gap-2">
+                                        <img src="~/Images/volunteer1.png" class="rounded-circle" width="40px" height="40px"/>
+                                        <span>@coworker.FirstName @coworker.LastName </span>
+                                    </div>
+                                     <div id="RecommandationBtn">
+                                         <button type="button"  class="btn btn-primary" id="@coworker.UserId" value="@Model.StoryId @ViewBag.UserDetails.UserId @coworker.UserId @coworker.Email">
+                                             <img src="~/Images/user.png" class="rounded-circle" width="35px" height="35px"/>Recommanded</button>
+                                    </div>
+                                </div>
+                              }
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
     </div>
     <hr class="hr mt-5" />
 
@@ -346,7 +383,26 @@
                 next = next.nextElementSibling
             }
         })
+        $("#RecommandationBtn button").on('click', function () {
+    console.log("click");
+    var udetails = $(this).attr('value');
+    var arr = udetails.split(" ");
+    var Recommanded = {
+        SId: arr[0],
+        FromUid: arr[1],
+        Uid: arr[2],
+        Uemail: arr[3]
+    };
+    console.log(Recommanded);
+    var url = "/StoryRelated/RecommandToCoWorker?Recommanded=" + JSON.stringify(Recommanded);
 
+    $.ajax({
+        url: url,
+        success: function (data) {
+            window.location.reload();
+        },
+    });
+})
 
     </script>
 

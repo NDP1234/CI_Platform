@@ -702,7 +702,7 @@ public partial class CiPlatformContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("published_at");
             entity.Property(e => e.Status)
-                .HasMaxLength(8)
+                .HasMaxLength(16)
                 .IsUnicode(false)
                 .HasDefaultValueSql("('DRAFT')")
                 .HasColumnName("status");
@@ -714,6 +714,7 @@ public partial class CiPlatformContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("updated_at");
             entity.Property(e => e.UserId).HasColumnName("user_id");
+            entity.Property(e => e.Views).HasColumnName("views");
 
             entity.HasOne(d => d.Mission).WithMany(p => p.Stories)
                 .HasForeignKey(d => d.MissionId)

@@ -5,22 +5,29 @@ using CI_Platform.Repository.Interface;
 using CI_Platform.Repository.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-namespace CI_PLATFORM.Controllers
-{
+using System.Net;
+using System.Net.Mail;
+
+namespace CI_PLATFORM.Controllers;
+
+
     public class StoryRelatedController : Controller
     {
         private readonly IUserList _users;
         private readonly CiPlatformContext _db;
         private readonly IStoryListingRepository _db2;
         private readonly IMissionApplicationListingRepository _listingRepository;
-        public StoryRelatedController( IUserList users, CiPlatformContext db, IStoryListingRepository db2, IMissionApplicationListingRepository listingRepository)
+        private readonly IStoryDetailRepository _sd;
+        public StoryRelatedController( IUserList users, CiPlatformContext db, IStoryListingRepository db2, IMissionApplicationListingRepository listingRepository, IStoryDetailRepository sd)
         {           
             _users = users;
             _db = db;
             _db2 = db2;
             _listingRepository = listingRepository;
+            _sd = sd;
         }
         public IActionResult Story_Listing_Page()
         {
@@ -32,12 +39,11 @@ namespace CI_PLATFORM.Controllers
             List<User> users = _users.GetUserList();
             var profile = users.FirstOrDefault(m => m.Email == session_details);
             ViewBag.UserDetails = profile;
-            //List<StoryViewModel> stories = _db2.GetAllStory();
             StoryViewModel storymodel = new StoryViewModel();
             storymodel.Stories = _db2.GetAllStory();
             storymodel.User = _db.Users;
             storymodel.MissionThemes = _db.MissionThemes;
-            //storymodel.MissionThemes = _db.MissionThemes;
+         
             return View(storymodel);
             
         }
@@ -69,25 +75,35 @@ namespace CI_PLATFORM.Controllers
         {
             var submit = _listingRepository.SubmitStory(userid, missionid, title, publishedAt, description, status);
             return Ok();
-        }
-        [HttpGet]
-        [Route("isStoryExist", Name = "isStoryExist")]
+    }
 
-        public ShareMyStoryViewModel.ForSubmit isStoryExist(int userId, int missionId)
+    //for appear or disappear perticular buttons
+    [HttpGet]
+    public IActionResult isStoryExist(int userId, int missionId)
+    {
+        var result = _db.Stories.FirstOrDefault(r => r.MissionId == missionId && r.UserId == userId);
+
+        if (result == null)
         {
-            bool result = _db.Stories.Any(r => r.MissionId == missionId && r.UserId == userId && r.Status == "DRAFT");
-
-            ShareMyStoryViewModel.ForSubmit storystatus = new ShareMyStoryViewModel.ForSubmit()
-            {
-                isStoryExist = result,
-
-            };
-
-
-            return storystatus;
-
+            return View(); 
         }
-        [HttpGet]
+        var storystatus = new Story()
+        {
+            StoryId = result.StoryId,
+            UserId =result.UserId,
+            MissionId = result.MissionId,
+            Title = result.Title,
+            Description = result.Description,
+            Status = result.Status
+        };
+
+
+        return Ok(storystatus); 
+
+    }
+    
+    //for returning data to ajax if story is saved as draft
+    [HttpGet]
         
         public IActionResult GetStoryDraft(int missionId, int userId)
         {
@@ -109,14 +125,78 @@ namespace CI_PLATFORM.Controllers
                          }).ToList();
             
                 return Json(story);
-            
-        }
-
-
-        public IActionResult Story_detail_page()
-        {
-            return View();
-        }
 
     }
-}
+
+
+    public IActionResult Story_detail_page(int id)
+    {
+        var session_details = HttpContext.Session.GetString("Login");
+        if (session_details == null)
+        {
+            return RedirectToAction("login", "Authentication");
+        }
+        List<User> users = _users.GetUserList();
+        var profile = users.FirstOrDefault(m => m.Email == session_details);
+        ViewBag.UserDetails = profile;
+        StoryDetailViewModel storyDetailViewModel = _sd.storyDetailPageInfo(id);
+
+        return View(storyDetailViewModel);
+    }
+
+    //for recommandation to co-worker
+    public void RecommandToCoWorker(string Recommanded)
+    {
+        var parseObject = JObject.Parse(Recommanded);
+        var uStoryId = parseObject.Value<long>("SId");
+        var uId = parseObject.Value<long>("Uid");
+        var SessionUId = parseObject.Value<long>("FromUid");
+        var EmailAdd = parseObject.Value<string>("Uemail");
+        var recObj = new StoryInvite()
+        {
+            StoryId = uStoryId,
+            FromUserId = SessionUId,
+            ToUserId = uId,
+        };
+        if (EmailAdd != null)
+        {
+            var MissionDetailLink = Url.Action("Story_detail_page", "StoryRelated", new { id = uStoryId }, Request.Scheme);
+
+
+            _db.StoryInvites.Add(recObj);
+            _db.SaveChanges();
+            EmailSend(EmailAdd, MissionDetailLink);
+        }
+    }
+
+    //for sending email to co-worker
+    public IActionResult EmailSend(string Email, string MissionDetailLink)
+        {
+        var recommandedLink = MissionDetailLink;
+
+            var fromEmail = new MailAddress("niravdpatel632@gmail.com");
+            var toEmail = new MailAddress(Email);
+            var fromEmailPassword = "hflzawnzmsaqrkrj";
+            string subject = "Recommandation For Story";
+            string body = recommandedLink;
+
+            var smtp = new SmtpClient
+            {
+
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+
+            MailMessage message = new MailMessage(fromEmail, toEmail);
+            message.Subject = subject;
+            message.Body = body;
+            message.IsBodyHtml = true;
+            smtp.Send(message);
+            return Ok();
+        }
+    }
+
