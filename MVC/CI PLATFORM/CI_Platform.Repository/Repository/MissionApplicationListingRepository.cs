@@ -46,18 +46,30 @@ namespace CI_Platform.Repository.Repository
                 _db.Stories.Update(isExistStory);
                 _db.SaveChanges();
                 var storyid = isExistStory.StoryId;
+                var existingPhotos = _db.StoryMedia
+                .Where(sm => sm.StoryId == storyid)
+                .ToList();
+                if (existingPhotos != null)
+                {
+                    foreach (var photo in existingPhotos)
+                    {
+                        _db.StoryMedia.Remove(photo);
+                    }
+                }
 
+                
                 foreach (var path in pathlist)
                 {
-                    var isExistMedia = _db.StoryMedia.Where(s => s.StoryId == isExistStory.StoryId).FirstOrDefault();
+                    CI_Platform.Entities.Models.StoryMedium image = new StoryMedium()
+                    {
+                        Path = path,
+                        StoryId = storyid,
+                        CreatedAt = DateTime.UtcNow,
+                        Type = ".jpg",
+                    };
+                    _db.StoryMedia.Add(image);
 
-                    isExistMedia.Path = path;
-                    isExistMedia.StoryId = storyid;
-                    isExistMedia.CreatedAt = DateTime.UtcNow;
-                    isExistMedia.Type = ".png";
 
-
-                    _db.StoryMedia.Update(isExistMedia);
                 }
 
 

@@ -75,7 +75,8 @@ $("#SaveBtn").on('click', function () {
     var status = "DRAFT";
     var description = CKEDITOR.instances.editor1.editable().getText();
 
-    var pathlist = selectedImagesBase64;
+    var pathlist = selectedImagesBase64.concat(paths);
+    console.log(pathlist);
     
     console.log(pathlist)
     console.log("User ID:", userid);
@@ -176,23 +177,27 @@ missionSelect.addEventListener("change", function () {
             }
             else if (data.status == "PUBLISHED") {
                 $("#submitBtn").prop("disabled", true);
-                $("#SaveBtn").prop("disabled", true);
+                $("#SaveBtn").prop("disabled", false);
+                alert("there is alredy submitted story for this mission , you can also store another story for this mission...... ")
             }
             else {
                 $("#submitBtn").prop("disabled", true);
                 $("#SaveBtn").prop("disabled", false);
+                alert("please save the draft before submit");
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log('failed while storing: ' + textStatus + ', ' + errorThrown);
             $("#submitBtn").prop("disabled", true);
             $("#SaveBtn").prop("disabled", false);
+            alert("please save the draft before submit");
         }
     });
 });
-
+var paths = [];
 //for getting data if draft is exist or not
 $(document).ready(function () {
+    // Define the paths array outside the $.ajax() call
     $('#myInputSelect').change(function () {
         var userId = $(this).data('user-id');
         var missionId = $(this).val();
@@ -211,14 +216,14 @@ $(document).ready(function () {
                     var publishedDate = data[0].publishedAt;
                     var yyyymmdd = formatedate(publishedDate);
                     $("#myStoryDate").val(yyyymmdd);
-                    var paths = data[0].paths;
+                    paths = data[0].paths; // Assign the paths array returned from the server to the global paths variable
                     var imagesHtml = '';
                     for (var i = 0; i < paths.length; i++) {
-                        imagesHtml += '<img class="selectedImageItem" src="' + paths[i] + '" />';
-                        
+                        imagesHtml += '<div class="selectedImageItem"><img src="' + paths[i] + '" /><span class="removeImageIcon" data-index="' + i + '">x</span></div>';
+
                     }
                     $(".selectedImage").html(imagesHtml);
-                    
+
                 }
                 else {
                     CKEDITOR.instances.editor1.editable().setText('');
@@ -230,14 +235,22 @@ $(document).ready(function () {
 
             },
             error: function () {
-               
+
                 alert('there  is no any drfts is stored with this storyid and userid so you can save draft at now');
-                
+
             }
-            
+
         });
     });
+    console.log(paths)
+    $(document).on('click', '.removeImageIcon', function () {
+        var index = $(this).data('index');
+        paths.splice(index, 1); // Remove the element from the array
+        $(this).closest('.selectedImageItem').remove(); // Remove the corresponding image tag
+        console.log(paths);
+    });
 });
+
 
 /*function that converts datetime to yyyy-mm-dd format*/
 function formatedate(datetime){
@@ -252,7 +265,7 @@ function formatedate(datetime){
     return outputDateStr;
 
 }
-console.log("jdfdsjf")
+
 //for recommended to co-worker functionality
 $("#RecommandationBtn").on('click', function () {
     cosole.log("click");
