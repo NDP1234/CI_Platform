@@ -328,7 +328,7 @@
                         <div class="img-event position-relative">
 
                             <img class="group list-group-image img-fluid w-100 imghv"
-                             src="@item.StoryMedia.FirstOrDefault(m=> m.StoryId == @item.StoryId).Path" alt="" />
+                             src="@item.StoryMedia.FirstOrDefault(m=> m.StoryId == @item.StoryId && m.Type == ".jpg" ).Path" alt="" />
                             <div class="bottom-center justify-content-center missiontheme">
 
                                 @item.Mission.Theme.Title
@@ -369,26 +369,30 @@
     </div>
 
     <!-- Pagenation  -->
-    @*<nav aria-label="Page navigation example justify-content-center">
-        <ul class="pagination mt-3">
-        <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-        <span class="sr-only">Previous</span>
-        </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-        <span class="sr-only">Next</span>
-        <span aria-hidden="true">&raquo;</span>
-
-        </a>
-        </li>
+         <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center mt-3">
+            <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Story_Listing_Page", new { page = Model.CurrentPage - 1 })" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Story_Listing_Page", new { page = i })">@i</a>
+                </li>
+            }
+            <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Story_Listing_Page", new { page = Model.CurrentPage + 1 })" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
         </ul>
-        </nav>*@
+    </nav>
+
+
     <div class="content mt-5 text-center hidden" id="NoMissionFound">
         <div class="head w-100 text-center">
             <h5>No Story found</h5>

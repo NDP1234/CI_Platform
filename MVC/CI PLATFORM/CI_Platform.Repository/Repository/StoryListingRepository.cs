@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CI_Platform.Repository.Repository
 {
-    public class StoryListingRepository: IStoryListingRepository
+    public class StoryListingRepository : IStoryListingRepository
     {
         private readonly CiPlatformContext _db;
 
@@ -19,11 +19,17 @@ namespace CI_Platform.Repository.Repository
         {
             _db = db;
         }
-        
+
         public List<Story> GetAllStory()
         {
-            List<Story> stories = _db.Stories.Include(m=>m.User).Include(m=>m.StoryMedia).Include(m=>m.Mission).Include(m=>m.Mission.Theme).ToList();
+            List<Story> stories = _db.Stories.Include(m => m.User).Include(m => m.StoryMedia).Include(m => m.Mission).Include(m => m.Mission.Theme).ToList();
             return stories;
         }
+
+        public int GetStoryCount()
+        {
+            return _db.Stories.Count();
+        }
+
     }
 }

@@ -74,7 +74,9 @@ $("#SaveBtn").on('click', function () {
     var publisheddate = $("#myStoryDate").val();
     var status = "DRAFT";
     var description = CKEDITOR.instances.editor1.editable().getText();
-
+    var videoUrl = $("#myStoryVideo").val();
+    let vId = videoUrl.split('v=')[1];
+    var url = "https://www.youtube.com/embed/" + vId;
     var pathlist = selectedImagesBase64.concat(paths);
     console.log(pathlist);
     
@@ -85,6 +87,7 @@ $("#SaveBtn").on('click', function () {
     console.log("Mission Title:", missiontitle);
     console.log("Published Date:", publisheddate);
     console.log("Description:", description);
+    console.log("url:", url);
 
     $.ajax({
         type: "POST",
@@ -99,7 +102,8 @@ $("#SaveBtn").on('click', function () {
             publishedAt: publisheddate,
             description: description,
             status: status,
-            pathlist: pathlist
+            pathlist: pathlist,
+            url: url
 
         },
         success: function (data) {
@@ -123,14 +127,20 @@ $("#submitBtn").on('click', function () {
     var publisheddate = $("#myStoryDate").val();
     var status = "PUBLISHED";
     var description = CKEDITOR.instances.editor1.editable().getText();
- 
+    var videoUrl = $("#myStoryVideo").val();
+    console.log(videoUrl);
+    var vId = videoUrl.split('v=')[1];
+    var url = "https://www.youtube.com/embed/"+vId;
+   
+
+    
     console.log("User ID:", userid);
     console.log("Mission ID:", missionid);
     console.log("Story Title:", storytitle);
     console.log("Mission Title:", missiontitle);
     console.log("Published Date:", publisheddate);
     console.log("Description:", description);
-
+    console.log("url:", url);
     $.ajax({
         type: "POST",
         url: "/StoryRelated/SubmitStory",
@@ -142,7 +152,7 @@ $("#submitBtn").on('click', function () {
             publishedAt: publisheddate,
             description: description,
             status: status,
-
+            url: url
 
         },
         success: function (data) {
@@ -216,20 +226,51 @@ $(document).ready(function () {
                     var publishedDate = data[0].publishedAt;
                     var yyyymmdd = formatedate(publishedDate);
                     $("#myStoryDate").val(yyyymmdd);
+
                     paths = data[0].paths; // Assign the paths array returned from the server to the global paths variable
+
+                    var videoURLs = [];
+
+                    // Loop through each path in the paths array
+                    for (var i = 0; i < paths.length; i++) {
+
+                        
+                        if (paths[i].includes("https://www.youtube.com/embed/")) {
+
+                            // Extract the video ID from the link using a regular expression
+                            var videoID = paths[i].match(/https:\/\/www.youtube.com\/embed\/(.*)/)[1];
+
+                            // Construct the video URL using the video ID
+                            var videoURL = "https://www.youtube.com/watch?v=" + videoID;
+
+                            // Add the video URL to the videoURLs array
+                            videoURLs.push(videoURL);
+                        }
+                    }
+
+
+                    $("#myStoryVideo").val(videoURLs);
+
+
+                    //filter the path which not contains link of video
+                    paths = paths.filter(function (path) {
+                        return !path.includes("https://www.youtube.com/embed/");
+                    });
+
                     var imagesHtml = '';
                     for (var i = 0; i < paths.length; i++) {
                         imagesHtml += '<div class="selectedImageItem"><img src="' + paths[i] + '" /><span class="removeImageIcon" data-index="' + i + '">x</span></div>';
 
                     }
                     $(".selectedImage").html(imagesHtml);
-
+   
                 }
                 else {
                     CKEDITOR.instances.editor1.editable().setText('');
                     $("#storyTitle").val('');
                     $("#myStoryDate").val('');
                     $(".selectedImage").html('');
+                    $("#myStoryVideo").val('');
                     //alert('there  is no any drfts is stored with this storyid and userid so you can save draft at now');
                 }
 
@@ -257,8 +298,8 @@ function formatedate(datetime){
     const inputDateStr = datetime;
     const date = new Date(inputDateStr);
 
-    const day = date.getDate();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
     const outputDateStr = `${year}-${month}-${day}`;
     console.log(outputDateStr); 
@@ -287,3 +328,9 @@ $("#RecommandationBtn").on('click', function () {
         },
     });
 })
+
+    
+   
+    
+
+

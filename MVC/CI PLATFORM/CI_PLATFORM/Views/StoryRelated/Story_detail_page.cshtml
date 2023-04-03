@@ -16,6 +16,18 @@
     <title>Story_detail_page </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/sdp.css">
+    <style>
+        .image-container {
+            width: 900px; /* set the desired width */
+            height: 300px; /* set the desired height */
+            overflow: hidden; /* hide any parts of the image that exceed the container dimensions */
+        }
+
+            .image-container img {
+                max-width: 100%; /* set the maximum width to 100% of the container */
+                max-height: 100%; /* set the maximum height to 100% of the container */
+            }
+    </style>
 </head>
 <body>
     <div class="container-fluid">
@@ -103,102 +115,65 @@
         <hr class="hr" />
         <div class="container mt-5">
             <div class="row">
-                <div class="col-lg-6 col-md-12 col-sm-12 ">
+              @*carousal*@
+                <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="image">
-                        <img src="/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-2.png" class="imghr"
-                            width="100%" height="50%" id="id12" alt="">
-                        <img src="/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-2.png" class="imghr"
-                            width="100%" height="50%" id="id1" alt="">
-                        <img src="/images/img1.png" width="100%" height="50%" class="imghr" id="id2" alt="">
-                        <img src="/images/Grow-Trees-On-the-path-to-environment-sustainability-2.png" class="imghr"
-                            width="100%" height="50%" id="id3" alt="">
-                        <img src="/images/img11.png" width="100%" height="50%" class="imghr" alt="" id="id4">
-                        <img src="/images/img.png" width="100%" class="imgh" alt="" id="id5">
-                        <img src="/images/image2.png" width="100%" class="imgh" alt="" id="id6">
+                        <img id="selectedImage" class="img-fluid image-container" src="@Model.paths.FirstOrDefault()">
+                        <iframe id="video1"  height="360px" src="" class="d-none w-100 " frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
-    
-                    <div class="container text-center p-0 ">
-                        <div class="row  justify-content-center">
+
+                    <div class="container text-center p-0">
+                        <div class="row justify-content-center">
                             <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner" role="listbox">
-                                    <div class="carousel-item active">
-                                        <div class="col-md-3">
-                                            <div class="card">
-                                                <div class="card-img">
-                                                    <img src="/images/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-5.png"
-                                                        class="img-fluid img2 if" id="i1" onclick="show('id1')">
-                                                </div>
-    
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="col-md-3">
-                                            <div class="card">
-                                                <div class="card-img">
-                                                    <img src="/images/img3.png" class="img-fluid img2 if"
-                                                        onclick="show('id2')">
-                                                </div>
-    
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="col-md-3">
-                                            <div class="card">
-                                                <div class="card-img">
-                                                    <img src="/images/Grow-Trees-On-the-path-to-environment-sustainability-5.png"
-                                                        class="img-fluid img2 if" id="i2" onclick="show('id3')">
+                                   @foreach (var item in Model.paths)
+                                    {
+                                        <div class="carousel-item @(item == Model.paths.FirstOrDefault() ? "active" : "")">
+                                            <div class="col-md-3">
+                                                <div class="card">
+                                                    @if (item.Contains("youtube.com/embed/"))
+                                                    {
+                                                        <div class="card-img">
+                                                        @{
+                                                            string videoId = item.Substring(item.LastIndexOf("/") + 1);
+                                                            string thumbUrl = string.Format("https://img.youtube.com/vi/{0}/maxresdefault.jpg", videoId);
+                                                        }
+                                                        <img src="@thumbUrl" data-url="@item" class="img-fluid img2 if" id="ivideo" onclick="displayVideo(this)">
+                                                    </div>
+
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="card-img">
+                                                            <img src="@item" class="img-fluid img2 if" id="i1" onclick="displayImage(this)">
+                                                        </div>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="col-md-3">
-                                            <div class="card">
-                                                <div class="card-img">
-                                                    <img src="/images/img33.png" class="img-fluid img2 if" id="i3"
-                                                        onclick="show('id4')">
-                                                </div>
-    
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="col-md-3">
-                                            <div class="card">
-                                                <div class="card-img">
-                                                    <img src="/images/img.png" class="img-fluid img2 if" id="i4"
-                                                        onclick="show('id5')">
-                                                </div>
-    
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="col-md-3">
-                                            <div class="card">
-                                                <div class="card-img">
-                                                    <img src="/images/image.png" class="img-fluid img2 if" id="i5"
-                                                        onclick="show('id6')">
-                                                </div>
-    
-                                            </div>
-                                        </div>
-                                    </div>
+                                    }
+
+                                    
                                 </div>
-                                <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel" role="button"
-                                    data-bs-slide="prev">
+                                <a class="carousel-control-prev bg-transparent w-auto" href="#recipeCarousel" role="button"
+                                   data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 </a>
-                                <a class="carousel-control-next bg-transparent w-aut" href="#recipeCarousel" role="button"
-                                    data-bs-slide="next">
+                                <a class="carousel-control-next bg-transparent w-auto" href="#recipeCarousel" role="button"
+                                   data-bs-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
+                
+
+
+                
+
+
                 <div class="col-lg-6 col-md-12 col-sm-12 ">
                     <div class="d-flex  mb-3">
                         <div class="p-2 ">
@@ -251,22 +226,7 @@
                    @*Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis est facilis consectetur qui quasi, neque officiis? Rem, laudantium quaerat blanditiis saepe cum repellendus vitae beatae consectetur dolorum! Laboriosam, nesciunt magni.*@
                      @Model.Description 
                </P>
-                @*<P class="p-text">
-                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit saepe totam inventore harum quod pariatur accusamus mollitia cum itaque expedita ullam incidunt rerum facere illum nihil deleniti, omnis laborum ad eos minus id sapiente vero exercitationem molestiae. Recusandae iure voluptas earum ipsa! Necessitatibus a accusamus debitis quas in assumenda labore.
-                </P>
-                <p class="p-text">
-                    We use these technologies for a number of purposes, such as:
-                </p>
-                <ul>
-                    <li>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain. </li>
-                    <li>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi.  </li>   
-                    <li> On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized </li>  
-                    <li>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain. </li>  
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore</li> 
-                </ul>
-                <P class="p-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi provident ad laboriosam officiis voluptates sit rerum doloremque quis atque facere iure, recusandae pariatur voluptas vitae fugiat obcaecati consectetur sed minus.
-                </P>*@
+               
             </div>
         </div>
                 @*Modal for Recommand to co-worker*@
@@ -383,6 +343,11 @@
                 next = next.nextElementSibling
             }
         })
+       
+        
+
+
+    //for recommanded to coworker
         $("#RecommandationBtn button").on('click', function () {
     console.log("click");
     var udetails = $(this).attr('value');
@@ -403,6 +368,40 @@
         },
     });
 })
+            //for displaying images in story 
+        function displayImage(img) {
+            var selectedImage = document.getElementById("selectedImage");
+            var videoFrame = document.getElementById("video1");
+            selectedImage.classList.remove("d-none");
+            videoFrame.classList.add("d-none");
+
+            selectedImage.src = img.src;
+        }
+
+       function displayVideo(img) {
+           console.log("hello")
+           var selectedImage = document.getElementById("selectedImage");
+           var videoFrame = document.getElementById("video1");
+            selectedImage.classList.add("d-none");
+            videoFrame.classList.remove("d-none");
+            videoFrame.classList.add("d-block");
+            var videoUrl = $('#ivideo').data('url');
+            console.log(videoUrl);
+            //var videoUrl = img.src.replace('/maxresdefault.jpg', '');
+            
+            videoFrame.src = videoUrl;
+            console.log(selectedImage);
+            console.log(videoFrame);
+            
+        }
+
+
+
+        
+
+
+        
+
 
     </script>
 

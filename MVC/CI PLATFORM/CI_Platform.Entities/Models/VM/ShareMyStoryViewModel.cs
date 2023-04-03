@@ -28,6 +28,7 @@ namespace CI_Platform.Entities.Models.VM
             public DateTime CreatedAt { get; set; }
 
             public List<string> paths { get; set; }
+            //public bool isExistUrl { get; set; }
         }
 
         public class ForSubmit

@@ -9,8 +9,11 @@ using System.Threading.Tasks;
 
 namespace CI_Platform.Repository.Interface
 {
+
     public interface IStoryListingRepository
     {
-       public List<Story> GetAllStory();
+        List<Story> GetAllStory();
+        int GetStoryCount();
     }
+
 }
