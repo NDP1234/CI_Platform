@@ -70,10 +70,16 @@
                                 <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
                             </a>
 
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            @*<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <li><a class="dropdown-item" href="#">Action</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li><a class="dropdown-item" href="#">Something else </a></li>
+                            </ul>*@
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                                <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
+                                <li><a class="dropdown-item" href="#">Help Center</a></li>
+                                <li><a class="dropdown-item" href="#">Logout </a></li>
                             </ul>
                         </div>
                     </form>
@@ -368,7 +374,7 @@
         },
     });
 })
-            //for displaying images in story 
+        //for displaying images in story carousal
         function displayImage(img) {
             var selectedImage = document.getElementById("selectedImage");
             var videoFrame = document.getElementById("video1");
@@ -378,8 +384,9 @@
             selectedImage.src = img.src;
         }
 
+        //for displaying VIDEO in story carousal
        function displayVideo(img) {
-           console.log("hello")
+           
            var selectedImage = document.getElementById("selectedImage");
            var videoFrame = document.getElementById("video1");
             selectedImage.classList.add("d-none");
@@ -387,7 +394,6 @@
             videoFrame.classList.add("d-block");
             var videoUrl = $('#ivideo').data('url');
             console.log(videoUrl);
-            //var videoUrl = img.src.replace('/maxresdefault.jpg', '');
             
             videoFrame.src = videoUrl;
             console.log(selectedImage);

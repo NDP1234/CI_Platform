@@ -63,10 +63,16 @@
                                 <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
                             </a>
 
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            @*<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <li><a class="dropdown-item" href="#">Action</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li><a class="dropdown-item" href="#">Something else </a></li>
+                            </ul>*@
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                                <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
+                                <li><a class="dropdown-item" href="#">Help Center</a></li>
+                                <li><a class="dropdown-item" href="#">Logout </a></li>
                             </ul>
                         </div>
                     </form>
@@ -110,7 +116,7 @@
     </div>
     <hr class="hr" />
     <div class="container">
-        
+        <form class="row g-3 needs-validation" novalidate>
         <p class="my-3 fs-1">
             Share your story
         </p>
@@ -118,38 +124,52 @@
             <div class="col col-lg-4 col-md-6 col-12 padforcol">
                 <label for="myInputSelect" class="form-label">Select Mission</label>
                 
-                <select class="form-select myMissionTitles" id="myInputSelect" aria-label="Select your mission" data-user-id="@ViewBag.UserDetails.UserId" >
+                <select class="form-select myMissionTitles" id="myInputSelect" aria-label="Select your mission" data-user-id="@ViewBag.UserDetails.UserId" required>
                     <option selected value="-1">Select your mission</option>
                     @foreach (Mission item in Model)
                     {
                         <option value="@item.MissionId" data-user-id="@ViewBag.UserDetails.UserId">@item.Title</option>
                     }
                 </select>
-                
+                <div class="invalid-feedback">
+                    Please select a valid option.
+                </div>
 
             </div>
             <div class="col col-lg-4 col-md-6 col-12 padforcol">
                 <label for="storyTitle" class="form-label">My Story Title</label>
-                <input type="text" class="form-control" id="storyTitle" placeholder="Enter story title" >
+                <input type="text" class="form-control" id="storyTitle" placeholder="Enter story title" required>
+                <div class="invalid-feedback">
+                    Please write a story title.
+                </div>
             </div>
             
 
             <div class="col col-lg-4 col-md-12 col-12 padforcol">
                 <label for="myStoryDate" class="form-label">Date</label>
-                <input type="date" class="form-control" id="myStoryDate" placeholder="Select date" >
+                <input type="date" class="form-control" id="myStoryDate" placeholder="Select date" required>
+                <div class="invalid-feedback">
+                    Please select a date.
+                </div>
             </div>
             
         </div>
         <div class="row mt-3">
             <label for="ckText" class="form-label">My Story</label>
             <div class="col" id="ckText">
-                <textarea  cols="80" id="editor1" name="editor1" rows="4">&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href=&quot;https://ckeditor.com/&quot;&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea>
+                <textarea required cols="80" id="editor1" name="editor1" rows="4">&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href=&quot;https://ckeditor.com/&quot;&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea>
+                <div class="invalid-feedback">
+                  Please enter a message in the textarea.
+                </div>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col">
                 <label for="myStoryVideo" class="form-label">Enter Video URL</label>
-                <input  type="text" class="form-control" id="myStoryVideo" placeholder="Enter your url">
+                <input  type="text" class="form-control" id="myStoryVideo" placeholder="Enter your url" required>
+                <div class="invalid-feedback">
+                    Please specify url link.
+                </div>
             </div>
            
         </div>
@@ -170,12 +190,13 @@
 
         <div class="row mt-3">
             <div class="col">
-                <a class="btn btn-danger cancelBtn float-start" asp-action="Story_Listing_Page" asp-controller="StoryRelated" type="button">Cancel</a>
+                <button class="btn btn-success cancelBtn float-start" id="previewbtn" type="button">Preview</button>
+                <a class="btn btn-danger cancelBtn float-start mx-2" asp-action="Story_Listing_Page" asp-controller="StoryRelated" type="button">Cancel</a>
                 <button class="btn btn-primary SaveOrSubmitBtn float-end mx-2" id="submitBtn" type="button">Submit</button>
-                <button class="btn btn-success SaveOrSubmitBtn float-end " id="SaveBtn"> Save</button>
+                <button class="btn btn-success SaveOrSubmitBtn float-end " id="SaveBtn" type="button">  Save</button>
             </div>
         </div>
-       
+       </form>
         
           
     </div>
@@ -217,9 +238,50 @@
                     document.getElementById("mySidebar2").style.width = "0";
                     document.getElementById("main2").style.marginLeft = "0";
                 }
-        // -----------------------------------------------------------------------------------------------------------------
+        
 
+       //for validation 
+       (function () {
+          'use strict'
 
+          // Get the "Save" and "Submit" buttons
+          var saveBtn = document.getElementById('SaveBtn');
+          var submitBtn = document.getElementById('submitBtn');
+
+          // Attach event listener to "Save" button
+          saveBtn.addEventListener('click', function (event) {
+            var form = document.querySelector('.needs-validation');
+
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+
+            form.classList.add('was-validated');
+          });
+
+          // Attach event listener to "Submit" button
+          submitBtn.addEventListener('click', function (event) {
+            var form = document.querySelector('.needs-validation');
+
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+
+            form.classList.add('was-validated');
+          });
+        })();
+
+        //preview buttton
+        $("#previewbtn").click(function () {
+
+           
+            var missionid = $("#myInputSelect").val();
+            console.log(missionid);
+            window.location.href = "/StoryRelated/previewstorydata?id=" + missionid;
+
+        });
 
 
         // -----------------------------------------------------------------------------------------------------------------

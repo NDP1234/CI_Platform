@@ -16,17 +16,17 @@ namespace CI_Platform.Entities.Models.VM
             public long UserId { get; set; }
 
             public long MissionId { get; set; }
-
+            [Required]
             public string? Title { get; set; }
-
+            [Required]
             public string? Description { get; set; }
 
             public string Status { get; set; } = null!;
-
+            [Required]
             public DateTime PublishedAt { get; set; }
 
             public DateTime CreatedAt { get; set; }
-
+            [Required]
             public List<string> paths { get; set; }
             //public bool isExistUrl { get; set; }
         }

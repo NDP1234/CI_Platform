@@ -59,6 +59,9 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "StoryRelated",
     pattern: "{controller=StoryRelated}/{action=Story_Listing_Page}");
+app.MapControllerRoute(
+    name: "UserEditProfile",
+    pattern: "{controller=UserEditProfile}/{action=UserEditProfilePage}");
 
 app.Run();
 

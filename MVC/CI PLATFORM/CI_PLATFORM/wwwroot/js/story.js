@@ -184,22 +184,27 @@ missionSelect.addEventListener("change", function () {
             if (data.status == "DRAFT") {
                 $("#submitBtn").prop("disabled", false);
                 $("#SaveBtn").prop("disabled", false);
+                $("#previewbtn").prop("disabled", false);
             }
             else if (data.status == "PUBLISHED") {
                 $("#submitBtn").prop("disabled", true);
                 $("#SaveBtn").prop("disabled", false);
+                $("#previewbtn").prop("disabled", false);
                 alert("there is alredy submitted story for this mission , you can also store another story for this mission...... ")
             }
             else {
                 $("#submitBtn").prop("disabled", true);
                 $("#SaveBtn").prop("disabled", false);
+                $("#previewbtn").prop("disabled", true);
                 alert("please save the draft before submit");
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log('failed while storing: ' + textStatus + ', ' + errorThrown);
             $("#submitBtn").prop("disabled", true);
             $("#SaveBtn").prop("disabled", false);
+            $("#previewbtn").prop("disabled", true);
+            console.log('failed while storing: ' + textStatus + ', ' + errorThrown);
+           
             alert("please save the draft before submit");
         }
     });
@@ -222,12 +227,11 @@ $(document).ready(function () {
 
                     CKEDITOR.instances.editor1.editable().setText(data[0].description);
                     $("#storyTitle").val(data[0].title);
-                    /*$("#myStoryDate").val(data[0].publishedAt);*/
                     var publishedDate = data[0].publishedAt;
                     var yyyymmdd = formatedate(publishedDate);
                     $("#myStoryDate").val(yyyymmdd);
 
-                    paths = data[0].paths; // Assign the paths array returned from the server to the global paths variable
+                    paths = data[0].paths; 
 
                     var videoURLs = [];
 
@@ -237,10 +241,10 @@ $(document).ready(function () {
                         
                         if (paths[i].includes("https://www.youtube.com/embed/")) {
 
-                            // Extract the video ID from the link using a regular expression
+                            // Extract the video ID(token) from the link using a regular expression
                             var videoID = paths[i].match(/https:\/\/www.youtube.com\/embed\/(.*)/)[1];
 
-                            // Construct the video URL using the video ID
+                            // create the video URL using the video ID
                             var videoURL = "https://www.youtube.com/watch?v=" + videoID;
 
                             // Add the video URL to the videoURLs array
@@ -271,7 +275,7 @@ $(document).ready(function () {
                     $("#myStoryDate").val('');
                     $(".selectedImage").html('');
                     $("#myStoryVideo").val('');
-                    //alert('there  is no any drfts is stored with this storyid and userid so you can save draft at now');
+                    
                 }
 
             },
@@ -329,7 +333,7 @@ $("#RecommandationBtn").on('click', function () {
     });
 })
 
-    
+
    
     
 

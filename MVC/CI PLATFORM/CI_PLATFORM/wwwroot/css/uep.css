@@ -1,0 +1,8 @@
+.SaveOrSubmitBtn{
+    border-radius: 20px;
+    border: 2px solid #F88634;
+    color: #F88634;
+    background-color: white;
+    padding:10px 5px;
+    width: 130px;
+  }

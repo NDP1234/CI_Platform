@@ -1,0 +1,305 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Edit Profile Page</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/uep.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light d-none d-md-block">
+            <div class="container">
+                <button class="navbar-toggler bg-light " type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 mrg-start">
+
+                        <li class="nav-item ">
+                            <a class="nav-link text-dark" asp-action="Story_Listing_Page" asp-controller="StoryRelated">Stories</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Policy
+                            </a>
+                            <ul class="dropdown-menu ">
+                                <li><a class="dropdown-item " href="#">Policy-1</a></li>
+                                <li><a class="dropdown-item" href="#">Policy-2</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <form class="d-flex" role="search">
+
+                        <div class="dropdown">
+                            <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="/Images/volunteer1.png" alt="" style="border-radius: 50%;" height="30px"
+                                    width="30px">
+                                <span>Nirav Patel</span>
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ////////////////////////////////// -->
+        <div class="first-nav d-md-none ">
+            <div id="mySidebar1" class="sidebar d-inline">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+                <a href="#">
+                    Stories
+                </a>
+
+                <a href="#">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Policy
+                        </a>
+                        <ul class="dropdown-menu ">
+                            <li><a class="dropdown-item " href="#">Policy-1</a></li>
+                            <li><a class="dropdown-item" href="#">Policy-2</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else </a></li>
+                        </ul>
+                    </li>
+                </a>
+            </div>
+            <div id="main1" class="d-flex justify-content-between m-2">
+                <button class="openbtn " onclick="openNav()">☰ </button>
+                <img src="/Images/volunteer1.png" class="rounded-pill  " height="40px" width="40px" alt="">
+            </div>
+        </div>
+        <!-- //////////////////////////////// -->
+
+        <hr class="hr" />
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-md-12 ">
+                    <div class="border p-2  p-3 mb-5 shadow">
+                        <img class="rounded-circle mx-auto d-block w-50 h-50" src="/Images/volunteer1.png" alt="unable to load an image">
+                        <h5 class="text-center">Nirav Patel</h5>
+                        <div class="changePwd text-center">
+                            <!-- <a href="#" class="text-decoration-none text-dark" >Change Password</a> -->
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Change Password
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-md-12">
+                    <div class="row">
+                        <div class="col">
+                            <span class="fs-4 border-dark border-bottom " style="padding-bottom: 1px;" >Basic Information</span>
+                            <hr class="hr mt-0" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-12 col-xl-6">
+                            <div class="mb-3">
+                                <label for="nameInput" class="form-label ">Name*</label>
+                                <input type="text" class="form-control " id="nameInput"  placeholder="Enter your name" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12 col-xl-6">
+                            <div class="mb-3">
+                                <label for="surnameInput" class="form-label ">Surname*</label>
+                                <input type="text" class="form-control " id="surnameInput"  placeholder="Enter your surname" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3 ">
+                        <div class="col-12 col-md-12 col-xl-6">
+                            <div class="mb-3">
+                                <label for="EmployeeIdInput" class="form-label ">Employee ID</label>
+                                <input type="text" class="form-control " id="EmployeeIdInput"  placeholder="Enter your employee id" >
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12 col-xl-6">
+                            <div class="mb-3">
+                                <label for="ManagerInput" class="form-label ">Manager</label>
+                                <input type="text" class="form-control " id="ManagerInput"  placeholder="Enter your manager details" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-12 col-xl-6">
+                            <div class="mb-3">
+                                <label for="TitleInput" class="form-label ">Title</label>
+                                <input type="text" class="form-control " id="TitleInput"  placeholder="Enter title here" >
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12 col-xl-6">
+                            <div class="mb-3">
+                                <label for="DepartmentInput" class="form-label ">Department</label>
+                                <input type="text" class="form-control " id="DepartmentInput"  placeholder="Enter your department here" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="MyProfileTextarea" class="form-label">My Profile*</label>
+                                <textarea class="form-control" id="MyProfileTextarea" rows="3" placeholder="Enter your comments..." required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="WhyIVolunteerTextarea" class="form-label">Why I Volunteer?</label>
+                                <textarea class="form-control" id="WhyIVolunteerTextarea" rows="3" placeholder="Enter your comments..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col ">
+                            <span class="fs-4 border-dark border-bottom " style="padding-bottom: 1px;" >Address Information</span>
+                            <hr class="hr mt-0" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-12 col-xl-6">
+                            <div class="mb-3">
+                                <label for="cityInput" class="form-label">City</label>
+                                <input type="text" class="form-control " id="cityInput"  placeholder="Enter your city" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12 col-xl-6">
+                            <div class="mb-3">
+                                <label for="CountryInput" class="form-label">Country*</label>
+                                <select class="form-select" id="CountryInput" aria-label="Default select example" required>
+                                    <option selected>Select your country</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <span class="fs-4 border-dark border-bottom " style="padding-bottom: 1px;" >Professional Information</span>
+                            <hr class="hr mt-0" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-12 col-xl-6">
+                            <div class="mb-3">
+                                <label for="AvailablityInput" class="form-label">Availablity</label>
+                                <select class="form-select" id="AvailablityInput" aria-label="Default select example">
+                                    <option selected>Select your Availablity</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12 col-xl-6">
+                            <div class="mb-3">
+                                <label for="cityInput" class="form-label">LinkedIn</label>
+                                <input type="text" class="form-control " id="cityInput"  placeholder="Enter linkedIn URL" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <span class="fs-4 border-dark border-bottom " style="padding-bottom: 1px;" >My Skills</span>
+                            <hr class="hr mt-0" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <ul class="list-group">
+                                <li class="list-group-item">Anthropology </li>
+                                <li class="list-group-item">Archeology </li>
+                                <li class="list-group-item">Astronomy </li>
+                                <li class="list-group-item">Computer </li>
+                                <li class="list-group-item">Science Environmental Science History</li>
+                                <li class="list-group-item"> History</li>
+                                <li class="list-group-item"> Science History</li>
+                                <li class="list-group-item"> History</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-outline-dark rounded-pill p-2" style="width:150px" >Add Skills</button>
+                    
+                    <div class="row mt-5 mb-5">
+                        <div class="col">
+                            <button class="btn btn-primary SaveOrSubmitBtn float-end mx-2 " type="button">Save</button>
+                        </div>
+                    </div>
+                </div>
+            <!-- Modal for change password-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">change Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            
+                            <input type="password" class="form-control " id="oldpwd"  placeholder="Enter old password" required>
+                        </div>
+                        <div class="mb-3">
+                            
+                            <input type="password" class="form-control " id="newpwd"  placeholder="Enter new password" required>
+                        </div>
+                        <div class="mb-3">
+                           
+                            <input type="password" class="form-control " id="confirmpwd"  placeholder="Enter confrim password" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Change Password</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <hr class="hr" />
+        <!-- Footer (Privacy Policy) -->
+        <div class="container">
+            <div class=" mt-3 mb-5 d-inline">
+                <a href="#" class="text-decoration-none text-dark"> Privacy Policy</a>
+            </div>
+            <div class=" mt-3 mb-5 d-inline">
+                <a href="#" class="text-decoration-none text-dark ms-5"> Contact Us </a>
+            </div>
+        </div>
+    </div>
+   @* <script src="/js/bootstrap.bundle.min.js"></script>*@
+     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

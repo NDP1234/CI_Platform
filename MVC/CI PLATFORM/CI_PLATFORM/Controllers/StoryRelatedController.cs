@@ -211,5 +211,24 @@ public class StoryRelatedController : Controller
         smtp.Send(message);
         return Ok();
     }
+
+    public IActionResult previewstorydata(int id)
+    {
+        var session_details = HttpContext.Session.GetString("Login");
+        if (session_details == null)
+        {
+            return RedirectToAction("login", "Authentication");
+        }
+        List<User> users = _users.GetUserList();
+        var profile = users.FirstOrDefault(m => m.Email == session_details);
+        ViewBag.UserDetails = profile;
+        int userId = (int)profile.UserId;
+
+        int storyId = (int)_db.Stories.Where(s => s.MissionId == id && s.UserId == userId).Select(s => s.StoryId).FirstOrDefault();
+
+        return RedirectToAction("Story_detail_page", new { id = storyId });
+
+    }
 }
+
 
