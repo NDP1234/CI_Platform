@@ -9,6 +9,6 @@ namespace CI_Platform.Repository.Interface
 {
     public interface IStoryDetailRepository
     {
-        public StoryDetailViewModel storyDetailPageInfo(int id);
+        public StoryDetailViewModel storyDetailPageInfo(int id, int userId);
     }
 }

@@ -152,7 +152,8 @@ public class StoryRelatedController : Controller
         List<User> users = _users.GetUserList();
         var profile = users.FirstOrDefault(m => m.Email == session_details);
         ViewBag.UserDetails = profile;
-        StoryDetailViewModel storyDetailViewModel = _sd.storyDetailPageInfo(id);
+        int userId = (int)profile.UserId;
+        StoryDetailViewModel storyDetailViewModel = _sd.storyDetailPageInfo(id, userId);
 
         return View(storyDetailViewModel);
     }

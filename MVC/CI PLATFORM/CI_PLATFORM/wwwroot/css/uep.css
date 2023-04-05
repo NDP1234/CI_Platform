@@ -6,3 +6,64 @@
     padding:10px 5px;
     width: 130px;
   }
+
+ul, li {
+    list-style-type: none;
+}
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+    .sidebar a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 20px;
+        color: black;
+        display: block;
+        transition: 0.3s;
+    }
+
+        .sidebar a:hover {
+            color: black;
+        }
+
+    .sidebar .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #f4f4f4;
+    color: black;
+    padding: 10px 15px;
+    border: none;
+}
+
+    .openbtn:hover {
+        background-color: #444;
+    }
+
+#main1 {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+#main2 {
+    transition: margin-left .5s;
+    padding: 16px;
+}

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "pwpgsA9UklCHmp4rNLUL2H17aoyLGsF5VEXEuglq4E0=",
+  "Hash": "pbv2BGDJfas84Zk+vWVT4PUAXXU/N+/ppXvgN42U7/Y=",
   "Source": "CI_PLATFORM",
   "BasePath": "_content/CI_PLATFORM",
   "Mode": "Default",
@@ -3551,6 +3551,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\story_listing.js"
+    },
+    {
+      "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\js\\UserEditProfile.js",
+      "SourceId": "CI_PLATFORM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\",
+      "BasePath": "_content/CI_PLATFORM",
+      "RelativePath": "js/UserEditProfile.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\UserEditProfile.js"
     },
     {
       "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

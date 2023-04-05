@@ -18,16 +18,26 @@ namespace CI_Platform.Repository.Repository
         {
             _db = db;
         }
-        public StoryDetailViewModel storyDetailPageInfo(int id)
+        public StoryDetailViewModel storyDetailPageInfo(int id, int userId)
         {
             Story stories = _db.Stories.Where(s => s.StoryId == id).First();
             List<StoryMedium> storyMedium = _db.StoryMedia.Where(s => s.StoryId == id).ToList();
             User user = _db.Users.Where(u => u.UserId == stories.UserId).First();
             List<User> users = _db.Users.ToList();
+
+            var currentUser = _db.Users.FirstOrDefault(u => u.UserId == userId); // replace currentUserId with the ID of the currently logged in user
+            bool isAuthor = (stories.UserId == currentUser.UserId);
             var story = _db.Stories.FirstOrDefault(s => s.StoryId == id);
-            story.Views = story.Views + 1;
-            _db.Stories.Update(story);
-            _db.SaveChanges();
+            if (!isAuthor) // only increment views if the current user is not the author
+            {
+                story.Views = story.Views + 1;
+                _db.Stories.Update(story);
+                _db.SaveChanges();
+            }
+            
+            //story.Views = story.Views + 1;
+            //_db.Stories.Update(story);
+            //_db.SaveChanges();
             var viewModel = new StoryDetailViewModel
             {
                 StoryId = stories.StoryId,
