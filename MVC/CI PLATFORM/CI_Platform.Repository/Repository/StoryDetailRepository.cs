@@ -25,19 +25,26 @@ namespace CI_Platform.Repository.Repository
             User user = _db.Users.Where(u => u.UserId == stories.UserId).First();
             List<User> users = _db.Users.ToList();
 
-            var currentUser = _db.Users.FirstOrDefault(u => u.UserId == userId); // replace currentUserId with the ID of the currently logged in user
-            bool isAuthor = (stories.UserId == currentUser.UserId);
-            var story = _db.Stories.FirstOrDefault(s => s.StoryId == id);
-            if (!isAuthor) // only increment views if the current user is not the author
+            //for increment view on the basis of distinct user
+            bool isStoryViewExist = _db.StoryViews.Any(s => s.StoryId == id && s.UserId == userId);
+
+            if (!isStoryViewExist)
             {
-                story.Views = story.Views + 1;
-                _db.Stories.Update(story);
+                StoryView storyView = new StoryView()
+                {
+                    StoryId = id,
+                    UserId = (long)userId,
+                    CreatedAt = DateTime.UtcNow,
+
+                };
+                _db.StoryViews.Add(storyView);
                 _db.SaveChanges();
             }
-            
-            //story.Views = story.Views + 1;
-            //_db.Stories.Update(story);
-            //_db.SaveChanges();
+
+            long storyViews = _db.StoryViews.Where(s => s.StoryId == id).Count();
+
+
+           
             var viewModel = new StoryDetailViewModel
             {
                 StoryId = stories.StoryId,
@@ -51,7 +58,7 @@ namespace CI_Platform.Repository.Repository
                 LastName = user.LastName,
                 WhyIVolunteer = user.WhyIVolunteer,
                 Users = users,
-                Views = story.Views
+                Views = storyViews
             };
 
             return viewModel;

@@ -34,6 +34,13 @@ namespace CI_Platform.Entities.Models.VM
         public string NewPassword { get; set; } = null!;
         public string ConfirmPassword { get; set; } = null!;
 
+        public List<UserSkillViewModel> userSkills { get; set; }
+
+        public class UserSkillViewModel
+        {
+            public long SkillId { get; set; }
+            public string SkillName { get; set; }
+        }
 
     }
 }

@@ -48,6 +48,17 @@ namespace CI_PLATFORM.Controllers
             TempData["Message"] = "data is saved successfully.";
             return RedirectToAction("UserEditProfilePage");
         }
+        [HttpPost]
+        public IActionResult GetCitiesForCountry(long countryId)
+        {
+            var session_details = HttpContext.Session.GetString("Login");
+            
+            List<User> users = _users.GetUserList();
+            var profile = users.FirstOrDefault(m => m.Email == session_details);
+            var cities = _db.Cities.Where(c => c.CountryId == countryId ).ToList();
+            var cityList = cities.Select(c => new { cityId = c.CityId, name = c.Name });
+            return Json(cityList);
+        }
 
 
         public IActionResult getuserprofile( int userId)

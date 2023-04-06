@@ -58,6 +58,8 @@ public partial class CiPlatformContext : DbContext
 
     public virtual DbSet<StoryMedium> StoryMedia { get; set; }
 
+    public virtual DbSet<StoryView> StoryViews { get; set; }
+
     public virtual DbSet<Timesheet> Timesheets { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
@@ -779,6 +781,26 @@ public partial class CiPlatformContext : DbContext
                 .HasForeignKey(d => d.StoryId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_story_story_media");
+        });
+
+        modelBuilder.Entity<StoryView>(entity =>
+        {
+            entity.HasKey(e => e.StoryViewId).HasName("PK__story_vi__A2F4803B169B19DA");
+
+            entity.ToTable("story_view");
+
+            entity.Property(e => e.StoryViewId).HasColumnName("story_view_id");
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.DeletedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("deleted_at");
+            entity.Property(e => e.StoryId).HasColumnName("story_id");
+            entity.Property(e => e.UpdatedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("updated_at");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
         });
 
         modelBuilder.Entity<Timesheet>(entity =>

@@ -2,6 +2,8 @@
 using CI_Platform.Entities.Models;
 using CI_Platform.Entities.Models.VM;
 using CI_Platform.Repository.Interface;
+using Microsoft.AspNetCore.Http;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +15,20 @@ namespace CI_Platform.Repository.Repository
     public class UserEditProfileRepository : IUserEditProfileRepository
     {
         private readonly CiPlatformContext _db;
-
-        public UserEditProfileRepository(CiPlatformContext db)
+        private readonly IUserList _users;
+        public UserEditProfileRepository(CiPlatformContext db, IUserList users)
         {
             _db = db;
+            _users = users;
         }
 
         //for returning country and city list
         public UserEditProfileViewModel getCountryAndCityList()
         {
+            //var session_details = HttpContext.Session.GetString("Login");
+
+            //List<User> users = _users.GetUserList();
+            //var profile = users.FirstOrDefault(m => m.Email == session_details);
             UserEditProfileViewModel cityandcountryinfo = new UserEditProfileViewModel()
             {
                 countries = _db.Countries.ToList(),
@@ -35,8 +42,13 @@ namespace CI_Platform.Repository.Repository
         public UserEditProfileViewModel GetUserInfo(int userid)
         {
             var isExistUser = _db.Users.Where(u => u.UserId == userid).FirstOrDefault();
-            
-                UserEditProfileViewModel userinfo = new UserEditProfileViewModel()
+            var userSkills = _db.UserSkills
+            .Where(u => u.UserId == userid)
+            .Select(u => new UserEditProfileViewModel.UserSkillViewModel { SkillId = u.SkillId, SkillName = u.Skill.SkillName })
+            .ToList();
+
+
+            UserEditProfileViewModel userinfo = new UserEditProfileViewModel()
                 {
                     Avatar = isExistUser.Avatar,
                     FirstName = isExistUser.FirstName,
@@ -48,8 +60,9 @@ namespace CI_Platform.Repository.Repository
                     WhyIVolunteer = isExistUser.WhyIVolunteer,
                     LinkedInUrl = isExistUser.LinkedInUrl,
                     CountryId = isExistUser.CountryId,
-                    CityId = isExistUser.CityId
-                };
+                    CityId = isExistUser.CityId,
+                    userSkills = userSkills
+            };
                 
 
                 return userinfo;

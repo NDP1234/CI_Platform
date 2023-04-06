@@ -1,11 +1,39 @@
-.SaveOrSubmitBtn{
+
+.skillcontainer .selected {
+    background-color: #ccc;
+}
+
+.selectedskillcontainer .selected {
+    background-color: #ccc;
+}
+
+.SaveOrSubmitBtn {
     border-radius: 20px;
     border: 2px solid #F88634;
     color: #F88634;
     background-color: white;
-    padding:10px 5px;
+    padding: 10px 5px;
     width: 130px;
-  }
+}
+.SaveBtn {
+    border-radius: 20px;
+    border: 2px solid #F88634;
+    color: #F88634;
+    background-color: white;
+    padding: 10px 5px;
+    width: 70px;
+    text-align:center
+}
+
+.cancelBtn {
+    border-radius: 20px;
+    border: 2px solid #757575;
+    color: #757575;
+    background-color: white;
+    padding: 10px 5px;
+    width: 70px;
+    text-align: center
+}
 
 ul, li {
     list-style-type: none;
