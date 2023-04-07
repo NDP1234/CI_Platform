@@ -81,17 +81,25 @@ $(document).ready(function () {
                 cascading();
                 $('#CountryInput').val(data.countryId).prop('selected', true);
               
-                $('#cityInput').val(data.cityId).prop('selected', true); // Set city ID as data attribute
+                $('#cityInput').val(data.cityId).prop('selected', true); 
 
                 
 
                 var userSkillList = data.userSkills;
                 var skillList = $(".skilllist ul");
-
+                //for appending in list
                 $.each(userSkillList, function (i, skill) {
                     var li = $("<li>").text(skill.skillName).attr("data-skillid", skill.skillId);
                     skillList.append(li);
                 });
+
+                //for appending in modal
+                var selectedSkillList = $(".selectedskillcontainer");
+                $.each(userSkillList, function (i, SelectedSkill) {
+                    var div = $("<div>").text(SelectedSkill.skillName).attr("class", "border my-2 text-center").attr("value", SelectedSkill.skillId);
+                    selectedSkillList.append(div);
+                });
+                
             }
             else {
                 console.log("No data found");
@@ -154,13 +162,21 @@ $("#rightArrow").click(function () {
 
 
 //when user clicks on save button it is displayed in list
-    $(document).ready(function () {
-        $(".SaveBtn").click(function () {
+$(document).ready(function () {
+
+    $(".SaveBtn").click(function () {
+        $(".list-group").empty();
+        var skillList = [];
             var selectedSkills = "";
             $(".selectedskillcontainer .border").each(function () {
                 var skillName = $(this).text();
-                selectedSkills += "<li class='list-group-item'>" + skillName + "</li>";
+                var skillid = $(this).attr("value");
+                selectedSkills += "<li class='list-group-item' value=" + skillid + ">" + skillName + "</li>";
+                skillList.push(skillid);
+                console.log(skillList);
+                document.getElementById('myskills').value = skillList;
             });
+
             $(".list-group").append(selectedSkills);
         });
     });
@@ -178,4 +194,38 @@ saveBtn.addEventListener('click', function () {
     var modal = bootstrap.Modal.getInstance(modalEl);
     modal.hide();
 });
+
+
+//for visible alert message till 5 seconds
+setTimeout(function () {
+    $('#alert-message').fadeOut('fast');
+}, 5000)
+
+
+
+
+
+//for converting image in base 64 and append to src
+//const fileInput = document.getElementById("fileInput");
+//const userProfile = document.getElementById("userProfile");
+//const avatarInput = document.querySelector('input[type="hidden"][name="Avatar"]');
+
+//userProfile.addEventListener("click", () => {
+//    fileInput.click();
+//});
+
+//fileInput.addEventListener("change", () => {
+//    const file = fileInput.files[0];
+//    const reader = new FileReader();
+
+//    reader.addEventListener("load", () => {
+//        const base64Image = reader.result;
+//        userProfile.src = base64Image;
+//        avatarInput.value = base64Image;
+//    });
+
+//    reader.readAsDataURL(file);
+//});
+
+
 

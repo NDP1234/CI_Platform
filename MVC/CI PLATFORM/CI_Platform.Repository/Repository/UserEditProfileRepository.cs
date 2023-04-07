@@ -25,14 +25,13 @@ namespace CI_Platform.Repository.Repository
         //for returning country and city list
         public UserEditProfileViewModel getCountryAndCityList()
         {
-            //var session_details = HttpContext.Session.GetString("Login");
-
-            //List<User> users = _users.GetUserList();
-            //var profile = users.FirstOrDefault(m => m.Email == session_details);
+            
+            var skills = _db.Skills.ToList();
             UserEditProfileViewModel cityandcountryinfo = new UserEditProfileViewModel()
             {
                 countries = _db.Countries.ToList(),
-                cities = _db.Cities.ToList()
+                cities = _db.Cities.ToList(),
+                Skills = skills
             };
             return cityandcountryinfo;
         }
@@ -46,7 +45,7 @@ namespace CI_Platform.Repository.Repository
             .Where(u => u.UserId == userid)
             .Select(u => new UserEditProfileViewModel.UserSkillViewModel { SkillId = u.SkillId, SkillName = u.Skill.SkillName })
             .ToList();
-
+           
 
             UserEditProfileViewModel userinfo = new UserEditProfileViewModel()
                 {
@@ -61,7 +60,8 @@ namespace CI_Platform.Repository.Repository
                     LinkedInUrl = isExistUser.LinkedInUrl,
                     CountryId = isExistUser.CountryId,
                     CityId = isExistUser.CityId,
-                    userSkills = userSkills
+                    userSkills = userSkills,
+                    
             };
                 
 
@@ -92,6 +92,47 @@ namespace CI_Platform.Repository.Repository
             _db.Users.Update(isExistUser);
             _db.SaveChanges();
 
+            if (myUserModel.skillIds != null)
+            {
+                var selectedSkillIds = myUserModel.skillIds.Split(',').Select(s => long.Parse(s)).ToList();
+                var existingSkillIds = _db.UserSkills.Where(u => u.UserId == userid).Select(u => u.SkillId).ToList();
+
+
+                foreach (var skillId in selectedSkillIds)
+                {
+                    // Add new skills
+                    if (!existingSkillIds.Contains(skillId))
+                    {
+                        var myskill = new UserSkill()
+                        {
+                            UserId = userid,
+                            SkillId = skillId,
+                            CreatedAt = DateTime.UtcNow
+                        };
+                        _db.UserSkills.Add(myskill);
+                    }
+                    //change in UpdatedAt field if new skillList conatins in database
+                    if (existingSkillIds.Contains(skillId))
+                    {
+                        var myexistskill = _db.UserSkills.Where(u => u.SkillId == skillId && u.UserId == userid).FirstOrDefault();
+                        myexistskill.UpdatedAt = DateTime.UtcNow;
+
+                        _db.UserSkills.Update(myexistskill);
+                        _db.SaveChanges();
+                    }
+                }
+
+                // Remove unmatched skills
+                foreach (var skillId in existingSkillIds)
+                {
+                    if (!selectedSkillIds.Contains(skillId))
+                    {
+                        var removeskill = _db.UserSkills.Where(u => u.SkillId == skillId && u.UserId == userid).FirstOrDefault();
+                        _db.UserSkills.Remove(removeskill);
+                        _db.SaveChanges();
+                    }
+                }
+            }
         }
 
         //for update password of user

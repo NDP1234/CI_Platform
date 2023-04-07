@@ -58,10 +58,12 @@
                                 <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
                             </a>
 
+                            
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                            <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                                <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
+                                <li><a class="dropdown-item" href="#">Help Center</a></li>
+                                <li><a class="dropdown-item" href="#">Logout </a></li>
                             </ul>
                         </div>
                     </form>
@@ -102,19 +104,25 @@
         <!-- //////////////////////////////// -->
         @if (TempData["Message"] != null)
         {
-            <div class="alert alert-success">
+            <div class="alert alert-success" id="alert-message">
                 @TempData["Message"]
             </div>
         }
         <hr class="hr" />
         <div class="container">
+             
             <div class="row">
                 <div class="col-xl-3 col-md-12 ">
                     <div class="border p-2  p-3 mb-5 shadow">
-                        <img class="rounded-circle mx-auto d-block w-50 h-50" id="userProfile" src="" alt="unable to load an image">
+                      
+                        <input type="file" id="fileInput" style="display:none;">
+                        <img class="rounded-circle mx-auto d-block w-50 h-50" id="userProfile" src="" alt="profile picture" asp-for="Avatar" />
+                        <input type="hidden" @*asp-for="Avatar"*@ />
+
+
                         <h5 class="text-center" id="UserName" data-user-id="@ViewBag.UserDetails.UserId"></h5>
                         <div class="changePwd text-center">
-                            <!-- <a href="#" class="text-decoration-none text-dark" >Change Password</a> -->
+                           
                             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Change Password
                             </button>
@@ -122,9 +130,9 @@
                     </div>
                 </div>
                 <div class="col-xl-9 col-md-12">
-                    <form method="post">
+                   
 
-
+                    <form method="post" > 
                         <div class="row">
                             <div class="col">
                                 <span class="fs-4 border-dark border-bottom " style="padding-bottom: 1px;">Basic Information</span>
@@ -262,6 +270,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col skilllist">
+                                <input type="hidden" asp-for="skillIds" value="@Model.skillIds" id="myskills" />
                                 <ul class="list-group">
                                    
                                 </ul>
@@ -322,12 +331,14 @@
                             <div class="modal-body">
                                <div class="row">
                                    <div class="col-md-5">
-                                       <div class="skillcontainer">
-                                           <div class="border my-2 text-center">skill no 1</div>
-                                           <div class="border my-2 text-center">skill no 2</div>
-                                           <div class="border my-2 text-center">skill no 3</div>
-                                           <div class="border my-2 text-center">skill no 4</div>
-                                           <div class="border my-2 text-center">skill no 5</div>
+                                       <div class="skillcontainer"> 
+                                           @foreach(var item in Model.Skills)
+                                            {
+                                             
+                                               <div class="border my-2 text-center" value="@item.SkillId">@item.SkillName</div>
+
+                                            }
+                                           
                                        </div>
                                    </div>
                                    <div class="col-md-2  align-self-center">
@@ -340,7 +351,7 @@
                                    </div>
                                    <div class="col-md-5">
                                        <div class="selectedskillcontainer">
-                                           
+                                          
                                        </div>
                                    </div>
                                </div>

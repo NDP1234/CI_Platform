@@ -853,7 +853,7 @@ public partial class CiPlatformContext : DbContext
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.Avatar)
-                .HasMaxLength(2048)
+                .HasMaxLength(1000)
                 .IsUnicode(false)
                 .HasColumnName("avatar");
             entity.Property(e => e.CityId).HasColumnName("city_id");
