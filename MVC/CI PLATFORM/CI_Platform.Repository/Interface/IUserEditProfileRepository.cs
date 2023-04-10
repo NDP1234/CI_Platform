@@ -13,6 +13,6 @@ namespace CI_Platform.Repository.Interface
         public UserEditProfileViewModel getCountryAndCityList();
         public void saveUserDetails(int userid, UserEditProfileViewModel myUserModel);
         public bool UpdatePwd(int uid, UserEditProfileViewModel mychangePwdModel);
-
+        public bool saveContactUsDetails(string username, string useremail, string subject, string message);
     }
 }

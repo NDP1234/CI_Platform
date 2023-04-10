@@ -26,6 +26,8 @@ public partial class CiPlatformContext : DbContext
 
     public virtual DbSet<Comment> Comments { get; set; }
 
+    public virtual DbSet<ContactU> ContactUs { get; set; }
+
     public virtual DbSet<Country> Countries { get; set; }
 
     public virtual DbSet<FavouriteMission> FavouriteMissions { get; set; }
@@ -233,6 +235,30 @@ public partial class CiPlatformContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_comment_user");
+        });
+
+        modelBuilder.Entity<ContactU>(entity =>
+        {
+            entity.HasKey(e => e.ContactUsId).HasName("PK__Contact___2DE2876E4B81F3D0");
+
+            entity.ToTable("Contact_Us");
+
+            entity.Property(e => e.ContactUsId).HasColumnName("contact_us_id");
+            entity.Property(e => e.Message)
+                .HasColumnType("text")
+                .HasColumnName("message");
+            entity.Property(e => e.Subject)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("subject");
+            entity.Property(e => e.UserEmailId)
+                .HasMaxLength(500)
+                .IsUnicode(false)
+                .HasColumnName("user_emailId");
+            entity.Property(e => e.UserName)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("user_name");
         });
 
         modelBuilder.Entity<Country>(entity =>

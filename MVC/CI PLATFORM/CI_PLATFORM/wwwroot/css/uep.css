@@ -24,7 +24,15 @@
     width: 70px;
     text-align:center
 }
-
+.SaveBtn2 {
+    border-radius: 20px;
+    border: 2px solid #F88634;
+    color: #F88634;
+    background-color: white;
+    padding: 10px 5px;
+    width: 100px;
+    text-align: center
+}
 .cancelBtn {
     border-radius: 20px;
     border: 2px solid #757575;
@@ -32,6 +40,15 @@
     background-color: white;
     padding: 10px 5px;
     width: 70px;
+    text-align: center
+}
+.cancelBtn2 {
+    border-radius: 20px;
+    border: 2px solid #757575;
+    color: #757575;
+    background-color: white;
+    padding: 10px 5px;
+    width: 100px;
     text-align: center
 }
 

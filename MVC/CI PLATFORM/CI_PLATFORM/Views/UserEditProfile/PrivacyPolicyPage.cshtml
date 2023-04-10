@@ -1,0 +1,257 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/pAndp.css">
+</head>
+
+<body>
+    <div class="container-fliud">
+        <nav class="navbar navbar-expand-lg navbar-light d-none d-md-block">
+            <div class="container">
+                <button class="navbar-toggler bg-light " type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 mrg-start">
+
+                        <li class="nav-item ">
+                            <a class="nav-link text-dark" asp-action="Story_Listing_Page"
+                                asp-controller="StoryRelated">Stories</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Policy
+                            </a>
+                            <ul class="dropdown-menu ">
+                                <li><a class="dropdown-item " href="#">Policy-1</a></li>
+                                <li><a class="dropdown-item" href="#">Policy-2</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <form class="d-flex" role="search">
+
+                        <div class="dropdown">
+                            <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="@ViewBag.UserDetails.Avatar" alt="" style="border-radius: 50%;" height="30px"
+                                     width="30px">
+                                <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                                <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
+                                <li><a class="dropdown-item" href="#">Help Center</a></li>
+                                <li><a class="dropdown-item" href="#">Logout </a></li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ////////////////////////////////// -->
+        <div class="first-nav d-md-none ">
+            <div id="mySidebar1" class="sidebar d-inline">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+                <a href="#">
+                    Stories
+                </a>
+
+                <a href="#">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Policy
+                        </a>
+                        <ul class="dropdown-menu ">
+                            <li><a class="dropdown-item " href="#">Policy-1</a></li>
+                            <li><a class="dropdown-item" href="#">Policy-2</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else </a></li>
+                        </ul>
+                    </li>
+                </a>
+            </div>
+            <div id="main1" class="d-flex justify-content-between m-2">
+                <button class="openbtn " onclick="openNav()">☰ </button>
+                <img src="/Images/volunteer1.png" class="rounded-pill  " height="40px" width="40px" alt="">
+            </div>
+        </div>
+        <!-- //////////////////////////////// -->
+
+        <hr class="hr" />
+    </div>
+    <div class="container">
+        <div>
+            <h3 class="my-3">Privacy and Cookies Policy</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <nav id="navbar-example3" class="navbar navbar-light bg-light flex-column align-items-stretch p-3">
+                    <nav class="nav nav-pills flex-column">
+                        <a class="nav-link" href="#intro">Introduction </a>
+                        <a class="nav-link" href="#hduc">How does use cookies?</a>
+                        <a class="nav-link" href="#mcp">How to manage your cookie preferences?</a>
+                    </nav>
+                </nav>
+
+
+            </div>
+            <div class="col-md-9 ">
+                <div class="container overflow-auto forscroll" data-bs-spy="scroll" data-bs-target="#navbar-example3"
+                    data-bs-offset="0" tabindex="0">
+                    <div class="contentOfPrivacy">
+                        <div class="intro" id="intro">
+                            <h4>Introduction</h4>
+                            <p class="p-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                deserunt mollit anim id est laborum.</p>
+                            <p class="p-text"> Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+                                veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+                                voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+                                dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                            <p class="p-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                deserunt mollit anim id est laborum.</p>
+                        </div>
+                        <div class="hduc" id="hduc">
+                            <h4>How does use cookies?</h4>
+                            <p class="p-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                                doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et
+                                quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
+                                voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
+                                ratione voluptatem sequi nesciunt.</p>
+                            <h5>Why Optimy Uses These Technologies? </h5>
+                            <p class="p-text">We use these technologies for a number of purposes, such as:</p>
+                            <div class="p-text">
+                                <ul>
+                                    <li> But I must explain to you how all this mistaken idea of denouncing pleasure and
+                                        praising pain.</li>
+                                    <li>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+                                        praesentium voluptatum deleniti atque excepturi sint occaecati cupiditate non
+                                        provident, similique sunt in culpa qui officia deserunt mollitia animi.</li>
+                                    <li>On the other hand, we denounce with righteous indignation and dislike men who
+                                        are so beguiled and demoralized. </li>
+                                    <li>But I must explain to you how all this mistaken idea of denouncing pleasure and
+                                        praising pain.</li>
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore.</li>
+                                </ul>
+                            </div>
+                            <p class="p-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                                doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et
+                                quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
+                                voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
+                                ratione voluptatem sequi nesciunt.</p>
+                        </div>
+                        <div class="mcp" id="mcp">
+                            <h4>How to manage your cookie preferences?</h4>
+                            <p class="p-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                deserunt mollit anim id est laborum.</p>
+                            <p class="p-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                                doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et
+                                quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
+                                voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
+                                ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
+                                dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora
+                                incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
+                                veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid
+                                ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate
+                                velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+                                voluptas nulla pariatur.</p>
+                            <h5>Why Optimy Uses These Technologies? </h5>
+                            <p class="p-text">We use these technologies for a number of purposes, such as:</p>
+                            <div class="p-text">
+                                <h5>Subtitle goes here</h5>
+                                <ol class="list-group list-group-numbered">
+                                    <li>But I must explain to you how all this mistaken idea of denouncing pleasure and
+                                        praising pain. </li>
+                                    <ol>
+                                        <li> On the other hand, we denounce with righteous indignation and dislike men
+                                            who are so beguiled. </li>
+                                        <li> On the other hand, we denounce with righteous indignation and dislike men
+                                            who are so beguiled.</li>
+                                    </ol>
+                                    <li>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+                                        praesentium voluptatum deleniti atque excepturi sint occaecati cupiditate non
+                                        provident, similique sunt in culpa qui officia deserunt mollitia animi. </li>
+                                    <li>On the other hand, we denounce with righteous indignation and dislike men who
+                                        are so beguiled and demoralized</li>
+                                    <li> But I must explain to you how all this mistaken idea of denouncing pleasure and
+                                        praising pain. </li>
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore</li>
+                                </ol>
+                                <div class="heading my-3">
+                                    <h1>The first level heading - H1</h1>
+                                    <h2>The second level heading - H2</h2>
+                                    <h3>The third level heading - H3 </h3>
+                                    <h4>The forth level heading - H4 </h4>
+                                    <h5>The fifth level heading - H5 </h5>
+                                    <h6>The sixth level heading - H6</h6>
+                                </div>
+                            </div>
+                            <p class="p-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                deserunt mollit anim id est laborum.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+    
+    <hr class="hr" />
+    <!-- Footer (Privacy Policy) -->
+    <div class="container">
+        <div class=" mt-3 mb-5 d-inline">
+            <a asp-action="PrivacyPolicyPage" asp-controller="UserEditProfile" class="text-decoration-none text-dark"> Privacy Policy</a>
+        </div>
+        
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

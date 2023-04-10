@@ -25,7 +25,7 @@ namespace CI_Platform.Repository.Repository
         //for returning country and city list
         public UserEditProfileViewModel getCountryAndCityList()
         {
-            
+
             var skills = _db.Skills.ToList();
             UserEditProfileViewModel cityandcountryinfo = new UserEditProfileViewModel()
             {
@@ -45,27 +45,27 @@ namespace CI_Platform.Repository.Repository
             .Where(u => u.UserId == userid)
             .Select(u => new UserEditProfileViewModel.UserSkillViewModel { SkillId = u.SkillId, SkillName = u.Skill.SkillName })
             .ToList();
-           
+
 
             UserEditProfileViewModel userinfo = new UserEditProfileViewModel()
-                {
-                    Avatar = isExistUser.Avatar,
-                    FirstName = isExistUser.FirstName,
-                    LastName = isExistUser.LastName,
-                    EmployeeId = isExistUser?.EmployeeId,
-                    Title = isExistUser.Title,
-                    Department = isExistUser?.Department,
-                    ProfileText = isExistUser.ProfileText,
-                    WhyIVolunteer = isExistUser.WhyIVolunteer,
-                    LinkedInUrl = isExistUser.LinkedInUrl,
-                    CountryId = isExistUser.CountryId,
-                    CityId = isExistUser.CityId,
-                    userSkills = userSkills,
-                    
-            };
-                
+            {
+                Avatar = isExistUser.Avatar,
+                FirstName = isExistUser.FirstName,
+                LastName = isExistUser.LastName,
+                EmployeeId = isExistUser?.EmployeeId,
+                Title = isExistUser.Title,
+                Department = isExistUser?.Department,
+                ProfileText = isExistUser.ProfileText,
+                WhyIVolunteer = isExistUser.WhyIVolunteer,
+                LinkedInUrl = isExistUser.LinkedInUrl,
+                CountryId = isExistUser.CountryId,
+                CityId = isExistUser.CityId,
+                userSkills = userSkills,
 
-                return userinfo;
+            };
+
+
+            return userinfo;
 
         }
 
@@ -139,9 +139,9 @@ namespace CI_Platform.Repository.Repository
         public bool UpdatePwd(int uid, UserEditProfileViewModel mychangePwdModel)
         {
             var isExistUser = _db.Users.Where(u => u.UserId == uid).FirstOrDefault();
-            if (isExistUser != null && mychangePwdModel.ConfirmPassword == mychangePwdModel.NewPassword && mychangePwdModel.OldPassword==isExistUser.Password)
+            if (isExistUser != null && mychangePwdModel.ConfirmPassword == mychangePwdModel.NewPassword && mychangePwdModel.OldPassword == isExistUser.Password)
             {
-                isExistUser.Password=mychangePwdModel.NewPassword;
+                isExistUser.Password = mychangePwdModel.NewPassword;
                 _db.Users.Update(isExistUser);
                 _db.SaveChanges();
                 return true;
@@ -150,6 +150,21 @@ namespace CI_Platform.Repository.Repository
             {
                 return false;
             }
+        }
+
+        //for saving data in contact us schema
+        public bool saveContactUsDetails(string username, string useremail, string subject, string message)
+        {
+            
+            ContactU saveContact = new ContactU();
+            saveContact.Message = message;
+            saveContact.UserEmailId = useremail;
+            saveContact.Subject = subject;
+            saveContact.UserName =  username;
+
+            _db.ContactUs.Add(saveContact);
+            _db.SaveChanges();
+            return true;
         }
     }
 }

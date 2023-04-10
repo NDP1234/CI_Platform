@@ -33,8 +33,17 @@ namespace CI_Platform.Entities.Models.VM
         public string OldPassword { get; set; } = null!;
         public string NewPassword { get; set; } = null!;
         public string ConfirmPassword { get; set; } = null!;
+        //
+        public long ContactUsId { get; set; }
 
-        //public List<UserSkillViewModel> userSkills { get; set; }
+        public string UserName { get; set; } = null!;
+
+        public string UserEmailId { get; set; } = null!;
+
+        public string Subject { get; set; } = null!;
+
+        public string Message { get; set; } = null!;
+        //
         public List<UserSkillViewModel> userSkills { get; set; } = new List<UserSkillViewModel>(); // Initialize with an empty list
 
         public class UserSkillViewModel

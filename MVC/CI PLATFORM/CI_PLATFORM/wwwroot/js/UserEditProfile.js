@@ -28,7 +28,7 @@ function cascading() {
     $('#CountryInput').on('change', function () {
         var countryId = $(this).val(); // get the selected country id
         $('#cityInput').empty(); // clear the city dropdown
-        
+
         // make an AJAX request to get cities for the selected country
         $('#selectedCity').remove();
         $.ajax({
@@ -37,6 +37,7 @@ function cascading() {
             dataType: 'json',
             data: { countryId: countryId },
             success: function (data) {
+                console.log(data);
                 // populate the city dropdown with the returned data
                 $('#cityInput').empty();
 
@@ -44,7 +45,7 @@ function cascading() {
                     $('#cityInput').append($('<option>').attr('value', city.cityId).text(city.name));
                 });
 
-                 //Select the city based on the city ID retrieved from data
+                //Select the city based on the city ID retrieved from data
                 var cityId = $('#cityInput').data('city-id');
                 if (cityId) {
                     $('#cityInput').val(cityId);
@@ -80,10 +81,10 @@ $(document).ready(function () {
                 $('#LinkedInInput').val(data.linkedInUrl);
                 cascading();
                 $('#CountryInput').val(data.countryId).prop('selected', true);
-              
-                $('#cityInput').val(data.cityId).prop('selected', true); 
 
-                
+                $('#cityInput').val(data.cityId).prop('selected', true);
+
+
 
                 var userSkillList = data.userSkills;
                 var skillList = $(".skilllist ul");
@@ -99,7 +100,7 @@ $(document).ready(function () {
                     var div = $("<div>").text(SelectedSkill.skillName).attr("class", "border my-2 text-center").attr("value", SelectedSkill.skillId);
                     selectedSkillList.append(div);
                 });
-                
+
             }
             else {
                 console.log("No data found");
@@ -167,19 +168,19 @@ $(document).ready(function () {
     $(".SaveBtn").click(function () {
         $(".list-group").empty();
         var skillList = [];
-            var selectedSkills = "";
-            $(".selectedskillcontainer .border").each(function () {
-                var skillName = $(this).text();
-                var skillid = $(this).attr("value");
-                selectedSkills += "<li class='list-group-item' value=" + skillid + ">" + skillName + "</li>";
-                skillList.push(skillid);
-                console.log(skillList);
-                document.getElementById('myskills').value = skillList;
-            });
-
-            $(".list-group").append(selectedSkills);
+        var selectedSkills = "";
+        $(".selectedskillcontainer .border").each(function () {
+            var skillName = $(this).text();
+            var skillid = $(this).attr("value");
+            selectedSkills += "<li class='list-group-item' value=" + skillid + ">" + skillName + "</li>";
+            skillList.push(skillid);
+            console.log(skillList);
+            document.getElementById('myskills').value = skillList;
         });
+
+        $(".list-group").append(selectedSkills);
     });
+});
 
 
 //when user saves the modal at a time modal will disappear
@@ -202,30 +203,61 @@ setTimeout(function () {
 }, 5000)
 
 
+$('#SaveBtn2').on('click', function () {
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation.contactUsvalidation')
+        console.log(forms);
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+               
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                
+            })
+    })()
 
 
+    var username = $('#username').val();
+    var useremail = $('#useremail').val();
+    var subject = $('#subjectText').val();
+    var message = $('#messageText').val();
 
-//for converting image in base 64 and append to src
-//const fileInput = document.getElementById("fileInput");
-//const userProfile = document.getElementById("userProfile");
-//const avatarInput = document.querySelector('input[type="hidden"][name="Avatar"]');
+    if (username && useremail && subject && message) {
+        $.ajax({
+            type:"POST",
+            url: '/UserEditProfile/SaveContactUs',
+            data: {
+                username : username,
+                useremail :useremail,
+                subject:subject,
+                message: message
+            },
+            success: function (data) {
+                if (data) {
+                    console.log("success");
+                    $('#successDiv').removeClass('d-none');
+                  
+                }
+                else {
+                    console.log("fail to save");
+                    $('#errorDiv').removeClass('d-none');
+                }
+            }
+        })
+    }
 
-//userProfile.addEventListener("click", () => {
-//    fileInput.click();
-//});
+   
+})
 
-//fileInput.addEventListener("change", () => {
-//    const file = fileInput.files[0];
-//    const reader = new FileReader();
 
-//    reader.addEventListener("load", () => {
-//        const base64Image = reader.result;
-//        userProfile.src = base64Image;
-//        avatarInput.value = base64Image;
-//    });
-
-//    reader.readAsDataURL(file);
-//});
 
 
 
