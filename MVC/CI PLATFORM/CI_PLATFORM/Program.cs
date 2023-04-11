@@ -27,6 +27,7 @@ builder.Services.AddScoped<IStoryListingRepository, StoryListingRepository>();
 builder.Services.AddScoped<IMissionApplicationListingRepository, MissionApplicationListingRepository>();
 builder.Services.AddScoped<IStoryDetailRepository, StoryDetailRepository>();
 builder.Services.AddScoped<IUserEditProfileRepository, UserEditProfileRepository>();
+builder.Services.AddScoped<IVolunteeringTimeSheetRepository, VolunteeringTimeSheetRepository>();
 
 var app = builder.Build();
 
@@ -48,7 +49,8 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+     //pattern: "{controller=Home}/{action=Index}/{id?}");
+     pattern: "{controller=Authentication}/{action=login}");
 
 app.MapControllerRoute(
     name: "Authentication",
@@ -63,6 +65,9 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "UserEditProfile",
     pattern: "{controller=UserEditProfile}/{action=UserEditProfilePage}");
+app.MapControllerRoute(
+    name: "Timesheet",
+    pattern: "{controller=Timesheet}/{action=VolunteeringTimesheet}");
 
 app.Run();
 

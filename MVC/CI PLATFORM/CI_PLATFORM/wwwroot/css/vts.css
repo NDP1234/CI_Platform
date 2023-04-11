@@ -1,0 +1,27 @@
+.goalbasedmission{
+    height:400px;
+}
+.timebasedmission{
+    height:400px;
+}
+.cancelBtn{
+    border-radius: 20px;
+    border: 2px solid #757575;
+    color: #757575;
+    background-color: white;
+    padding: 10px 5px;
+    width: 100px;
+    text-align: center
+}
+.SaveBtn{
+    border-radius: 20px;
+    border: 2px solid #F88634;
+    color: #F88634;
+    background-color: white;
+    padding: 10px 5px;
+    width: 100px;
+    text-align: center
+}
+.Titlewidth{
+    width:30%;
+}

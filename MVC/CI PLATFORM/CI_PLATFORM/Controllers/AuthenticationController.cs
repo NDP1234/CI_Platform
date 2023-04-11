@@ -14,7 +14,7 @@ namespace CI_PLATFORM.Controllers
     {
 
         private readonly CiPlatformContext _db;
-            
+
         public AuthenticationController(CiPlatformContext db)
         {
             _db = db;
@@ -23,7 +23,7 @@ namespace CI_PLATFORM.Controllers
 
 
         //login
-        [Route("Authentication/login", Name = "UserLogin2")]    
+        [Route("Authentication/login", Name = "UserLogin2")]
         public IActionResult login()
         {
             return View();
@@ -33,13 +33,13 @@ namespace CI_PLATFORM.Controllers
         [Route("Authentication/login", Name = "UserLogin1")]
         public IActionResult login(loginViewModel model)
         {
-            
+
             if (ModelState.IsValid)
             {
                 // Check if a user with the provided email and password exists in the database
                 var userExists = _db.Users.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
-          
-                if (userExists!=null)
+
+                if (userExists != null)
                 {
                     // User exists
                     HttpContext.Session.SetString("Login", userExists.Email);
@@ -52,7 +52,7 @@ namespace CI_PLATFORM.Controllers
                 }
             }
 
-            
+
             // ModelState is invalid, or user does not exist, return to the login view with errors
             return View(model);
         }
@@ -94,8 +94,8 @@ namespace CI_PLATFORM.Controllers
                     token += randomint.ToString();
                     token += randomChar.ToString();
 
-                    
-                    var PasswordResetLink = Url.Action("Reset_Password", "Authentication", new {  Token = token }, Request.Scheme);
+
+                    var PasswordResetLink = Url.Action("Reset_Password", "Authentication", new { Token = token }, Request.Scheme);
 
                     var ResetPasswordInfo = new CI_Platform.Entities.Models.PasswordReset()
                     {
@@ -156,7 +156,7 @@ namespace CI_PLATFORM.Controllers
         //    });
         //}
 
-        public IActionResult Reset_Password( string token)
+        public IActionResult Reset_Password(string token)
         {
 
             var temail = _db.PasswordResets.FirstOrDefault(m => m.Token == token);
@@ -167,10 +167,11 @@ namespace CI_PLATFORM.Controllers
                 email = temail.Email,
                 Token = token,
                 CreatedAt = temail.CreateAt,
-                
+
             };
             var curTime = DateTime.Now;
-            if (ExpiredAt.CompareTo(curTime)<0) {
+            if (ExpiredAt.CompareTo(curTime) < 0)
+            {
                 return RedirectToAction("Forgot_Password");
             }
             //return View(new ResetPwdModel
@@ -194,7 +195,7 @@ namespace CI_PLATFORM.Controllers
 
             if (ModelState.IsValid)
             {
-                if (model.NewPassword==model.ConfirmPassword)
+                if (model.NewPassword == model.ConfirmPassword)
                 {
                     var x = context.Users.FirstOrDefault(e => e.Email == model.email);
                     x.Password = model.NewPassword;
@@ -206,7 +207,7 @@ namespace CI_PLATFORM.Controllers
                 else
                 {
                     ModelState.AddModelError("Token", "Reset Passwordword Link is Invalid");
-                    return View(); 
+                    return View();
                 }
             }
             else
@@ -229,22 +230,22 @@ namespace CI_PLATFORM.Controllers
         public IActionResult Registration(RegistrationViewModel model)
         {
 
-            
+
 
 
             if (ModelState.IsValid)
             {
-                
+
                 var user = new CI_Platform.Entities.Models.User
                 {
-                   
+
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Email = model.Email,
                     PhoneNumber = model.PhoneNumber,
                     Password = model.Password,
-                    CityId=1,
-                    CountryId=1
+                    CityId = 1,
+                    CountryId = 1
                 };
 
                 _db.Users.Add(user);
@@ -254,6 +255,12 @@ namespace CI_PLATFORM.Controllers
             }
 
             return View(model);
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("login", "Authentication");
         }
     }
 }

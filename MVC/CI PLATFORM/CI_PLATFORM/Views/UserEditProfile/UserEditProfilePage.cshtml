@@ -62,8 +62,8 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <li><a class="dropdown-item" href="#">Dashboard</a></li>
                                 <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
-                                <li><a class="dropdown-item" href="#">Help Center</a></li>
-                                <li><a class="dropdown-item" href="#">Logout </a></li>
+                                 <li><a class="dropdown-item" asp-action="VolunteeringTimesheet" asp-controller="Timesheet">Volunteering Timesheet</a></li>
+                                <li><a class="dropdown-item" asp-action="Logout" asp-controller="Authentication">Logout </a></li>
                             </ul>
                         </div>
                     </form>
@@ -374,7 +374,7 @@
             <div class=" mt-3 mb-5 d-inline">
                 @*<a href="#" class="text-decoration-none text-dark ms-5"> Contact Us </a>*@
                 <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#ContactUsModal"> Contact Us </button>
-
+            </div>
                 <div class="modal fade" id="ContactUsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <form class="row g-3 needs-validation contactUsvalidation" novalidate>
 
@@ -415,7 +415,7 @@
                                         request has been successfully sent.....!
                                     </div>
                                     <div class="alert alert-danger d-none" id="errorDiv" role="alert">
-                                       request has been fail to send.....!
+                                        request has been fail to send.....!
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -426,7 +426,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            
         </div>
     </div>
 
