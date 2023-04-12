@@ -18,6 +18,7 @@ namespace CI_PLATFORM.Controllers
             _db = db;
             _timesheet = timesheet;
         }
+        //for pass the required fields in the form of view model
         public IActionResult VolunteeringTimesheet()
         {
             var session_details = HttpContext.Session.GetString("Login");
@@ -32,9 +33,12 @@ namespace CI_PLATFORM.Controllers
             List<Mission>? missionTitles = _timesheet.getMissionTitles(userId);
             VTSViewModel vTSViewModel = new VTSViewModel();
             vTSViewModel.Missions = missionTitles;
-            vTSViewModel.timesheets = _db.Timesheets.Where(t=>t.UserId== userId && t.Action==null).ToList();
+            vTSViewModel.timesheets = _db.Timesheets.Where(t => t.UserId == userId && t.Action == null).ToList();
+            vTSViewModel.timesheetsGoalBased = _db.Timesheets.Where(t => t.UserId == userId && t.Action != null).ToList();
             return View(vTSViewModel);
         }
+
+        //for save the time based timesheet details 
         [HttpPost]
         [Route("/Timesheet/SaveTimeBasedTimesheet", Name = "SaveTimeBasedTimesheet")]
         public IActionResult SaveTimeBasedTimesheet(int userid, int TitleId, DateTime Date, int Hours, int Minutes, string Message)
@@ -44,19 +48,62 @@ namespace CI_PLATFORM.Controllers
             return Json(tbasedDetail);
         }
 
+        //for save the edited time based timesheet
         [HttpPost]
-        public bool saveTimeBasedTimesheetDetails(int userid,int timesheetId, int TitleId, DateTime Date, int Hours, int Minutes, string Message)
+        public bool editTimeBasedTimesheetDetails(int uesrId, int timesheetId,  DateTime Date, int Hour, int Minute, string Message)
         {
             var ExistTimesheet = _db.Timesheets.Where(t => t.TimesheetId == timesheetId).FirstOrDefault();
-            ExistTimesheet.UserId=userid;
-            ExistTimesheet.MissionId = TitleId;
-            ExistTimesheet.DateVolunteered=Date;
+            ExistTimesheet.UserId = uesrId;
+            ExistTimesheet.DateVolunteered = Date;
             ExistTimesheet.Notes = Message;
-            var timeOnly = new TimeOnly(Hours, Minutes, 0);
+            var timeOnly = new TimeOnly(Hour, Minute, 0);
             ExistTimesheet.Time = timeOnly;
+            ExistTimesheet.UpdatedAt = DateTime.UtcNow;
             _db.Timesheets.Update(ExistTimesheet);
             _db.SaveChanges();
             return true;
         }
+
+        //for delete the  timesheet detail
+        public bool trashTimeBasedData(int timesheetId)
+        {
+            var ExistTimesheet = _db.Timesheets.Where(t => t.TimesheetId == timesheetId).FirstOrDefault();
+            if (ExistTimesheet != null)
+            {
+                _db.Timesheets.Remove(ExistTimesheet);
+                _db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        //for save the goal based timesheet details
+        [HttpPost]
+        [Route("/Timesheet/SaveGoalBasedTimesheet", Name = "SaveGoalBasedTimesheet")]
+        public IActionResult SaveTimeBasedTimesheet(int userid, int TitleId, DateTime Date, int Action, string Message)
+        {
+
+            var tbasedDetail = _timesheet.saveGoalBasedTimeSheetDetails(userid, TitleId, Date, Action, Message);
+            return Json(tbasedDetail);
+        }
+
+        //for save the edited goal based timesheet
+        [HttpPost]
+        public bool editGoalBasedTimesheetDetails(int uesrId, int timesheetId, DateTime Date, int Action, string Message)
+        {
+            var ExistTimesheet = _db.Timesheets.Where(t => t.TimesheetId == timesheetId).FirstOrDefault();
+            ExistTimesheet.UserId = uesrId;
+            ExistTimesheet.DateVolunteered = Date;
+            ExistTimesheet.Action = Action;
+            ExistTimesheet.Notes = Message;
+            
+            _db.Timesheets.Update(ExistTimesheet);
+            _db.SaveChanges();
+            return true;
+        }
+
     }
 }

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Views\NewFolder\" />
+    <Folder Include="wwwroot\profileImg\" />
   </ItemGroup>
 
   <ItemGroup>

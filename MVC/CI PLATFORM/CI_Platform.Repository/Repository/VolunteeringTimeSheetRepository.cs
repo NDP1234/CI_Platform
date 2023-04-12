@@ -39,5 +39,20 @@ namespace CI_Platform.Repository.Repository
 
             return model;
         }
+        
+        public Timesheet saveGoalBasedTimeSheetDetails(int userid, int TitleId, DateTime Date, int Action, string Message)
+        {
+            Timesheet model = new Timesheet();
+            model.UserId = userid;
+            model.MissionId = TitleId;
+            model.DateVolunteered = Date;
+            model.Status = "APPROVED";
+            model.Action = Action;
+            model.Notes = Message;
+            _db.Timesheets.Add(model);
+            _db.SaveChanges();
+
+            return model;
+        }
     }
 }

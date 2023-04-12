@@ -77,6 +77,7 @@ namespace CI_Platform.Repository.Repository
 
 
             isExistUser.UserId = userid;
+            isExistUser.Avatar = myUserModel.Avatar;
             isExistUser.FirstName = myUserModel.FirstName;
             isExistUser.LastName = myUserModel.LastName;
             isExistUser.EmployeeId = myUserModel.EmployeeId;

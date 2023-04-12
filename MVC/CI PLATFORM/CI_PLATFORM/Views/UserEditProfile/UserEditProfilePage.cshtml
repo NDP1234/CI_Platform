@@ -62,7 +62,7 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <li><a class="dropdown-item" href="#">Dashboard</a></li>
                                 <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
-                                 <li><a class="dropdown-item" asp-action="VolunteeringTimesheet" asp-controller="Timesheet">Volunteering Timesheet</a></li>
+                                <li><a class="dropdown-item" asp-action="VolunteeringTimesheet" asp-controller="Timesheet">Volunteering Timesheet</a></li>
                                 <li><a class="dropdown-item" asp-action="Logout" asp-controller="Authentication">Logout </a></li>
                             </ul>
                         </div>
@@ -110,16 +110,19 @@
         }
         <hr class="hr" />
         <div class="container">
-
+            <form method="post">
             <div class="row">
+                
                 <div class="col-xl-3 col-md-12 ">
+                    
                     <div class="border p-2  p-3 mb-5 shadow">
 
-                        <input type="file" id="fileInput" style="display:none;">
-                        <img class="rounded-circle mx-auto d-block w-50 h-50" id="userProfile" src="" alt="profile picture" asp-for="Avatar" />
-                        <input type="hidden" asp-for="Avatar" />
 
+                         <input type="file" id="fileInput" style="display:none;" onchange="previewImage()">
 
+                            <img class="rounded-circle mx-auto d-block w-50 h-50" id="userProfile" src="/profileImg/default-avatar.png" alt="profile picture" onclick="selectFile()">
+                            <input type="hidden" id="avatarInput" asp-for="Avatar" />
+                       
                         <h5 class="text-center" id="UserName" data-user-id="@ViewBag.UserDetails.UserId"></h5>
                         <div class="changePwd text-center">
 
@@ -132,7 +135,7 @@
                 <div class="col-xl-9 col-md-12">
 
 
-                    <form method="post">
+                    @*<form method="post">*@
                         <div class="row">
                             <div class="col">
                                 <span class="fs-4 border-dark border-bottom " style="padding-bottom: 1px;">Basic Information</span>
@@ -284,9 +287,15 @@
                                 <button class="btn btn-primary SaveOrSubmitBtn float-end mx-2 " value="save" type="submit">Save</button>
                             </div>
                         </div>
-                    </form>
+                    @*</form>*@
+                
                 </div>
-                <!-- Modal for change password-->
+               
+              
+
+         </form>
+        </div>
+          <!-- Modal for change password-->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <form method="post" asp-action="ChangePassword" asp-controller="UserEditProfile">
 
@@ -363,8 +372,6 @@
                 </div>
 
             </div>
-
-        </div>
         <hr class="hr" />
         <!-- Footer (Privacy Policy) -->
         <div class="container">
@@ -375,58 +382,58 @@
                 @*<a href="#" class="text-decoration-none text-dark ms-5"> Contact Us </a>*@
                 <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#ContactUsModal"> Contact Us </button>
             </div>
-                <div class="modal fade" id="ContactUsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <form class="row g-3 needs-validation contactUsvalidation" novalidate>
+            <div class="modal fade" id="ContactUsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <form class="row g-3 needs-validation contactUsvalidation" novalidate>
 
-                        <div class="modal-dialog w-75">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Contact Us</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-dialog w-75">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Contact Us</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label class="mb-1" for="username">Name*</label>
+                                    <input type="text" disabled class="form-control" value="@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName" id="username" placeholder="" required>
+
+
                                 </div>
-                                <div class="modal-body">
-                                    <div class="mb-3">
-                                        <label class="mb-1" for="username">Name*</label>
-                                        <input type="text" disabled class="form-control" value="@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName" id="username" placeholder="" required>
+                                <div class="mb-3">
+                                    <label class="mb-1" for="useremail">Email Address*</label>
+                                    <input type="email" disabled class="form-control" value="@ViewBag.UserDetails.Email" id="useremail" placeholder="" required>
 
 
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="mb-1" for="useremail">Email Address*</label>
-                                        <input type="email" disabled class="form-control" value="@ViewBag.UserDetails.Email" id="useremail" placeholder="" required>
-
-
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="mb-1" for="subject">Subject*</label>
-                                        <input type="text" class="form-control " id="subjectText" placeholder="Enter your Subject" required>
-                                        <div class="invalid-feedback">
-                                            Please enter the subject details.
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="mb-1" for="message">Message*</label>
-                                        <textarea class="form-control" id="messageText" rows="3" placeholder="Enter your Message" required></textarea>
-                                        <div class="invalid-feedback">
-                                            Please enter the message details.
-                                        </div>
-                                    </div>
-                                    <div class="alert alert-success d-none" id="successDiv" role="alert">
-                                        request has been successfully sent.....!
-                                    </div>
-                                    <div class="alert alert-danger d-none" id="errorDiv" role="alert">
-                                        request has been fail to send.....!
+                                </div>
+                                <div class="mb-3">
+                                    <label class="mb-1" for="subject">Subject*</label>
+                                    <input type="text" class="form-control " id="subjectText" placeholder="Enter your Subject" required>
+                                    <div class="invalid-feedback">
+                                        Please enter the subject details.
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn  cancelBtn2 " data-bs-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn SaveBtn2" id="SaveBtn2">Save</button>
+                                <div class="mb-3">
+                                    <label class="mb-1" for="message">Message*</label>
+                                    <textarea class="form-control" id="messageText" rows="3" placeholder="Enter your Message" required></textarea>
+                                    <div class="invalid-feedback">
+                                        Please enter the message details.
+                                    </div>
+                                </div>
+                                <div class="alert alert-success d-none" id="successDiv" role="alert">
+                                    request has been successfully sent.....!
+                                </div>
+                                <div class="alert alert-danger d-none" id="errorDiv" role="alert">
+                                    request has been fail to send.....!
                                 </div>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn  cancelBtn2 " data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn SaveBtn2" id="SaveBtn2">Save</button>
+                            </div>
                         </div>
-                    </form>
-                </div>
-            
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 

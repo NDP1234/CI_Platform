@@ -12,7 +12,7 @@ namespace CI_PLATFORM.Controllers
         private readonly CiPlatformContext _db;
         private readonly IUserEditProfileRepository _UEPrepository;
         public UserEditProfileController(IUserList users, CiPlatformContext db, IUserEditProfileRepository UEPrepository)
-        { 
+        {
             _users = users;
             _db = db;
             _UEPrepository = UEPrepository;
@@ -54,16 +54,16 @@ namespace CI_PLATFORM.Controllers
         public IActionResult GetCitiesForCountry(long countryId)
         {
             var session_details = HttpContext.Session.GetString("Login");
-            
+
             List<User> users = _users.GetUserList();
             var profile = users.FirstOrDefault(m => m.Email == session_details);
-            var cities = _db.Cities.Where(c => c.CountryId == countryId ).ToList();
+            var cities = _db.Cities.Where(c => c.CountryId == countryId).ToList();
             var cityList = cities.Select(c => new { cityId = c.CityId, name = c.Name });
             return Json(cityList);
         }
 
 
-        public IActionResult getuserprofile( int userId)
+        public IActionResult getuserprofile(int userId)
         {
             var udetails = _UEPrepository.GetUserInfo(userId);
             return Json(udetails);
@@ -112,7 +112,24 @@ namespace CI_PLATFORM.Controllers
             {
                 return false;
             }
-            
+
         }
+
+        [HttpPost]
+        public IActionResult SaveImage(IFormFile file)
+        {
+            string fileName = file.FileName;
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/profileImg", fileName);
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
+            return Content("/profileImg/" + fileName);
+        }
+
+
+
     }
 }

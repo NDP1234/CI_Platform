@@ -151,8 +151,8 @@
                                         <td>@item.Time.Value.Hour</td>
                                         <td>@item.Time.Value.Minute</td>
                                         <td>
-                                            <button class="d-inline" type="button" id="editableBtn" data-bs-toggle="modal" data-timesheet-id="@item.TimesheetId" data-bs-target="#editTimeBasedModal-@item.TimesheetId"><i class="bi bi-pencil-square"></i></button>
-                                            <i class="bi bi-trash" data-timesheet-id="@item.TimesheetId"></i>
+                                            <button class="d-inline border-0 bg-white" type="button" id="editableBtn" data-bs-toggle="modal" data-timesheet-id="@item.TimesheetId" data-bs-target="#editTimeBasedModal-@item.TimesheetId"><i class="bi bi-pencil-square"></i></button>
+                                            <button class="d-inline border-0 bg-white TrashBtn" type="button" id="TrashBtn" data-timesheet-id="@item.TimesheetId"><i class="bi bi-trash"></i></button>
 
                                         </td>
                                         <div class="modal fade" id="editTimeBasedModal-@item.TimesheetId" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -171,16 +171,10 @@
                                                             <div class="container">
                                                                 <div class="row mb-3">
                                                                     <div class="col">
-                                                                        <label class="mb-2" for="mymission2">Mission</label>
-                                                                        <select class="form-select" id="mymission2"
-                                                                            aria-label="Default select example" required>
+                                                                        <label class="mb-2" for="mymission-@item.TimesheetId">Mission</label>
 
-                                                                            <option selected value="-1">Select your mission</option>
-                                                                            @foreach (var item2 in Model.Missions.Where(m => m.MissionType == "TIME"))
-                                                                            {
-                                                                                <option value="@item2.MissionId" data-user-id="@ViewBag.UserDetails.UserId" selected>@item2.Title</option>
-                                                                            }
-                                                                        </select>
+                                                                        <input type="text" class="form-control" id="mymission-@item.TimesheetId"
+                                                                           placeholder="Select mission" value="@item.Mission.Title" disabled required>
                                                                         <div class="invalid-feedback">
                                                                             Please select a valid option.
                                                                         </div>
@@ -218,7 +212,7 @@
                                                                     <div class="col">
                                                                         <label class="mb-2" for="myMessage-@item.TimesheetId" class="form-label">Message</label>
                                                                         <textarea type="date" class="form-control" id="myMessage-@item.TimesheetId"
-                                                                              placeholder="Enter your message" rows="4"  required>@item.Notes</textarea>
+                                                                              placeholder="Enter your message" rows="4" required>@item.Notes</textarea>
                                                                         <div class="invalid-feedback">
                                                                             Please write message here.
                                                                         </div>
@@ -274,25 +268,83 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Plantation Programme</td>
-                                    <td>22/02/2022</td>
-                                    <td>0</td>
-                                    <td>
-                                        <i class="bi bi-pencil-square"></i>
-                                        <i class="bi bi-trash"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Education Programme</td>
-                                    <td>22/02/2022</td>
-                                    <td>1</td>
-                                    <td>
-                                        <i class="bi bi-pencil-square"></i>
-                                        <i class="bi bi-trash"></i>
-                                    </td>
-                                </tr>
-
+                                @foreach (var item in Model.timesheetsGoalBased)
+                                {
+                                    <tr>
+                                        <td>@item.Mission.Title</td>
+                                        <td>@item.DateVolunteered</td>
+                                        <td>@item.Action</td>
+                                        <td>
+                                            <button class="d-inline border-0 bg-white" type="button" id="editableBtn2" data-bs-toggle="modal" data-timesheet-id="@item.TimesheetId" data-bs-target="#editGoalBasedModal-@item.TimesheetId"><i class="bi bi-pencil-square"></i></button>
+                                            <button class="d-inline border-0 bg-white TrashBtn" type="button" id="TrashBtn2" data-timesheet-id="@item.TimesheetId"><i class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <div class="modal fade" id="editGoalBasedModal-@item.TimesheetId" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                     aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Please input below Volunteering Goal</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="row g-3 needs-validation " novalidate>
+                                                        <div class="container">
+                                                            <div class="row mb-3">
+                                                                <div class="col">
+                                                                  
+                                                                    <label class="mb-2" for="mymission2-@item.TimesheetId">Mission</label>
+                                                                    <input type="text" class="form-control" id="mymission2-@item.TimesheetId"
+                                                                       placeholder="Select mission" value="@item.Mission.Title" disabled required>
+                                                                    <div class="invalid-feedback">
+                                                                        Please select a valid option.
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col">
+                                                                    <label class="mb-2" for="myAction-@item.TimesheetId" class="form-label">Actions</label>
+                                                                    <input type="text" class="form-control" id="myAction-@item.TimesheetId"
+                                                                       placeholder="Enter Actions" value="@item.Action">
+                                                                    <div class="invalid-feedback">
+                                                                        Please specify a valid action.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col">
+                                                                    <label class="mb-2" for="myDate2-@item.TimesheetId" class="form-label">
+                                                                        Date Volunteered
+                                                                    </label>
+                                                                    <input type="date" class="form-control" id="myDate2-@item.TimesheetId"
+                                                                       placeholder="Select date" value="@item.DateVolunteered.ToString("yyyy-MM-dd")">
+                                                                    <div class="invalid-feedback">
+                                                                        Please select a valid date.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col">
+                                                                    <label class="mb-2" for="myMessage2-@item.TimesheetId" class="form-label">Message</label>
+                                                                    <textarea type="date" class="form-control" id="myMessage2-@item.TimesheetId"
+                                                                          placeholder="Enter your message" rows="4">@item.Notes</textarea>
+                                                                    <div class="invalid-feedback">
+                                                                        Please write message here.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn cancelBtn" data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="button" data-timesheet-id="@item.TimesheetId" data-user-id="@ViewBag.UserDetails.UserId" id="SaveBtn4" class="btn SaveBtn">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -393,42 +445,55 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form class="row g-3 needs-validation " novalidate>
+                            <form class="row g-3 needs-validation goalbasedtimesheet" novalidate>
                                 <div class="container">
                                     <div class="row mb-3">
                                         <div class="col">
                                             <label class="mb-2" for="mymission2">Mission</label>
                                             <select class="form-select" id="mymission2"
-                                                    aria-label="Default select example">
-                                                <option selected>Open this select menu</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
+                                                    aria-label="Default select example" required>
+                                                <option selected value="-1">Select your mission</option>
+                                                @foreach (var item in Model.Missions.Where(m => m.MissionType == "GOAL"))
+                                                {
+                                                    <option value="@item.MissionId" data-user-id="@ViewBag.UserDetails.UserId">@item.Title</option>
+                                                }
+
                                             </select>
+                                            <div class="invalid-feedback">
+                                                Please select a valid option.
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col">
                                             <label class="mb-2" for="myAction" class="form-label">Actions</label>
                                             <input type="text" class="form-control" id="myAction"
-                                                   placeholder="Enter Actions">
+                                                   placeholder="Enter Actions" required>
+                                            <div class="invalid-feedback">
+                                                Please specify a valid action.
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col">
                                             <label class="mb-2" for="myDate2" class="form-label">
-                                                Date
-                                                Volunteered
+                                                Date Volunteered
                                             </label>
                                             <input type="date" class="form-control" id="myDate2"
-                                                   placeholder="Select date">
+                                                   placeholder="Select date" required>
+                                            <div class="invalid-feedback">
+                                                Please select a valid date.
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col">
                                             <label class="mb-2" for="myMessage2" class="form-label">Message</label>
                                             <textarea type="date" class="form-control" id="myMessage2"
-                                                      placeholder="Enter your message" rows="4"></textarea>
+                                                      placeholder="Enter your message" rows="4" required></textarea>
+                                            <div class="invalid-feedback">
+                                                Please write message here.
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -436,7 +501,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn cancelBtn" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn SaveBtn">Submit</button>
+                            <button type="button" data-user-id="@ViewBag.UserDetails.UserId" id="SaveBtn3" class="btn SaveBtn">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -448,7 +513,7 @@
         <hr class="hr" />
         <div class="container">
             <div class="d-flex bd-highlight mb-3">
-                <div class="p-2 bd-highlight">Privacy Policy</div>
+                <a asp-action="PrivacyPolicyPage" asp-controller="UserEditProfile" class="text-decoration-none text-dark p-2"> Privacy Policy</a>
                 <div class="p-2 bd-highlight">Cookie Policy</div>
                 <div class="p-2 bd-highlight">Terms of Use</div>
                 <div class="ms-auto p-2 bd-highlight"> 2019 Optimy.com. All rights reserved</div>

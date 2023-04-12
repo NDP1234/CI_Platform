@@ -10,6 +10,7 @@ namespace CI_Platform.Entities.Models.VM
     {
         public List<Mission> Missions { get; set; }
         public List<Timesheet> timesheets { get; set; }
+        public List<Timesheet> timesheetsGoalBased { get; set; }
 
         //public long MissionId { get; set; }
         public long TimesheetId { get; set; }

@@ -143,18 +143,7 @@ namespace CI_PLATFORM.Controllers
 
 
 
-        //Reset Password
-        //public IActionResult Reset_Password(string email, string token)
-        //{
-
-
-
-        //    return View(new ResetPwdModel
-        //    {
-        //        email = email,
-        //        Token = token
-        //    });
-        //}
+       
 
         public IActionResult Reset_Password(string token)
         {
@@ -174,11 +163,7 @@ namespace CI_PLATFORM.Controllers
             {
                 return RedirectToAction("Forgot_Password");
             }
-            //return View(new ResetPwdModel
-            //{
-            //    email = temail.Email,
-            //    Token = token
-            //});
+            
             ViewBag.emailDetails = temail.Email;
             return View();
         }

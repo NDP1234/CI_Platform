@@ -13,5 +13,7 @@ namespace CI_Platform.Repository.Interface
         public List<Mission> getMissionTitles(int userid);
 
         public Timesheet saveTimeBasedTimeSheetDetails(int userid, int TitleId, DateTime Date, TimeOnly time, string Message);
+
+        public Timesheet saveGoalBasedTimeSheetDetails(int userid, int TitleId, DateTime Date, int Action, string Message);
     }
 }
