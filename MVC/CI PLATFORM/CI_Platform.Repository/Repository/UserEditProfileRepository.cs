@@ -103,6 +103,7 @@ namespace CI_Platform.Repository.Repository
                 {
                     // Add new skills
                     if (!existingSkillIds.Contains(skillId))
+
                     {
                         var myskill = new UserSkill()
                         {

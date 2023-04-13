@@ -68,6 +68,11 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "Timesheet",
     pattern: "{controller=Timesheet}/{action=VolunteeringTimesheet}");
+app.MapControllerRoute(
+    name: "Admin",
+    pattern: "{controller=Admin}/{action=AdminDashBoard}");
+
+
 
 app.Run();
 
