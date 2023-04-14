@@ -318,7 +318,7 @@
                                                                         Date Volunteered
                                                                     </label>
                                                                     <input type="date" class="form-control" id="myDate2-@item.TimesheetId"
-                                                                       placeholder="Select date" value="@item.DateVolunteered.ToString("yyyy-MM-dd")">
+                                                                       placeholder="Select date" value="@item.DateVolunteered.ToString("yyyy-MM-dd")" >
                                                                     <div class="invalid-feedback">
                                                                         Please select a valid date.
                                                                     </div>
@@ -375,7 +375,7 @@
                                                 <option selected value="-1">Select your mission</option>
                                                 @foreach (var item in Model.Missions.Where(m => m.MissionType == "TIME"))
                                                 {
-                                                    <option value="@item.MissionId" data-user-id="@ViewBag.UserDetails.UserId">@item.Title</option>
+                                                    <option value="@item.MissionId" data-user-id="@ViewBag.UserDetails.UserId" data-start-date="@item.StartDate" data-end-date="@item.EndDate" >@item.Title</option>
                                                 }
                                             </select>
                                             <div class="invalid-feedback">
@@ -387,7 +387,7 @@
                                         <div class="col">
                                             <label class="mb-2" for="myDate" class="form-label">Date Volunteered</label>
                                             <input type="date" class="form-control" id="myDate"
-                                                   placeholder="Select date" required>
+                                                   placeholder="Select date"  max="@DateTime.Now.ToString("yyyy-MM-dd")" required>
                                             <div class="invalid-feedback">
                                                 Please select a valid date.
                                             </div>
@@ -455,7 +455,7 @@
                                                 <option selected value="-1">Select your mission</option>
                                                 @foreach (var item in Model.Missions.Where(m => m.MissionType == "GOAL"))
                                                 {
-                                                    <option value="@item.MissionId" data-user-id="@ViewBag.UserDetails.UserId">@item.Title</option>
+                                                    <option value="@item.MissionId" data-user-id="@ViewBag.UserDetails.UserId" data-start-date="@item.StartDate" data-end-date="@item.EndDate">@item.Title</option>
                                                 }
 
                                             </select>
@@ -480,7 +480,7 @@
                                                 Date Volunteered
                                             </label>
                                             <input type="date" class="form-control" id="myDate2"
-                                                   placeholder="Select date" required>
+                                                   placeholder="Select date"  max="@DateTime.Now.ToString("yyyy-MM-dd")" required>
                                             <div class="invalid-feedback">
                                                 Please select a valid date.
                                             </div>

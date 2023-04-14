@@ -129,28 +129,34 @@ $(".skillcontainer .border").click(function () {
 });
 
 
-// Add click event handlers to the arrow buttons
+
 $("#rightArrow").click(function () {
     // Check if a skill is selected
     var selectedSkill = $(".skillcontainer .border.selected");
     if (selectedSkill.length > 0) {
+        // Check if the selected skill is already in the selected skill container
+        var selectedSkillName = selectedSkill.text();
+        var alreadySelected = $(".selectedskillcontainer .border:contains('" + selectedSkillName + "')").length > 0;
+        if (alreadySelected) {
+            // Show a popup message to the user
+            alert("You have already selected this skill.");
+            return;
+        }
         // Clone the selected skill and append it to the selected skill container
         var clonedSkill = selectedSkill.clone();
         clonedSkill.removeClass("selected");
         $(".selectedskillcontainer").append(clonedSkill);
-    }
 
-    // Add click event handlers to the skills in the selected skill container
-    $(".selectedskillcontainer .border").click(function () {
-        // Remove any previous selection
-        $(".selectedskillcontainer .border.selected").removeClass("selected");
-        $(".skillcontainer .border.selected").removeClass("selected");
-        // Highlight the selected skill
-        $(this).addClass("selected");
-    });
+        // Add click event handlers to the skills in the selected skill container
+        $(".selectedskillcontainer .border").click(function () {
+            // Remove any previous selection
+            $(".selectedskillcontainer .border.selected").removeClass("selected");
+            $(".skillcontainer .border.selected").removeClass("selected");
+            // Highlight the selected skill
+            $(this).addClass("selected");
+        });
 
-
-    $("#leftArrow").click(function () {
+        $("#leftArrow").click(function () {
         // Check if a skill is selected in the selected skill container
         var selectedSelectedSkill = $(".selectedskillcontainer .border.selected");
         if (selectedSelectedSkill.length > 0) {
@@ -158,7 +164,7 @@ $("#rightArrow").click(function () {
             selectedSelectedSkill.remove();
         }
     });
-
+    }
 });
 
 
@@ -290,9 +296,10 @@ function previewImage() {
             }
         };
         xhr.send(formData);
-    } else {
-        preview.src = "/profileImg/default-avatar.png";
-        document.getElementById("avatarInput").value = "";
     }
+    //else {
+    //    preview.src = "/profileImg/default-avatar.png";
+    //    document.getElementById("avatarInput").value = "";
+    //}
 }
 

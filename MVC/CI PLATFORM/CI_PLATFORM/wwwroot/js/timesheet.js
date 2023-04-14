@@ -75,7 +75,9 @@ $("#editableBtn").on("click", function () {
 });
 
 //for update and save the edited timesheet details  
-$('#SaveBtn2').on('click', function () {
+
+$(document).on('click','#SaveBtn2', function () {
+    console.log("click on sv btn")
     var timesheetId = $(this).data('timesheet-id');
     var userId = $('#SaveBtn2').data('user-id');
     var mDate = $(`#myDate-${timesheetId}`).val();
@@ -238,3 +240,56 @@ $('#SaveBtn4').on('click', function () {
     })
 
 })
+
+
+    $(document).ready(function () {
+        // add event listener to mymission select element
+        $("#mymission").change(function () {
+            var selectedMission = $(this).find(":selected");
+            var startTime = selectedMission.data("start-date");
+  
+
+            var formatedStartTime = DateFormatting(startTime);
+
+
+            console.log(selectedMission);
+            console.log(startTime);
+            console.log(formatedStartTime);
+
+            // update myDate input element's min and max attributes based on selected mission's start and end times
+            $("#myDate").attr("min", formatedStartTime);
+
+        });
+    });
+
+ $(document).ready(function () {
+        // add event listener to mymission select element
+     $("#mymission2").change(function () {
+            var selectedMission = $(this).find(":selected");
+            var startTime = selectedMission.data("start-date");
+  
+
+            var formatedStartTime = DateFormatting(startTime);
+
+
+            console.log(selectedMission);
+            console.log(startTime);
+            console.log(formatedStartTime);
+
+            // update myDate input element's min and max attributes based on selected mission's start and end times
+            $("#myDate2").attr("min", formatedStartTime);
+
+        });
+    });
+
+
+function DateFormatting(dateStr) {
+    var dateParts = dateStr.split(" ");
+    var date = dateParts[0].split("-");
+    var formattedDate = date[2] + "-" + date[1] + "-" + date[0];
+    return formattedDate;
+}
+
+
+    
+

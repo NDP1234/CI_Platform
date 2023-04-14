@@ -4,6 +4,9 @@
 @{
     Layout = null;
 }
+@using CI_Platform.Entities.Models.VM;
+@model AdminViewModel;
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +17,7 @@
     <title>Admin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
     <style>
         .orangeClr {
             background-color: #F88634;
@@ -30,7 +34,7 @@
         }
 
         .nav-pills .nav-link.active,
-        .nav-pills .show>.nav-link {
+        .nav-pills .show > .nav-link {
             color: #F88634;
             background-color: white;
         }
@@ -49,13 +53,14 @@
             border-radius: 20px;
             color: #F88634;
         }
-        .icon-green{
+
+        .icon-green {
             color: #14C506;
         }
-        .icon-red{
+
+        .icon-red {
             color: red;
         }
-       
     </style>
 
 </head>
@@ -63,131 +68,152 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
             <!-- sidebar -->
             <div class="col-md-12 col-lg-3 col-12 col-xs-12 col-xl-2">
-                
+
                 <!--  -->
                 <button class="btn btn-primary d-md-block d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-                   Menu
+                    Menu
                 </button>
                 <div class="offcanvas offcanvas-start " tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                     <div class="offcanvas-header">
-                      <h5 class="offcanvas-title" id="offcanvasExampleLabel">NAVIGATION</h5>
-                      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">NAVIGATION</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
                         <div class="sidebar-container">
                             <div class="nav d-flex flex-column nav-pills me-3 orangeClr" id="v-pills-tab" role="tablist"
-                                aria-orientation="vertical">
+                                 aria-orientation="vertical">
                                 <h6 class="text-start ms- text-light ms-3 my-4">NAVIGATION</h6>
                                 <button class="nav-link txtwhite active d-flex w-100 mx-2 my-2" id="v-pills-User-tab"
-                                    data-bs-toggle="pill" data-bs-target="#v-pills-User" type="button" role="tab"
-                                    aria-controls="v-pills-home" aria-selected="true"><i
-                                        class="bi bi-person me-3"></i>User</button>
+                                        data-bs-toggle="pill" data-bs-target="#v-pills-User" type="button" role="tab"
+                                        aria-controls="v-pills-home" aria-selected="true">
+                                    <i class="bi bi-person me-3"></i>User
+                                </button>
                                 <button class="nav-link txtwhite d-flex w-100 mx-2 my-2" id="v-pills-CMSPage-tab"
-                                    data-bs-toggle="pill" data-bs-target="#v-pills-CMSPage" type="button" role="tab"
-                                    aria-controls="v-pills-profile" aria-selected="false"><i
-                                        class="bi bi-file-earmark-text-fill me-3"></i>CMS Page</button>
+                                        data-bs-toggle="pill" data-bs-target="#v-pills-CMSPage" type="button" role="tab"
+                                        aria-controls="v-pills-profile" aria-selected="false">
+                                    <i class="bi bi-file-earmark-text-fill me-3"></i>CMS Page
+                                </button>
                                 <button class="nav-link txtwhite d-flex w-100 mx-2 my-2" id="v-pills-Mission-tab"
-                                    data-bs-toggle="pill" data-bs-target="#v-pills-Mission" type="button" role="tab"
-                                    aria-controls="v-pills-messages" aria-selected="false"><i
-                                        class="bi bi-bullseye me-3"></i>Mission</button>
+                                        data-bs-toggle="pill" data-bs-target="#v-pills-Mission" type="button" role="tab"
+                                        aria-controls="v-pills-messages" aria-selected="false">
+                                    <i class="bi bi-bullseye me-3"></i>Mission
+                                </button>
                                 <button class="nav-link txtwhite d-flex w-100 mx-2 my-2" id="v-pills-MissionTheme-tab"
-                                    data-bs-toggle="pill" data-bs-target="#v-pills-MissionTheme" type="button" role="tab"
-                                    aria-controls="v-pills-settings" aria-selected="false"><i
-                                        class="bi bi-layout-wtf me-3"></i>Mission Theme</button>
+                                        data-bs-toggle="pill" data-bs-target="#v-pills-MissionTheme" type="button" role="tab"
+                                        aria-controls="v-pills-settings" aria-selected="false">
+                                    <i class="bi bi-layout-wtf me-3"></i>Mission Theme
+                                </button>
                                 <button class="nav-link txtwhite d-flex w-100 mx-2 my-2" id="v-pills-MissionSkills-tab"
-                                    data-bs-toggle="pill" data-bs-target="#v-pills-MissionSkills" type="button" role="tab"
-                                    aria-controls="v-pills-settings" aria-selected="false"><i
-                                        class="bi bi-tools me-3"></i>Mission
-                                    Skills</button>
+                                        data-bs-toggle="pill" data-bs-target="#v-pills-MissionSkills" type="button" role="tab"
+                                        aria-controls="v-pills-settings" aria-selected="false">
+                                    <i class="bi bi-tools me-3"></i>Mission
+                                    Skills
+                                </button>
                                 <button class="nav-link txtwhite d-flex w-100 mx-2 my-2" id="v-pills-MissionApplication-tab"
-                                    data-bs-toggle="pill" data-bs-target="#v-pills-MissionApplication" type="button" role="tab"
-                                    aria-controls="v-pills-settings" aria-selected="false"><i
-                                        class="bi bi-folder-minus me-3"></i>Mission Application</button>
+                                        data-bs-toggle="pill" data-bs-target="#v-pills-MissionApplication" type="button" role="tab"
+                                        aria-controls="v-pills-settings" aria-selected="false">
+                                    <i class="bi bi-folder-minus me-3"></i>Mission Application
+                                </button>
                                 <button class="nav-link txtwhite d-flex w-100 mx-2 my-2" id="v-pills-Story-tab"
-                                    data-bs-toggle="pill" data-bs-target="#v-pills-Story" type="button" role="tab"
-                                    aria-controls="v-pills-settings" aria-selected="false"><i
-                                        class="bi bi-bookmark-star-fill me-3"></i>Story</button>
+                                        data-bs-toggle="pill" data-bs-target="#v-pills-Story" type="button" role="tab"
+                                        aria-controls="v-pills-settings" aria-selected="false">
+                                    <i class="bi bi-bookmark-star-fill me-3"></i>Story
+                                </button>
                                 <button class="nav-link txtwhite d-flex w-100 mx-2 my-2" id="v-pills-BannerManagement-tab"
-                                    data-bs-toggle="pill" data-bs-target="#v-pills-BannerManagement" type="button" role="tab"
-                                    aria-controls="v-pills-settings" aria-selected="false">Banner Management</button>
+                                        data-bs-toggle="pill" data-bs-target="#v-pills-BannerManagement" type="button" role="tab"
+                                        aria-controls="v-pills-settings" aria-selected="false">
+                                    Banner Management
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!--  -->
-
                 <!-- normal sidebar -->
                 <div class="sidebar-container d-none d-lg-block ">
                     <div class="nav d-flex flex-column nav-pills me-3 orangeClr" id="v-pills-tab" role="tablist"
-                        aria-orientation="vertical">
+                         aria-orientation="vertical">
                         <h6 class="text-start ms- text-light ms-3 my-4">NAVIGATION</h6>
                         <button class="nav-link txtwhite active d-flex w-100 mx-2 my-2" id="v-pills-User-tab"
-                            data-bs-toggle="pill" data-bs-target="#v-pills-User" type="button" role="tab"
-                            aria-controls="v-pills-home" aria-selected="true"><i
-                                class="bi bi-person me-3"></i>User</button>
+                                data-bs-toggle="pill" data-bs-target="#v-pills-User" type="button" role="tab"
+                                aria-controls="v-pills-home" aria-selected="true">
+                            <i class="bi bi-person me-3"></i>User
+                        </button>
                         <button class="nav-link txtwhite d-flex w-100 mx-2 my-2" id="v-pills-CMSPage-tab"
-                            data-bs-toggle="pill" data-bs-target="#v-pills-CMSPage" type="button" role="tab"
-                            aria-controls="v-pills-profile" aria-selected="false"><i
-                                class="bi bi-file-earmark-text-fill me-3"></i>CMS Page</button>
+                                data-bs-toggle="pill" data-bs-target="#v-pills-CMSPage" type="button" role="tab"
+                                aria-controls="v-pills-profile" aria-selected="false">
+                            <i class="bi bi-file-earmark-text-fill me-3"></i>CMS Page
+                        </button>
                         <button class="nav-link txtwhite d-flex w-100 mx-2 my-2" id="v-pills-Mission-tab"
-                            data-bs-toggle="pill" data-bs-target="#v-pills-Mission" type="button" role="tab"
-                            aria-controls="v-pills-messages" aria-selected="false"><i
-                                class="bi bi-bullseye me-3"></i>Mission</button>
+                                data-bs-toggle="pill" data-bs-target="#v-pills-Mission" type="button" role="tab"
+                                aria-controls="v-pills-messages" aria-selected="false">
+                            <i class="bi bi-bullseye me-3"></i>Mission
+                        </button>
                         <button class="nav-link txtwhite d-flex w-100 mx-2 my-2" id="v-pills-MissionTheme-tab"
-                            data-bs-toggle="pill" data-bs-target="#v-pills-MissionTheme" type="button" role="tab"
-                            aria-controls="v-pills-settings" aria-selected="false"><i
-                                class="bi bi-layout-wtf me-3"></i>Mission Theme</button>
+                                data-bs-toggle="pill" data-bs-target="#v-pills-MissionTheme" type="button" role="tab"
+                                aria-controls="v-pills-settings" aria-selected="false">
+                            <i class="bi bi-layout-wtf me-3"></i>Mission Theme
+                        </button>
                         <button class="nav-link txtwhite d-flex w-100 mx-2 my-2" id="v-pills-MissionSkills-tab"
-                            data-bs-toggle="pill" data-bs-target="#v-pills-MissionSkills" type="button" role="tab"
-                            aria-controls="v-pills-settings" aria-selected="false"><i
-                                class="bi bi-tools me-3"></i>Mission
-                            Skills</button>
+                                data-bs-toggle="pill" data-bs-target="#v-pills-MissionSkills" type="button" role="tab"
+                                aria-controls="v-pills-settings" aria-selected="false">
+                            <i class="bi bi-tools me-3"></i>Mission
+                            Skills
+                        </button>
                         <button class="nav-link txtwhite d-flex w-100 mx-2 my-2" id="v-pills-MissionApplication-tab"
-                            data-bs-toggle="pill" data-bs-target="#v-pills-MissionApplication" type="button" role="tab"
-                            aria-controls="v-pills-settings" aria-selected="false"><i
-                                class="bi bi-folder-minus me-3"></i>Mission Application</button>
+                                data-bs-toggle="pill" data-bs-target="#v-pills-MissionApplication" type="button" role="tab"
+                                aria-controls="v-pills-settings" aria-selected="false">
+                            <i class="bi bi-folder-minus me-3"></i>Mission Application
+                        </button>
                         <button class="nav-link txtwhite d-flex w-100 mx-2 my-2" id="v-pills-Story-tab"
-                            data-bs-toggle="pill" data-bs-target="#v-pills-Story" type="button" role="tab"
-                            aria-controls="v-pills-settings" aria-selected="false"><i
-                                class="bi bi-bookmark-star-fill me-3"></i>Story</button>
+                                data-bs-toggle="pill" data-bs-target="#v-pills-Story" type="button" role="tab"
+                                aria-controls="v-pills-settings" aria-selected="false">
+                            <i class="bi bi-bookmark-star-fill me-3"></i>Story
+                        </button>
                         <button class="nav-link txtwhite d-flex w-100 mx-2 my-2" id="v-pills-BannerManagement-tab"
-                            data-bs-toggle="pill" data-bs-target="#v-pills-BannerManagement" type="button" role="tab"
-                            aria-controls="v-pills-settings" aria-selected="false">Banner Management</button>
+                                data-bs-toggle="pill" data-bs-target="#v-pills-BannerManagement" type="button" role="tab"
+                                aria-controls="v-pills-settings" aria-selected="false">
+                            Banner Management
+                        </button>
                     </div>
                 </div>
                 <!-- normal sidebar -->
-                
+
             </div>
             <!-- sidebar -->
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
             <!-- tab -->
-            <div class="col-md-12 col-lg-9 col-xs-12 col-12 col-xl-10" >
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <div class="col-md-12 col-lg-9 col-xs-12 col-12 col-xl-10">
+                <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
                 <!-- navbar-top -->
                 <nav class="navbar navbar-expand-lg navbar-light d-none d-md-block shadow p-3 mb-5 bg-white rounded">
                     <div class="container">
                         <button class="navbar-toggler bg-light " type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0 mrg-start">
 
                                 <li class="nav-item currentTime">
-                                    Thursday, November 3, 2022, 10:06 AM
+                                    @*Thursday, November 3, 2022, 10:06 AM*@
+                                    @*@DateTime.Now.ToString("dddd, MMMM d, yyyy, h:mm tt")*@
+                                    <span id="current-time"></span>
+
+
                                 </li>
                             </ul>
                             <form class="d-flex" role="search">
 
                                 <div class="dropdown">
                                     <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                       data-bs-toggle="dropdown" aria-expanded="false">
                                         <img src="/images/user-img.png" alt="" style="border-radius: 50%;" height="30px"
-                                            width="30px">
+                                             width="30px">
                                         <span>Nirav Patel</span>
                                     </a>
 
@@ -202,13 +228,12 @@
                     </div>
                 </nav>
                 <!-- navbar-top -->
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
                 <!-- for displaying tabs -->
                 <div class="tab-content col-md-10 col-8 w-100 me-5" id="v-pills-tabContent">
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                    <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
                     <!-- UserTAB -->
-                    <div class="tab-pane fade  show active " id="v-pills-User" role="tabpanel"
-                        aria-labelledby="v-pills-home-tab">
+                    <div class="tab-pane fade  show active " id="v-pills-User" role="tabpanel" aria-labelledby="v-pills-home-tab">
                         <span class="mb-0 border-bottom border-dark fs-3">User</span>
                         <hr class="w-100 mtop">
 
@@ -219,8 +244,8 @@
                                 <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
                                 <form id="search-form" method="get" class="d-inline">
                                     <input type="search" class="form-control rounded d-inline srch " id="search-input"
-                                        name="query" placeholder="Search."  aria-label="Search"
-                                        aria-describedby="search-addon">
+                                           name="query" placeholder="Search." aria-label="Search"
+                                           aria-describedby="search-addon">
                                 </form>
 
                             </div>
@@ -245,18 +270,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="border">
-                                        <td>Adam</td>
-                                        <td>Baldwin</td>
-                                        <td>Adam12546@yahs.com</td>
-                                        <td>1364978456</td>
-                                        <td>HR</td>
-                                        <td class="greentext">Active</td>
-                                        <td>
-                                            <button class="border-0 bg-white"><i class="bi bi-pencil-square "></i></button>
-                                            <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
-                                        </td>
-                                    </tr>
+                                    @foreach (var item in Model.users)
+                                    {
+                                        <tr class="border">
+                                            <td>@item.FirstName</td>
+                                            <td>@item.LastName</td>
+                                            <td>@item.Email</td>
+                                            <td>@item.EmployeeId</td>
+                                            <td>@item.Department</td>
+                                            @if (@item.Status == 1)
+                                            {
+                                                <td class="greentext">
+                                                    Active
+                                                </td>
+                                            }
+                                            <td>
+                                                <button class="border-0 bg-white"><i class="bi bi-pencil-square "></i></button>
+                                                <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
+                                            </td>
+                                        </tr>
+                                    }
+
                                 </tbody>
                             </table>
                         </div>
@@ -264,27 +298,26 @@
 
                     </div>
                     <!-- UserTAB -->
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                    <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
                     <!-- CMS-Page Tab -->
-                    <div class="tab-pane fade " id="v-pills-CMSPage" role="tabpanel"
-                        aria-labelledby="v-pills-profile-tab">
+                    <div class="tab-pane fade " id="v-pills-CMSPage" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                         <span class="mb-0 border-bottom border-dark fs-3">CMS Page</span>
                         <hr class="w-100 mtop">
-
-                        <div class="d-flex w-100 my-4">
+                        <div class="cmscontent">
+                            <div class="d-flex w-100 my-4">
                             <!-- searchbar -->
                             <div class=" srch  w-25">
 
                                 <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
                                 <form id="search-form" method="get" class="d-inline">
                                     <input type="search" class="form-control rounded d-inline srch " id="search-input"
-                                        name="query" placeholder="Search." aria-label="Search"
-                                        aria-describedby="search-addon">
+                                           name="query" placeholder="Search." aria-label="Search"
+                                           aria-describedby="search-addon">
                                 </form>
 
                             </div>
                             <div class="ms-auto me-5 mt-4">
-                                <button class="btn addUserBtn "><span>Add</span><i class="bi bi-plus"></i></button>
+                                <button class="btn addUserBtn" id="addCMS"><span>Add</span><i class="bi bi-plus"></i></button>
                             </div>
                         </div>
 
@@ -296,7 +329,7 @@
                                         <th scope="col">Title</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Action</th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -312,13 +345,14 @@
                             </table>
                         </div>
                         <!-- CMS table -->
+                        </div>
                         
+
                     </div>
                     <!-- CMS-Page Tab -->
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                    <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
                     <!-- mission page -->
-                    <div class="tab-pane fade " id="v-pills-Mission" role="tabpanel"
-                        aria-labelledby="v-pills-messages-tab">
+                    <div class="tab-pane fade " id="v-pills-Mission" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                         <span class="mb-0 border-bottom border-dark fs-3">Mission</span>
                         <hr class="w-100 mtop">
 
@@ -329,8 +363,8 @@
                                 <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
                                 <form id="search-form" method="get" class="d-inline">
                                     <input type="search" class="form-control rounded d-inline srch " id="search-input"
-                                        name="query" placeholder="Search." aria-label="Search"
-                                        aria-describedby="search-addon">
+                                           name="query" placeholder="Search." aria-label="Search"
+                                           aria-describedby="search-addon">
                                 </form>
 
                             </div>
@@ -352,31 +386,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="border">
-                                        <td>Various versions have evolved over</td>
-                                        <td>Goal</td>
-                                        <td>10/02/2019</td>
-                                        <td>20/02/2022</td>
-                                        <td>
-                                            <button class="border-0 bg-white"><i class="bi bi-pencil-square "></i></button>
-                                            <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
-                                        </td>
-                                    </tr>
+                                    @foreach (var item in Model.Missions)
+                                    {
+                                        <tr class="border">
+                                            <td>@item.Title</td>
+                                            <td>@item.MissionType</td>
+                                            <td>@item.StartDate</td>
+                                            <td>@item.EndDate</td>
+                                            <td>
+                                                <button class="border-0 bg-white"><i class="bi bi-pencil-square "></i></button>
+                                                <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
+                                            </td>
+                                        </tr>
+                                    }
+
                                 </tbody>
                             </table>
                         </div>
                         <!-- Mission table -->
                     </div>
                     <!-- mission page -->
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                    <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                     <!-- mission theme -->
                     <div class="tab-pane fade " id="v-pills-MissionTheme" role="tabpanel"
-                        aria-labelledby="v-pills-settings-tab">tab4</div>
-                    <div class="tab-pane fade " id="v-pills-MissionSkills" role="tabpanel"
-                        aria-labelledby="v-pills-settings-tab">tab5</div>
-                    <!-- Mission Application Tab -->
-                    <div class="tab-pane fade " id="v-pills-MissionApplication" role="tabpanel"
                         aria-labelledby="v-pills-settings-tab">
-                        <span class="mb-0 border-bottom border-dark fs-3">Mission Application</span>
+                        <span class="mb-0 border-bottom border-dark fs-3">Mission Theme</span>
                         <hr class="w-100 mtop">
 
                         <div class="d-flex w-100 my-4">
@@ -388,6 +422,123 @@
                                     <input type="search" class="form-control rounded d-inline srch " id="search-input"
                                         name="query" placeholder="Search." aria-label="Search"
                                         aria-describedby="search-addon">
+                                </form>
+
+                            </div>
+                            <div class="ms-auto me-5 mt-4">
+                                <button class="btn addUserBtn "><span>Add</span><i class="bi bi-plus"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- mission theme table -->
+                        <div class="table-responsive">
+                            <table class="table table-borderless ">
+                                <thead>
+                                    <tr class="bg-light">
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col" class="text-center">Action</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.MissionThemes)
+                                    {
+                                        <tr class="border">
+                                        <td>@item.Title</td>
+                                            @if (@item.Status == 1)
+                                            {
+                                                <td class="greentext">Active</td>
+                                            }
+                                            
+                                        <td class="text-center">
+                                            <button class="border-0 bg-white"><i class="bi bi-pencil-square "></i></button>
+                                            <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
+                                        </td>
+                                    </tr>
+                                    }
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- mission theme table -->
+                    </div>
+                     <!-- mission theme -->
+                     <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+                     <!-- mission skill -->
+                    <div class="tab-pane fade " id="v-pills-MissionSkills" role="tabpanel"
+                        aria-labelledby="v-pills-settings-tab">
+                        <span class="mb-0 border-bottom border-dark fs-3">Mission Skills</span>
+                        <hr class="w-100 mtop">
+
+                        <div class="d-flex w-100 my-4">
+                            <!-- searchbar -->
+                            <div class=" srch  w-25">
+
+                                <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
+                                <form id="search-form" method="get" class="d-inline">
+                                    <input type="search" class="form-control rounded d-inline srch " id="search-input"
+                                        name="query" placeholder="Search." aria-label="Search"
+                                        aria-describedby="search-addon">
+                                </form>
+
+                            </div>
+                            <div class="ms-auto me-5 mt-4">
+                                <button class="btn addUserBtn "><span>Add</span><i class="bi bi-plus"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Mission skill table -->
+                        <div class="table-responsive">
+                            <table class="table table-borderless ">
+                                <thead>
+                                    <tr class="bg-light">
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col" class="text-center">Action</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.missionSkills)
+                                    {
+                                        <tr class="border">
+                                        <td>@item.SkillName</td>
+                                        @if(@item.Status==1){
+                                            <td class="greentext">Active</td>
+                                        }
+                                        <td class="text-center">
+                                            <button class="border-0 bg-white"><i class="bi bi-pencil-square "></i></button>
+                                            <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
+                                        </td>
+                                    </tr>
+                                    }
+                                        
+                                    
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--Mission skill table -->
+                    </div>
+                    <!-- mission skill -->
+                    <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+                    <!-- Mission Application Tab -->
+                    <div class="tab-pane fade " id="v-pills-MissionApplication" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                        <span class="mb-0 border-bottom border-dark fs-3">Mission Application</span>
+                        <hr class="w-100 mtop">
+
+                        <div class="d-flex w-100 my-4">
+                            <!-- searchbar -->
+                            <div class=" srch  w-25">
+
+                                <i class="fas fa-search "><img src="~/images/search.png" alt=""></i>
+                                <form id="search-form" method="get" class="d-inline">
+                                    <input type="search" class="form-control rounded d-inline srch " id="search-input"
+                                           name="query" placeholder="Search." aria-label="Search"
+                                           aria-describedby="search-addon">
                                 </form>
 
                             </div>
@@ -406,26 +557,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="border">
-                                        <td>Various versions have evolved over</td>
-                                        <td>5164978456</td>
-                                        <td>1364978465</td>
-                                        <td>Adam Baldwin</td>
-                                        <td>15/02/2024</td>
-                                        <td>
-                                            <button class="border-0 bg-white"><i class="bi bi-check-circle icon-green"></i></button>
-                                            <button class="border-0 bg-white"><i class="bi bi-x-circle icon-red"></i></button>
-                                        </td>
-                                    </tr>
+                                    @foreach (var item in Model.MissionApplications)
+                                    {
+                                        <tr class="border">
+                                            <td>@item.Mission.Title</td>
+                                            <td>@item.MissionId</td>
+                                            <td>@item.UserId</td>
+                                            <td>@item.User.FirstName @item.User.LastName</td>
+                                            <td>@item.AppliedAt</td>
+                                            <td>
+                                                <button class="border-0 bg-white"><i class="bi bi-check-circle icon-green"></i></button>
+                                                <button class="border-0 bg-white"><i class="bi bi-x-circle icon-red"></i></button>
+                                            </td>
+                                        </tr>
+                                    }
+
                                 </tbody>
                             </table>
                         </div>
                         <!-- Mission Application table -->
                     </div>
                     <!-- Mission Application Tab -->
+                    <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
                     <!-- story tab -->
-                    <div class="tab-pane fade " id="v-pills-Story" role="tabpanel"
-                        aria-labelledby="v-pills-settings-tab">
+                    <div class="tab-pane fade " id="v-pills-Story" role="tabpanel" aria-labelledby="v-pills-settings-tab">
                         <span class="mb-0 border-bottom border-dark fs-3">Story</span>
                         <hr class="w-100 mtop">
 
@@ -436,8 +592,8 @@
                                 <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
                                 <form id="search-form" method="get" class="d-inline">
                                     <input type="search" class="form-control rounded d-inline srch " id="search-input"
-                                        name="query" placeholder="Search." aria-label="Search"
-                                        aria-describedby="search-addon">
+                                           name="query" placeholder="Search." aria-label="Search"
+                                           aria-describedby="search-addon">
                                 </form>
 
                             </div>
@@ -454,25 +610,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="border">
-                                        <td>Desktop publishing software also the leap into</td>
-                                        <td>Adam Baldwin</td>
-                                        <td>Desktop publishing software</td>
-                                        <td>
-                                            <button class="btn addUserBtn "><span>View</span></button>
-                                            <button class="border-0 bg-white"><i class="bi bi-check-circle icon-green"></i></button>
-                                            <button class="border-0 bg-white"><i class="bi bi-x-circle icon-red"></i></button>
-                                            <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
-                                        </td>
-                                    </tr>
+                                    @foreach (var item in Model.Stories)
+                                    {
+                                        <tr class="border">
+                                            <td>@item.Title</td>
+                                            <td>@item.User.FirstName @item.User.LastName</td>
+                                            <td>@item.Mission.Title</td>
+                                            <td>
+                                                <a class="btn addUserBtn " asp-action="Story_detail_page" asp-controller="StoryRelated" asp-route-id="@item.StoryId"><span>View</span></a>
+                                                <button class="border-0 bg-white"><i class="bi bi-check-circle icon-green"></i></button>
+                                                <button class="border-0 bg-white"><i class="bi bi-x-circle icon-red"></i></button>
+                                                <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
+                                            </td>
+                                        </tr>
+                                    }
+
                                 </tbody>
                             </table>
                         </div>
                         <!-- Story table -->
                     </div>
-                     <!-- story tab -->
+                    <!-- story tab -->
                     <div class="tab-pane fade " id="v-pills-BannerManagement" role="tabpanel"
-                        aria-labelledby="v-pills-settings-tab">tab8</div>
+                         aria-labelledby="v-pills-settings-tab">
+                        tab8
+                    </div>
                 </div>
                 <!-- for displaying tabs -->
 
@@ -483,8 +645,43 @@
 
 
 
-     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+          setInterval(function() {
+            var now = new Date();
+            //for full name of the day of the week
+            var day = now.toLocaleString('default', { weekday: 'long' });
+            //for full name of the month
+            var month = now.toLocaleString('default', { month: 'long' });
+             //Get date
+            var date = now.getDate();
+            //get year
+            var year = now.getFullYear();
+            //get hour
+            var hour = now.getHours();
+            //get minute
+            var minute = now.getMinutes();
+            //for select PM or AM
+            var ampm = hour >= 12 ? 'PM' : 'AM';
+            //for convert hour in based of 12-hour format
+            hour = hour % 12;
+            //for displaying 12 instaed of 0 hour
+            hour = hour ? hour : 12;
+            //for append thw zero if minute is in single digit
+            minute = minute < 10 ? '0' + minute : minute;
+            //provide required format
+            var time = day + ', ' + month + ' ' + date + ', ' + year + ', ' + hour + ':' + minute + ' ' + ampm;
+            $('#current-time').text(time);
+          }, 1000);
+        });
+
+        $('#addCMS').on('click', function(){
+
+           $('.cmscontent').load('@Url.Content("/Admin/_CMSAddPage")');
+        })
+    </script>
 </body>
 
 </html>

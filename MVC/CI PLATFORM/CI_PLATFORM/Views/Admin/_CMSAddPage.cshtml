@@ -1,0 +1,91 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add CMS Page</title>
+    
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+    <style>
+        .cancelBtn{
+      border-radius: 20px;
+      border: 2px solid #757575;
+      color: #757575;
+      background-color: white;
+      padding:10px 5px;
+      width: 130px;
+    }
+    .SaveBtn{
+      border-radius: 20px;
+      border: 2px solid #F88634;
+      color: #F88634;
+      background-color: white;
+      padding:10px 5px;
+      width: 130px;
+    }
+    </style>
+</head>
+<body>
+    <div class="container-fluid mt-2">
+        <div class="row ">
+            <div class="col bg-light py-3 ">
+                <h4 class="ps-4">Add</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="my-3">
+                    <label for="cmstitle" class="form-label ">Title</label>
+                    <input type="text" class="form-control" id="cmstitle" aria-describedby="titleHelp">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <label for="editor1">Description</label>
+                <textarea cols="80" id="editor1" name="editor1" rows="4">&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href=&quot;https://ckeditor.com/&quot;&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="my-3">
+                    <label for="cmsSlug" class="form-label ">Slug</label>
+                    <input type="text" class="form-control" id="cmsSlug" aria-describedby="SlugHelp">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="my-3">
+                    <label for="cmsStatus" class="form-label ">Status</label>
+                    <input type="text" class="form-control" id="cmsStatus" aria-describedby="StatusHelp">
+                </div>
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <button class="btn btn-success SaveBtn float-end " type="button">Save</button>
+                <a class="btn btn-primary cancelBtn float-end mx-2" href="/Admin/AdminDashBoard" type="button">cancel</a>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        CKEDITOR.replace('editor1', {
+      height: 200,
+      baseFloatZIndex: 10005
+
+    });
+
+    </script>
+</body>
+</html>
