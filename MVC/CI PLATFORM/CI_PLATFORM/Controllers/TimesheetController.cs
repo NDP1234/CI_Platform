@@ -2,10 +2,12 @@
 using CI_Platform.Entities.Models;
 using CI_Platform.Entities.Models.VM;
 using CI_Platform.Repository.Interface;
+//using CI_PLATFORM.FILTERS;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CI_PLATFORM.Controllers
 {
+    //[ServiceFilter(typeof(IsUserProfileValidated))]
     public class TimesheetController : Controller
     {
         private readonly IUserList _users;
@@ -83,7 +85,7 @@ namespace CI_PLATFORM.Controllers
         //for save the goal based timesheet details
         [HttpPost]
         [Route("/Timesheet/SaveGoalBasedTimesheet", Name = "SaveGoalBasedTimesheet")]
-        public IActionResult SaveTimeBasedTimesheet(int userid, int TitleId, DateTime Date, int Action, string Message)
+        public IActionResult SaveGoalBasedTimesheet(int userid, int TitleId, DateTime Date, int Action, string Message)
         {
 
             var tbasedDetail = _timesheet.saveGoalBasedTimeSheetDetails(userid, TitleId, Date, Action, Message);
@@ -99,7 +101,7 @@ namespace CI_PLATFORM.Controllers
             ExistTimesheet.DateVolunteered = Date;
             ExistTimesheet.Action = Action;
             ExistTimesheet.Notes = Message;
-            
+            ExistTimesheet.UpdatedAt = DateTime.UtcNow;
             _db.Timesheets.Update(ExistTimesheet);
             _db.SaveChanges();
             return true;

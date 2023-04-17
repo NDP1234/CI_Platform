@@ -15,5 +15,10 @@ namespace CI_Platform.Repository.Interface
         public List<Story> getStoryDetailList();
         public List<Skill> getMissionSkillList();
         public List<MissionTheme> getMissionThemeList();
+
+         public bool forApproveMissionApplication(int MissionAppId) ;
+         public bool forDeclineMissionApplication(int MissionAppId) ;
+         public bool forPublishStory(int StoryId) ;
+         public bool forDeclineStory(int StoryId) ;
     }
 }

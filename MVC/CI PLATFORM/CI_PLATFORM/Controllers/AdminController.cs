@@ -28,9 +28,31 @@ namespace CI_PLATFORM.Controllers
             viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
             return View(viewmodel);
         }
+
         public IActionResult _CMSAddPage()
         {
             return View();
+        }
+
+        public bool ApproveMissionApplication(int MissionApplicationId)
+        {
+           var approveMisApp = _adminPrepository.forApproveMissionApplication(MissionApplicationId);
+            return approveMisApp;
+        }
+        public bool DeclineMissionApplication(int MissionApplicationId)
+        {
+           var declineMisApp = _adminPrepository.forDeclineMissionApplication(MissionApplicationId);
+            return declineMisApp;
+        } 
+        public bool PublishStory(int StoryId)
+        {
+           var pubStory = _adminPrepository.forPublishStory(StoryId);
+            return pubStory;
+        } 
+        public bool DeclineStory(int StoryId)
+        {
+           var declineStory = _adminPrepository.forDeclineStory(StoryId);
+            return declineStory;
         }
     }
 }

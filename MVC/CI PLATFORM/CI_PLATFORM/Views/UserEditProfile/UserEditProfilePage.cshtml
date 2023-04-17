@@ -108,34 +108,35 @@
                 @TempData["Message"]
             </div>
         }
+        
         <hr class="hr" />
         <div class="container">
-            <form method="post">
-            <div class="row">
-                
-                <div class="col-xl-3 col-md-12 ">
-                    
-                    <div class="border p-2  p-3 mb-5 shadow">
+            <form method="post" class="row g-3 needs-validation userprofileValidation" novalidate>
+                <div class="row">
+
+                    <div class="col-xl-3 col-md-12 ">
+
+                        <div class="border p-2  p-3 mb-5 shadow">
 
 
-                         <input type="file" id="fileInput" style="display:none;" onchange="previewImage()">
+                            <input type="file" id="fileInput" style="display:none;" onchange="previewImage()">
 
                             <img class="rounded-circle mx-auto d-block w-50 h-50" id="userProfile" src="" alt="profile picture" onclick="selectFile()">
                             <input type="hidden" id="avatarInput" asp-for="Avatar" />
-                       
-                        <h5 class="text-center" id="UserName" data-user-id="@ViewBag.UserDetails.UserId"></h5>
-                        <div class="changePwd text-center">
 
-                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                Change Password
-                            </button>
+                            <h5 class="text-center" id="UserName" data-user-id="@ViewBag.UserDetails.UserId"></h5>
+                            <div class="changePwd text-center">
+
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Change Password
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-9 col-md-12">
+                    <div class="col-xl-9 col-md-12">
 
 
-                    @*<form method="post">*@
+                        @*<form method="post">*@
                         <div class="row">
                             <div class="col">
                                 <span class="fs-4 border-dark border-bottom " style="padding-bottom: 1px;">Basic Information</span>
@@ -147,6 +148,9 @@
                                 <div class="mb-3">
                                     <label for="nameInput" class="form-label ">Name*</label>
                                     <input type="text" class="form-control " id="nameInput" asp-for="FirstName" placeholder="Enter your name" required>
+                                    <div class="invalid-feedback">
+                                        Please enter your first name.
+                                    </div>
                                 </div>
 
                             </div>
@@ -154,6 +158,9 @@
                                 <div class="mb-3">
                                     <label for="surnameInput" class="form-label ">Surname*</label>
                                     <input type="text" class="form-control " id="surnameInput" asp-for="LastName" placeholder="Enter your surname" required>
+                                    <div class="invalid-feedback">
+                                        Please enter your last name.
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -167,7 +174,7 @@
                             <div class="col-12 col-md-12 col-xl-6">
                                 <div class="mb-3">
                                     <label for="ManagerInput" class="form-label ">Manager</label>
-                                    <input type="text" class="form-control " id="ManagerInput" placeholder="Enter your manager details">
+                                    <input type="text" class="form-control " id="ManagerInput" placeholder="Badal Patel">
                                 </div>
                             </div>
                         </div>
@@ -190,6 +197,9 @@
                                 <div class="mb-3">
                                     <label for="MyProfileTextarea" class="form-label">My Profile*</label>
                                     <textarea class="form-control" id="MyProfileTextarea" rows="3" asp-for="ProfileText" placeholder="Enter your comments..." required></textarea>
+                                    <div class="invalid-feedback">
+                                        Please enter your profile information.
+                                    </div>
                                 </div>
 
                             </div>
@@ -235,6 +245,9 @@
                                             <option value="@item.CountryId">@item.Name</option>
                                         }
                                     </select>
+                                    <div class="invalid-feedback">
+                                        Please select a country.
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -253,7 +266,7 @@
                                         <option selected>Select your Availablity</option>
                                         <option value="1">daily</option>
                                         <option value="2">weekly</option>
-                                        <option value="3">week-end</option>
+                                        <option value="3" selected>week-end</option>
                                         <option value="3">monthly</option>
                                     </select>
                                 </div>
@@ -287,154 +300,154 @@
                                 <button class="btn btn-primary SaveOrSubmitBtn float-end mx-2 " value="save" type="submit">Save</button>
                             </div>
                         </div>
-                    @*</form>*@
-                
-                </div>
-               
-              
+                        @*</form>*@
 
-         </form>
+                    </div>
+
+
+
+            </form>
         </div>
-          <!-- Modal for change password-->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <form method="post" asp-action="ChangePassword" asp-controller="UserEditProfile">
+        <!-- Modal for change password-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <form method="post" asp-action="ChangePassword" asp-controller="UserEditProfile">
 
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">change Password</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="mb-3">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">change Password</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
 
-                                        <input type="password" class="form-control " id="oldpwd" asp-for="OldPassword" placeholder="Enter old password" required>
-                                    </div>
-                                    <div class="mb-3">
+                                <input type="password" class="form-control " id="oldpwd" asp-for="OldPassword" placeholder="Enter old password" required>
+                            </div>
+                            <div class="mb-3">
 
-                                        <input type="password" class="form-control " id="newpwd" asp-for="NewPassword" placeholder="Enter new password" required>
-                                    </div>
-                                    <div class="mb-3">
+                                <input type="password" class="form-control " id="newpwd" asp-for="NewPassword" placeholder="Enter new password" required>
+                            </div>
+                            <div class="mb-3">
 
-                                        <input type="password" class="form-control " id="confirmpwd" asp-for="ConfirmPassword" placeholder="Enter confrim password" required>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-primary">Change Password</button>
-                                </div>
+                                <input type="password" class="form-control " id="confirmpwd" asp-for="ConfirmPassword" placeholder="Enter confrim password" required>
                             </div>
                         </div>
-                    </form>
-                </div>
-
-                <!-- Modal for add skills -->
-                <div class="modal fade" id="skillmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Add your Skills</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <div class="skillcontainer">
-                                            @foreach (var item in Model.Skills)
-                                            {
-
-                                                <div class="border my-2 text-center" value="@item.SkillId">@item.SkillName</div>
-
-                                            }
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2  align-self-center">
-                                        <div class="row my-1 ">
-                                            <button class="bg-white " id="rightArrow"> <i class="bi bi-chevron-right"></i> </button>
-                                        </div>
-                                        <div class="row my-1">
-                                            <button class="bg-white" id="leftArrow"> <i class="bi bi-chevron-left"></i> </button>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="selectedskillcontainer">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer d-flex justify-content-start">
-                                <button type="button" class="btn cancelBtn text-center" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn SaveBtn text-center">Save </button>
-                            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Change Password</button>
                         </div>
                     </div>
                 </div>
+            </form>
+        </div>
 
-            </div>
-        <hr class="hr" />
-        <!-- Footer (Privacy Policy) -->
-        <div class="container">
-            <div class=" mt-3 mb-5 d-inline">
-                <a asp-action="PrivacyPolicyPage" asp-controller="UserEditProfile" class="text-decoration-none text-dark"> Privacy Policy</a>
-            </div>
-            <div class=" mt-3 mb-5 d-inline">
-                @*<a href="#" class="text-decoration-none text-dark ms-5"> Contact Us </a>*@
-                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#ContactUsModal"> Contact Us </button>
-            </div>
-            <div class="modal fade" id="ContactUsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <form class="row g-3 needs-validation contactUsvalidation" novalidate>
+        <!-- Modal for add skills -->
+        <div class="modal fade" id="skillmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add your Skills</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="skillcontainer">
+                                    @foreach (var item in Model.Skills)
+                                    {
 
-                    <div class="modal-dialog w-75">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Contact Us</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label class="mb-1" for="username">Name*</label>
-                                    <input type="text" disabled class="form-control" value="@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName" id="username" placeholder="" required>
+                                        <div class="border my-2 text-center" value="@item.SkillId">@item.SkillName</div>
 
+                                    }
 
-                                </div>
-                                <div class="mb-3">
-                                    <label class="mb-1" for="useremail">Email Address*</label>
-                                    <input type="email" disabled class="form-control" value="@ViewBag.UserDetails.Email" id="useremail" placeholder="" required>
-
-
-                                </div>
-                                <div class="mb-3">
-                                    <label class="mb-1" for="subject">Subject*</label>
-                                    <input type="text" class="form-control " id="subjectText" placeholder="Enter your Subject" required>
-                                    <div class="invalid-feedback">
-                                        Please enter the subject details.
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="mb-1" for="message">Message*</label>
-                                    <textarea class="form-control" id="messageText" rows="3" placeholder="Enter your Message" required></textarea>
-                                    <div class="invalid-feedback">
-                                        Please enter the message details.
-                                    </div>
-                                </div>
-                                <div class="alert alert-success d-none" id="successDiv" role="alert">
-                                    request has been successfully sent.....!
-                                </div>
-                                <div class="alert alert-danger d-none" id="errorDiv" role="alert">
-                                    request has been fail to send.....!
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn  cancelBtn2 " data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn SaveBtn2" id="SaveBtn2">Save</button>
+                            <div class="col-md-2  align-self-center">
+                                <div class="row my-1 ">
+                                    <button class="bg-white " id="rightArrow"> <i class="bi bi-chevron-right"></i> </button>
+                                </div>
+                                <div class="row my-1">
+                                    <button class="bg-white" id="leftArrow"> <i class="bi bi-chevron-left"></i> </button>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="selectedskillcontainer">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </form>
+                    <div class="modal-footer d-flex justify-content-start">
+                        <button type="button" class="btn cancelBtn text-center" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn SaveBtn text-center">Save </button>
+                    </div>
+                </div>
             </div>
-
         </div>
+
+    </div>
+    <hr class="hr" />
+    <!-- Footer (Privacy Policy) -->
+    <div class="container">
+        <div class=" mt-3 mb-5 d-inline">
+            <a asp-action="PrivacyPolicyPage" asp-controller="UserEditProfile" class="text-decoration-none text-dark"> Privacy Policy</a>
+        </div>
+        <div class=" mt-3 mb-5 d-inline">
+            @*<a href="#" class="text-decoration-none text-dark ms-5"> Contact Us </a>*@
+            <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#ContactUsModal"> Contact Us </button>
+        </div>
+        <div class="modal fade" id="ContactUsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <form class="row g-3 needs-validation contactUsvalidation" novalidate>
+
+                <div class="modal-dialog w-75">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Contact Us</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="mb-1" for="username">Name*</label>
+                                <input type="text" disabled class="form-control" value="@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName" id="username" placeholder="" required>
+
+
+                            </div>
+                            <div class="mb-3">
+                                <label class="mb-1" for="useremail">Email Address*</label>
+                                <input type="email" disabled class="form-control" value="@ViewBag.UserDetails.Email" id="useremail" placeholder="" required>
+
+
+                            </div>
+                            <div class="mb-3">
+                                <label class="mb-1" for="subject">Subject*</label>
+                                <input type="text" class="form-control " id="subjectText" placeholder="Enter your Subject" required>
+                                <div class="invalid-feedback">
+                                    Please enter the subject details.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="mb-1" for="message">Message*</label>
+                                <textarea class="form-control" id="messageText" rows="3" placeholder="Enter your Message" required></textarea>
+                                <div class="invalid-feedback">
+                                    Please enter the message details.
+                                </div>
+                            </div>
+                            <div class="alert alert-success d-none" id="successDiv" role="alert">
+                                request has been successfully sent.....!
+                            </div>
+                            <div class="alert alert-danger d-none" id="errorDiv" role="alert">
+                                request has been fail to send.....!
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn  cancelBtn2 " data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn SaveBtn2" id="SaveBtn2">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

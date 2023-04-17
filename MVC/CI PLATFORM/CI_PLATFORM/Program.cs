@@ -1,6 +1,9 @@
 using CI_Platform.Entities.Data;
 using CI_Platform.Repository.Interface;
 using CI_Platform.Repository.Repository;
+//using CI_PLATFORM.FILTERS;
+
+
 //using CI_PLATFORM.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,6 +32,13 @@ builder.Services.AddScoped<IStoryDetailRepository, StoryDetailRepository>();
 builder.Services.AddScoped<IUserEditProfileRepository, UserEditProfileRepository>();
 builder.Services.AddScoped<IVolunteeringTimeSheetRepository, VolunteeringTimeSheetRepository>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+//builder.Services.AddScoped<IsUserProfileValidated>();
+
+
+
+
+
+
 
 var app = builder.Build();
 

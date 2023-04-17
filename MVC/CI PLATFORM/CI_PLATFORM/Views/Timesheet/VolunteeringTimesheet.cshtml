@@ -278,8 +278,7 @@
                                             <button class="d-inline border-0 bg-white" type="button" id="editableBtn2" data-bs-toggle="modal" data-timesheet-id="@item.TimesheetId" data-bs-target="#editGoalBasedModal-@item.TimesheetId"><i class="bi bi-pencil-square"></i></button>
                                             <button class="d-inline border-0 bg-white TrashBtn" type="button" id="TrashBtn2" data-timesheet-id="@item.TimesheetId"><i class="bi bi-trash"></i></button>
                                         </td>
-                                    </tr>
-                                    <div class="modal fade" id="editGoalBasedModal-@item.TimesheetId" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                        <div class="modal fade" id="editGoalBasedModal-@item.TimesheetId" tabindex="-1" aria-labelledby="exampleModalLabel"
                                      aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
@@ -344,6 +343,8 @@
                                             </div>
                                         </div>
                                     </div>
+                                    </tr>
+                                    
                                 }
                             </tbody>
                         </table>

@@ -209,8 +209,9 @@ $("#editableBtn2").on("click", function () {
 
 
 //for update and save the edited goal based timesheet details 
-$('#SaveBtn4').on('click', function () {
-    var timesheetId = $('#SaveBtn4').data('timesheet-id');
+//$('#SaveBtn4').on('click', function () {
+$(document).on('click', '#SaveBtn4', function () {
+    var timesheetId = $(this).data('timesheet-id');
     var userId = $('#SaveBtn4').data('user-id');
     var myDate = $(`#myDate2-${timesheetId}`).val();
     var myAction = $(`#myAction-${timesheetId}`).val();

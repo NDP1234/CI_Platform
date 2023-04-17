@@ -48,8 +48,50 @@ namespace CI_Platform.Repository.Repository
 
         public List<MissionTheme> getMissionThemeList()
         {
-            var ListOfMissionTheme =  _db.MissionThemes.ToList();
+            var ListOfMissionTheme = _db.MissionThemes.ToList();
             return ListOfMissionTheme;
+        }
+
+
+        public bool forApproveMissionApplication(int MissionAppId)
+        {
+            var MissionApplicationExist = _db.MissionApplications.Where(m => m.MissionApplicationId == MissionAppId).FirstOrDefault();
+
+            MissionApplicationExist.ApprovalStatus = "APPROVE";
+            _db.MissionApplications.Update(MissionApplicationExist);
+            _db.SaveChanges();
+
+            return true;
+        }
+        public bool forDeclineMissionApplication(int MissionAppId)
+        {
+            var MissionApplicationExist = _db.MissionApplications.Where(m => m.MissionApplicationId == MissionAppId).FirstOrDefault();
+
+            MissionApplicationExist.ApprovalStatus = "DECLINE";
+            _db.MissionApplications.Update(MissionApplicationExist);
+            _db.SaveChanges();
+
+            return true;
+        }
+
+        public bool forPublishStory(int StoryId)
+        {
+            var storyExist = _db.Stories.Where(s=>s.StoryId == StoryId).FirstOrDefault();
+            storyExist.Status = "PUBLISHED";
+            storyExist.PublishedAt = DateTime.Now;
+            _db.Stories.Update(storyExist);
+            _db.SaveChanges();
+
+            return true;
+        } 
+        public bool forDeclineStory(int StoryId)
+        {
+            var storyExist = _db.Stories.Where(s=>s.StoryId == StoryId).FirstOrDefault();
+            storyExist.Status = "DECLINED";           
+            _db.Stories.Update(storyExist);
+            _db.SaveChanges();
+
+            return true;
         }
     }
 }

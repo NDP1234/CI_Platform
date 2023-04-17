@@ -14,9 +14,11 @@ using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+//using CI_PLATFORM.FILTERS;
 
 namespace CI_PLATFORM.Controllers
 {
+    //[ServiceFilter(typeof(IsUserProfileValidated))]
     public class ContentController : Controller
     {
         private IConfiguration _configuration;

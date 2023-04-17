@@ -139,7 +139,7 @@
                         <h6 class="text-start ms- text-light ms-3 my-4">NAVIGATION</h6>
                         <button class="nav-link txtwhite active d-flex w-100 mx-2 my-2" id="v-pills-User-tab"
                                 data-bs-toggle="pill" data-bs-target="#v-pills-User" type="button" role="tab"
-                                aria-controls="v-pills-home" aria-selected="true">
+                                aria-controls="v-pills-home" aria-selected="false">
                             <i class="bi bi-person me-3"></i>User
                         </button>
                         <button class="nav-link txtwhite d-flex w-100 mx-2 my-2" id="v-pills-CMSPage-tab"
@@ -233,7 +233,7 @@
                 <div class="tab-content col-md-10 col-8 w-100 me-5" id="v-pills-tabContent">
                     <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
                     <!-- UserTAB -->
-                    <div class="tab-pane fade  show active " id="v-pills-User" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                    <div class="tab-pane fade   " id="v-pills-User" role="tabpanel" aria-labelledby="v-pills-home-tab">
                         <span class="mb-0 border-bottom border-dark fs-3">User</span>
                         <hr class="w-100 mtop">
 
@@ -305,48 +305,48 @@
                         <hr class="w-100 mtop">
                         <div class="cmscontent">
                             <div class="d-flex w-100 my-4">
-                            <!-- searchbar -->
-                            <div class=" srch  w-25">
+                                <!-- searchbar -->
+                                <div class=" srch  w-25">
 
-                                <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
-                                <form id="search-form" method="get" class="d-inline">
-                                    <input type="search" class="form-control rounded d-inline srch " id="search-input"
-                                           name="query" placeholder="Search." aria-label="Search"
-                                           aria-describedby="search-addon">
-                                </form>
+                                    <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
+                                    <form id="search-form" method="get" class="d-inline">
+                                        <input type="search" class="form-control rounded d-inline srch " id="search-input"
+                                               name="query" placeholder="Search." aria-label="Search"
+                                               aria-describedby="search-addon">
+                                    </form>
 
+                                </div>
+                                <div class="ms-auto me-5 mt-4">
+                                    <button class="btn addUserBtn" id="addCMS"><span>Add</span><i class="bi bi-plus"></i></button>
+                                </div>
                             </div>
-                            <div class="ms-auto me-5 mt-4">
-                                <button class="btn addUserBtn" id="addCMS"><span>Add</span><i class="bi bi-plus"></i></button>
+
+                            <!-- CMS table -->
+                            <div class="table-responsive">
+                                <table class="table table-borderless ">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border">
+                                            <td>Various versions have evolved over the years Many desktop publishing packages and web page editors</td>
+                                            <td>Active</td>
+                                            <td>
+                                                <button class="border-0 bg-white"><i class="bi bi-pencil-square "></i></button>
+                                                <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
+                            <!-- CMS table -->
                         </div>
 
-                        <!-- CMS table -->
-                        <div class="table-responsive">
-                            <table class="table table-borderless ">
-                                <thead>
-                                    <tr class="bg-light">
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Action</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="border">
-                                        <td>Various versions have evolved over the years Many desktop publishing packages and web page editors</td>
-                                        <td>Active</td>
-                                        <td>
-                                            <button class="border-0 bg-white"><i class="bi bi-pencil-square "></i></button>
-                                            <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- CMS table -->
-                        </div>
-                        
 
                     </div>
                     <!-- CMS-Page Tab -->
@@ -407,9 +407,8 @@
                     </div>
                     <!-- mission page -->
                     <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
-                     <!-- mission theme -->
-                    <div class="tab-pane fade " id="v-pills-MissionTheme" role="tabpanel"
-                        aria-labelledby="v-pills-settings-tab">
+                    <!-- mission theme -->
+                    <div class="tab-pane fade " id="v-pills-MissionTheme" role="tabpanel" aria-labelledby="v-pills-settings-tab">
                         <span class="mb-0 border-bottom border-dark fs-3">Mission Theme</span>
                         <hr class="w-100 mtop">
 
@@ -420,8 +419,8 @@
                                 <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
                                 <form id="search-form" method="get" class="d-inline">
                                     <input type="search" class="form-control rounded d-inline srch " id="search-input"
-                                        name="query" placeholder="Search." aria-label="Search"
-                                        aria-describedby="search-addon">
+                                           name="query" placeholder="Search." aria-label="Search"
+                                           aria-describedby="search-addon">
                                 </form>
 
                             </div>
@@ -438,37 +437,35 @@
                                         <th scope="col">Title</th>
                                         <th scope="col">Status</th>
                                         <th scope="col" class="text-center">Action</th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model.MissionThemes)
                                     {
                                         <tr class="border">
-                                        <td>@item.Title</td>
+                                            <td>@item.Title</td>
                                             @if (@item.Status == 1)
                                             {
                                                 <td class="greentext">Active</td>
                                             }
-                                            
-                                        <td class="text-center">
-                                            <button class="border-0 bg-white"><i class="bi bi-pencil-square "></i></button>
-                                            <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
-                                        </td>
-                                    </tr>
+
+                                            <td class="text-center">
+                                                <button class="border-0 bg-white"><i class="bi bi-pencil-square "></i></button>
+                                                <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
+                                            </td>
+                                        </tr>
                                     }
-                                    
+
                                 </tbody>
                             </table>
                         </div>
                         <!-- mission theme table -->
                     </div>
-                     <!-- mission theme -->
-                     <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
-
-                     <!-- mission skill -->
-                    <div class="tab-pane fade " id="v-pills-MissionSkills" role="tabpanel"
-                        aria-labelledby="v-pills-settings-tab">
+                    <!-- mission theme -->
+                    <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                    <!-- mission skill -->
+                    <div class="tab-pane fade " id="v-pills-MissionSkills" role="tabpanel" aria-labelledby="v-pills-settings-tab">
                         <span class="mb-0 border-bottom border-dark fs-3">Mission Skills</span>
                         <hr class="w-100 mtop">
 
@@ -479,8 +476,8 @@
                                 <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
                                 <form id="search-form" method="get" class="d-inline">
                                     <input type="search" class="form-control rounded d-inline srch " id="search-input"
-                                        name="query" placeholder="Search." aria-label="Search"
-                                        aria-describedby="search-addon">
+                                           name="query" placeholder="Search." aria-label="Search"
+                                           aria-describedby="search-addon">
                                 </form>
 
                             </div>
@@ -497,26 +494,27 @@
                                         <th scope="col">Title</th>
                                         <th scope="col">Status</th>
                                         <th scope="col" class="text-center">Action</th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model.missionSkills)
                                     {
                                         <tr class="border">
-                                        <td>@item.SkillName</td>
-                                        @if(@item.Status==1){
-                                            <td class="greentext">Active</td>
-                                        }
-                                        <td class="text-center">
-                                            <button class="border-0 bg-white"><i class="bi bi-pencil-square "></i></button>
-                                            <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
-                                        </td>
-                                    </tr>
+                                            <td>@item.SkillName</td>
+                                            @if (@item.Status == 1)
+                                            {
+                                                <td class="greentext">Active</td>
+                                            }
+                                            <td class="text-center">
+                                                <button class="border-0 bg-white"><i class="bi bi-pencil-square "></i></button>
+                                                <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
+                                            </td>
+                                        </tr>
                                     }
-                                        
-                                    
-                                    
+
+
+
                                 </tbody>
                             </table>
                         </div>
@@ -524,7 +522,6 @@
                     </div>
                     <!-- mission skill -->
                     <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
-
                     <!-- Mission Application Tab -->
                     <div class="tab-pane fade " id="v-pills-MissionApplication" role="tabpanel" aria-labelledby="v-pills-settings-tab">
                         <span class="mb-0 border-bottom border-dark fs-3">Mission Application</span>
@@ -566,8 +563,28 @@
                                             <td>@item.User.FirstName @item.User.LastName</td>
                                             <td>@item.AppliedAt</td>
                                             <td>
-                                                <button class="border-0 bg-white"><i class="bi bi-check-circle icon-green"></i></button>
-                                                <button class="border-0 bg-white"><i class="bi bi-x-circle icon-red"></i></button>
+                                                @*<button class="border-0 bg-white missionApplicationApproved" data-missionapplication-id="@item.MissionApplicationId" id="missionApplicationApproved"><i class="bi bi-check-circle icon-green"></i></button>*@
+                                                <button class="border-0 bg-white missionApplicationApproved" data-missionapplication-id="@item.MissionApplicationId" id="missionApplicationApproved">
+                                                    @if (item.ApprovalStatus == "APPROVE")
+                                                    {
+                                                        <i class="bi bi-check-circle-fill icon-green"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="bi bi-check-circle icon-green"></i>
+                                                    }
+                                                </button>
+
+                                                <button class="border-0 bg-white missionApplicationDeclined" data-missionapplication-id="@item.MissionApplicationId">
+                                                    @if (item.ApprovalStatus == "DECLINE")
+                                                    {
+                                                        <i class="bi bi-x-circle-fill icon-red"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="bi bi-x-circle icon-red"></i>
+                                                    }
+                                                </button>
                                             </td>
                                         </tr>
                                     }
@@ -579,7 +596,6 @@
                     </div>
                     <!-- Mission Application Tab -->
                     <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
-
                     <!-- story tab -->
                     <div class="tab-pane fade " id="v-pills-Story" role="tabpanel" aria-labelledby="v-pills-settings-tab">
                         <span class="mb-0 border-bottom border-dark fs-3">Story</span>
@@ -618,9 +634,29 @@
                                             <td>@item.Mission.Title</td>
                                             <td>
                                                 <a class="btn addUserBtn " asp-action="Story_detail_page" asp-controller="StoryRelated" asp-route-id="@item.StoryId"><span>View</span></a>
-                                                <button class="border-0 bg-white"><i class="bi bi-check-circle icon-green"></i></button>
-                                                <button class="border-0 bg-white"><i class="bi bi-x-circle icon-red"></i></button>
-                                                <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
+                                                <button class="border-0 bg-white storyApproved" data-story-id="@item.StoryId">
+                                                    @*<i class="bi bi-check-circle icon-green"></i>*@
+                                                    @if (item.Status == "PUBLISHED")
+                                                    {
+                                                        <i class="bi bi-check-circle-fill icon-green"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="bi bi-check-circle icon-green"></i>
+                                                    }
+                                                </button>
+                                                <button class="border-0 bg-white storyDeclined" data-story-id="@item.StoryId">
+                                                    @*<i class="bi bi-x-circle icon-red"></i>*@
+                                                    @if (item.Status == "DECLINED")
+                                                    {
+                                                        <i class="bi bi-x-circle-fill icon-red"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="bi bi-x-circle icon-red"></i>
+                                                    }
+                                                </button>
+                                                <button class="border-0 bg-white" data-story-id="@item.StoryId"><i class="bi bi-trash  "></i></button>
                                             </td>
                                         </tr>
                                     }
@@ -647,41 +683,8 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        $(document).ready(function() {
-          setInterval(function() {
-            var now = new Date();
-            //for full name of the day of the week
-            var day = now.toLocaleString('default', { weekday: 'long' });
-            //for full name of the month
-            var month = now.toLocaleString('default', { month: 'long' });
-             //Get date
-            var date = now.getDate();
-            //get year
-            var year = now.getFullYear();
-            //get hour
-            var hour = now.getHours();
-            //get minute
-            var minute = now.getMinutes();
-            //for select PM or AM
-            var ampm = hour >= 12 ? 'PM' : 'AM';
-            //for convert hour in based of 12-hour format
-            hour = hour % 12;
-            //for displaying 12 instaed of 0 hour
-            hour = hour ? hour : 12;
-            //for append thw zero if minute is in single digit
-            minute = minute < 10 ? '0' + minute : minute;
-            //provide required format
-            var time = day + ', ' + month + ' ' + date + ', ' + year + ', ' + hour + ':' + minute + ' ' + ampm;
-            $('#current-time').text(time);
-          }, 1000);
-        });
+    <script src="~/js/Admin.js" asp-append-version="true"></script>
 
-        $('#addCMS').on('click', function(){
-
-           $('.cmscontent').load('@Url.Content("/Admin/_CMSAddPage")');
-        })
-    </script>
 </body>
 
 </html>

@@ -10,9 +10,10 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Net;
 using System.Net.Mail;
+//using CI_PLATFORM.FILTERS;
 
 namespace CI_PLATFORM.Controllers;
-
+//[ServiceFilter(typeof(IsUserProfileValidated))]
 
 public class StoryRelatedController : Controller
 {
