@@ -76,22 +76,77 @@ namespace CI_Platform.Repository.Repository
 
         public bool forPublishStory(int StoryId)
         {
-            var storyExist = _db.Stories.Where(s=>s.StoryId == StoryId).FirstOrDefault();
+            var storyExist = _db.Stories.Where(s => s.StoryId == StoryId).FirstOrDefault();
             storyExist.Status = "PUBLISHED";
             storyExist.PublishedAt = DateTime.Now;
             _db.Stories.Update(storyExist);
             _db.SaveChanges();
 
             return true;
-        } 
+        }
         public bool forDeclineStory(int StoryId)
         {
-            var storyExist = _db.Stories.Where(s=>s.StoryId == StoryId).FirstOrDefault();
-            storyExist.Status = "DECLINED";           
+            var storyExist = _db.Stories.Where(s => s.StoryId == StoryId).FirstOrDefault();
+            storyExist.Status = "DECLINED";
             _db.Stories.Update(storyExist);
             _db.SaveChanges();
 
             return true;
         }
+
+        public bool forAddMissionTheme(string Title, int Status)
+        {
+            var MissionThemeData = new MissionTheme();
+            MissionThemeData.Title = Title;
+            MissionThemeData.Status = (byte)Status;
+            _db.MissionThemes.Add(MissionThemeData);
+            _db.SaveChanges();
+
+            MissionThemeData.Status = (byte)Status;
+            _db.MissionThemes.Update(MissionThemeData);
+            _db.SaveChanges();
+            return true;
+        }
+        public bool forEditMissionTheme(int MissionThemeId, string Title, int Status)
+        {
+
+            var isExistMissionTheme = _db.MissionThemes.Where(m => m.MissionThemeId == MissionThemeId).FirstOrDefault();
+            isExistMissionTheme.Title = Title;
+            isExistMissionTheme.Status = (byte)Status;
+            isExistMissionTheme.UpdatedAt = DateTime.UtcNow;
+            _db.MissionThemes.Update(isExistMissionTheme);
+            _db.SaveChanges();
+            return true;
+        }
+
+        public bool forAddMissionSkill(string Title, int Status)
+        {
+
+            Skill MissionSkillData = new Skill();
+
+            MissionSkillData.SkillName = Title;
+            MissionSkillData.Status = (byte)Status;
+            _db.Skills.Add(MissionSkillData);
+            _db.SaveChanges();
+
+            MissionSkillData.Status = (byte)Status;
+            _db.Skills.Update(MissionSkillData);
+            _db.SaveChanges();
+
+            return true;
+        }
+
+        public bool forEditMissionSkill(int SkillId, string Title, int Status)
+        {
+            var isExistMissionSkill = _db.Skills.Where(m => m.SkillId == SkillId).FirstOrDefault();
+            isExistMissionSkill.SkillName = Title;
+            isExistMissionSkill.Status = (byte)Status;
+            isExistMissionSkill.UpdatedAt = DateTime.UtcNow;
+            _db.Skills.Update(isExistMissionSkill);
+            _db.SaveChanges();
+            return true;
+        }
     }
+
+
 }

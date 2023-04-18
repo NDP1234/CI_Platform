@@ -20,5 +20,9 @@ namespace CI_Platform.Repository.Interface
          public bool forDeclineMissionApplication(int MissionAppId) ;
          public bool forPublishStory(int StoryId) ;
          public bool forDeclineStory(int StoryId) ;
+         public bool forAddMissionTheme(string Title, int Status);
+        public bool forEditMissionTheme(int MissionThemeId, string Title, int Status);
+        public bool forAddMissionSkill(string Title, int Status);
+        public bool forEditMissionSkill(int SkillId, string Title, int Status);
     }
 }

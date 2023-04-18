@@ -36,23 +36,46 @@ namespace CI_PLATFORM.Controllers
 
         public bool ApproveMissionApplication(int MissionApplicationId)
         {
-           var approveMisApp = _adminPrepository.forApproveMissionApplication(MissionApplicationId);
+            var approveMisApp = _adminPrepository.forApproveMissionApplication(MissionApplicationId);
             return approveMisApp;
         }
         public bool DeclineMissionApplication(int MissionApplicationId)
         {
-           var declineMisApp = _adminPrepository.forDeclineMissionApplication(MissionApplicationId);
+            var declineMisApp = _adminPrepository.forDeclineMissionApplication(MissionApplicationId);
             return declineMisApp;
-        } 
+        }
         public bool PublishStory(int StoryId)
         {
-           var pubStory = _adminPrepository.forPublishStory(StoryId);
+            var pubStory = _adminPrepository.forPublishStory(StoryId);
             return pubStory;
-        } 
+        }
         public bool DeclineStory(int StoryId)
         {
-           var declineStory = _adminPrepository.forDeclineStory(StoryId);
+            var declineStory = _adminPrepository.forDeclineStory(StoryId);
             return declineStory;
         }
+        public bool AddMissionTheme(string Title, int Status)
+        {
+            var addmissiontheme = _adminPrepository.forAddMissionTheme(Title, Status);
+            return addmissiontheme;
+        }
+        public bool editMissionTheme(int MissionThemeId, string Title, int Status)
+        {
+            var editmissiontheme = _adminPrepository.forEditMissionTheme(MissionThemeId, Title, Status);
+            return editmissiontheme;
+        }
+
+        public bool AddMissionSkill(string Title, int Status)
+        {
+            var addmissionskill = _adminPrepository.forAddMissionSkill(Title, Status);
+            return addmissionskill;
+        }
+
+        public bool editMissionSkill(int SkillId, string Title, int Status)
+        {
+            var editmissionskill = _adminPrepository.forEditMissionSkill (SkillId, Title, Status);
+            return editmissionskill;
+        }
+
     }
 }

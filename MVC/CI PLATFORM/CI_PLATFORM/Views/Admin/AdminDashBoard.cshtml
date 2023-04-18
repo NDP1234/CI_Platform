@@ -47,7 +47,11 @@
             color: #14C506;
         }
 
-        .addUserBtn {
+        .redtext{
+            color:red;
+        }
+
+        .addUserBtn, .addthemeBtn, .addSkillBtn {
             border: 2px solid #F88634;
             padding: 5px 10px;
             border-radius: 20px;
@@ -137,7 +141,7 @@
                     <div class="nav d-flex flex-column nav-pills me-3 orangeClr" id="v-pills-tab" role="tablist"
                          aria-orientation="vertical">
                         <h6 class="text-start ms- text-light ms-3 my-4">NAVIGATION</h6>
-                        <button class="nav-link txtwhite active d-flex w-100 mx-2 my-2" id="v-pills-User-tab"
+                        <button class="nav-link txtwhite  d-flex w-100 mx-2 my-2" id="v-pills-User-tab"
                                 data-bs-toggle="pill" data-bs-target="#v-pills-User" type="button" role="tab"
                                 aria-controls="v-pills-home" aria-selected="false">
                             <i class="bi bi-person me-3"></i>User
@@ -425,8 +429,59 @@
 
                             </div>
                             <div class="ms-auto me-5 mt-4">
-                                <button class="btn addUserBtn "><span>Add</span><i class="bi bi-plus"></i></button>
+                                <button class="btn addthemeBtn" data-bs-toggle="modal" data-bs-target="#AddMissionThemeModal"><span>Add</span><i class="bi bi-plus"></i></button>
                             </div>
+
+                            @*modal for add missiontheme*@
+                            <!-- Modal -->
+                            <div class="modal fade" id="AddMissionThemeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <form class="row g-3 needs-validation addthemevalidation" novalidate>
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Add theme</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <div class="mb-3">
+                                                    <label for="MissionThemeTitle" class="form-label">Mission Theme</label>
+                                                    <input type="text" class="form-control" id="MissionThemeTitle" placeholder="Enter mission theme here" required>
+                                                    <div class="invalid-feedback">
+                                                        Please enter mission theme name.
+                                                    </div>
+                                                </div>
+                                                <fieldset class="row mb-3">
+                                                    <legend class="col-form-label col-sm-2 pt-0">Status</legend>
+                                                    <div class="col-sm-10">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="gridRadios" id="ActiveRadio" value="1" required>
+                                                            <label class="form-check-label" for="ActiveRadio">
+                                                                Active
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="gridRadios" id="InactiveRadio" value="0" required>
+                                                            <label class="form-check-label" for="InactiveRadio">
+                                                                Inactive
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <div class="invalid-feedback">
+                                                    Please select an option .
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary " id="addthemeBtn">Add Theme</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal -->
                         </div>
 
                         <!-- mission theme table -->
@@ -449,12 +504,70 @@
                                             {
                                                 <td class="greentext">Active</td>
                                             }
+                                            else
+                                            {
+                                                <td class="redtext">Inactive</td>
+                                            }
 
                                             <td class="text-center">
-                                                <button class="border-0 bg-white"><i class="bi bi-pencil-square "></i></button>
+                                                <button class="border-0 bg-white editMissionThemeModal" type="button" id="editMissionTheme" data-missionTheme-id="@item.MissionThemeId" data-bs-toggle="modal" data-bs-target="editMissionThemeModal-@item.MissionThemeId"><i class="bi bi-pencil-square "></i></button>
                                                 <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
                                             </td>
-                                        </tr>
+                                            <!-- Modal -->
+                                        <div class="modal fade" id="editMissionThemeModal-@item.MissionThemeId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <form class="row g-3 needs-validation addthemevalidation" novalidate>
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Edit theme</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                                <div class="mb-3">
+                                                                    <label for="MissionThemeTitle" class="form-label">Mission Theme</label>
+                                                                    <input type="text" class="form-control" id="MissionThemeTitle-@item.MissionThemeId" placeholder="Enter mission theme here" value="@item.Title" required>
+                                                                    <div class="invalid-feedback">
+                                                                        Please enter mission theme name.
+                                                                    </div>
+                                                                </div>
+                                                                <fieldset class="row mb-3">
+                                                                    <legend class="col-form-label col-sm-2 pt-0">Status</legend>
+                                                                    <div class="col-sm-10">
+                                                                        <div class="form-check">
+                                                                            
+                                                                        <input class="form-check-input" type="radio" name="gridRadios-@item.MissionThemeId" id="ActiveRadio-@item.MissionThemeId" value="1" data-status="1" required @if (@item.Status == 1) { <text>checked</text> }>
+
+                                                                            <label class="form-check-label" for="ActiveRadio-@item.MissionThemeId">
+                                                                                Active
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="form-check">
+                                                                            
+                                                                        <input class="form-check-input" type="radio" name="gridRadios-@item.MissionThemeId" id="InactiveRadio-@item.MissionThemeId" value="0" data-status="0" required @if (@item.Status == 0) { <text>checked</text> }>
+
+                                                                            <label class="form-check-label" for="InactiveRadio-@item.MissionThemeId">
+                                                                                Inactive
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </fieldset>
+                                                                <div class="invalid-feedback">
+                                                                    Please select an option .
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary " id="EditablethemeBtn" data-missionTheme-id="@item.MissionThemeId" >Save Theme</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Modal -->
+                                    </tr>
+
                                     }
 
                                 </tbody>
@@ -482,8 +595,58 @@
 
                             </div>
                             <div class="ms-auto me-5 mt-4">
-                                <button class="btn addUserBtn "><span>Add</span><i class="bi bi-plus"></i></button>
+                                <button class="btn addSkillBtn" data-bs-toggle="modal" data-bs-target="#AddSkillModal"><span>Add</span><i class="bi bi-plus"></i></button>
                             </div>
+                            @*modal for add missionskill*@
+                            <!-- Modal -->
+                            <div class="modal fade" id="AddSkillModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <form class="row g-3 needs-validation addskillvalidation" novalidate>
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Add Skill</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <div class="mb-3">
+                                                    <label for="MissionSkillTitle" class="form-label">Mission Skill</label>
+                                                    <input type="text" class="form-control" id="MissionSkillTitle" placeholder="Enter skill name here" required>
+                                                    <div class="invalid-feedback">
+                                                        Please enter the name of mission skill.
+                                                    </div>
+                                                </div>
+                                                <fieldset class="row mb-3">
+                                                    <legend class="col-form-label col-sm-2 pt-0">Status</legend>
+                                                    <div class="col-sm-10">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="gridRadios2" id="ActiveSkillRadio" value="1" required>
+                                                            <label class="form-check-label" for="ActiveSkillRadio">
+                                                                Active
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="gridRadios2" id="InactiveSkillRadio" value="0" required>
+                                                            <label class="form-check-label" for="InactiveSkillRadio">
+                                                                Inactive
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <div class="invalid-feedback">
+                                                    Please select an option .
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary " id="addSkillBtn">Add Skill</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal -->
                         </div>
 
                         <!-- Mission skill table -->
@@ -506,10 +669,63 @@
                                             {
                                                 <td class="greentext">Active</td>
                                             }
+                                             else
+                                            {
+                                                <td class="redtext">Inactive</td>
+                                            }
                                             <td class="text-center">
-                                                <button class="border-0 bg-white"><i class="bi bi-pencil-square "></i></button>
+                                                <button class="border-0 bg-white editMissionSkillModal"  data-skill-id="@item.SkillId" data-bs-toggle="modal" data-bs-target="editMissionSkillModal-@item.SkillId"><i class="bi bi-pencil-square "></i></button>
                                                 <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
                                             </td>
+                                              <!-- Modal -->
+                                            <div class="modal fade " id="editMissionSkillModal-@item.SkillId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <form class="row g-3 needs-validation addskillvalidation" novalidate>
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Edit Skill</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                                <div class="mb-3">
+                                                                    <label for="MissionSkillTitle-@item.SkillId" class="form-label">Mission Skill</label>
+                                                                    <input type="text" class="form-control" id="MissionSkillTitle-@item.SkillId" placeholder="Enter skill name here" value="@item.SkillName" required>
+                                                                    <div class="invalid-feedback">
+                                                                        Please enter the name of mission skill.
+                                                                    </div>
+                                                                </div>
+                                                                <fieldset class="row mb-3">
+                                                                    <legend class="col-form-label col-sm-2 pt-0">Status</legend>
+                                                                    <div class="col-sm-10">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="gridRadios2-@item.SkillId" id="ActiveSkillRadio-@item.SkillId" value="1" data-status="1" required @if (@item.Status == 1) { <text>checked</text> }>
+                                                                            <label class="form-check-label" for="ActiveSkillRadio-@item.SkillId">
+                                                                                Active
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="gridRadios2-@item.SkillId" id="InactiveSkillRadio-@item.SkillId" value="0" data-status="0"  required @if (@item.Status == 0) { <text>checked</text> }>
+                                                                            <label class="form-check-label" for="InactiveSkillRadio-@item.SkillId">
+                                                                                Inactive
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </fieldset>
+                                                                <div class="invalid-feedback">
+                                                                    Please select an option .
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary " data-skill-id="@item.SkillId"  id="EditSkillBtn" >Edit Skill</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Modal -->
                                         </tr>
                                     }
 

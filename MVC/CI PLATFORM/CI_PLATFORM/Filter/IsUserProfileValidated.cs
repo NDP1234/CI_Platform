@@ -27,7 +27,7 @@
 //            _users = users;
 //            //_httpContextAccessor = httpContextAccessor;
 //        }
-        
+
 //        public void OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext context)
 //        {
 //            var session_details = HttpContext.Session.GetString("Login");

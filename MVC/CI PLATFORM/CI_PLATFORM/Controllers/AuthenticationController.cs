@@ -43,7 +43,15 @@ namespace CI_PLATFORM.Controllers
                 {
                     // User exists
                     HttpContext.Session.SetString("Login", userExists.Email);
-                    return RedirectToAction("Platform_Landing_Page", "Content");
+                    if (userExists.ProfileText == null)
+                    {
+                        return RedirectToAction("UserEditProfilePage", "UserEditProfile");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Platform_Landing_Page", "Content");
+                    }
+
                 }
                 else
                 {
