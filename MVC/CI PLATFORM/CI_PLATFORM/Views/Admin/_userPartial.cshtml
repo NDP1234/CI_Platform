@@ -1,0 +1,125 @@
+﻿@using CI_Platform.Entities.Models.VM
+@model AdminViewModel;
+  @foreach (var item in Model.users)
+{
+    <tr class="border">
+        <td>@item.FirstName</td>
+        <td>@item.LastName</td>
+        <td>@item.Email</td>
+        <td>@item.EmployeeId</td>
+        <td>@item.Department</td>
+        @if (@item.Status == 1)
+        {
+            <td class="greentext">
+                Active
+            </td>
+        }
+        <td>
+            <button class="border-0 bg-white editUserModal" type="button" id="editUserDetails" data-user-id="@item.UserId" data-bs-toggle="modal" data-bs-target="editUserDetailModal-@item.UserId"><i class="bi bi-pencil-square "></i></button>
+            <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
+        </td>
+        @*edit User Modal*@
+        <div class="modal fade" id="editUserDetailModal-@item.UserId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit User Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <label for="profileImage-@item.UserId" class="d-block">Profile image</label>
+                                <img src="@item.Avatar" class="rounded-pill" id="profileImage-@item.UserId"
+                                 alt="unable to load an image" >
+                            </div>
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="mb-3">
+                                        <label for="myFirstName-@item.UserId" class="form-label">First Name</label>
+                                        <input type="text" class="form-control" id="myFirstName-@item.UserId" value="@item.FirstName">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3">
+                                        <label for="myLastName-@item.UserId" class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" id="myLastName-@item.UserId" value="@item.LastName">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3">
+                                <label for="myemail-@item.UserId" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="myemail-@item.UserId" value="@item.Email">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="myPwd-@item.UserId" class="form-label">Password</label>
+                                    <div class="d-flex w-100">
+                                        <input type="password" class="form-control border border-end-0" id="myPwd-@item.UserId" value="@item.Password"> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="EmpId-@item.UserId" class="form-label" >Employee Id</label>
+                                    <input type="text" class="form-control" id="EmpId-@item.UserId" value="@item.EmployeeId">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="Country-@item.UserId" class="form-label">Country</label>
+                                <select class="form-select" id="Country-@item.UserId" aria-label="Default select example">
+                                    <option selected>Select a country</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="City-@item.UserId" class="form-label">City</label>
+                                <select class="form-select" id="City-@item.UserId" aria-label="Default select example">
+                                    <option selected>Select a City</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3">
+                                <label for="pText-@item.UserId" class="form-label">Profile Text</label>
+                                <textarea class="form-control" id="pText-@item.UserId" rows="3">@item.ProfileText</textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="Department-@item.UserId" class="form-label">Department</label>
+                                    <input type="text" class="form-control" id="Department-@item.UserId" value="@item.Department">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label for="Status-@item.UserId" class="form-label">Status</label>
+                                <select class="form-select" id="Status-@item.UserId" value="@item.Status" aria-label="Default select example">
+                                    <option selected>Select a status</option>
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Add User</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*edit User Modal*@
+    </tr>
+}

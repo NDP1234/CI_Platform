@@ -1,5 +1,6 @@
 ﻿using CI_Platform.Entities.Data;
 using CI_Platform.Entities.Models;
+using CI_Platform.Entities.Models.VM;
 using CI_Platform.Repository.Interface;
 using System;
 using System.Collections.Generic;
@@ -45,13 +46,18 @@ namespace CI_Platform.Repository.Repository
             var ListOfMissionSkills = _db.Skills.ToList();
             return ListOfMissionSkills;
         }
+        
 
         public List<MissionTheme> getMissionThemeList()
         {
             var ListOfMissionTheme = _db.MissionThemes.ToList();
             return ListOfMissionTheme;
         }
-
+        public List<CmsPage> getCMSPageList()
+        {
+            var ListOfCMSPages = _db.CmsPages.ToList();
+            return ListOfCMSPages;
+        }
 
         public bool forApproveMissionApplication(int MissionAppId)
         {
@@ -119,6 +125,32 @@ namespace CI_Platform.Repository.Repository
             return true;
         }
 
+        //public List<AdminViewModel.MissionSkill> forAddMissionSkill(string Title, int Status)
+        //{
+
+        //    Skill MissionSkillData = new Skill();
+
+        //    MissionSkillData.SkillName = Title;
+        //    MissionSkillData.Status = (byte)Status;
+        //    _db.Skills.Add(MissionSkillData);
+        //    _db.SaveChanges();
+
+        //    MissionSkillData.Status = (byte)Status;
+        //    _db.Skills.Update(MissionSkillData);
+        //    _db.SaveChanges();
+
+        //    AdminViewModel.MissionSkill myskill = new AdminViewModel.MissionSkill
+        //    {
+        //        SkillId = MissionSkillData.SkillId,
+        //        SkillName = MissionSkillData.SkillName,
+        //        Status = MissionSkillData.Status
+        //    };
+        //    List<AdminViewModel.MissionSkill> myskills = new List<AdminViewModel.MissionSkill>();
+        //    myskills.Add(myskill);
+
+        //    return myskills;
+
+        //}
         public bool forAddMissionSkill(string Title, int Status)
         {
 
@@ -135,7 +167,6 @@ namespace CI_Platform.Repository.Repository
 
             return true;
         }
-
         public bool forEditMissionSkill(int SkillId, string Title, int Status)
         {
             var isExistMissionSkill = _db.Skills.Where(m => m.SkillId == SkillId).FirstOrDefault();

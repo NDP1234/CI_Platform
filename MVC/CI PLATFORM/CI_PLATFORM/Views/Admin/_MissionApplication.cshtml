@@ -1,0 +1,36 @@
+﻿@using CI_Platform.Entities.Models.VM
+@model AdminViewModel;
+@foreach (var item in Model.MissionApplications)
+                                    {
+                                        <tr class="border">
+                                            <td>@item.Mission.Title</td>
+                                            <td>@item.MissionId</td>
+                                            <td>@item.UserId</td>
+                                            <td>@item.User.FirstName @item.User.LastName</td>
+                                            <td>@item.AppliedAt</td>
+                                            <td>
+                                                @*<button class="border-0 bg-white missionApplicationApproved" data-missionapplication-id="@item.MissionApplicationId" id="missionApplicationApproved"><i class="bi bi-check-circle icon-green"></i></button>*@
+                                                <button class="border-0 bg-white missionApplicationApproved" data-missionapplication-id="@item.MissionApplicationId" id="missionApplicationApproved">
+                                                    @if (item.ApprovalStatus == "APPROVE")
+                                                    {
+                                                        <i class="bi bi-check-circle-fill icon-green"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="bi bi-check-circle icon-green"></i>
+                                                    }
+                                                </button>
+
+                                                <button class="border-0 bg-white missionApplicationDeclined" data-missionapplication-id="@item.MissionApplicationId">
+                                                    @if (item.ApprovalStatus == "DECLINE")
+                                                    {
+                                                        <i class="bi bi-x-circle-fill icon-red"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="bi bi-x-circle icon-red"></i>
+                                                    }
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }

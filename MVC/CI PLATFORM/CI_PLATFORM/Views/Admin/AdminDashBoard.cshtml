@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
     <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+
+
     <style>
         .orangeClr {
             background-color: #F88634;
@@ -47,8 +49,8 @@
             color: #14C506;
         }
 
-        .redtext{
-            color:red;
+        .redtext {
+            color: red;
         }
 
         .addUserBtn, .addthemeBtn, .addSkillBtn {
@@ -141,7 +143,7 @@
                     <div class="nav d-flex flex-column nav-pills me-3 orangeClr" id="v-pills-tab" role="tablist"
                          aria-orientation="vertical">
                         <h6 class="text-start ms- text-light ms-3 my-4">NAVIGATION</h6>
-                        <button class="nav-link txtwhite  d-flex w-100 mx-2 my-2" id="v-pills-User-tab"
+                        <button class="nav-link txtwhite  d-flex w-100 mx-2 my-2 active" id="v-pills-User-tab"
                                 data-bs-toggle="pill" data-bs-target="#v-pills-User" type="button" role="tab"
                                 aria-controls="v-pills-home" aria-selected="false">
                             <i class="bi bi-person me-3"></i>User
@@ -237,7 +239,7 @@
                 <div class="tab-content col-md-10 col-8 w-100 me-5" id="v-pills-tabContent">
                     <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
                     <!-- UserTAB -->
-                    <div class="tab-pane fade   " id="v-pills-User" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                    <div class="tab-pane fade  show active " id="v-pills-User" role="tabpanel" aria-labelledby="v-pills-home-tab">
                         <span class="mb-0 border-bottom border-dark fs-3">User</span>
                         <hr class="w-100 mtop">
 
@@ -254,8 +256,112 @@
 
                             </div>
                             <div class="ms-auto me-5 mt-4">
-                                <button class="btn addUserBtn "><span>Add</span><i class="bi bi-plus"></i></button>
+                                <button class="btn addUserBtn" data-bs-toggle="modal" data-bs-target="#addUserModal" ><span>Add</span><i class="bi bi-plus"></i></button>
                             </div>
+                            @*Add User Modal*@
+                            <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog  modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-4 text-center">
+                                                    <label for="profileImage" class="d-block">Profile image</label>
+                                                    <img src="/Images/volunteer1.png" class="rounded-pill" id="profileImage"
+                                                         alt="unable to load an image">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="row">
+                                                        <div class="mb-3">
+                                                            <label for="myFirstName" class="form-label">First Name</label>
+                                                            <input type="text" class="form-control" id="myFirstName">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="mb-3">
+                                                            <label for="myLastName" class="form-label">Last Name</label>
+                                                            <input type="text" class="form-control" id="myLastName">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="mb-3">
+                                                    <label for="myemail" class="form-label">Email address</label>
+                                                    <input type="email" class="form-control" id="myemail">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label for="myPwd" class="form-label">Password</label>
+                                                        <div class="d-flex w-100">
+                                                            <input type="password" class="form-control border border-end-0" id="myPwd"> <i class="bi bi-eye-slash border border-start-0 "
+                                                                                                                                           id="togglePassword"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label for="EmpId" class="form-label">Employee Id</label>
+                                                        <input type="text" class="form-control" id="EmpId">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <label for="Country" class="form-label">Country</label>
+                                                    <select class="form-select" id="Country" aria-label="Default select example">
+                                                        <option selected>Select a country</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col">
+                                                    <label for="City" class="form-label">City</label>
+                                                    <select class="form-select" id="City" aria-label="Default select example">
+                                                        <option selected>Select a City</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="mb-3">
+                                                    <label for="pText" class="form-label">Profile Text</label>
+                                                    <textarea class="form-control" id="pText" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label for="Department" class="form-label">Department</label>
+                                                        <input type="text" class="form-control" id="Department">
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <label for="Status" class="form-label">Status</label>
+                                                    <select class="form-select" id="Status" aria-label="Default select example">
+                                                        <option selected>Select a status</option>
+                                                        <option value="1">Active</option>
+                                                        <option value="0">Inactive</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Add User</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*Add User Modal*@
                         </div>
 
 
@@ -274,26 +380,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in Model.users)
-                                    {
-                                        <tr class="border">
-                                            <td>@item.FirstName</td>
-                                            <td>@item.LastName</td>
-                                            <td>@item.Email</td>
-                                            <td>@item.EmployeeId</td>
-                                            <td>@item.Department</td>
-                                            @if (@item.Status == 1)
-                                            {
-                                                <td class="greentext">
-                                                    Active
-                                                </td>
-                                            }
-                                            <td>
-                                                <button class="border-0 bg-white"><i class="bi bi-pencil-square "></i></button>
-                                                <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
-                                            </td>
-                                        </tr>
-                                    }
+                                    @await Html.PartialAsync("_userPartial", Model)
 
                                 </tbody>
                             </table>
@@ -321,14 +408,14 @@
 
                                 </div>
                                 <div class="ms-auto me-5 mt-4">
-                                    <button class="btn addUserBtn" id="addCMS"><span>Add</span><i class="bi bi-plus"></i></button>
+                                    <button type="button" class="btn addUserBtn" id="addCMS"><span>Add</span><i class="bi bi-plus"></i></button>
                                 </div>
                             </div>
 
                             <!-- CMS table -->
                             <div class="table-responsive">
                                 <table class="table table-borderless ">
-                                    <thead>
+                                    <thead class="text-center">
                                         <tr class="bg-light">
                                             <th scope="col">Title</th>
                                             <th scope="col">Status</th>
@@ -337,14 +424,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="border">
-                                            <td>Various versions have evolved over the years Many desktop publishing packages and web page editors</td>
-                                            <td>Active</td>
-                                            <td>
-                                                <button class="border-0 bg-white"><i class="bi bi-pencil-square "></i></button>
-                                                <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
-                                            </td>
-                                        </tr>
+                                        @await Html.PartialAsync("_CMSPage", Model)
+
                                     </tbody>
                                 </table>
                             </div>
@@ -495,80 +576,8 @@
 
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach (var item in Model.MissionThemes)
-                                    {
-                                        <tr class="border">
-                                            <td>@item.Title</td>
-                                            @if (@item.Status == 1)
-                                            {
-                                                <td class="greentext">Active</td>
-                                            }
-                                            else
-                                            {
-                                                <td class="redtext">Inactive</td>
-                                            }
-
-                                            <td class="text-center">
-                                                <button class="border-0 bg-white editMissionThemeModal" type="button" id="editMissionTheme" data-missionTheme-id="@item.MissionThemeId" data-bs-toggle="modal" data-bs-target="editMissionThemeModal-@item.MissionThemeId"><i class="bi bi-pencil-square "></i></button>
-                                                <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
-                                            </td>
-                                            <!-- Modal -->
-                                        <div class="modal fade" id="editMissionThemeModal-@item.MissionThemeId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
-                                                        <form class="row g-3 needs-validation addthemevalidation" novalidate>
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">Edit theme</h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-
-                                                                <div class="mb-3">
-                                                                    <label for="MissionThemeTitle" class="form-label">Mission Theme</label>
-                                                                    <input type="text" class="form-control" id="MissionThemeTitle-@item.MissionThemeId" placeholder="Enter mission theme here" value="@item.Title" required>
-                                                                    <div class="invalid-feedback">
-                                                                        Please enter mission theme name.
-                                                                    </div>
-                                                                </div>
-                                                                <fieldset class="row mb-3">
-                                                                    <legend class="col-form-label col-sm-2 pt-0">Status</legend>
-                                                                    <div class="col-sm-10">
-                                                                        <div class="form-check">
-                                                                            
-                                                                        <input class="form-check-input" type="radio" name="gridRadios-@item.MissionThemeId" id="ActiveRadio-@item.MissionThemeId" value="1" data-status="1" required @if (@item.Status == 1) { <text>checked</text> }>
-
-                                                                            <label class="form-check-label" for="ActiveRadio-@item.MissionThemeId">
-                                                                                Active
-                                                                            </label>
-                                                                        </div>
-                                                                        <div class="form-check">
-                                                                            
-                                                                        <input class="form-check-input" type="radio" name="gridRadios-@item.MissionThemeId" id="InactiveRadio-@item.MissionThemeId" value="0" data-status="0" required @if (@item.Status == 0) { <text>checked</text> }>
-
-                                                                            <label class="form-check-label" for="InactiveRadio-@item.MissionThemeId">
-                                                                                Inactive
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                </fieldset>
-                                                                <div class="invalid-feedback">
-                                                                    Please select an option .
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn btn-primary " id="EditablethemeBtn" data-missionTheme-id="@item.MissionThemeId" >Save Theme</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Modal -->
-                                    </tr>
-
-                                    }
+                                <tbody class="Missionthemelisting">
+                                    @await Html.PartialAsync("_MissionTheme", Model)
 
                                 </tbody>
                             </table>
@@ -660,77 +669,8 @@
 
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach (var item in Model.missionSkills)
-                                    {
-                                        <tr class="border">
-                                            <td>@item.SkillName</td>
-                                            @if (@item.Status == 1)
-                                            {
-                                                <td class="greentext">Active</td>
-                                            }
-                                             else
-                                            {
-                                                <td class="redtext">Inactive</td>
-                                            }
-                                            <td class="text-center">
-                                                <button class="border-0 bg-white editMissionSkillModal"  data-skill-id="@item.SkillId" data-bs-toggle="modal" data-bs-target="editMissionSkillModal-@item.SkillId"><i class="bi bi-pencil-square "></i></button>
-                                                <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
-                                            </td>
-                                              <!-- Modal -->
-                                            <div class="modal fade " id="editMissionSkillModal-@item.SkillId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
-                                                        <form class="row g-3 needs-validation addskillvalidation" novalidate>
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Edit Skill</h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-
-                                                                <div class="mb-3">
-                                                                    <label for="MissionSkillTitle-@item.SkillId" class="form-label">Mission Skill</label>
-                                                                    <input type="text" class="form-control" id="MissionSkillTitle-@item.SkillId" placeholder="Enter skill name here" value="@item.SkillName" required>
-                                                                    <div class="invalid-feedback">
-                                                                        Please enter the name of mission skill.
-                                                                    </div>
-                                                                </div>
-                                                                <fieldset class="row mb-3">
-                                                                    <legend class="col-form-label col-sm-2 pt-0">Status</legend>
-                                                                    <div class="col-sm-10">
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="gridRadios2-@item.SkillId" id="ActiveSkillRadio-@item.SkillId" value="1" data-status="1" required @if (@item.Status == 1) { <text>checked</text> }>
-                                                                            <label class="form-check-label" for="ActiveSkillRadio-@item.SkillId">
-                                                                                Active
-                                                                            </label>
-                                                                        </div>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="gridRadios2-@item.SkillId" id="InactiveSkillRadio-@item.SkillId" value="0" data-status="0"  required @if (@item.Status == 0) { <text>checked</text> }>
-                                                                            <label class="form-check-label" for="InactiveSkillRadio-@item.SkillId">
-                                                                                Inactive
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                </fieldset>
-                                                                <div class="invalid-feedback">
-                                                                    Please select an option .
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn btn-primary " data-skill-id="@item.SkillId"  id="EditSkillBtn" >Edit Skill</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Modal -->
-                                        </tr>
-                                    }
-
-
-
+                                <tbody id="missionskillPartialView">
+                                    @await Html.PartialAsync("_MissionSkill", Model)
                                 </tbody>
                             </table>
                         </div>
@@ -769,41 +709,8 @@
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach (var item in Model.MissionApplications)
-                                    {
-                                        <tr class="border">
-                                            <td>@item.Mission.Title</td>
-                                            <td>@item.MissionId</td>
-                                            <td>@item.UserId</td>
-                                            <td>@item.User.FirstName @item.User.LastName</td>
-                                            <td>@item.AppliedAt</td>
-                                            <td>
-                                                @*<button class="border-0 bg-white missionApplicationApproved" data-missionapplication-id="@item.MissionApplicationId" id="missionApplicationApproved"><i class="bi bi-check-circle icon-green"></i></button>*@
-                                                <button class="border-0 bg-white missionApplicationApproved" data-missionapplication-id="@item.MissionApplicationId" id="missionApplicationApproved">
-                                                    @if (item.ApprovalStatus == "APPROVE")
-                                                    {
-                                                        <i class="bi bi-check-circle-fill icon-green"></i>
-                                                    }
-                                                    else
-                                                    {
-                                                        <i class="bi bi-check-circle icon-green"></i>
-                                                    }
-                                                </button>
-
-                                                <button class="border-0 bg-white missionApplicationDeclined" data-missionapplication-id="@item.MissionApplicationId">
-                                                    @if (item.ApprovalStatus == "DECLINE")
-                                                    {
-                                                        <i class="bi bi-x-circle-fill icon-red"></i>
-                                                    }
-                                                    else
-                                                    {
-                                                        <i class="bi bi-x-circle icon-red"></i>
-                                                    }
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    }
+                                <tbody class="missionApplicationListing">
+                                    @await Html.PartialAsync("_MissionApplication", Model)
 
                                 </tbody>
                             </table>
@@ -841,41 +748,8 @@
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach (var item in Model.Stories)
-                                    {
-                                        <tr class="border">
-                                            <td>@item.Title</td>
-                                            <td>@item.User.FirstName @item.User.LastName</td>
-                                            <td>@item.Mission.Title</td>
-                                            <td>
-                                                <a class="btn addUserBtn " asp-action="Story_detail_page" asp-controller="StoryRelated" asp-route-id="@item.StoryId"><span>View</span></a>
-                                                <button class="border-0 bg-white storyApproved" data-story-id="@item.StoryId">
-                                                    @*<i class="bi bi-check-circle icon-green"></i>*@
-                                                    @if (item.Status == "PUBLISHED")
-                                                    {
-                                                        <i class="bi bi-check-circle-fill icon-green"></i>
-                                                    }
-                                                    else
-                                                    {
-                                                        <i class="bi bi-check-circle icon-green"></i>
-                                                    }
-                                                </button>
-                                                <button class="border-0 bg-white storyDeclined" data-story-id="@item.StoryId">
-                                                    @*<i class="bi bi-x-circle icon-red"></i>*@
-                                                    @if (item.Status == "DECLINED")
-                                                    {
-                                                        <i class="bi bi-x-circle-fill icon-red"></i>
-                                                    }
-                                                    else
-                                                    {
-                                                        <i class="bi bi-x-circle icon-red"></i>
-                                                    }
-                                                </button>
-                                                <button class="border-0 bg-white" data-story-id="@item.StoryId"><i class="bi bi-trash  "></i></button>
-                                            </td>
-                                        </tr>
-                                    }
+                                <tbody class="StoryListing">
+                                    @await Html.PartialAsync("_StoryPartial", Model)
 
                                 </tbody>
                             </table>
@@ -896,7 +770,7 @@
     </div>
 
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/Admin.js" asp-append-version="true"></script>

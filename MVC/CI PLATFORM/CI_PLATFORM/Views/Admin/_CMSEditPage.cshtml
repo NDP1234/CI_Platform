@@ -4,36 +4,8 @@
 @{
     Layout = null;
 }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit CMS Page</title>
-    
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
-    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
-    <style>
-        .cancelBtn{
-      border-radius: 20px;
-      border: 2px solid #757575;
-      color: #757575;
-      background-color: white;
-      padding:10px 5px;
-      width: 130px;
-    }
-    .SaveBtn{
-      border-radius: 20px;
-      border: 2px solid #F88634;
-      color: #F88634;
-      background-color: white;
-      padding:10px 5px;
-      width: 130px;
-    }
-    </style>
-</head>
-<body>
+@using CI_Platform.Entities.Models.VM
+@model AdminViewModel;
     <div class="container mt-2">
         <div class="row ">
             <div class="col bg-light py-3 ">
@@ -44,7 +16,7 @@
             <div class="col">
                 <div class="my-3">
                     <label for="cmstitle2" class="form-label ">Title</label>
-                    <input type="text" class="form-control" id="cmstitle2" aria-describedby="titleHelp">
+                    <input type="text" class="form-control" id="cmstitle2" aria-describedby="titleHelp" >
                 </div>
             </div>
         </div>
@@ -77,8 +49,7 @@
             </div>
         </div>
     </div>
-     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+ <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('editor1', {
       height: 200,
@@ -87,5 +58,3 @@
 
     });
     </script>
-</body>
-</html>

@@ -28,13 +28,10 @@
         }, 1000);
         });
 
-    $('#addCMS').on('click', function(){
-
-        $('.cmscontent').load('@Url.Content("/Admin/_CMSAddPage")');
-        })
 
 
-$('.missionApplicationApproved').on('click', function () {
+
+$(document).on("click", ".missionApplicationApproved", function () {
     var maID = $(this).data('missionapplication-id');
 
     $.ajax({
@@ -46,8 +43,8 @@ $('.missionApplicationApproved').on('click', function () {
         success: function (data) {
             console.log(data);
             
-             location.reload();
-
+          
+        $('.missionApplicationListing').html(data);
             
             alert(" Mission application is successfully approved");
           
@@ -57,7 +54,8 @@ $('.missionApplicationApproved').on('click', function () {
     })
 })
 
-$('.missionApplicationDeclined').on('click', function () {
+
+$(document).on("click", ".missionApplicationDeclined", function () {
     var maID = $(this).data('missionapplication-id');
 
     $.ajax({
@@ -69,15 +67,16 @@ $('.missionApplicationDeclined').on('click', function () {
         success: function (data) {
             console.log(data);
 
-            location.reload();
-
+           
+            $('.missionApplicationListing').html(data);
             alert(" Mission application is successfully Declined");
          
 
         },
     })
 })
-$('.storyApproved').on('click', function () {
+
+$(document).on("click", ".storyApproved", function () {
     var sID = $(this).data('story-id');
 
     $.ajax({
@@ -89,8 +88,9 @@ $('.storyApproved').on('click', function () {
         success: function (data) {
             console.log(data);
 
-            location.reload();
-
+         
+            $('.StoryListing').html(data);
+            
             alert(" story is sccessfully published");
          
 
@@ -98,7 +98,8 @@ $('.storyApproved').on('click', function () {
     })
 })
 
-$('.storyDeclined').on('click', function () {
+
+$(document).on("click", ".storyDeclined", function () {
     var sID = $(this).data('story-id');
 
     $.ajax({
@@ -110,7 +111,8 @@ $('.storyDeclined').on('click', function () {
         success: function (data) {
             console.log(data);
 
-            location.reload();
+           
+            $('.StoryListing').html(data);
 
             alert(" story is sccessfully declined ");
          
@@ -123,10 +125,10 @@ $('#addthemeBtn').on('click', function () {
     (function () {
         'use strict'
 
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        
         var forms = document.querySelectorAll('.needs-validation.addthemevalidation')
         console.log(forms);
-        // Loop over them and prevent submission
+       
         Array.prototype.slice.call(forms)
             .forEach(function (form) {
 
@@ -155,8 +157,8 @@ $('#addthemeBtn').on('click', function () {
             },
             success: function (data) {
                 console.log(data);
-                location.reload();
-
+               
+                $('.Missionthemelisting').html(data);
                 alert("data is  successfully added");
 
             },
@@ -167,8 +169,8 @@ $('#addthemeBtn').on('click', function () {
 
 
 
-    $(".editMissionThemeModal").on("click", function () {
 
+$(document).on("click", ".editMissionThemeModal", function () {
 
         var MissionThemeId = $(this).attr('data-missionTheme-id');
 
@@ -200,7 +202,8 @@ $(document).on('click', '#EditablethemeBtn', function () {
         },
         success: function (data) {
             console.log(data);
-            location.reload();
+            
+            $('.Missionthemelisting').html(data);
             alert("Edited data is successfully saved");
 
         },
@@ -213,10 +216,10 @@ $('#addSkillBtn').on('click', function () {
     (function () {
         'use strict'
 
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      
         var forms = document.querySelectorAll('.needs-validation.addskillvalidation')
         console.log(forms);
-        // Loop over them and prevent submission
+        
         Array.prototype.slice.call(forms)
             .forEach(function (form) {
 
@@ -245,8 +248,8 @@ $('#addSkillBtn').on('click', function () {
             },
             success: function (data) {
                 console.log(data);
-                location.reload();
-
+               
+                $('#missionskillPartialView').html(data);
                 alert("data is  successfully added");
 
             },
@@ -255,16 +258,18 @@ $('#addSkillBtn').on('click', function () {
 
 });
 
-$(".editMissionSkillModal").on("click", function () {
 
-    var SkillId = $(this).attr('data-skill-id');
+   
+$(document).on("click", ".editMissionSkillModal", function () {
+
+    var SkillId = $(this).data('skill-id');
 
     console.log(SkillId);
 
-    $(`#editMissionSkillModal-${SkillId}`).modal("show");
-
+    $('#editMissionSkillModal-' + SkillId).modal("show");
 
 })
+
 
 
 $(document).on('click', '#EditSkillBtn', function () {
@@ -288,11 +293,58 @@ $(document).on('click', '#EditSkillBtn', function () {
         },
         success: function (data) {
             console.log(data);
+       
+            $('#missionskillPartialView').html(data);
             alert("Edited data is successfully saved");
-            location.reload();
-          
+
         },
     })
 
 })
 
+$('#addCMS').on('click', function () {
+    $.ajax({
+        url: "/Admin/_CMSAddPage",
+        success: function (data) {
+            $('.cmscontent').html(data);
+        }
+    })
+})
+
+$('#editCMS').on('click', function () {
+    $.ajax({
+        url: "/Admin/_CMSEditPage",
+        success: function (data) {
+            $('.cmscontent').html(data);
+        }
+    })
+})
+
+$(document).on("click", ".editUserModal", function () {
+
+    var userId = $(this).attr('data-user-id');
+
+    console.log(userId);
+
+    $(`#editUserDetailModal-${userId}`).modal("show");
+
+})
+
+const togglePassword = document
+    .querySelector('#togglePassword');
+
+const password = document.querySelector('#myPwd');
+
+togglePassword.addEventListener('click', () => {
+
+    // Toggle the type attribute using
+    // getAttribure() method
+    const type = password
+        .getAttribute('type') === 'password' ?
+        'text' : 'password';
+
+    password.setAttribute('type', type);
+
+    // Toggle the eye and bi-eye icon
+    this.classList.toggle('bi-eye');
+});

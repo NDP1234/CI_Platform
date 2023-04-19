@@ -15,5 +15,8 @@ namespace CI_Platform.Entities.Models.VM
         public List<Skill> missionSkills { get; set; }
         public List<MissionTheme> MissionThemes { get; set; }
 
+        public List<CmsPage> cmsPages { get; set; }
+
+
     }
 }

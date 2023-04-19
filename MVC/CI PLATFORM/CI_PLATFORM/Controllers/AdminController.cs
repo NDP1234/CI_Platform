@@ -1,4 +1,5 @@
 ﻿using CI_Platform.Entities.Data;
+using CI_Platform.Entities.Models;
 using CI_Platform.Entities.Models.VM;
 using CI_Platform.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -26,55 +27,142 @@ namespace CI_PLATFORM.Controllers
             viewmodel.Stories = _adminPrepository.getStoryDetailList();
             viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
             viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             return View(viewmodel);
         }
 
         public IActionResult _CMSAddPage()
         {
+            return PartialView("_CMSAddPage");
+        }
+        
+        public IActionResult _MissionSkill()
+        {
+            return View();
+        } 
+        public IActionResult _MissionTheme()
+        {
+           
+            return View();
+        }
+        public IActionResult _MissionApplication()
+        {
+           
+            return View();
+        }
+        public IActionResult _StoryPartial()
+        {
+           
             return View();
         }
 
-        public bool ApproveMissionApplication(int MissionApplicationId)
+        public IActionResult ApproveMissionApplication(int MissionApplicationId)
         {
             var approveMisApp = _adminPrepository.forApproveMissionApplication(MissionApplicationId);
-            return approveMisApp;
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            return PartialView("_MissionApplication", viewmodel);
         }
-        public bool DeclineMissionApplication(int MissionApplicationId)
+        public IActionResult DeclineMissionApplication(int MissionApplicationId)
         {
             var declineMisApp = _adminPrepository.forDeclineMissionApplication(MissionApplicationId);
-            return declineMisApp;
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            return PartialView("_MissionApplication", viewmodel);
         }
-        public bool PublishStory(int StoryId)
+        public IActionResult PublishStory(int StoryId)
         {
             var pubStory = _adminPrepository.forPublishStory(StoryId);
-            return pubStory;
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            return PartialView("_StoryPartial", viewmodel);
         }
-        public bool DeclineStory(int StoryId)
+        public IActionResult DeclineStory(int StoryId)
         {
             var declineStory = _adminPrepository.forDeclineStory(StoryId);
-            return declineStory;
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            return PartialView("_StoryPartial", viewmodel);
         }
-        public bool AddMissionTheme(string Title, int Status)
+        public IActionResult AddMissionTheme(string Title, int Status)
         {
             var addmissiontheme = _adminPrepository.forAddMissionTheme(Title, Status);
-            return addmissiontheme;
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            return PartialView("_MissionTheme", viewmodel);
         }
-        public bool editMissionTheme(int MissionThemeId, string Title, int Status)
+        public IActionResult editMissionTheme(int MissionThemeId, string Title, int Status)
         {
             var editmissiontheme = _adminPrepository.forEditMissionTheme(MissionThemeId, Title, Status);
-            return editmissiontheme;
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            return PartialView("_MissionTheme", viewmodel);
         }
 
-        public bool AddMissionSkill(string Title, int Status)
+       
+
+        public IActionResult AddMissionSkill(string Title, int Status)
         {
             var addmissionskill = _adminPrepository.forAddMissionSkill(Title, Status);
-            return addmissionskill;
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            return PartialView("_MissionSkill", viewmodel);
+           
         }
-
-        public bool editMissionSkill(int SkillId, string Title, int Status)
+        public IActionResult editMissionSkill(int SkillId, string Title, int Status)
         {
             var editmissionskill = _adminPrepository.forEditMissionSkill (SkillId, Title, Status);
-            return editmissionskill;
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            return PartialView("_MissionSkill", viewmodel);
         }
 
     }

@@ -1,0 +1,69 @@
+﻿@using CI_Platform.Entities.Models.VM
+@model AdminViewModel;
+@foreach (var item in Model.missionSkills)
+                                    {
+                                        <tr class="border">
+                                            <td>@item.SkillName</td>
+                                            @if (@item.Status == 1)
+                                            {
+                                                <td class="greentext">Active</td>
+                                            }
+                                             else
+                                            {
+                                                <td class="redtext">Inactive</td>
+                                            }
+                                            <td class="text-center">
+                                                <button class="border-0 bg-white editMissionSkillModal"  data-skill-id="@item.SkillId" data-bs-toggle="modal" data-bs-target="editMissionSkillModal-@item.SkillId"><i class="bi bi-pencil-square "></i></button>
+                                                <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
+                                            </td>
+                                              <!-- Modal -->
+                                            <div class="modal fade " id="editMissionSkillModal-@item.SkillId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <form class="row g-3 needs-validation addskillvalidation" novalidate>
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Edit Skill</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                                <div class="mb-3">
+                                                                    <label for="MissionSkillTitle-@item.SkillId" class="form-label">Mission Skill</label>
+                                                                    <input type="text" class="form-control" id="MissionSkillTitle-@item.SkillId" placeholder="Enter skill name here" value="@item.SkillName" required>
+                                                                    <div class="invalid-feedback">
+                                                                        Please enter the name of mission skill.
+                                                                    </div>
+                                                                </div>
+                                                                <fieldset class="row mb-3">
+                                                                    <legend class="col-form-label col-sm-2 pt-0">Status</legend>
+                                                                    <div class="col-sm-10">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="gridRadios2-@item.SkillId" id="ActiveSkillRadio-@item.SkillId" value="1" data-status="1" required @if (@item.Status == 1) { <text>checked</text> }>
+                                                                            <label class="form-check-label" for="ActiveSkillRadio-@item.SkillId">
+                                                                                Active
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="gridRadios2-@item.SkillId" id="InactiveSkillRadio-@item.SkillId" value="0" data-status="0"  required @if (@item.Status == 0) { <text>checked</text> }>
+                                                                            <label class="form-check-label" for="InactiveSkillRadio-@item.SkillId">
+                                                                                Inactive
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </fieldset>
+                                                                <div class="invalid-feedback">
+                                                                    Please select an option .
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary " data-skill-id="@item.SkillId"  id="EditSkillBtn" >Edit Skill</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Modal -->
+                                        </tr>
+                                    }

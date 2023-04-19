@@ -1,0 +1,25 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using CI_Platform.Entities.Models.VM
+@model AdminViewModel;
+
+@foreach (var item in Model.cmsPages)
+{
+    <tr class="border ">
+        <td>@item.Title</td>
+        @if (@item.Status == 1)
+        {
+            <td class="greentext text-center">Active</td>
+        }
+        else
+        {
+            <td class="redtext text-center">Inactive</td>
+        }
+
+        <td class="text-center">
+            <a class="border-0 bg-white text-dark" ><i class="bi bi-pencil-square "></i></a>
+            <button class="border-0 bg-white" ><i class="bi bi-trash "></i></button>
+        </td>
+    </tr>
+}
