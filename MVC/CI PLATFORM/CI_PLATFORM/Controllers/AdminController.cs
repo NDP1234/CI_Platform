@@ -28,6 +28,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
             viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            viewmodel.countries = _adminPrepository.getCountryList();
             return View(viewmodel);
         }
 
@@ -35,24 +36,37 @@ namespace CI_PLATFORM.Controllers
         {
             return PartialView("_CMSAddPage");
         }
-        
+
+        public IActionResult _CMSEditPage()
+        {
+            return PartialView("_CMSEditPage");
+        }
+        public IActionResult _CMSPage()
+        {
+            return PartialView("_CMSPage");
+        }
         public IActionResult _MissionSkill()
         {
             return View();
-        } 
+        }
         public IActionResult _MissionTheme()
         {
-           
+
             return View();
         }
         public IActionResult _MissionApplication()
         {
-           
+
             return View();
         }
         public IActionResult _StoryPartial()
         {
-           
+
+            return View();
+        }
+        public IActionResult _userPartial()
+        {
+
             return View();
         }
 
@@ -135,7 +149,7 @@ namespace CI_PLATFORM.Controllers
             return PartialView("_MissionTheme", viewmodel);
         }
 
-       
+
 
         public IActionResult AddMissionSkill(string Title, int Status)
         {
@@ -149,11 +163,11 @@ namespace CI_PLATFORM.Controllers
             viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             return PartialView("_MissionSkill", viewmodel);
-           
+
         }
         public IActionResult editMissionSkill(int SkillId, string Title, int Status)
         {
-            var editmissionskill = _adminPrepository.forEditMissionSkill (SkillId, Title, Status);
+            var editmissionskill = _adminPrepository.forEditMissionSkill(SkillId, Title, Status);
             var viewmodel = new AdminViewModel();
             viewmodel.users = _adminPrepository.getUserList();
             viewmodel.Missions = _adminPrepository.getMissionList();
@@ -165,5 +179,116 @@ namespace CI_PLATFORM.Controllers
             return PartialView("_MissionSkill", viewmodel);
         }
 
+        public IActionResult deleteMissionSkill(int skillid)
+        {
+            var deletemissionskill = _adminPrepository.forDeleteMissionSkill(skillid);
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            return PartialView("_MissionSkill", viewmodel);
+        }
+        public IActionResult deleteMissionTheme(int themeId)
+        {
+            var deletemissiontheme = _adminPrepository.forDeleteMissionTheme(themeId);
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            return PartialView("_MissionTheme", viewmodel);
+        }
+        public IActionResult deleteStory(int StoryId)
+        {
+            var deletemissiontheme = _adminPrepository.forDeleteStory(StoryId);
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            return PartialView("_StoryPartial", viewmodel);
+        }
+
+        public IActionResult AddCmsDetails(string Title, string Description, string Slug, int Status)
+        {
+            var addCMSdetails = _adminPrepository.forAddCMSDetails(Title, Description, Slug, Status);
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            return PartialView("_CMSPage", viewmodel);
+        }
+        public IActionResult EditCmsDetails(int CMSPageId, string Title, string Description, string Slug, int Status)
+        {
+            var editCMSdetails = _adminPrepository.forEditCMSDetails(CMSPageId, Title, Description, Slug, Status);
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            return PartialView("_CMSPage", viewmodel);
+        }
+        public IActionResult DeleteCmsDetails(int CMSPageId)
+        {
+            var editCMSdetails = _adminPrepository.forDeleteCMSDetails(CMSPageId);
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            return PartialView("_CMSPage", viewmodel);
+        }
+
+        public IActionResult GetCitiesForCountry(long countryId)
+        {
+            var session_details = HttpContext.Session.GetString("Login");
+
+            List<User> users = _users.GetUserList();
+            var profile = users.FirstOrDefault(m => m.Email == session_details);
+            var cities = _db.Cities.Where(c => c.CountryId == countryId).ToList();
+            var cityList = cities.Select(c => new { cityId = c.CityId, name = c.Name });
+            return Json(cityList);
+        }
+
+        public IActionResult CheckEmailExistence(string email)
+        {
+            bool emailExists = _db.Users.Any(u => u.Email == email);
+            return Json(!emailExists);
+        }
+
+        public IActionResult AddUser(string firstName, string LastName, string email, string pwd, string EmpId, int CountryId, int CityId, string ProfText, string Department, int Status)
+        {
+            var editCMSdetails = _adminPrepository.forAddUser(firstName, LastName, email, pwd, EmpId, CountryId, CityId, ProfText, Department, Status);
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            viewmodel.countries = _adminPrepository.getCountryList();
+            return PartialView("_userPartial", viewmodel);
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿@using CI_Platform.Entities.Models.VM
 @model AdminViewModel;
-@foreach (var item in Model.Stories)
+@foreach (var item in Model.Stories.Where(st=>st.DeletedAt==null))
                                     {
                                         <tr class="border">
                                             <td>@item.Title</td>
@@ -30,7 +30,7 @@
                                                         <i class="bi bi-x-circle icon-red"></i>
                                                     }
                                                 </button>
-                                                <button class="border-0 bg-white" data-story-id="@item.StoryId"><i class="bi bi-trash  "></i></button>
+                                                <button class="border-0 bg-white deleteStory" data-story-id="@item.StoryId"><i class="bi bi-trash  "></i></button>
                                             </td>
                                         </tr>
                                     }

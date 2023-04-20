@@ -5,56 +5,63 @@
     Layout = null;
 }
 @using CI_Platform.Entities.Models.VM
-@model AdminViewModel;
-    <div class="container mt-2">
-        <div class="row ">
-            <div class="col bg-light py-3 ">
-                <h4 class="ps-4">Edit</h4>
-            </div>
+@model AdminViewModel
+<div class="container mt-2">
+    <div class="row ">
+        <div class="col bg-light py-3 ">
+            <h4 class="ps-4">Edit</h4>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="my-3">
-                    <label for="cmstitle2" class="form-label ">Title</label>
-                    <input type="text" class="form-control" id="cmstitle2" aria-describedby="titleHelp" >
-                </div>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col">
-                <label for="CMSeditor2">Description</label>
-                <textarea cols="80" id="editor1" name="editor1" rows="4">&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href=&quot;https://ckeditor.com/&quot;&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="my-3">
-                    <label for="cmsSlug2" class="form-label ">Slug</label>
-                    <input type="text" class="form-control" id="cmsSlug2" aria-describedby="SlugHelp">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="my-3">
-                    <label for="cmsStatus3" class="form-label ">Status</label>
-                    <input type="text" class="form-control" id="cmsStatus3" aria-describedby="StatusHelp">
-                </div>
-            </div>
-        </div>
-        <div class="row my-4">
-            <div class="col">
-                <button class="btn btn-success SaveBtn float-end " type="button">Save</button>
-                <button class="btn btn-primary cancelBtn float-end mx-2" type="button">cancel</button>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="my-3">
+                <label for="cmstitle2" class="form-label ">Title</label>
+                <input type="text" class="form-control" id="cmstitle2" aria-describedby="titleHelp">
             </div>
         </div>
     </div>
- <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('editor1', {
+    <div class="row mt-3">
+        <div class="col">
+            <label for="CMSeditor2">Description</label>
+            <textarea cols="80" id="CMSeditor2" class="mydescription" name="CMSeditor2" rows="4">&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href=&quot;https://ckeditor.com/&quot;&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea>
+         </div>
+       
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="my-3">
+                <label for="cmsSlug2" class="form-label ">Slug</label>
+                <input type="text" class="form-control" id="cmsSlug2" aria-describedby="SlugHelp">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div>
+                <label for="myStatusOfCMS2">Status</label>
+                <select class="form-select" id="myStatusOfCMS2" aria-label="Default select example" required>
+                    <option selected>Select a status</option>
+                    <option value="0">Inactive</option>
+                    <option value="1">Active</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row my-4">
+        <div class="col">
+            <button class="btn btn-success SaveBtn float-end CmsEdit" id="EditBtnForCmsPage" data-cms-id="" type="button">Save</button>
+            <a class="btn btn-primary cancelBtn float-end mx-2" asp-action="AdminDashBoard" asp-controller="Admin" type="button">cancel</a>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.ckeditor.com/4.21.0/basic/ckeditor.js"></script>
+<script>
+        CKEDITOR.replace('CMSeditor2', {
       height: 200,
       baseFloatZIndex: 10005
-        removeButtons: 'PasteFromWord,Cut,Copy,Paste,PasteText,Undo,Redo,Link,Unlink,Scayt,HorizontalRule,SpecialChar,NumberedList,BulletedList,Outdent,Indent,Blockquote,Anchor,Image,Table,Maximize,Source'
 
     });
-    </script>
+   
+</script>

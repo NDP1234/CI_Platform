@@ -16,6 +16,7 @@ namespace CI_Platform.Entities.Models.VM
         public List<MissionTheme> MissionThemes { get; set; }
 
         public List<CmsPage> cmsPages { get; set; }
+        public List<Country> countries { get; set; }
 
 
     }

@@ -4,7 +4,7 @@
 @using CI_Platform.Entities.Models.VM
 @model AdminViewModel;
 
-@foreach (var item in Model.cmsPages)
+@foreach (var item in Model.cmsPages.Where(c=>c.DeletedAt==null))
 {
     <tr class="border ">
         <td>@item.Title</td>
@@ -18,8 +18,8 @@
         }
 
         <td class="text-center">
-            <a class="border-0 bg-white text-dark" ><i class="bi bi-pencil-square "></i></a>
-            <button class="border-0 bg-white" ><i class="bi bi-trash "></i></button>
+            <button class="border-0 bg-white text-dark editCMS" data-cms-id="@item.CmsPageId" onclick="editCmms('@item.Title','@item.Status','@item.CmsPageId','@item.Description', '@item.Slug' )"><i class="bi bi-pencil-square "></i></button>
+            <button class="border-0 bg-white " id="DeleteBtnForCmsPage" data-cms-id="@item.CmsPageId"><i class="bi bi-trash "></i></button>
         </td>
     </tr>
 }

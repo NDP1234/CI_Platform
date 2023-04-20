@@ -46,7 +46,7 @@ namespace CI_Platform.Repository.Repository
             var ListOfMissionSkills = _db.Skills.ToList();
             return ListOfMissionSkills;
         }
-        
+
 
         public List<MissionTheme> getMissionThemeList()
         {
@@ -125,32 +125,6 @@ namespace CI_Platform.Repository.Repository
             return true;
         }
 
-        //public List<AdminViewModel.MissionSkill> forAddMissionSkill(string Title, int Status)
-        //{
-
-        //    Skill MissionSkillData = new Skill();
-
-        //    MissionSkillData.SkillName = Title;
-        //    MissionSkillData.Status = (byte)Status;
-        //    _db.Skills.Add(MissionSkillData);
-        //    _db.SaveChanges();
-
-        //    MissionSkillData.Status = (byte)Status;
-        //    _db.Skills.Update(MissionSkillData);
-        //    _db.SaveChanges();
-
-        //    AdminViewModel.MissionSkill myskill = new AdminViewModel.MissionSkill
-        //    {
-        //        SkillId = MissionSkillData.SkillId,
-        //        SkillName = MissionSkillData.SkillName,
-        //        Status = MissionSkillData.Status
-        //    };
-        //    List<AdminViewModel.MissionSkill> myskills = new List<AdminViewModel.MissionSkill>();
-        //    myskills.Add(myskill);
-
-        //    return myskills;
-
-        //}
         public bool forAddMissionSkill(string Title, int Status)
         {
 
@@ -177,7 +151,87 @@ namespace CI_Platform.Repository.Repository
             _db.SaveChanges();
             return true;
         }
+
+        public bool forDeleteMissionSkill(int skillid)
+        {
+            var ExistSkillData = _db.Skills.Where(s => s.SkillId == skillid).FirstOrDefault();
+            ExistSkillData.DeletedAt = DateTime.UtcNow;
+            _db.Skills.Update(ExistSkillData);
+            _db.SaveChanges();
+            return true;
+        }
+        public bool forDeleteMissionTheme(int missionThemeId)
+        {
+            var ExistThmeData = _db.MissionThemes.Where(m => m.MissionThemeId == missionThemeId).FirstOrDefault();
+            ExistThmeData.DeletedAt = DateTime.UtcNow;
+            _db.MissionThemes.Update(ExistThmeData);
+            _db.SaveChanges();
+            return true;
+        }
+        public bool forDeleteStory(int StoryId)
+        {
+            var ExistStoryData = _db.Stories.Where(st => st.StoryId == StoryId).FirstOrDefault();
+            ExistStoryData.DeletedAt = DateTime.UtcNow;
+            _db.Stories.Update(ExistStoryData);
+            _db.SaveChanges();
+            return true;
+        }
+
+        public bool forAddCMSDetails(string Title, string Description, string Slug, int Status)
+        {
+            CmsPage myCMS = new CmsPage();
+            myCMS.Title = Title;
+            myCMS.Description = Description;
+            myCMS.Slug = Slug;
+            myCMS.Status = Status;
+            _db.CmsPages.Add(myCMS);
+            _db.SaveChanges();
+            return true;
+        }
+        public bool forEditCMSDetails(int CMSid, string Title, string Description, string Slug, int Status)
+        {
+            var existCms = _db.CmsPages.Where(c => c.CmsPageId == CMSid).FirstOrDefault();
+            existCms.Description = Description;
+            existCms.Slug = Slug;
+            existCms.Status = Status;
+            existCms.UpdatedAt = DateTime.UtcNow;
+            existCms.Title = Title;
+            _db.CmsPages.Update(existCms);
+            _db.SaveChanges();
+            return true;
+        }
+        public bool forDeleteCMSDetails(int CMSPageId)
+        {
+            var existCmsPage = _db.CmsPages.Where(c => c.CmsPageId == CMSPageId).FirstOrDefault();
+            existCmsPage.DeletedAt = DateTime.UtcNow;
+            _db.CmsPages.Update(existCmsPage);
+            _db.SaveChanges();
+            return true;
+        }
+        public List<Country> getCountryList()
+        {
+            var ListOfCountry = _db.Countries.ToList();
+            return ListOfCountry;
+        }
+
+        public bool forAddUser(string firstName, string LastName, string email, string pwd, string EmpId, int CountryId, int CityId, string ProfText, string Department, int Status)
+        {
+            User adduser = new User();
+            adduser.FirstName = firstName;
+            adduser.LastName = LastName;
+            adduser.Email = email;
+            adduser.Password = pwd;
+            adduser.EmployeeId = EmpId;
+            adduser.CountryId = CountryId;
+            adduser.CityId = CityId;
+            adduser.ProfileText = ProfText;
+            adduser.Department = Department;
+            adduser.Status = Status;
+
+            _db.Users.Add(adduser);
+            _db.SaveChanges();
+            return true;
+        }
     }
-
-
 }
+
