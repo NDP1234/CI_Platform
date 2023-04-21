@@ -313,20 +313,6 @@ $(document).on('click', '#EditSkillBtn', function () {
 })
 
 
-
-
-
-$(document).on("click", ".editUserModal", function () {
-
-    var userId = $(this).attr('data-user-id');
-
-    console.log(userId);
-
-    $(`#editUserDetailModal-${userId}`).modal("show");
-
-})
-
-
 $(document).on('click', '.deleteMissionSkill', function () {
     var skillId = $(this).attr('mission-skill-id')
 
@@ -436,11 +422,11 @@ function editCmms(Title, Status, CmsPageId, Description, Slug) {
         $('#EditBtnForCmsPage').attr('data-cms-id', CmsPageId);
 
 
-    }) 
+    })
     $(document).on('click', '#EditBtnForCmsPage', function () {
 
         var editedTitle = $('#cmstitle2').val();
-       
+
         var editedDescription = CKEDITOR.instances.CMSeditor2.editable().getText();
         var editedSlug = $('#cmsSlug2').val();
         var editedStatus = $('#myStatusOfCMS2').val();
@@ -461,13 +447,13 @@ function editCmms(Title, Status, CmsPageId, Description, Slug) {
                 Status: editedStatus
             },
             success: function (data) {
-                
+
                 alert("Edited data is successfully saved");
             }
         })
     })
 
-   
+
 }
 
 $(document).on('click', '#DeleteBtnForCmsPage', function () {
@@ -493,7 +479,7 @@ $('#Country').on('change', function () {
     $('#City').empty(); // clear the city dropdown
 
     // make an AJAX request to get cities for the selected country
-   /* $('#selectedCity').remove();*/
+
     $.ajax({
         url: '/Admin/GetCitiesForCountry',
         type: 'POST',
@@ -507,12 +493,6 @@ $('#Country').on('change', function () {
             $.each(data, function (i, city) {
                 $('#City').append($('<option>').attr('value', city.cityId).text(city.name));
             });
-
-            //Select the city based on the city ID retrieved from data
-            //var cityId = $('#cityInput').data('city-id');
-            //if (cityId) {
-            //    $('#cityInput').val(cityId);
-            //}
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log(xhr.responseText);
@@ -567,7 +547,8 @@ $(document).on('click', '#AddUserBtn', function () {
     var ProfText = $('#pText').val();
     var Department = $('#Department').val();
     var Status = $('#Status').val();
-
+    var phone = $('#phonenumber').val();
+    var profilepic = $('#userProfile').attr('src');
     console.log(firstName);
     console.log(LastName);
     console.log(email);
@@ -578,13 +559,15 @@ $(document).on('click', '#AddUserBtn', function () {
     console.log(ProfText);
     console.log(Department);
     console.log(Status);
+    console.log(phone);
+    console.log(profilepic);
 
     if (pwd.length < 8) {
         $('#pwdValid').removeClass('d-none');
     }
-    
 
-    if (firstName && LastName && email && pwd.length > 8 && EmpId && CountryId && CityId && ProfText && Department && Status){
+
+    if (firstName && LastName && email && pwd.length > 8 && EmpId && CountryId && CityId && ProfText && Department && Status && phone) {
         $.ajax({
             type: "POST",
             url: "/Admin/AddUser",
@@ -598,7 +581,9 @@ $(document).on('click', '#AddUserBtn', function () {
                 CityId: CityId,
                 ProfText: ProfText,
                 Department: Department,
-                Status: Status
+                Status: Status,
+                PhoneNumber: phone,
+                Avatar: profilepic
             },
             success: function (data) {
                 console.log(data);
@@ -613,6 +598,159 @@ $(document).on('click', '#AddUserBtn', function () {
 })
 
 
+
+function OpenEditUserModal(UserId, FirstName, LastName, Email, Password, EmployeeId, CountryId, CityId, ProfileText, Department, Status, PhoneNumber, Avatar) {
+
+    $('#UserSaveChangesBtn').attr('data-user-id', UserId);
+    $('#myFirstName2').val(FirstName);
+    $('#myLastName2').val(LastName);
+    $('#myemail2').val(Email);
+    $('#myPwd2').val(Password);
+    $('#EmpId2').val(EmployeeId);
+    $('#Country2').val(CountryId);
+    $('#City2').val(CityId);
+    $('#pText2').val(ProfileText);
+    $('#Department2').val(Department);
+    $('#Status2').val(Status);
+    $('#phonenumber2').val(PhoneNumber);
+    $('#userProfile2').attr('src', Avatar);
+    $('#editUserDetailModal').modal('show');
+
+}
+
+
+$(document).on('click', '#UserSaveChangesBtn', function () {
+
+    var userId = $(this).attr('data-user-id');
+    var FirstName = $(`#myFirstName2`).val();
+    var LastName = $(`#myLastName2`).val();
+    var Email = $(`#myemail2`).val();
+    var Password = $(`#myPwd2`).val();
+    var EmployeeId = $(`#EmpId2`).val();
+    var CountryId = $(`#Country2`).val();
+    var CityId = $(`#City2`).val();
+    var ProfileText = $(`#pText2`).val();
+    var Department = $(`#Department2`).val();
+    var Status = $(`#Status2`).val();
+    var PhoneNumber = $(`#phonenumber2`).val();
+    var Avatar = $(`#userProfile2`).attr('src');
+
+    console.log(userId);
+    console.log(FirstName);
+    console.log(LastName);
+    console.log(Email);
+    console.log(Password);
+    console.log(EmployeeId);
+    console.log(CountryId);
+    console.log(CityId);
+    console.log(ProfileText);
+    console.log(Department);
+    console.log(Status);
+    console.log(PhoneNumber);
+    console.log(Avatar);
+    if (userId && FirstName && LastName && Email && Password && EmployeeId && CountryId && CityId && ProfileText && Department && Status && PhoneNumber && Avatar) {
+        $.ajax({
+            type: "POST",
+            url: "/Admin/SaveEditedUser",
+            data: {
+                userId: userId,
+                FirstName: FirstName,
+                LastName: LastName,
+                Email: Email,
+                Password: Password,
+                EmployeeId: EmployeeId,
+                CountryId: CountryId,
+                CityId: CityId,
+                ProfileText: ProfileText,
+                Department: Department,
+                Status: Status,
+                PhoneNumber: PhoneNumber,
+                Avatar: Avatar,
+            },
+            success: function (data) {
+                console.log(data);
+
+                $('.userlist').html(data);
+                alert(" edited data is successfully saved");
+
+            },
+        })
+    }
+
+
+})
+
+
+$(document).on('click', '.deleteUserBtn', function () {
+    var userId = $(this).attr('data-user-id')
+
+    $.ajax({
+        type: "POST",
+        url: "/Admin/deleteUser",
+        data: {
+            UserId: userId
+        },
+        success: function (data) {
+            console.log(data);
+
+            $('.userlist').html(data);
+            alert(" data is successfully deleted");
+
+        },
+    })
+})
+
+
+$('#Country2').on('change', function () {
+    var countryId = $(this).val(); // get the selected country id
+    $('#City2').empty(); // clear the city dropdown
+
+    // make an AJAX request to get cities for the selected country
+    $.ajax({
+        url: '/Admin/GetCitiesForCountry',
+        type: 'POST',
+        dataType: 'json',
+        data: { countryId: countryId },
+        success: function (data) {
+            console.log(data);
+            // populate the city dropdown with the returned data
+            $('#cityInput').empty();
+
+            $.each(data, function (i, city) {
+                $('#City2').append($('<option>').attr('value', city.cityId).text(city.name));
+            });
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log(xhr.responseText);
+        }
+    });
+});
+
+
+$('#MissionCountry').on('change', function () {
+    var countryId = $(this).val(); // get the selected country id
+    $('#MissionCity').empty(); // clear the city dropdown
+
+    // make an AJAX request to get cities for the selected country
+    $.ajax({
+        url: '/Admin/GetCitiesForCountry',
+        type: 'POST',
+        dataType: 'json',
+        data: { countryId: countryId },
+        success: function (data) {
+            console.log(data);
+            // populate the city dropdown with the returned data
+            /*  $('#cityInput').empty();*/
+
+            $.each(data, function (i, city) {
+                $('#MissionCity').append($('<option>').attr('value', city.cityId).text(city.name));
+            });
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log(xhr.responseText);
+        }
+    });
+});
 
 const togglePassword = document
     .querySelector('#togglePassword');
@@ -632,3 +770,349 @@ togglePassword.addEventListener('click', () => {
     // Toggle the eye and bi-eye icon
     this.classList.toggle('bi-eye');
 });
+
+
+function selectFile() {
+    document.getElementById("fileInput").click();
+}
+
+function previewImage() {
+    var preview = document.getElementById("userProfile");
+    var file = document.getElementById("fileInput").files[0];
+    var reader = new FileReader();
+
+    reader.onloadend = function () {
+        preview.src = reader.result;
+    }
+
+    if (file) {
+        reader.readAsDataURL(file);
+        var formData = new FormData();
+        formData.append('file', file);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Admin/SaveImage', true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                preview.src = xhr.responseText;
+                document.getElementById("avatarInput").value = xhr.responseText;
+            }
+        };
+        xhr.send(formData);
+    }
+
+}
+
+function selectFile2() {
+    document.getElementById("fileInput2").click();
+}
+
+function previewImage2() {
+    var preview = document.getElementById("userProfile2");
+    var file = document.getElementById("fileInput2").files[0];
+    var reader = new FileReader();
+
+    reader.onloadend = function () {
+        preview.src = reader.result;
+    }
+
+    if (file) {
+        reader.readAsDataURL(file);
+        var formData = new FormData();
+        formData.append('file', file);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Admin/SaveImage', true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                preview.src = xhr.responseText;
+                document.getElementById("avatarInput").value = xhr.responseText;
+            }
+        };
+        xhr.send(formData);
+    }
+
+}
+
+
+// -----------------------------------------------------------------------------------------------------------------  
+// for select images or videos and displayed at below      
+// -----------------------------------------------------------------------------------------------------------------  
+// Global array for storing selected image paths in base64 format
+const selectedImagesBase64 = [];
+
+// Get the selectedImage div
+const selectedImage = document.querySelector('.selectedImage');
+
+// Handle the change event for the file input element
+const fileInput = document.getElementById('fileInputForMission');
+fileInput.addEventListener('change', function (event) {
+    for (const file of event.target.files) {
+        // Create a new image element for each selected file
+        if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
+            const newImage = document.createElement(file.type.startsWith('image/') ? 'img' : 'video');
+            newImage.src = URL.createObjectURL(file);
+            newImage.controls = true;
+
+            // Convert the file to base64 and add it to the selectedImagesBase64 array
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                const base64Image = reader.result;
+                selectedImagesBase64.push(base64Image);
+            };
+
+            // Create a new remove icon for each selected image
+            const removeIcon = document.createElement('span');
+            removeIcon.innerHTML = 'x';
+            removeIcon.className = 'remove';
+
+            // Add the new image and remove icon to the selectedImage div
+            const newDiv = document.createElement('div');
+            newDiv.className = 'selectedImageItem';
+            newDiv.appendChild(newImage);
+            newDiv.appendChild(removeIcon);
+            selectedImage.appendChild(newDiv);
+
+            // Add a horizontal line between images
+            selectedImage.appendChild(document.createElement('hr'));
+        }
+    }
+    console.log(selectedImagesBase64);
+    // Call the function to handle remove icon clicks
+    handleRemoveIconClick();
+});
+
+// Handle remove icon clicks
+function handleRemoveIconClick() {
+    const removeIcons = document.querySelectorAll('.selectedImageItem .remove');
+    removeIcons.forEach(icon => {
+        icon.addEventListener('click', function () {
+            // Remove the image path from the selectedImagesBase64 array
+            const imageElement = this.previousSibling;
+            const index = selectedImagesBase64.indexOf(imageElement.src);
+            if (index !== -1) {
+                selectedImagesBase64.splice(index, 1);
+            }
+
+            // Remove the selected image item from the selectedImage div
+            this.parentElement.remove();
+        });
+    });
+}
+
+
+// -----------------------------------------------------------------------------------------------------------------  
+// for select documents and displayed at below      
+// -----------------------------------------------------------------------------------------------------------------  
+// Global array for storing selected document paths in base64 format
+const selectedDocsBase64 = [];
+
+// Get the selectedDoc div
+const selectedDoc = document.querySelector('.selectedDoc');
+
+// Handle the change event for the file input element
+const fileInputDoc = document.getElementById('fileInputForMissionDoc');
+fileInputDoc.addEventListener('change', function (event) {
+    for (const file of event.target.files) {
+        // Create a new element for each selected file
+        if (!file.type.startsWith('image/') && !file.type.startsWith('video/')) {
+            const newDoc = document.createElement('div');
+            newDoc.className = 'selectedDocItem';
+
+            // Create a new remove icon for each selected document
+            const removeIcon = document.createElement('span');
+            removeIcon.innerHTML = 'x';
+            removeIcon.className = 'remove';
+
+            // Display the document name
+            const docName = document.createElement('span');
+            docName.innerHTML = file.name;
+            docName.className = 'docName';
+
+            // Add the new document, remove icon and document name to the selectedDoc div
+            newDoc.appendChild(docName);
+            newDoc.appendChild(removeIcon);
+            selectedDoc.appendChild(newDoc);
+
+            // Convert the file to base64 and add it to the selectedDocsBase64 array
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                const base64Doc = reader.result;
+                selectedDocsBase64.push(base64Doc);
+            };
+
+            // Add a horizontal line between documents
+            selectedDoc.appendChild(document.createElement('hr'));
+        }
+    }
+    console.log(selectedDocsBase64);
+    // Call the function to handle remove icon clicks
+    handleRemoveIconClickDoc();
+});
+
+// Handle remove icon clicks
+function handleRemoveIconClickDoc() {
+    const removeIcons = document.querySelectorAll('.selectedDocItem .remove');
+    removeIcons.forEach(icon => {
+        icon.addEventListener('click', function () {
+            // Remove the document path from the selectedDocsBase64 array
+            const index = Array.from(selectedDoc.children).indexOf(this.parentElement);
+            if (index !== -1) {
+                selectedDocsBase64.splice(index, 1);
+            }
+
+            // Remove the selected document item from the selectedDoc div
+            this.parentElement.remove();
+        });
+    });
+}
+
+
+$(document).on('click', '#AddMissionDetailBtn', function () {
+
+    (function () {
+        'use strict'
+
+
+        var forms = document.querySelectorAll('.needs-validation.addMissionDetailsValidate')
+        console.log(forms);
+
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+
+            })
+    })()
+
+    var MissionTitle = $('#MyMissionTitle').val();
+    var ShortDescription = $('#sDescription').val();
+    var Description = CKEDITOR.instances.Missioneditor.editable().getText();
+    var CountryId = $('#MissionCountry').val();
+    var CityId = $('#MissionCity').val();
+    var OrganisationName = $('#OrganisationName').val();
+    var Missiontype = $('#MissionType').val();
+    var MisStartDate = $('#MisStartDate').val();
+    var MisEndDate = $('#MisEndDate').val();
+    var Organizationdetails = $('#Organizationdetails').val();
+    var TotalSeats = $('#TotalSeats').val();
+    var MisRegEndDate = $('#MisRegEndDate').val();
+    var MissionTheme = $('#MissionThemedata').val();
+    var myAvailability = $('#myAvailability').val();
+    var VideoUrl = $('#VideoUrl').val();
+    var imgpathlist = selectedImagesBase64;
+    var docpathlist = selectedDocsBase64;
+    var goaltext = $('#goaltext').val();
+    var GoalValue = $('#GoalValue').val();
+    var selectedSkills = [];
+
+    $('.themeDropdown').each(function () {
+        if ($(this).is(':checked')) {
+            selectedSkills.push($(this).attr('id'));
+        }
+    });
+
+    var selectedMissionSkill = selectedSkills;
+    console.log(MissionTitle)
+    console.log(ShortDescription)
+    console.log(Description)
+    console.log(CountryId)
+    console.log(CityId)
+    console.log(OrganisationName)
+    console.log(Missiontype)
+    console.log(MisStartDate)
+    console.log(MisEndDate)
+    console.log(Organizationdetails)
+    console.log(TotalSeats)
+    console.log(MisRegEndDate)
+    console.log(MissionTheme)
+    console.log(myAvailability)
+    console.log(VideoUrl)
+    console.log(imgpathlist)
+    console.log(docpathlist)
+    console.log(selectedMissionSkill)
+    console.log(goaltext)
+    console.log(GoalValue)
+
+    if (MissionTitle && ShortDescription && Description && CountryId && CityId && OrganisationName && Missiontype && MisStartDate && MisEndDate && Organizationdetails   && MissionTheme && myAvailability && VideoUrl && imgpathlist && docpathlist && selectedMissionSkill)
+    {
+        $.ajax({
+            type: "POST",
+            url: "/Admin/SaveMission",
+            data: {
+                MissionTitle: MissionTitle,
+                ShortDescription: ShortDescription,
+                Description: Description,
+                CountryId: CountryId,
+                CityId: CityId,
+                OrganisationName: OrganisationName,
+                Missiontype: Missiontype,
+                MisStartDate: MisStartDate,
+                MisEndDate: MisEndDate,
+                Organizationdetails: Organizationdetails,
+                TotalSeats: TotalSeats,
+                MisRegEndDate: MisRegEndDate,
+                MissionTheme: MissionTheme,
+                myAvailability: myAvailability,
+                VideoUrl: VideoUrl,
+                imgpathlist: imgpathlist,
+                docpathlist: docpathlist,
+                selectedMissionSkill: selectedMissionSkill,
+                goaltext: goaltext,
+                GoalValue: GoalValue
+                
+            },
+            success: function (data) {
+                console.log(data);
+
+                $('.missionList').html(data);
+                alert("  data is successfully saved");
+
+            },
+        })
+    }
+
+
+})
+
+
+    // Get references to the form fields
+ const missionTypeSelect = document.getElementById("MissionType");
+const goalText = document.getElementById("goaltext");
+const goalValue = document.getElementById("GoalValue");
+const totalSeats = document.getElementById("TotalSeats");
+const regDeadline = document.getElementById("MisRegEndDate");
+
+// Disable all fields initially
+goalText.disabled = true;
+goalValue.disabled = true;
+totalSeats.disabled = true;
+regDeadline.disabled = true;
+
+// Listen for changes on the mission type select element
+missionTypeSelect.addEventListener("change", () => {
+    // Enable/disable fields based on the selected value
+    if (missionTypeSelect.value === "GOAL") {
+        goalText.disabled = false;
+        goalValue.disabled = false;
+        totalSeats.disabled = true;
+        regDeadline.disabled = true;
+    } else if (missionTypeSelect.value === "TIME") {
+        goalText.disabled = true;
+        goalValue.disabled = true;
+        totalSeats.disabled = false;
+        regDeadline.disabled = false;
+    } else {
+        // If the selected value is neither "GOAL" nor "TIME", disable all fields
+        goalText.disabled = true;
+        goalValue.disabled = true;
+        totalSeats.disabled = true;
+        regDeadline.disabled = true;
+    }
+});
+

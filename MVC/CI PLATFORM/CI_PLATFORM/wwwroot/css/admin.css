@@ -1,0 +1,105 @@
+﻿.selectedDoc {
+    margin-top: 10px;
+}
+
+.selectedDocItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.docName {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.selectedDocItem .remove {
+    cursor: pointer;
+    font-weight: bold;
+    color: red;
+}
+
+
+
+.selectedImage {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.selectedImageItem {
+    display: inline-block;
+    position: relative;
+    max-width: 200px;
+    margin: 10px;
+}
+
+    .selectedImageItem img {
+        height: 150px;
+        width: 150px;
+        margin: 0px 12px;
+        object-fit: cover;
+    }
+
+    .selectedImageItem .remove {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        cursor: pointer;
+    }
+
+/* Style the horizontal line between images */
+.selectedImage hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 5px 0;
+}
+
+.orangeClr {
+    background-color: #F88634;
+    height: 100vh;
+}
+
+.nav-link:hover {
+    background-color: white;
+    color: #F88634;
+}
+
+.txtwhite {
+    color: white;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    color: #F88634;
+    background-color: white;
+}
+
+.mtop {
+    margin-top: -3px;
+}
+
+.greentext {
+    color: #14C506;
+}
+
+.redtext {
+    color: red;
+}
+
+.addUserBtn, .addthemeBtn, .addSkillBtn {
+    border: 2px solid #F88634;
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: #F88634;
+}
+
+.icon-green {
+    color: #14C506;
+}
+
+.icon-red {
+    color: red;
+}

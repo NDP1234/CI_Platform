@@ -214,24 +214,152 @@ namespace CI_Platform.Repository.Repository
             return ListOfCountry;
         }
 
-        public bool forAddUser(string firstName, string LastName, string email, string pwd, string EmpId, int CountryId, int CityId, string ProfText, string Department, int Status)
+        public List<City> getCityList()
+        {
+            var ListOfCity = _db.Cities.ToList();
+            return ListOfCity;
+        }
+
+        public bool forAddUser(string firstName, string LastName, string email, string pwd, string EmpId, int CountryId, int CityId, string ProfText, string Department, int Status, string PhoneNumber, string Avatar)
         {
             User adduser = new User();
             adduser.FirstName = firstName;
             adduser.LastName = LastName;
             adduser.Email = email;
             adduser.Password = pwd;
-            adduser.EmployeeId = EmpId;
             adduser.CountryId = CountryId;
+            adduser.EmployeeId = EmpId;
             adduser.CityId = CityId;
             adduser.ProfileText = ProfText;
             adduser.Department = Department;
             adduser.Status = Status;
-
+            adduser.PhoneNumber = PhoneNumber;
+            adduser.Avatar = Avatar;
             _db.Users.Add(adduser);
             _db.SaveChanges();
             return true;
         }
+
+        public bool SaveEditedUserinfo(int userId, string FirstName, string LastName, string Email, string Password, string EmployeeId, int CountryId, int CityId, string ProfileText, string Department, int Status, string PhoneNumber, string Avatar)
+        {
+            var isExistUser = _db.Users.Where(u => u.UserId == userId).FirstOrDefault();
+            isExistUser.FirstName = FirstName;
+            isExistUser.LastName = LastName;
+            isExistUser.Email = Email;
+            isExistUser.Password = Password;
+            isExistUser.EmployeeId = EmployeeId;
+            isExistUser.CountryId = CountryId;
+            isExistUser.CityId = CityId;
+            isExistUser.ProfileText = ProfileText;
+            isExistUser.Department = Department;
+            isExistUser.Status = Status;
+            isExistUser.PhoneNumber = PhoneNumber;
+            isExistUser.Avatar = Avatar;
+            isExistUser.UpdatedAt = DateTime.UtcNow;
+
+            _db.Users.Update(isExistUser);
+            _db.SaveChanges();
+            return true;
+        }
+
+        public bool DeleteUserDetails(int userId)
+        {
+            var isExistUser = _db.Users.Where(u => u.UserId == userId).FirstOrDefault();
+            isExistUser.DeletedAt = DateTime.UtcNow;
+            _db.Users.Update(isExistUser);
+            _db.SaveChanges();
+            return true;
+        }
+
+        public bool forAddMissionDetails(string MissionTitle, string ShortDescription, string Description, int CountryId, int CityId, string OrganisationName, string Missiontype, DateTime MisStartDate, DateTime MisEndDate, string Organizationdetails, int TotalSeats, DateTime MisRegEndDate, int MissionTheme, string myAvailability, string VideoUrl, List<string> imgpathlist, List<string> docpathlist, List<string> selectedMissionSkill, string goaltext, int GoalValue)
+        {
+            Mission myMission = new Mission();
+            myMission.Title = MissionTitle;
+            myMission.ShortDescription = ShortDescription;
+            myMission.Description = Description;
+            myMission.CountryId = CountryId;
+            myMission.CityId = CityId;
+            myMission.OrganizationName = OrganisationName;
+            myMission.MissionType = Missiontype;
+            myMission.StartDate = MisStartDate;
+            myMission.EndDate = MisEndDate;
+            myMission.OrganizationDetail = Organizationdetails;
+            myMission.SeatsVacancy = TotalSeats;
+            myMission.Availability = myAvailability;
+            myMission.ThemeId = MissionTheme;
+            _db.Missions.Add(myMission);
+            _db.SaveChanges();
+
+            var missionId = myMission.MissionId;
+
+            foreach (var img in imgpathlist)
+            {
+                MissionMedium image = new MissionMedium()
+                {
+
+                    MediaPath = img,
+                    MissionId = missionId,
+                    CreatedAt = DateTime.UtcNow,
+                    MediaType = "img",
+
+
+                };
+                _db.MissionMedia.Add(image);
+            }
+            _db.SaveChanges();
+
+            foreach (var doc in docpathlist)
+            {
+                MissionDocument missionDoc = new MissionDocument()
+                {
+                    MissionId = missionId,
+                    DocumentName = "document",
+                    DocumentType = "document",
+                    DocumentPath = doc
+
+
+                };
+                _db.MissionDocuments.Add(missionDoc);
+            }
+            _db.SaveChanges();
+
+            MissionMedium videoUrl = new MissionMedium()
+            {
+
+                MediaPath = VideoUrl,
+                MissionId = missionId,
+                MediaType = "url",
+
+
+            };
+            _db.MissionMedia.Add(videoUrl);
+            _db.SaveChanges();
+
+            foreach (var skl in selectedMissionSkill)
+            {
+                MissionSkill MissionSkill = new MissionSkill()
+                {
+                    MissionId = missionId,
+                    SkillId = long.Parse(skl),
+                };
+                _db.MissionSkills.Add(MissionSkill);
+            }
+            _db.SaveChanges();
+
+            if (Missiontype == "GOAL")
+            {
+                GoalMission mygoalMission = new GoalMission()
+                {
+                    MissionId = missionId,
+                    GoalObjectiveText = goaltext,
+                    GoalValue = GoalValue
+                };
+                _db.GoalMissions.Add(mygoalMission);
+                _db.SaveChanges();
+            }
+            return true;
+        }
+
     }
 }
 

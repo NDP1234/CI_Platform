@@ -1,0 +1,15 @@
+﻿@using CI_Platform.Entities.Models.VM
+@model AdminViewModel;
+@foreach (var item in Model.Missions)
+                                    {
+                                        <tr class="border">
+                                            <td>@item.Title</td>
+                                            <td>@item.MissionType</td>
+                                            <td>@item.StartDate</td>
+                                            <td>@item.EndDate</td>
+                                            <td>
+                                                <button class="border-0 bg-white"><i class="bi bi-pencil-square "></i></button>
+                                                <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
+                                            </td>
+                                        </tr>
+                                    }

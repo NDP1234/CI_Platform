@@ -17,6 +17,7 @@ namespace CI_Platform.Entities.Models.VM
 
         public List<CmsPage> cmsPages { get; set; }
         public List<Country> countries { get; set; }
+        public List<City> cities { get; set; }
 
 
     }

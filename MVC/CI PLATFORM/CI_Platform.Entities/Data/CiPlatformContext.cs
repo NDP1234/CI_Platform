@@ -475,16 +475,13 @@ public partial class CiPlatformContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("deleted_at");
             entity.Property(e => e.DocumentName)
-                .HasMaxLength(255)
-                .IsUnicode(false)
+                .HasColumnType("text")
                 .HasColumnName("document_name");
             entity.Property(e => e.DocumentPath)
-                .HasMaxLength(255)
-                .IsUnicode(false)
+                .HasColumnType("text")
                 .HasColumnName("document_path");
             entity.Property(e => e.DocumentType)
-                .HasMaxLength(255)
-                .IsUnicode(false)
+                .HasColumnType("text")
                 .HasColumnName("document_type");
             entity.Property(e => e.MissionId).HasColumnName("mission_id");
             entity.Property(e => e.UpdatedAt)
@@ -556,8 +553,7 @@ public partial class CiPlatformContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("media_name");
             entity.Property(e => e.MediaPath)
-                .HasMaxLength(255)
-                .IsUnicode(false)
+                .HasColumnType("text")
                 .HasColumnName("media_path");
             entity.Property(e => e.MediaType)
                 .HasMaxLength(4)
@@ -882,8 +878,12 @@ public partial class CiPlatformContext : DbContext
                 .HasMaxLength(1000)
                 .IsUnicode(false)
                 .HasColumnName("avatar");
-            entity.Property(e => e.CityId).HasColumnName("city_id");
-            entity.Property(e => e.CountryId).HasColumnName("country_id");
+            entity.Property(e => e.CityId)
+                .HasDefaultValueSql("((1))")
+                .HasColumnName("city_id");
+            entity.Property(e => e.CountryId)
+                .HasDefaultValueSql("((1))")
+                .HasColumnName("country_id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")

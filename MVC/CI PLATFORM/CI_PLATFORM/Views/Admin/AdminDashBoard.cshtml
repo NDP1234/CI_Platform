@@ -17,57 +17,10 @@
     <title>Admin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/admin.css">
     <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
 
 
-    <style>
-        .orangeClr {
-            background-color: #F88634;
-            height: 100vh;
-        }
-
-        .nav-link:hover {
-            background-color: white;
-            color: #F88634;
-        }
-
-        .txtwhite {
-            color: white;
-        }
-
-        .nav-pills .nav-link.active,
-        .nav-pills .show > .nav-link {
-            color: #F88634;
-            background-color: white;
-        }
-
-        .mtop {
-            margin-top: -3px;
-        }
-
-        .greentext {
-            color: #14C506;
-        }
-
-        .redtext {
-            color: red;
-        }
-
-        .addUserBtn, .addthemeBtn, .addSkillBtn {
-            border: 2px solid #F88634;
-            padding: 5px 10px;
-            border-radius: 20px;
-            color: #F88634;
-        }
-
-        .icon-green {
-            color: #14C506;
-        }
-
-        .icon-red {
-            color: red;
-        }
-    </style>
 
 </head>
 
@@ -262,141 +215,152 @@
                             <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog  modal-lg">
                                     <form class="row g-3 needs-validation adduservalidation " novalidate>
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-4 text-center">
-                                                    <label for="profileImage" class="d-block">Profile image</label>
-                                                    <img src="/Images/volunteer1.png" class="rounded-pill" id="profileImage"
-                                                         alt="unable to load an image">
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="row">
-                                                        <div class="mb-3">
-                                                            <label for="myFirstName" class="form-label" >First Name</label>
-                                                            <input type="text" class="form-control" id="myFirstName" required>
-                                                            <div class="invalid-feedback">
-                                                                Please enter first name.        
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="mb-3">
-                                                            <label for="myLastName" class="form-label" >Last Name</label>
-                                                            <input type="text" class="form-control" id="myLastName" required>
-                                                            <div class="invalid-feedback">
-                                                                Please enter last name.        
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="row">
-                                                <div class="mb-3">
-                                                    <label for="myemail" class="form-label" >Email address</label>
-                                                    <input type="email" class="form-control" id="myemail" required>
-                                                    <div class="invalid-feedback">
-                                                          Please enter an valid email.        
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-4 text-center">
+                                                        <input type="file" id="fileInput" style="display:none;" onchange="previewImage()">
+
+                                                        <img class="rounded-circle mx-auto d-block w-50 h-50" id="userProfile" src="/Images/volunteer1.png" alt="profile picture" onclick="selectFile()">
+                                                        <input type="hidden" id="avatarInput" />
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="row">
+                                                            <div class="mb-3">
+                                                                <label for="myFirstName" class="form-label">First Name</label>
+                                                                <input type="text" class="form-control" id="myFirstName" required>
+                                                                <div class="invalid-feedback">
+                                                                    Please enter first name.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="mb-3">
+                                                                <label for="myLastName" class="form-label">Last Name</label>
+                                                                <input type="text" class="form-control" id="myLastName" required>
+                                                                <div class="invalid-feedback">
+                                                                    Please enter last name.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="mb-3">
+                                                        <label for="myemail" class="form-label">Email address</label>
+                                                        <input type="email" class="form-control" id="myemail" required>
+                                                        <div class="invalid-feedback">
+                                                            Please enter an valid email.
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="mb-3">
+                                                            <label for="myPwd" class="form-label">Password</label>
+                                                            <div class="d-flex w-100">
+                                                                <input type="password" class="form-control border border-end-0" id="myPwd" required> <i class="bi bi-eye-slash border border-start-0 "
+                                                                                                                                                        id="togglePassword"></i>
+
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Please enter  password.
+                                                            </div>
+                                                        </div>
+                                                        <div class="error-feedback text-danger d-none" id="pwdValid">
+                                                            minimum length of password is 8.
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="mb-3">
+                                                            <label for="EmpId" class="form-label">Employee Id</label>
+                                                            <input type="text" class="form-control" id="EmpId" required>
+                                                            <div class="invalid-feedback">
+                                                                Please enter employee id.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col">
+                                                        <label for="Country" class="form-label">Country</label>
+                                                        <select class="form-select" id="Country" aria-label="Default select example" required>
+                                                            <option selected disabled value="">Select a country</option>
+                                                            @foreach (var item in Model.countries)
+                                                            {
+                                                                <option value="@item.CountryId">@item.Name</option>
+                                                            }
+
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Please select country.
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="City" class="form-label">City</label>
+                                                        <select class="form-select" id="City" aria-label="Default select example" required>
+                                                            <option selected disabled value="">Select a City</option>
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Please select city.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="mb-3">
+                                                        <label for="pText" class="form-label">Profile Text</label>
+                                                        <textarea class="form-control" id="pText" rows="3" required></textarea>
+                                                        <div class="invalid-feedback">
+                                                            Please enter profile text.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="mb-3">
+                                                            <label for="Department" class="form-label">Department</label>
+                                                            <input type="text" class="form-control" id="Department" required>
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Please enter department.
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="Status" class="form-label">Status</label>
+                                                        <select class="form-select" id="Status" aria-label="Default select example" required>
+                                                            <option selected disabled value="">Select a status</option>
+                                                            <option value="1">Active</option>
+                                                            <option value="0">Inactive</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Please select a status.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="phonenumber" class="form-label">Phone Number</label>
+                                                        <input type="tel" id="phonenumber" class="d-block w-100 form-control" required />
+                                                        <div class="invalid-feedback">
+                                                            Please enter phone number.
+                                                        </div>
                                                     </div>
 
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div class="mb-3">
-                                                        <label for="myPwd" class="form-label">Password</label>
-                                                        <div class="d-flex w-100">
-                                                            <input type="password" class="form-control border border-end-0" id="myPwd" required> <i class="bi bi-eye-slash border border-start-0 "
-                                                                                                                                           id="togglePassword"></i>
-                                                                                                                                          
-                                                        </div>
-                                                        <div class="invalid-feedback">
-                                                          Please enter  password.        
-                                                        </div>  
-                                                    </div>
-                                                    <div class="error-feedback text-danger d-none" id="pwdValid">
-                                                        minimum length of password is 8.        
-                                                     </div>  
-                                                </div>
-                                                <div class="col">
-                                                    <div class="mb-3">
-                                                        <label for="EmpId" class="form-label">Employee Id</label>
-                                                        <input type="text" class="form-control" id="EmpId" required>
-                                                        <div class="invalid-feedback">
-                                                          Please enter employee id.        
-                                                        </div> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col">
-                                                    <label for="Country" class="form-label">Country</label>
-                                                    <select class="form-select" id="Country" aria-label="Default select example" required >
-                                                        <option selected disabled value="">Select a country</option>
-                                                        @foreach (var item in Model.countries)
-                                                       {
-                                                           <option value="@item.CountryId">@item.Name</option>
-                                                       }
-                                                        
-                                                    </select>
-                                                    <div class="invalid-feedback">
-                                                          Please select country.        
-                                                     </div> 
-                                                </div>
-                                                <div class="col">
-                                                    <label for="City" class="form-label">City</label>
-                                                    <select class="form-select" id="City" aria-label="Default select example" required>
-                                                        <option selected disabled value="">Select a City</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                    </select>
-                                                    <div class="invalid-feedback">
-                                                          Please select city.        
-                                                     </div> 
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="mb-3">
-                                                    <label for="pText" class="form-label">Profile Text</label>
-                                                    <textarea class="form-control" id="pText" rows="3" required></textarea>
-                                                     <div class="invalid-feedback">
-                                                          Please enter profile text.        
-                                                     </div> 
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div class="mb-3">
-                                                        <label for="Department" class="form-label">Department</label>
-                                                        <input type="text" class="form-control" id="Department" required>
-                                                    </div>
-                                                    <div class="invalid-feedback">
-                                                          Please enter department.        
-                                                     </div> 
-                                                </div>
-                                                <div class="col">
-                                                    <label for="Status" class="form-label">Status</label>
-                                                    <select class="form-select" id="Status" aria-label="Default select example" required>
-                                                        <option selected disabled value="">Select a status</option>
-                                                        <option value="1">Active</option>
-                                                        <option value="0">Inactive</option>
-                                                    </select>
-                                                    <div class="invalid-feedback">
-                                                          Please select a status.        
-                                                     </div> 
-                                                </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary" id="AddUserBtn">Add User</button>
                                             </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary" id="AddUserBtn">Add User</button>
-                                        </div>
-                                    </div>
                                     </form>
                                 </div>
                             </div>
@@ -425,6 +389,161 @@
                             </table>
                         </div>
                         <!-- User table -->
+                        @*edit User Modal*@
+                        <div class="modal fade" id="editUserDetailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog  modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Edit User Details</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-4 text-center">
+                                                <input type="file" id="fileInput2" style="display:none;" onchange="previewImage2()">
+
+                                                <img class="rounded-circle mx-auto d-block w-50 h-50" id="userProfile2" src="" alt="profile picture" onclick="selectFile2()">
+                                                <input type="hidden" id="avatarInput2" />
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="row">
+                                                    <div class="mb-3">
+                                                        <label for="myFirstName2" class="form-label">First Name</label>
+                                                        <input type="text" class="form-control" id="myFirstName2" required>
+                                                        <div class="invalid-feedback">
+                                                            Please enter first name.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="mb-3">
+                                                        <label for="myLastName2" class="form-label">Last Name</label>
+                                                        <input type="text" class="form-control" id="myLastName2" required>
+                                                        <div class="invalid-feedback">
+                                                            Please enter last name.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="mb-3">
+                                                <label for="myemail2" class="form-label">Email address</label>
+                                                <input type="email" class="form-control" id="myemail2" required>
+                                                <div class="invalid-feedback">
+                                                    Please enter an valid email.
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label for="myPwd2" class="form-label">Password</label>
+                                                    <div class="d-flex w-100">
+                                                        <input type="password" class="form-control border border-end-0" id="myPwd2" required> <i class="bi bi-eye-slash border border-start-0 "
+                                                                                                                                                 id="togglePassword"></i>
+
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Please enter  password.
+                                                    </div>
+                                                </div>
+                                                <div class="error-feedback text-danger d-none" id="pwdValid2">
+                                                    minimum length of password is 8.
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label for="EmpId2" class="form-label">Employee Id</label>
+                                                    <input type="text" class="form-control" id="EmpId2" required>
+                                                    <div class="invalid-feedback">
+                                                        Please enter employee id.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col">
+                                                <label for="Country2" class="form-label">Country</label>
+                                                <select class="form-select" id="Country2" aria-label="Default select example" required>
+                                                    <option selected disabled value="">Select a country</option>
+                                                    @foreach (var item in Model.countries)
+                                                    {
+                                                        <option value="@item.CountryId">@item.Name</option>
+                                                    }
+
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please select country.
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <label for="City2" class="form-label">City</label>
+                                                <select class="form-select" id="City2" aria-label="Default select example" required>
+                                                    <option selected disabled value="">Select a City</option>
+                                                    @foreach (var item in Model.cities)
+                                                    {
+                                                        <option value="@item.CityId">@item.Name</option>
+                                                    }
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please select city.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="mb-3">
+                                                <label for="pText2" class="form-label">Profile Text</label>
+                                                <textarea class="form-control" id="pText2" rows="3" required></textarea>
+                                                <div class="invalid-feedback">
+                                                    Please enter profile text.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label for="Department2" class="form-label">Department</label>
+                                                    <input type="text" class="form-control" id="Department2" required>
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Please enter department.
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <label for="Status2" class="form-label">Status</label>
+                                                <select class="form-select" id="Status2" aria-label="Default select example" required>
+                                                    <option selected disabled value="">Select a status</option>
+                                                    <option value="1">Active</option>
+                                                    <option value="0">Inactive</option>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please select a status.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="phonenumber2" class="form-label">Phone Number</label>
+                                                <input type="tel" id="phonenumber2" class="d-block w-100 form-control" required />
+                                                <div class="invalid-feedback">
+                                                    Please enter phone number.
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" data-user-id="" id="UserSaveChangesBtn">Save Changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*edit User Modal*@
 
                     </div>
                     <!-- UserTAB -->
@@ -493,8 +612,265 @@
 
                             </div>
                             <div class="ms-auto me-5 mt-4">
-                                <button class="btn addUserBtn "><span>Add</span><i class="bi bi-plus"></i></button>
+                                <button class="btn addUserBtn" data-bs-toggle="modal" data-bs-target="#addMissionModal"><span>Add</span><i class="bi bi-plus"></i></button>
                             </div>
+                            @*modal for add mission*@
+                            <div class="modal fade" id="addMissionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog  modal-xl">
+                                    <form class="row g-3 needs-validation addMissionDetailsValidate " novalidate>
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Add Mission</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label for="MyMissionTitle" class="form-label">Mission Title</label>
+                                                        <input type="text" class="form-control" id="MyMissionTitle" required>
+                                                        <div class="invalid-feedback">
+                                                            Please enter a Mission Title.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label for="sDescription" class="form-label">Short Description</label>
+                                                        <textarea class="form-control" id="sDescription" rows="1" required></textarea>
+                                                        <div class="invalid-feedback">
+                                                            Please enter Short Description.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="col">
+                                                        <label for="Missioneditor">Description</label>
+                                                        <textarea cols="80" id="Missioneditor" class="mydescription" name="Missioneditor" rows="2" required>&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href=&quot;https://ckeditor.com/&quot;&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea>
+                                                        <div class="invalid-feedback">
+                                                            Please enter  Description.
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <label for="MissionCountry" class="form-label">Country</label>
+                                                    <select class="form-select" id="MissionCountry" aria-label="Default select example" required>
+                                                        <option selected disabled value="">Select a country</option>
+                                                        @foreach (var item in Model.countries)
+                                                        {
+                                                            <option value="@item.CountryId">@item.Name</option>
+                                                        }
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                            Please select a country.
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <label for="MissionCity" class="form-label">City</label>
+                                                    <select class="form-select" id="MissionCity" aria-label="Default select example" required>
+                                                        <option selected disabled value="">Select a City</option>
+                                                        @foreach (var item in Model.cities)
+                                                        {
+                                                            <option value="@item.CityId">@item.Name</option>
+                                                        }
+                                                    </select>
+                                                     <div class="invalid-feedback">
+                                                            Please select a city.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label for="OrganisationName" class="form-label"> Organisation Name </label>
+                                                        <input type="text" class="form-control" id="OrganisationName" required>
+                                                        <div class="invalid-feedback">
+                                                            Please enter Organisation name.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <label for="MissionType" class="form-label">Mission Type</label>
+                                                    <select class="form-select" id="MissionType" aria-label="Default select example" required>
+                                                        <option selected disabled value="">Select a mission type</option>
+                                                        <option value="TIME">Time</option>
+                                                        <option value="GOAL">Goal</option>
+                                                    </select>
+                                                     <div class="invalid-feedback">
+                                                            Please select a type.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <label class="mb-2" for="MisStartDate" class="form-label">Mission Start Date</label>
+                                                    <input type="date" class="form-control" id="MisStartDate" placeholder="Select start date" required>
+                                                     <div class="invalid-feedback">
+                                                            Please select a Mission Start Date.
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <label class="mb-2" for="MisEndDate" class="form-label">Mission End Date</label>
+                                                    <input type="date" class="form-control" id="MisEndDate" placeholder="Select end date" required>
+                                                     <div class="invalid-feedback">
+                                                            Please select a Mission End Date.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label for="Organizationdetails" class="form-label"> Organization details</label>
+                                                        <textarea class="form-control" id="Organizationdetails" rows="2" required></textarea>
+                                                        <div class="invalid-feedback">
+                                                            Please enter Organisation details.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label for="TotalSeats" class="form-label"> Total Seats</label>
+                                                    <input type="number" class="form-control" id="TotalSeats" required>
+                                                     <div class="invalid-feedback">
+                                                            Please enter Total numbers of Seats.
+                                                     </div>
+                                                </div>
+                                                <div class="col">
+                                                    <label class="mb-2" for="MisRegEndDate" class="form-label">Mission registration deadline</label>
+                                                    <input type="date" class="form-control" id="MisRegEndDate" placeholder="Select mission registration deadline" required>
+                                                    <div class="invalid-feedback">
+                                                            Please select Mission registration deadline.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class-="row">
+                                                <div class="col">
+                                                    
+                                                        <label for="goaltext" class="form-label"> Goal text </label>
+                                                        <input type="text" class="form-control" id="goaltext" required>
+                                                        <div class="invalid-feedback">
+                                                            Please enter goal text.
+                                                        </div>
+                                                    
+                                                </div>
+                                                <div class="col">
+                                                    <label for="GoalValue" class="form-label"> Goal Value</label>
+                                                    <input type="number" class="form-control" id="GoalValue" required>
+                                                     <div class="invalid-feedback">
+                                                            Please enter goal value.
+                                                     </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <label for="MissionThemedata" class="form-label">Mission Theme</label>
+                                                    <select class="form-select" id="MissionThemedata" aria-label="Default select example" required>
+                                                        <option selected>Select a mission theme</option>
+                                                        @foreach (var item in Model.MissionThemes.Where(m => m.DeletedAt == null))
+                                                        {
+                                                            <option value="@item.MissionThemeId">@item.Title</option>
+                                                        }
+                                                    </select>
+                                                     <div class="invalid-feedback">
+                                                            Please select a Mission Theme.
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="dropdown d-inline  ">
+                                                        <a class="btn  dropdown-toggle b-filter w-100 mt-4 py-2 border text-start" href="#" role="button" id="dropdownMenuLink"
+                                                           data-bs-toggle="dropdown" aria-expanded="false" >
+                                                            <span>Select Skills </span>
+                                                        </a>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" id="theme" required>
+
+                                                            @foreach (var item in Model.missionSkills.Where(ms => ms.DeletedAt == null))
+                                                            {
+                                                                <input class="form-check-input themeDropdown" id="@item.SkillId" type="checkbox" value="@item.SkillName">
+                                                                <label class="form-check-label" for="themeDropdown">
+                                                                    @item.SkillName
+                                                                </label>
+                                                                <br>
+
+                                                            }
+                                                        </ul>
+                                                        <div class="invalid-feedback">
+                                                            Please select skills .
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label for="myAvailability" class="form-label">Select Availability</label>
+                                                    <select class="form-select" id="myAvailability" aria-label="Default select example" required>
+                                                        <option selected>Select Availability</option>
+                                                        <option value="daily">Daily</option>
+                                                        <option value="weekly">Weekly</option>
+                                                        <option value="week-end">Week-end</option>
+                                                        <option value="monthly">Monthly</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                            Please select Availability.
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <label for="VideoUrl" class="form-label">video-Url</label>
+                                                    <input type="text" class="form-control" id="VideoUrl" required>
+                                                    <div class="invalid-feedback">
+                                                            Please enter  video url.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-3">
+                                                <label for="dragAndDrop" class="form-label">Upload photos</label>
+                                                <div class="col">
+                                                    <div id="dragAndDrop" class="border text-center">
+                                                        <label for="fileInputForMission">
+                                                            <img class="mx-auto d-block my-3" src="~/Images/drag-and-drop.png" alt="unable to load">
+                                                        </label>
+                                                        <input type="file" multiple id="fileInputForMission" style="display: none;">
+                                                    </div>
+
+                                                    <div class="selectedImage">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           
+                                            <div class="row mt-3">
+                                                <label for="dragAndDropDoc" class="form-label">Upload Documents</label>
+                                                <div class="col">
+                                                    <div id="dragAndDropDoc" class="border text-center">
+                                                        <label for="fileInputForMissionDoc">
+                                                            <img class="mx-auto d-block my-3" src="~/Images/drag-and-drop.png" alt="unable to load">
+                                                        </label>
+                                                        <input type="file" multiple id="fileInputForMissionDoc" style="display: none;">
+                                                    </div>
+
+                                                    <div class="selectedDoc">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary" id="AddMissionDetailBtn">Add Mission</button>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @*modal for add mission*@
+
+
+
                             <!-- ---- -->
                         </div>
                         <!-- Mission table -->
@@ -509,20 +885,8 @@
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach (var item in Model.Missions)
-                                    {
-                                        <tr class="border">
-                                            <td>@item.Title</td>
-                                            <td>@item.MissionType</td>
-                                            <td>@item.StartDate</td>
-                                            <td>@item.EndDate</td>
-                                            <td>
-                                                <button class="border-0 bg-white"><i class="bi bi-pencil-square "></i></button>
-                                                <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
-                                            </td>
-                                        </tr>
-                                    }
+                                <tbody class="missionList">
+                                    @await Html.PartialAsync("_MissionPartial", Model)
 
                                 </tbody>
                             </table>
@@ -571,7 +935,7 @@
                                                         Please enter mission theme name.
                                                     </div>
                                                 </div>
-                                               
+
                                                 <div>
                                                     <label for="myStatusOfTheme">Status</label>
                                                     <select class="form-select" id="myStatusOfTheme" aria-label="Default select example" required>
@@ -874,8 +1238,16 @@
             <!-- tab -->
         </div>
     </div>
+    <script src="https://cdn.ckeditor.com/4.21.0/basic/ckeditor.js"></script>
+                                                    <script>
+                                                            CKEDITOR.replace('Missioneditor', {
+                                                          height: 200,
+                                                          baseFloatZIndex: 10005
 
-     <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+                                                        });
+
+                                                    </script>
+    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
