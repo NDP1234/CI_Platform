@@ -19,6 +19,6 @@ namespace CI_Platform.Entities.Models.VM
         public List<Country> countries { get; set; }
         public List<City> cities { get; set; }
 
-
+        public List<Banner> BannerList { get; set;}
     }
 }

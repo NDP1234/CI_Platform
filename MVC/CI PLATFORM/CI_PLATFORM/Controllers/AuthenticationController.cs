@@ -38,11 +38,16 @@ namespace CI_PLATFORM.Controllers
             {
                 // Check if a user with the provided email and password exists in the database
                 var userExists = _db.Users.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
-
+                
                 if (userExists != null)
                 {
                     // User exists
                     HttpContext.Session.SetString("Login", userExists.Email);
+
+                    if (userExists.Role == "admin")
+                    {
+                        return RedirectToAction("AdminDashBoard", "Admin");
+                    }
                     if (userExists.ProfileText == null)
                     {
                         return RedirectToAction("UserEditProfilePage", "UserEditProfile");

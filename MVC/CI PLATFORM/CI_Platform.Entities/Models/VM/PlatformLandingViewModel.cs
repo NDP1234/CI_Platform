@@ -18,5 +18,7 @@ namespace CI_Platform.Entities.Models.VM
         public IEnumerable<Skill>? skills { get; set; }
         public IEnumerable<MissionSkill>? MissionSkills { get; set; }
         public List<User> Users { get; set; }
+        public double AvgRating { get; set; }
+        public string GoalObjectiveText { get; set; }
     }
 }

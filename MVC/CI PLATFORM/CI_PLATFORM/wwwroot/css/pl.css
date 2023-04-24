@@ -17,6 +17,10 @@
 i.filled-heart {
     font-size: 2.0rem; /* Set a font size for the heart icon */
     vertical-align: middle; /* Keep the icon in its original position */
+    position: absolute;
+    bottom: 0px;
+    right: 2px;
+    width: 100%;
 }
 
     i.filled-heart::before {

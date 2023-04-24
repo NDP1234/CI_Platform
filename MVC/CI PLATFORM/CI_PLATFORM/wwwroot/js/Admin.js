@@ -751,6 +751,32 @@ $('#MissionCountry').on('change', function () {
         }
     });
 });
+$('#MissionCountry2').on('change', function () {
+    var countryId = $(this).val(); // get the selected country id
+    $('#MissionCity2').empty(); // clear the city dropdown
+
+    // make an AJAX request to get cities for the selected country
+    $.ajax({
+        url: '/Admin/GetCitiesForCountry',
+        type: 'POST',
+        dataType: 'json',
+        data: { countryId: countryId },
+        success: function (data) {
+            console.log(data);
+            // populate the city dropdown with the returned data
+            /*  $('#cityInput').empty();*/
+
+            $.each(data, function (i, city) {
+                $('#MissionCity2').append($('<option>').attr('value', city.cityId).text(city.name));
+            });
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log(xhr.responseText);
+        }
+    });
+});
+
+
 
 const togglePassword = document
     .querySelector('#togglePassword');
@@ -770,6 +796,489 @@ togglePassword.addEventListener('click', () => {
     // Toggle the eye and bi-eye icon
     this.classList.toggle('bi-eye');
 });
+
+
+
+
+$(document).on('click', '#AddMissionDetailBtn', function () {
+
+    (function () {
+        'use strict'
+
+
+        var forms = document.querySelectorAll('.needs-validation.addMissionDetailsValidate')
+        console.log(forms);
+
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+
+            })
+    })()
+
+    var MissionTitle = $('#MyMissionTitle').val();
+    var ShortDescription = $('#sDescription').val();
+    var Description = CKEDITOR.instances.Missioneditor.editable().getText();
+    var CountryId = $('#MissionCountry').val();
+    var CityId = $('#MissionCity').val();
+    var OrganisationName = $('#OrganisationName').val();
+    var Missiontype = $('#MissionType').val();
+    var MisStartDate = $('#MisStartDate').val();
+    var MisEndDate = $('#MisEndDate').val();
+    var Organizationdetails = $('#Organizationdetails').val();
+    var TotalSeats = $('#TotalSeats').val();
+    var MisRegEndDate = $('#MisRegEndDate').val();
+    var MissionTheme = $('#MissionThemedata').val();
+    var myAvailability = $('#myAvailability').val();
+    var VideoUrl = $('#VideoUrl').val();
+    var imgpathlist = selectedImagesBase64;
+    var docpathlist = selectedDocsBase64;
+    var goaltext = $('#goaltext').val();
+    var GoalValue = $('#GoalValue').val();
+    var selectedSkills = [];
+
+    $('.themeDropdown').each(function () {
+        if ($(this).is(':checked')) {
+            selectedSkills.push($(this).attr('id'));
+        }
+    });
+
+    var selectedMissionSkill = selectedSkills;
+    console.log(MissionTitle)
+    console.log(ShortDescription)
+    console.log(Description)
+    console.log(CountryId)
+    console.log(CityId)
+    console.log(OrganisationName)
+    console.log(Missiontype)
+    console.log(MisStartDate)
+    console.log(MisEndDate)
+    console.log(Organizationdetails)
+    console.log(TotalSeats)
+    console.log(MisRegEndDate)
+    console.log(MissionTheme)
+    console.log(myAvailability)
+    console.log(VideoUrl)
+    console.log(imgpathlist)
+    console.log(docpathlist)
+    console.log(selectedMissionSkill)
+    console.log(goaltext)
+    console.log(GoalValue)
+
+    if (MissionTitle && ShortDescription && Description && CountryId && CityId && OrganisationName && Missiontype && MisStartDate && MisEndDate && Organizationdetails   && MissionTheme && myAvailability && VideoUrl && imgpathlist && docpathlist && selectedMissionSkill)
+    {
+        $.ajax({
+            type: "POST",
+            url: "/Admin/SaveMission",
+            data: {
+                MissionTitle: MissionTitle,
+                ShortDescription: ShortDescription,
+                Description: Description,
+                CountryId: CountryId,
+                CityId: CityId,
+                OrganisationName: OrganisationName,
+                Missiontype: Missiontype,
+                MisStartDate: MisStartDate,
+                MisEndDate: MisEndDate,
+                Organizationdetails: Organizationdetails,
+                TotalSeats: TotalSeats,
+                MisRegEndDate: MisRegEndDate,
+                MissionTheme: MissionTheme,
+                myAvailability: myAvailability,
+                VideoUrl: VideoUrl,
+                imgpathlist: imgpathlist,
+                docpathlist: docpathlist,
+                selectedMissionSkill: selectedMissionSkill,
+                goaltext: goaltext,
+                GoalValue: GoalValue
+                
+            },
+            success: function (data) {
+                console.log(data);
+
+                $('.missionList').html(data);
+                alert("  data is successfully saved");
+
+            },
+        })
+    }
+
+
+})
+
+var paths = [];
+$(document).on('click', '.EditMissionDetailBtn', function () {
+    var missionId = $(this).attr('data-mission-id');
+    console.log(missionId);
+
+
+   
+
+    $.ajax({
+        type: 'POST',
+        url: '/Admin/getMissionData',
+        data: {
+            MissionId: missionId,
+        },
+
+        success: function (data) {
+            console.log(data);
+
+            $('#editMissionDetailModal').modal('show');
+
+            /*alert("  data is successfully get");*/
+            $('#MyMissionTitle2').val(data.title);
+            $('#sDescription2').val(data.shortDescription);
+            CKEDITOR.instances.Missioneditoreditable.editable().setText(data.description);
+            $("#OrganisationName2").val(data.organizationName);
+            $('#MissionType2').val(data.missionType);
+            var startdate = data.startDate;
+            var enddate = data.endDate;
+            $('#MisStartDate2').val(formatedate(startdate));
+            $('#MisEndDate2').val(formatedate(enddate));
+            $('#Organizationdetails2').val(data.organizationDetail);
+            $('#TotalSeats2').val(data.seatsVacancy);
+            $('#goaltext2').val(data.goalObjectiveText);
+            $('#GoalValue2').val(data.goalValue);
+            $('#MissionThemedata2').val(data.themeId);
+            $('#myAvailability2').val(data.availability);
+            $('#MissionCountry2').val(data.countryId);
+            $('#MissionCity2').val(data.cityId);
+            $('#VideoUrl2').val(data.url);
+            var imagelist = data.missionMediums;
+            var doclist = data.missionDocuments;
+            paths = imagelist;
+
+            var imagesHtml = '';
+            for (var i = 0; i < paths.length; i++) {
+                imagesHtml += '<div class="selectedImageItem"><img src="' + paths[i] + '" /><span class="removeImageIcon" data-index="' + i + '">x</span></div>';
+
+            }
+            $(".selectedImageEditable").html(imagesHtml);
+
+            var docHtml = '';
+
+        },
+
+    })
+})
+$(document).on('click', '.removeImageIcon', function () {
+    var index = $(this).data('index');
+    paths.splice(index, 1); // Remove the element from the array
+    $(this).closest('.selectedImageItem').remove(); // Remove the corresponding image tag
+    console.log(paths);
+});
+
+function formatedate(datetime) {
+    const inputDateStr = datetime;
+    const date = new Date(inputDateStr);
+
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    const outputDateStr = `${year}-${month}-${day}`;
+    console.log(outputDateStr);
+    return outputDateStr;
+
+}
+
+
+        // Get references to the form fields
+        const missionTypeSelect = document.getElementById("MissionType");
+        const goalText = document.getElementById("goaltext");
+        const goalValue = document.getElementById("GoalValue");
+        const totalSeats = document.getElementById("TotalSeats");
+        const regDeadline = document.getElementById("MisRegEndDate");
+
+        // Disable all fields initially
+        goalText.disabled = true;
+        goalValue.disabled = true;
+        totalSeats.disabled = true;
+        regDeadline.disabled = true;
+
+        // Listen for changes on the mission type select element
+        missionTypeSelect.addEventListener("change", () => {
+            // Enable/disable fields based on the selected value
+            if (missionTypeSelect.value === "GOAL") {
+                goalText.disabled = false;
+                goalValue.disabled = false;
+                totalSeats.disabled = true;
+                regDeadline.disabled = true;
+            } else if (missionTypeSelect.value === "TIME") {
+                goalText.disabled = true;
+                goalValue.disabled = true;
+                totalSeats.disabled = false;
+                regDeadline.disabled = false;
+            } else {
+                // If the selected value is neither "GOAL" nor "TIME", disable all fields
+                goalText.disabled = true;
+                goalValue.disabled = true;
+                totalSeats.disabled = true;
+                regDeadline.disabled = true;
+            }
+        })
+
+
+// Get references to the form fields
+const missionTypeSelect2 = document.getElementById("MissionType2");
+const goalText2 = document.getElementById("goaltext2");
+const goalValue2 = document.getElementById("GoalValue2");
+const totalSeats2 = document.getElementById("TotalSeats2");
+const regDeadline2 = document.getElementById("MisRegEndDate2");
+
+// Disable all fields initially
+goalText2.disabled = true;
+goalValue2.disabled = true;
+totalSeats2.disabled = true;
+regDeadline2.disabled = true;
+
+// Listen for changes on the mission type select element
+missionTypeSelect2.addEventListener("change", () => {
+    // Enable/disable fields based on the selected value
+    if (missionTypeSelect2.selected.value === "GOAL") {
+        goalText2.disabled = false;
+        goalValue2.disabled = false;
+        totalSeats2.disabled = true;
+        regDeadline2.disabled = true;
+    } else if (missionTypeSelect2.selected.value === "TIME") {
+        goalText2.disabled = true;
+        goalValue2.disabled = true;
+        totalSeats2.disabled = false;
+        regDeadline2.disabled = false;
+    } else {
+        // If the selected value is neither "GOAL" nor "TIME", disable all fields
+        goalText2.disabled = true;
+        goalValue2.disabled = true;
+        totalSeats2.disabled = true;
+        regDeadline2.disabled = true;
+    }
+})
+
+
+//for sending selected image of banner to server
+$(document).ready(function () {
+    // Handle file input change event
+    $("#fileInputBanner").on("change", function (event) {
+        var file = event.target.files[0];
+
+        // Create form data object to send file to server
+        var formData = new FormData();
+        formData.append("file", file);
+
+        // Send file to server using AJAX
+        $.ajax({
+            type: "POST",
+            url: "/Admin/SaveBannerImage",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                // Display uploaded image
+                $(".selectedImage").html("<img src='" + response + "' class='BannerImage' height='400px' width='400px' />");
+            },
+            error: function (xhr, status, error) {
+                console.log("Error: " + error);
+            }
+        });
+    });
+});
+//for sending selected image of banner to server
+$(document).ready(function () {
+    // Handle file input change event
+    $("#fileInputBannereditable").on("change", function (event) {
+        var file = event.target.files[0];
+
+        // Create form data object to send file to server
+        var formData = new FormData();
+        formData.append("file", file);
+
+        // Send file to server using AJAX
+        $.ajax({
+            type: "POST",
+            url: "/Admin/SaveBannerImage",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                // Display uploaded image
+                $(".selectedImageEditable").html("<img src='" + response + "' class='BannerImageEditable' height='400px' width='400px' />");
+            },
+            error: function (xhr, status, error) {
+                console.log("Error: " + error);
+            }
+        });
+    });
+});
+
+$(document).on('click', "#SaveBanner", function () {
+
+    (function () {
+        'use strict'
+
+
+        var forms = document.querySelectorAll('.needs-validation.addbannervalidation')
+        console.log(forms);
+
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+
+            })
+    })()
+
+    var Text = $('#myText').val();
+    var Ordervalue = $('#SortOrderValue').val();
+    var image = $('.BannerImage').attr('src');
+    
+    console.log(Text);
+    console.log(Ordervalue);
+    console.log(image);
+
+    if (Text && Ordervalue && image) {
+        $.ajax({
+            type: "POST",
+            url: "/Admin/AddBannerDetails",
+            data: {
+                Text: Text,
+                Ordervalue: Ordervalue,
+                image: image
+
+            },
+            success: function (data) {
+                $('.Bannerdata').html(data);
+                alert(" data is successfully added");
+            }
+        })
+    }
+ 
+})
+
+function EditBannerDetails(BannerId, Text, SortOrder, Image)
+{
+    console.log(Text);
+    console.log(SortOrder);
+    console.log(Image);
+    $('#myTextedited').val(Text);
+    $('#SaveChangedBanner').attr('data-banner-id', BannerId);
+    $("#SortOrderValueedited").val(SortOrder);
+    $(".selectedImageEditable").html("<img src='" + Image + "' class='BannerImageEditable' height='400px' width='400px' />");
+
+    $('#editBannerModal').modal('show');
+
+}
+
+$(document).on('click', "#SaveChangedBanner", function () {
+
+    (function () {
+        'use strict'
+
+
+        var forms = document.querySelectorAll('.needs-validation.editedbannervalidation')
+        console.log(forms);
+
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+
+            })
+    })()
+    var bannerid = $(this).attr('data-banner-id');
+    var Text = $('#myTextedited').val();
+    var Ordervalue = $('#SortOrderValueedited').val();
+    var image = $('.BannerImageEditable').attr('src');
+    console.log(bannerid);
+    console.log(Text);
+    console.log(Ordervalue);
+    console.log(image);
+
+   
+        $.ajax({
+            type: "POST",
+            url: "/Admin/EditBannerDetails",
+            data: {
+                Text: Text,
+                Ordervalue: Ordervalue,
+                image: image,
+                BannerId: bannerid
+
+            },
+            success: function (data) {
+                $('.Bannerdata').html(data);
+                alert(" data is successfully added");
+            }
+        })
+    
+
+})
+
+$(document).on('click', '#trashBanner', function () {
+    var bannerId = $('#trashBanner').attr('data-banner-id');
+    console.log(bannerId);
+    $.ajax({
+        type: "POST",
+        url: "/Admin/DeleteBannerDetails",
+        data: {
+            BannerId: bannerId
+        },
+        success: function (data) {
+            $('.Bannerdata').html(data);
+            alert(" data is successfully deleted");
+        }
+    })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function selectFile() {
@@ -966,153 +1475,3 @@ function handleRemoveIconClickDoc() {
         });
     });
 }
-
-
-$(document).on('click', '#AddMissionDetailBtn', function () {
-
-    (function () {
-        'use strict'
-
-
-        var forms = document.querySelectorAll('.needs-validation.addMissionDetailsValidate')
-        console.log(forms);
-
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                form.classList.add('was-validated')
-
-            })
-    })()
-
-    var MissionTitle = $('#MyMissionTitle').val();
-    var ShortDescription = $('#sDescription').val();
-    var Description = CKEDITOR.instances.Missioneditor.editable().getText();
-    var CountryId = $('#MissionCountry').val();
-    var CityId = $('#MissionCity').val();
-    var OrganisationName = $('#OrganisationName').val();
-    var Missiontype = $('#MissionType').val();
-    var MisStartDate = $('#MisStartDate').val();
-    var MisEndDate = $('#MisEndDate').val();
-    var Organizationdetails = $('#Organizationdetails').val();
-    var TotalSeats = $('#TotalSeats').val();
-    var MisRegEndDate = $('#MisRegEndDate').val();
-    var MissionTheme = $('#MissionThemedata').val();
-    var myAvailability = $('#myAvailability').val();
-    var VideoUrl = $('#VideoUrl').val();
-    var imgpathlist = selectedImagesBase64;
-    var docpathlist = selectedDocsBase64;
-    var goaltext = $('#goaltext').val();
-    var GoalValue = $('#GoalValue').val();
-    var selectedSkills = [];
-
-    $('.themeDropdown').each(function () {
-        if ($(this).is(':checked')) {
-            selectedSkills.push($(this).attr('id'));
-        }
-    });
-
-    var selectedMissionSkill = selectedSkills;
-    console.log(MissionTitle)
-    console.log(ShortDescription)
-    console.log(Description)
-    console.log(CountryId)
-    console.log(CityId)
-    console.log(OrganisationName)
-    console.log(Missiontype)
-    console.log(MisStartDate)
-    console.log(MisEndDate)
-    console.log(Organizationdetails)
-    console.log(TotalSeats)
-    console.log(MisRegEndDate)
-    console.log(MissionTheme)
-    console.log(myAvailability)
-    console.log(VideoUrl)
-    console.log(imgpathlist)
-    console.log(docpathlist)
-    console.log(selectedMissionSkill)
-    console.log(goaltext)
-    console.log(GoalValue)
-
-    if (MissionTitle && ShortDescription && Description && CountryId && CityId && OrganisationName && Missiontype && MisStartDate && MisEndDate && Organizationdetails   && MissionTheme && myAvailability && VideoUrl && imgpathlist && docpathlist && selectedMissionSkill)
-    {
-        $.ajax({
-            type: "POST",
-            url: "/Admin/SaveMission",
-            data: {
-                MissionTitle: MissionTitle,
-                ShortDescription: ShortDescription,
-                Description: Description,
-                CountryId: CountryId,
-                CityId: CityId,
-                OrganisationName: OrganisationName,
-                Missiontype: Missiontype,
-                MisStartDate: MisStartDate,
-                MisEndDate: MisEndDate,
-                Organizationdetails: Organizationdetails,
-                TotalSeats: TotalSeats,
-                MisRegEndDate: MisRegEndDate,
-                MissionTheme: MissionTheme,
-                myAvailability: myAvailability,
-                VideoUrl: VideoUrl,
-                imgpathlist: imgpathlist,
-                docpathlist: docpathlist,
-                selectedMissionSkill: selectedMissionSkill,
-                goaltext: goaltext,
-                GoalValue: GoalValue
-                
-            },
-            success: function (data) {
-                console.log(data);
-
-                $('.missionList').html(data);
-                alert("  data is successfully saved");
-
-            },
-        })
-    }
-
-
-})
-
-
-    // Get references to the form fields
- const missionTypeSelect = document.getElementById("MissionType");
-const goalText = document.getElementById("goaltext");
-const goalValue = document.getElementById("GoalValue");
-const totalSeats = document.getElementById("TotalSeats");
-const regDeadline = document.getElementById("MisRegEndDate");
-
-// Disable all fields initially
-goalText.disabled = true;
-goalValue.disabled = true;
-totalSeats.disabled = true;
-regDeadline.disabled = true;
-
-// Listen for changes on the mission type select element
-missionTypeSelect.addEventListener("change", () => {
-    // Enable/disable fields based on the selected value
-    if (missionTypeSelect.value === "GOAL") {
-        goalText.disabled = false;
-        goalValue.disabled = false;
-        totalSeats.disabled = true;
-        regDeadline.disabled = true;
-    } else if (missionTypeSelect.value === "TIME") {
-        goalText.disabled = true;
-        goalValue.disabled = true;
-        totalSeats.disabled = false;
-        regDeadline.disabled = false;
-    } else {
-        // If the selected value is neither "GOAL" nor "TIME", disable all fields
-        goalText.disabled = true;
-        goalValue.disabled = true;
-        totalSeats.disabled = true;
-        regDeadline.disabled = true;
-    }
-});
-

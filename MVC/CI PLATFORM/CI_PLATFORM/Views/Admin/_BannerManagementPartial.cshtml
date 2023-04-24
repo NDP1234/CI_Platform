@@ -1,0 +1,17 @@
+﻿@using CI_Platform.Entities.Models.VM
+@model AdminViewModel;
+@foreach (var item in Model.BannerList.Where(b=>b.DeletedAt == null))
+    {
+    <tr class="border">
+    <td>@item.BannerId</td>
+    <td>@item.Text</td>
+    <td> <a target="_blank" href="@item.Image">View</a></td>
+    <td>
+    <button class="border-0 bg-white EditMissionDetailBtn" id="EditMissionDetailBtn" data-banner-id="@item.BannerId" onclick="EditBannerDetails('@item.BannerId','@item.Text', '@item.SortOrder', '@item.Image')"><i class="bi bi-pencil-square "></i></button>
+
+
+    <button class="border-0 bg-white " id="trashBanner" data-banner-id="@item.BannerId"><i class="bi bi-trash  "></i></button>
+    </td>
+    </tr>
+    }
+  

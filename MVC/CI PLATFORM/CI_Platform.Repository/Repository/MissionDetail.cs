@@ -21,7 +21,7 @@ namespace CI_Platform.Repository.Repository
         }
         public VolunteeringMissionPageViewModel GetMissionDetaiil(int id, int userID)
         {
-            
+
             //var userId = 
             List<Mission> mission = _db.Missions.ToList();
             List<MissionMedium> image = _db.MissionMedia.ToList();
@@ -32,7 +32,7 @@ namespace CI_Platform.Repository.Repository
             List<MissionSkill> missionSkills = _db.MissionSkills.ToList();
             List<User> users = _db.Users.ToList();
             List<MissionDocument> missionDocuments = _db.MissionDocuments.Where(m => m.MissionId == id).ToList(); // retrieve mission documents based on mission id
-            List<MissionApplication> missionApplications = _db.MissionApplications.Where(m =>m.UserId!=userID && m.MissionId == id).ToList();
+            List<MissionApplication> missionApplications = _db.MissionApplications.Where(m => m.UserId != userID && m.MissionId == id).ToList();
 
 
             var Missionsdetail = (from m in mission
@@ -41,14 +41,16 @@ namespace CI_Platform.Repository.Repository
                                   join s in missionSkills on m.MissionId equals s.MissionId into data1
                                   from i in data.DefaultIfEmpty().Take(1)
                                   from s in data1.DefaultIfEmpty().Take(1)
-                                  
-                                  select new VolunteeringMissionPageViewModel { image = i, Missions = m, Country = countries, themes = theme, skills = skills,UserDetail = users, isValid = _db.FavouriteMissions.Any(f => f.UserId == userID && f.MissionId == m.MissionId), MissionDocuments = missionDocuments, MissionApplications =missionApplications }).First();
 
-;
+                                  select new VolunteeringMissionPageViewModel { image = i, Missions = m, Country = countries, themes = theme, skills = skills, UserDetail = users, isValid = _db.FavouriteMissions.Any(f => f.UserId == userID && f.MissionId == m.MissionId), MissionDocuments = missionDocuments, MissionApplications = missionApplications }).First();
+
+            ;
             var relatedMissions = _db.Missions
-            .Where(m => (m.City.Name == Missionsdetail.Missions.City.Name || m.Theme.Title == Missionsdetail.Missions.Theme.Title) && m.MissionId != id)
-            .Join(_db.MissionMedia, m => m.MissionId, i => i.MissionId, (m, i) => new { Mission = m, Image = i })
-            .ToList();
+                                .Where(m => (m.City.Name == Missionsdetail.Missions.City.Name || m.Theme.Title == Missionsdetail.Missions.Theme.Title) && m.MissionId != id)
+                                .Join(_db.MissionMedia, m => m.MissionId, i => i.MissionId, (m, i) => new { Mission = m, Image = i })
+                                .GroupBy(x => x.Mission.MissionId)
+                                .Select(x => new { Mission = x.First().Mission, Image = x.First().Image })
+                                .ToList();
 
 
             Missionsdetail.RelatedMissions = relatedMissions.Select(x => x.Mission).ToList();

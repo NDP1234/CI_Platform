@@ -8,6 +8,10 @@
 
   <ItemGroup>
     <Folder Include="Views\NewFolder\" />
+    <Folder Include="wwwroot\BannerImage\" />
+    <Folder Include="wwwroot\DataTable\" />
+    <Folder Include="wwwroot\DataTable\css\" />
+    <Folder Include="wwwroot\DataTable\js\" />
     <Folder Include="wwwroot\profileImg\" />
   </ItemGroup>
 

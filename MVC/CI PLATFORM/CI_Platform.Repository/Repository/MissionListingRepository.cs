@@ -33,13 +33,23 @@ namespace CI_Platform.Repository.Repository
             List<MissionSkill> missionSkills = _db.MissionSkills.ToList();
             List<User> users = _db.Users.ToList();
             var Missions = (from m in mission
-                                //join S in missionSkills on m.MissionId equals S.MissionId
                             join i in image on m.MissionId equals i.MissionId into data
                             from i in data.DefaultIfEmpty().Take(1)
-                            select new PlatformLandingViewModel { image = i, Missions = m, Country = countries, themes = theme, skills = skills, isValid = _db.FavouriteMissions.Any(f => f.UserId == userId && f.MissionId == m.MissionId) }).ToList();
+                            join r in _db.MissionRatings on m.MissionId equals r.MissionId into ratings
+                            let avgRating = ratings.Any() ? ratings.Average(r => r.Rating) : 0
+                            select new PlatformLandingViewModel
+                            {
+                                image = i,
+                                Missions = m,
+                                Country = countries,
+                                themes = theme,
+                                skills = skills,
+                                isValid = _db.FavouriteMissions.Any(f => f.UserId == userId && f.MissionId == m.MissionId),
+                                AvgRating = avgRating,
+                                GoalObjectiveText = m.MissionType == "GOAL" ? _db.GoalMissions.Where(g => g.MissionId == m.MissionId).FirstOrDefault().GoalObjectiveText : null
+                            }).ToList();
             return Missions;
         }
-
 
         //public List<PlatformLandingViewModel> GetMissionSorting(string sort)
         //{
@@ -284,7 +294,7 @@ namespace CI_Platform.Repository.Repository
                     foreach (string skillname in skill)
                     {
                         IEnumerable<PlatformLandingViewModel> missionBySkill = filterMission.Where(m => m.Missions.MissionSkills.Any(x => x.Skill.SkillName == skillname));
-                        finalMission = (List<PlatformLandingViewModel>)finalMission.Concat(missionBySkill);
+                        finalMission = finalMission.Concat(missionBySkill).ToList();
                     }
                 }
                 else if (theme.Length != 0)

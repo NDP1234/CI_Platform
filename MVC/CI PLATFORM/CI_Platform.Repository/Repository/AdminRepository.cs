@@ -58,7 +58,11 @@ namespace CI_Platform.Repository.Repository
             var ListOfCMSPages = _db.CmsPages.ToList();
             return ListOfCMSPages;
         }
-
+        public List<Banner> getBannerList()
+        {
+            var ListOfBanner = _db.Banners.ToList();
+            return ListOfBanner;
+        }
         public bool forApproveMissionApplication(int MissionAppId)
         {
             var MissionApplicationExist = _db.MissionApplications.Where(m => m.MissionApplicationId == MissionAppId).FirstOrDefault();
@@ -357,6 +361,88 @@ namespace CI_Platform.Repository.Repository
                 _db.GoalMissions.Add(mygoalMission);
                 _db.SaveChanges();
             }
+            return true;
+        }
+
+
+
+        public MissionSendViewModel getMissionData(int missionId)
+        {
+            //var isExistMissionData = _db.Missions.Where(m => m.MissionId == missionId).FirstOrDefault();
+            var isExistMissionData = _db.Missions.FirstOrDefault(m => m.MissionId == missionId);
+            var MissionMediaData = _db.MissionMedia.Where(md => md.MissionId == missionId && md.MediaType!="url").Select(md=>md.MediaPath).ToList();
+            //var urlinfo = _db.MissionMedia.Where(md => md.MissionId == missionId && md.MediaType=="url").Select(md=>md.MediaPath).First();
+            var missionSkill = _db.MissionSkills.Where(ms => ms.MissionId == missionId).Select(m => m.SkillId).ToList();
+            var missionDoc = _db.MissionDocuments.Where(md => md.MissionId == missionId).Select(mdoc=>mdoc.DocumentPath).ToList();
+            var missionGoal = _db.GoalMissions.Where(mg => mg.MissionId == missionId).FirstOrDefault();
+            
+
+            MissionSendViewModel mymodel = new MissionSendViewModel()
+            {
+                MissionId = missionId,
+                Title = isExistMissionData.Title,
+                Description = isExistMissionData.Description,
+                ShortDescription = isExistMissionData.ShortDescription,
+                OrganizationDetail = isExistMissionData.OrganizationDetail,
+                OrganizationName = isExistMissionData.OrganizationName,
+                StartDate = isExistMissionData.StartDate,
+                EndDate = isExistMissionData.EndDate,
+                SeatsVacancy = isExistMissionData.SeatsVacancy,
+                MissionType = isExistMissionData.MissionType,
+                ThemeId = isExistMissionData.ThemeId,
+                CountryId = isExistMissionData.CountryId,
+                CityId = isExistMissionData.CityId,
+                Status = isExistMissionData.Status,
+                Availability = isExistMissionData.Availability,
+                MissionDocuments = missionDoc,
+                MissionMediums = MissionMediaData,
+                MissionSkills = missionSkill
+               
+            };
+            if (mymodel.MissionType == "GOAL")
+            {
+                mymodel.GoalObjectiveText = missionGoal.GoalObjectiveText;
+                mymodel.GoalValue = missionGoal.GoalValue;
+            }
+            return mymodel;
+
+
+        }
+
+
+
+        public bool forAddBannerDetails(string Text, int Ordervalue, string image)
+        {
+            var myBanner = new Banner();
+            myBanner.Text = Text;
+            myBanner.SortOrder = Ordervalue;
+            myBanner.Image = image;
+
+            _db.Banners.Add(myBanner);
+            _db.SaveChanges();
+            return true;
+        }
+
+        public bool forEditBannerDetails(string Text, int Ordervalue, string image, int BannerId)
+        {
+            var BannerExist = _db.Banners.Where(b => b.BannerId == BannerId).First();
+            BannerExist.Text = Text;
+            BannerExist.SortOrder = Ordervalue;
+            BannerExist.Image = image;
+            BannerExist.UpdatedAt = DateTime.UtcNow;
+
+            _db.Banners.Update(BannerExist);
+            _db.SaveChanges();
+
+            return true;
+        }
+
+        public bool forDeleteBannerDetails(int BannerId)
+        {
+            var isExistBnner = _db.Banners.Where(b => b.BannerId == BannerId).FirstOrDefault();
+            isExistBnner.DeletedAt = DateTime.UtcNow;
+            _db.Banners.Update(isExistBnner);
+            _db.SaveChanges();
             return true;
         }
 

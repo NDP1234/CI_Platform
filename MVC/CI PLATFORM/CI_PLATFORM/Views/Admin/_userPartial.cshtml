@@ -1,6 +1,6 @@
 ﻿@using CI_Platform.Entities.Models.VM
 @model AdminViewModel;
-  @foreach (var item in Model.users.Where(u=>u.DeletedAt == null))
+  @foreach (var item in Model.users.Where(u=>u.DeletedAt == null && u.Role=="user"))
 {
     <tr class="border">
         <td>@item.FirstName</td>

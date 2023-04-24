@@ -260,12 +260,12 @@ function skillfun(skill) {
 function clear4(clearnow) {
     //alert("calling clear");
     var arrayId = clearnow.value[0];
-    var arrlength = clearnow.length;
+    var arrlength = clearnow.value.length;
     var data = clearnow.value.substring(1, arrlength);
     //alert(arrayId);
     //alert(data);
     var idname = clearnow.value;
-    if (arrayId == 3) {
+    if (arrayId == 4) {
         console.log("nirav", skillchip);
         var name = skillchip.indexOf(data);
         //alert(name);
@@ -277,6 +277,7 @@ function clear4(clearnow) {
         $("#FilterBtn").click();
     }
 };
+
  
 
 

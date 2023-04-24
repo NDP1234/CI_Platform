@@ -11,7 +11,7 @@ let cardtitle = document.getElementsByClassName("card-title");
 
 let notfound = document.getElementById("NoMissionFound");
 
-let storydata = document.getElementById("mission-list");
+
 
 searchbar.addEventListener("input", search_mission);
 

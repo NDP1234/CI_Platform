@@ -15,6 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="~/css/pl.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -380,7 +381,7 @@
                                 else
                                 {
                                     <button  data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2"  style="border-radius:20px;">
-                                <i class="bi bi-heart"></i>
+                                <i class="bi bi-heart w-100"></i>
                            </button>
                                 }
 
@@ -399,14 +400,33 @@
                         <p class="group inner list-group-item-text sd">
                            @item.Missions.ShortDescription</p>
                         <div class="row mb">
-                            <div class="col col-lg-6 col-md-6 col-sm-12">@item.Missions.OrganizationName</div>
+                            @*<div class="col col-lg-6 col-md-6 col-sm-12">@item.Missions.OrganizationName</div>
                             <div class="col col-lg-6 col-md-6 col-sm-12 ">
+                                <span>@item.AvgRating</span>
                                 <img src="~/images/selected-star.png" class="wdimg" alt="">
                                 <img src="~/images/selected-star.png" class="wdimg" alt="">
                                 <img src="~/images/selected-star.png" class="wdimg" alt="">
                                 <img src="~/images/star.png" class="wdimg" alt="">
                                 <img src="~/images/star.png" class="wdimg" alt="">
-                            </div>
+                            </div>*@
+                                <div class="col col-lg-6 col-md-6 col-sm-12">@item.Missions.OrganizationName</div>
+                                <div class="col col-lg-6 col-md-6 col-sm-12">
+                                   @* <span>@item.AvgRating</span>*@
+                                    <div class="text-warning">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (i <= Math.Round(item.AvgRating))
+                                            {
+                                                <i class="bi bi-star-fill"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="bi bi-star"></i>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+
                         </div>
                         <div class="position-relative ">
                             <hr style="z-index: -1;">
@@ -419,7 +439,12 @@
                             else
                             {
                             <div class="dt text-center  position-absolute">
-                                <span class="fsize"> Ongoing Opportunity</span>
+                                @*<span class="fsize"> Ongoing Opportunity </span>*@
+                                        <span class="fsize">
+                                            @item.GoalObjectiveText
+                                        </span>
+
+
                             </div>
                                     
                             }
@@ -512,7 +537,19 @@
                 @item.Missions?.Theme.Title
             </div>
             <div class="bottom-right4  opacity-50   ">
-                <img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">
+                @*<img src="~/images/heart.png" class="mx-auto d-block p-1" alt="">*@
+                            @if (item.isValid)
+                            {
+                                <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="border-radius:20px;">
+                                    <i class="bi bi-heart filled-heart"></i>
+                                </button>
+                            }
+                            else
+                            {
+                                <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="border-radius:20px;">
+                                    <i class="bi bi-heart w-100"></i>
+                                </button>
+                            }
             </div>
             <div class="bottom-right5  opacity-50   ">
                 <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
@@ -532,11 +569,22 @@
                 <div class="col col-lg-6 col-md-6 col-sm-12">
                     <div class="d-inline">@item.Missions.OrganizationName</div>
                     <div class="d-inline">
-                        <img src="~/images/selected-star.png" class="wdimg" alt="">
+                        @*<img src="~/images/selected-star.png" class="wdimg" alt="">
                         <img src="~/images/selected-star.png" class="wdimg" alt="">
                         <img src="~/images/selected-star.png" class="wdimg" alt="">
                         <img src="~/images/star.png" class="wdimg" alt="">
-                        <img src="~/images/star.png" class="wdimg" alt="">
+                        <img src="~/images/star.png" class="wdimg" alt="">*@
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        if (i <= Math.Round(item.AvgRating))
+                                        {
+                                            <i class="bi bi-star-fill"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="bi bi-star"></i>
+                                        }
+                                    }
                     </div>
                 </div>
 
@@ -555,7 +603,7 @@
                    
                 <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds  ">
                      @*<hr style="z-index: -1;">*@
-                    <span class="fsize"> Ongoing Opportunity</span>
+                    <span class="fsize">@item.GoalObjectiveText</span>
                 </div>
 
                 }

@@ -3,6 +3,7 @@ using CI_Platform.Entities.Models;
 using CI_Platform.Entities.Models.VM;
 using CI_Platform.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace CI_PLATFORM.Controllers
 {
@@ -20,6 +21,20 @@ namespace CI_PLATFORM.Controllers
         }
         public IActionResult AdminDashBoard()
         {
+            var session_details = HttpContext.Session.GetString("Login");
+            var AuthorizedAdmin = _db.Users.FirstOrDefault(user => user.Email == session_details && user.DeletedAt == null && user.Role == "admin");
+            if (session_details == null)
+            {
+              
+                return RedirectToAction("Logout", "Authentication");
+            }
+
+            if (AuthorizedAdmin == null)
+            {
+              
+                return RedirectToAction("logout", "Authentication");
+            }
+
             var viewmodel = new AdminViewModel();
             viewmodel.users = _adminPrepository.getUserList();
             viewmodel.Missions = _adminPrepository.getMissionList();
@@ -30,6 +45,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return View(viewmodel);
         }
 
@@ -37,7 +53,10 @@ namespace CI_PLATFORM.Controllers
         {
             return PartialView("_CMSAddPage");
         }
-
+        public IActionResult _BannerManagementPartial()
+        {
+            return PartialView("_BannerManagementPartial");
+        }
         public IActionResult _CMSEditPage()
         {
             return PartialView("_CMSEditPage");
@@ -88,6 +107,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_MissionApplication", viewmodel);
         }
         public IActionResult DeclineMissionApplication(int MissionApplicationId)
@@ -103,6 +123,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_MissionApplication", viewmodel);
         }
         public IActionResult PublishStory(int StoryId)
@@ -118,6 +139,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_StoryPartial", viewmodel);
         }
         public IActionResult DeclineStory(int StoryId)
@@ -133,6 +155,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_StoryPartial", viewmodel);
         }
         public IActionResult AddMissionTheme(string Title, int Status)
@@ -148,6 +171,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_MissionTheme", viewmodel);
         }
         public IActionResult editMissionTheme(int MissionThemeId, string Title, int Status)
@@ -163,6 +187,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_MissionTheme", viewmodel);
         }
 
@@ -181,6 +206,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_MissionSkill", viewmodel);
 
         }
@@ -197,6 +223,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_MissionSkill", viewmodel);
         }
 
@@ -213,6 +240,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_MissionSkill", viewmodel);
         }
         public IActionResult deleteMissionTheme(int themeId)
@@ -228,6 +256,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_MissionTheme", viewmodel);
         }
         public IActionResult deleteStory(int StoryId)
@@ -243,6 +272,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_StoryPartial", viewmodel);
         }
 
@@ -259,6 +289,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_CMSPage", viewmodel);
         }
         public IActionResult EditCmsDetails(int CMSPageId, string Title, string Description, string Slug, int Status)
@@ -274,6 +305,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_CMSPage", viewmodel);
         }
         public IActionResult DeleteCmsDetails(int CMSPageId)
@@ -289,6 +321,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_CMSPage", viewmodel);
         }
 
@@ -300,6 +333,7 @@ namespace CI_PLATFORM.Controllers
             var profile = users.FirstOrDefault(m => m.Email == session_details);
             var cities = _db.Cities.Where(c => c.CountryId == countryId).ToList();
             var cityList = cities.Select(c => new { cityId = c.CityId, name = c.Name });
+         
             return Json(cityList);
         }
 
@@ -322,6 +356,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_userPartial", viewmodel);
         }
         public IActionResult SaveEditedUser(int userId, string FirstName, string LastName, string Email, string Password, string EmployeeId, int CountryId, int CityId, string ProfileText, string Department, int Status, string PhoneNumber, string Avatar)
@@ -337,6 +372,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_userPartial", viewmodel);
         }
         public IActionResult deleteUser(int userId)
@@ -352,6 +388,7 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_userPartial", viewmodel);
         }
         public IActionResult SaveMission(string MissionTitle, string ShortDescription, string Description, int CountryId, int CityId, string OrganisationName, string Missiontype, DateTime MisStartDate, DateTime MisEndDate, string Organizationdetails, int TotalSeats, DateTime MisRegEndDate, int MissionTheme, string myAvailability, string VideoUrl, List<string> imgpathlist, List<string> docpathlist, List<string> selectedMissionSkill, string goaltext, int GoalValue)
@@ -367,12 +404,65 @@ namespace CI_PLATFORM.Controllers
             viewmodel.cmsPages = _adminPrepository.getCMSPageList();
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_MissionPartial", viewmodel);
         }
 
+        public IActionResult getMissionData(int Missionid)
+        {
+            var missiondetails = _adminPrepository.getMissionData(Missionid);
+            return Json(missiondetails);
+        }
 
+        public IActionResult AddBannerDetails(string Text, int Ordervalue, string image)
+        {
+            var addBanneretails = _adminPrepository.forAddBannerDetails(Text, Ordervalue, image);
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            viewmodel.countries = _adminPrepository.getCountryList();
+            viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
+            return PartialView("_BannerManagementPartial", viewmodel);
+        }
+        public IActionResult EditBannerDetails(string Text, int Ordervalue, string image, int BannerId)
+        {
+            var editBannerdetails = _adminPrepository.forEditBannerDetails(Text, Ordervalue, image, BannerId);
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            viewmodel.countries = _adminPrepository.getCountryList();
+            viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
+            return PartialView("_BannerManagementPartial", viewmodel);
+        }
 
-
+        public IActionResult DeleteBannerDetails(int BannerId)
+        {
+            var deleteBannerdetails = _adminPrepository.forDeleteBannerDetails(BannerId);
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            viewmodel.countries = _adminPrepository.getCountryList();
+            viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
+            return PartialView("_BannerManagementPartial", viewmodel);
+        }
         [HttpPost]
         public IActionResult SaveImage(IFormFile file)
         {
@@ -386,5 +476,19 @@ namespace CI_PLATFORM.Controllers
 
             return Content("/profileImg/" + fileName);
         }
+        [HttpPost]
+        public IActionResult SaveBannerImage(IFormFile file)
+        {
+            string fileName = file.FileName;
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/BannerImage", fileName);
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
+            return Content("/BannerImage/" + fileName);
+        }
+        
     }
 }
