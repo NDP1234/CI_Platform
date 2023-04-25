@@ -11,6 +11,6 @@ namespace CI_Platform.Repository.Interface
     {
         public VolunteeringMissionPageViewModel GetMissionDetaiil(int id, int userID);
 
-        //public List<VolunteeringMissionPageViewModel> GetRelatedMission(int id);
+        
     }
 }

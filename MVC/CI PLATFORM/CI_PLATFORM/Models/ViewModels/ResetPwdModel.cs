@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CI_Platform.Entities.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace CI_PLATFORM.Models.ViewModels
 {
@@ -9,19 +10,15 @@ namespace CI_PLATFORM.Models.ViewModels
         public string Token { get; set; }
 
         [Required, DataType(DataType.Password)]
- 
+        [MinLength(8, ErrorMessage = "Password must contain minimum 8 characters  ")]
         public string NewPassword { get; set; }
 
         [Compare("NewPassword")]
+        [MinLength(8, ErrorMessage = "Password must contain minimum 8 characters  ")]
         public string ConfirmPassword { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
-        //[Required, DataType(DataType.Password)]
-
-
-
-        //public bool IsSuccess { get; set; }
-
+        public List<Banner> BannerList { get; set; } = new List<Banner>();
     }
 }

@@ -40,7 +40,7 @@ namespace CI_Platform.Repository.Repository
                 isExistStory.Status = status;
                 isExistStory.Title = title;
                 isExistStory.PublishedAt = publishedAt;
-                //isExistStory.CreatedAt = DateTime.UtcNow;
+                
                 isExistStory.Description = description;
 
                 _db.Stories.Update(isExistStory);
@@ -92,7 +92,7 @@ namespace CI_Platform.Repository.Repository
                     Status = status,
                     Title = title,
                     PublishedAt = publishedAt,
-                    //CreatedAt = DateTime.UtcNow,
+                   
                     Description = description,
                 };
 

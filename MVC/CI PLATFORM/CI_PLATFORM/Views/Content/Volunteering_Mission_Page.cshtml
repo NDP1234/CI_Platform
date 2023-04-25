@@ -29,10 +29,7 @@
 
     <!-- head Part -->
     <div class="container">
-@*        <div class="d-none">
-           <span> @Model.Missions.MissionId</span> 
-           <span> @ViewBag.UserDetails.Userid</span> 
-        </div>*@
+
         <nav class="navbar navbar-expand-lg navbar-light d-none d-md-block">
             <div class="container">
                 <button class="navbar-toggler bg-light " type="button" data-bs-toggle="collapse"
@@ -119,185 +116,7 @@
                 <img src="~/images/user-img.png" class="rounded-pill  " height="40px" width="40px" alt="">
             </div>
         </div>
-        <!-- //////////////////////////////// -->
-@*        <div class="row mt-4 bdr container-fluid  ps-0 pe-0  mb-2">
-            <div class="srchbar">
-                <div class="input-group rounded bd d-none d-md-flex  ">
-
-                    <div class="col-12 col-lg-6 col-md-6 be ">
-                        <div class="srch ">
-
-                            <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
-
-                            <input type="search" class="form-control rounded d-inline srch "
-                                placeholder="Search mission..." aria-label="Search" aria-describedby="search-addon" />
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-lg-6 col-md-6 ">
-                        <div class="row  ">
-                            <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
-                                <a class="btn dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLink"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span>Country&nbsp; &nbsp;</span>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">Country-1</a></li>
-                                    <li><a class="dropdown-item" href="#">Country-2</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
-                                </ul>
-                            </div>
-
-                            <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
-                                <a class="btn dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLink"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span>City&nbsp; &nbsp;</span>
-                                </a>
-                                <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">City-1</a></li>
-                                    <li><a class="dropdown-item" href="#">City-2 </a></li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
-                                </ul>
-                            </div>
-
-                            <div class="dropdown d-inline col-lg-3  col-md-3 col-6 be text-center">
-                                <a class="btn dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLink"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span>Theme &nbsp; &nbsp;</span>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">Theme-1</a></li>
-                                    <li><a class="dropdown-item" href="#">Theme-2 </a></li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
-                                </ul>
-                            </div>
-
-                            <div class="dropdown d-inline col-lg-3 col-md-3 col-6 text-center">
-                                <a class="btn dropdown-toggle p-0 b-filter" href="#" role="button"
-                                    id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span>Skills &nbsp; &nbsp;</span>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">Skill-1</a></li>
-                                    <li><a class="dropdown-item" href="#">Skills-2</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ///////////////////// -->
-            <div class="second-nav 	d-md-none w-100">
-                <div class="mob-sidebar mx-auto">
-                    <div id="mySidebar2" class="sidebar d-inline">
-                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">×</a>
-                        <a href="#">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Country
-                                </a>
-                                <ul class="dropdown-menu ">
-                                    <li><a class="dropdown-item " href="#">Country-1</a></li>
-                                    <li><a class="dropdown-item" href="#">Country-2</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
-                                </ul>
-                            </li>
-                        </a>
-                        <a href="#">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    City
-                                </a>
-                                <ul class="dropdown-menu ">
-                                    <li><a class="dropdown-item " href="#">City-1</a></li>
-                                    <li><a class="dropdown-item" href="#">City-2</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
-                                </ul>
-                            </li>
-                        </a>
-                        <a href="#">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Theme
-                                </a>
-                                <ul class="dropdown-menu ">
-                                    <li><a class="dropdown-item " href="#">Theme-1</a></li>
-                                    <li><a class="dropdown-item" href="#">Theme-2</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
-                                </ul>
-                            </li>
-                        </a>
-                        <a href="#">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Skills
-                                </a>
-                                <ul class="dropdown-menu ">
-                                    <li><a class="dropdown-item " href="#">Skills-1</a></li>
-                                    <li><a class="dropdown-item" href="#">Skills-2</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else </a></li>
-                                </ul>
-                            </li>
-                        </a>
-                    </div>
-
-                    <div id="main2" class="d-flex justify-content-end m-2 w-100 ">
-                        <input type="search" class="form-control rounded d-inline srch " placeholder="Search mission..."
-                            aria-label="Search" aria-describedby="search-addon" />
-
-                        <button class="openbtn bg-light" onclick="openNav2()"><img src="~/images/filter.png" alt="">
-                        </button>
-
-                    </div>
-                </div>
-            </div>
-            <!-- ///////////////// -->
-
-            <div class="all-filters d-flex align-items-center flex-wrap mt-4 mgl ">
-                <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1 flex-nowrap">
-                    <p class="filter">Tree Plantation</p>
-                    <i class="bi bi-x"></i>
-                </div>
-                <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
-                    <p class="filter">Canada</p>
-                    <i class="bi bi-x"></i>
-                </div>
-                <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
-                    <p class="filter">Toronto</p>
-                    <i class="bi bi-x"></i>
-                </div>
-                <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
-                    <p class="filter">Montreal</p>
-                    <i class="bi bi-x"></i>
-                </div>
-                <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
-                    <p class="filter">Environment</p>
-                    <i class="bi bi-x"></i>
-                </div>
-                <div class="filter-wrapper px-3 rounded-pill py-1 d-flex align-items-center m-1">
-                    <p class="filter">Nuitrition</p>
-                    <i class="bi bi-x"></i>
-                </div>
-            </div>
-        </div>*@
-
+        
 
     </div>
 
@@ -412,9 +231,7 @@
                     <div class="dt dt5 text-center  position-absolute ">
                         <span class="fsize"> From  @Model.Missions.StartDate.ToString().Substring(0, 10)  until @Model.Missions.EndDate.ToString().Substring(0, 10) </span>
                     </div>                    
-@*                    <div class="dt dt5 text-center  position-absolute ">
-                        <span class="fsize"> Plant 10,000 Trees</span>
-                    </div>*@
+
                 </div>
 
                 <div class="row mt1 mt7 justify-content-between">
@@ -458,7 +275,7 @@
                             @if (Model.isValid)
                             {
                                 <button id="myfavbtn" data-mission-id="@Model.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 "  style="border-radius:20px" onclick="addtofav();">
-                                @*<img src="~/images/heart1.png" alt="">*@
+                               
                                 <i class="bi bi-heart filled-heart"></i>
                            </button>
                                 <span id="spanforfav" >Remove from favourite</span>
@@ -466,7 +283,7 @@
                             else
                             {
                                 <button id="myfavbtn" data-mission-id="@Model.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 "  style="border-radius:20px" onclick="addtofav();">
-                                @*<img src="~/images/heart1.png" alt="">*@
+                                
                                 <i class="bi bi-heart"></i>
                            </button>
                            <span id="spanforfav">Add To favourite</span>
@@ -475,12 +292,7 @@
                         </div>
                          
                     </div>
-   @*                 <div class="col-lg-6 col-md-6 text-center">
-                        <div class=" dt3 text-center p-1 ">
-                            <img src="~/images/add1.png" alt="">
-                            <span>Recommend to a <span class="db5">Co-Worker</span> </span>
-                        </div>
-                    </div>*@
+   
                     <div class="col-lg-6 col-md-6 text-center">
                         <div class=" dt3 text-center p-1 w-100" >
                             <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#RecommendModel"><img src="~/images/add1.png" alt="">
@@ -545,8 +357,7 @@
                         <a type="button" class="btn btnlist  text-center missionApplyBtn" data-mission-id="@Model.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId">Apply now <img src="~/images/right-arrow.png" alt=""></a>
 
 
-                      @*  <button type="button" class="btn btnlist  text-center" data-mission-id="@Model.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId">Apply now <img src="~/images/right-arrow.png"
-                                alt=""></button>*@
+                   
                     </div>
                   
                 </div>
@@ -581,33 +392,11 @@
                         aria-labelledby="pills-home-tab">
                         <h3>Introduction</h3>
                         <p  class="p-text"> @Model.Missions.Description</p>
-                       @* <p class="p-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                            sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                            laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor
-                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                            sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                            laborum.</p>
-
-                        <h3>Challenge</h3>
-                        <p class="p-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem
-                            ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non
-                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>*@
+                      
                            
                         <div class="doc">
                             <h3>Documents</h3>
-                            @*<div class="row">*@
+                           
                             <div class="d-flex align-items-center  ">
                                 @foreach (var item in @Model.MissionDocuments){
 
@@ -634,32 +423,12 @@
 
                                 }
                             </div>
-                            @*</div>*@
+                           
                         </div>
                     </div>
                     <!-- ------------------------------------------------------ -->
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                        @*<div class="my-5">
-                            <h3 class="text-center ">Industrial Solutions Network</h3>
-                            <span>Melvin A. Sawyer, Managing Director</span>
-                        </div>
-
-
-                        <div class="p-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco..
-                            <a href="#" style="color: #F88634;"> See more</a>
-                        </div>
-
-                        <div class="info my-5">
-                            <div><span>4456 Illinois Avenue, Oregon City, OR97045</span> </div>
-
-                            <div><span> +1 503-742-7810</span></div>
-
-                            <div><span>melvinasawyer@yahoo.com</span> </div>
-
-                            <div> <span> www.cesnetworksolution.com</span></div>
-                        </div>*@
+                        
 
                         <h4 class="text-center">About Organization(@Model.Missions.OrganizationName)</h4>
                         <p class="p-text">
@@ -685,10 +454,7 @@
                         <div class="container bg-light p-2 scrollable" id="comments">
                             
                         </div>
-                        @*<button class="btn btn-primary" id="read-more">Read More</button>*@
-                        @*<button class="btn btnpc my-2 text-center" id="read-more" type="button" ">
-                            Read More 
-                        </button>*@
+                        
 
                     </div>
                 </div>
@@ -701,7 +467,7 @@
                     </div>
                     <div class="row border-top pinfo">
                         <div class="col-lg-3 col-md-3 col-3">Skills</div>
-                        @*<div class="col-lg-9 col-md-9 col-9">Cool, Easy Going, Math, Computer</div>*@
+                        
                         <div class="col-lg-9 col-md-9 col-9">
                             @foreach(var item in @Model.Missions.MissionSkills)
                                 {
@@ -725,30 +491,7 @@
 
 
                 <div class="rv border  mtd2 ">
-                    @*<div class="head mx-3 pinfo">
-                        <h4>Recent Volunteers</h4>
-                    </div>
-                    <div class="profile text-center">
-                        <div class="row py-1">
-                            @foreach(var item in @Model.MissionApplications)
-                            {
-                              <div class="col-lg-4 col-md-4 col-4">
-                                <img src="@item.User.Avatar" class="rounded-pill imgrv" alt="">
-                                <div> <span class="rvname">@item.User.FirstName @item.User.LastName </span></div>
-                            </div>  
-                            }
-                        </div>
-                    </div>*@
-                    @*<div class="container mt-3 w-100 border-top pt-3">
-                        <ul class="pagination w-100">
-                            <li class="page-item "><a class="page-link" href="#"><img src="~/images/left.png" alt=""></a>
-                            </li>
-                            <li class="page-item mx-auto my-auto"><span class="fs3">
-                                    </span></li>
-                            <li class="page-item"><a class="page-link" href="#"><img src="~/images/right-arrow1.png"
-                                        alt=""></a></li>
-                        </ul>
-                    </div>*@
+                   
                     <div class="recent__volunteer border mt-3 p-lg-3 p-sm-1">
                 <h4 class="mt-2 ms-4 ">Recent Volunteers</h4>
                 <hr>
@@ -932,7 +675,7 @@
                           <div class="modal-body">
                               @foreach (var coworker in Model.UserDetail)
                               {
-                                @*<li>@coworker.FirstName @coworker.LastName <button class="btn btn-primary" onclick="recommendToCoworker('@coworker.UserId')">Send</button></li>*@
+                               
                                 <div  class="d-flex flex-row justify-content-between border-bottom mt-1 py-1">
                                      <div class="d-flex flex-row gap-2">
                                         <img src="~/Images/volunteer1.png" class="rounded-circle" width="40px" height="40px"/>
@@ -1039,16 +782,6 @@
             }
         })
 
-//  function toggleColor() {
-//  var button = document.getElementById("myButton");
-//  if (button.classList.contains("white")) {
-//    button.classList.remove("white");
-//    button.classList.add("red");
-//  } else {
-//    button.classList.remove("red");
-//    button.classList.add("white");
-//  }
-//}
 
 
 

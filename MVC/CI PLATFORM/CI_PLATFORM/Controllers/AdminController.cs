@@ -22,19 +22,22 @@ namespace CI_PLATFORM.Controllers
         public IActionResult AdminDashBoard()
         {
             var session_details = HttpContext.Session.GetString("Login");
+            List<User> users = _users.GetUserList();
+            var profile = users.FirstOrDefault(m => m.Email == session_details);
+            ViewBag.UserDetails = profile;
             var AuthorizedAdmin = _db.Users.FirstOrDefault(user => user.Email == session_details && user.DeletedAt == null && user.Role == "admin");
             if (session_details == null)
             {
-              
+
                 return RedirectToAction("Logout", "Authentication");
             }
 
             if (AuthorizedAdmin == null)
             {
-              
+
                 return RedirectToAction("logout", "Authentication");
             }
-
+            
             var viewmodel = new AdminViewModel();
             viewmodel.users = _adminPrepository.getUserList();
             viewmodel.Missions = _adminPrepository.getMissionList();
@@ -333,7 +336,7 @@ namespace CI_PLATFORM.Controllers
             var profile = users.FirstOrDefault(m => m.Email == session_details);
             var cities = _db.Cities.Where(c => c.CountryId == countryId).ToList();
             var cityList = cities.Select(c => new { cityId = c.CityId, name = c.Name });
-         
+
             return Json(cityList);
         }
 
@@ -393,7 +396,23 @@ namespace CI_PLATFORM.Controllers
         }
         public IActionResult SaveMission(string MissionTitle, string ShortDescription, string Description, int CountryId, int CityId, string OrganisationName, string Missiontype, DateTime MisStartDate, DateTime MisEndDate, string Organizationdetails, int TotalSeats, DateTime MisRegEndDate, int MissionTheme, string myAvailability, string VideoUrl, List<string> imgpathlist, List<string> docpathlist, List<string> selectedMissionSkill, string goaltext, int GoalValue)
         {
-            var deleteUserdetails = _adminPrepository.forAddMissionDetails(MissionTitle, ShortDescription, Description, CountryId, CityId, OrganisationName, Missiontype, MisStartDate, MisEndDate, Organizationdetails, TotalSeats, MisRegEndDate, MissionTheme, myAvailability, VideoUrl, imgpathlist, docpathlist, selectedMissionSkill , goaltext, GoalValue);
+            var deleteUserdetails = _adminPrepository.forAddMissionDetails(MissionTitle, ShortDescription, Description, CountryId, CityId, OrganisationName, Missiontype, MisStartDate, MisEndDate, Organizationdetails, TotalSeats, MisRegEndDate, MissionTheme, myAvailability, VideoUrl, imgpathlist, docpathlist, selectedMissionSkill, goaltext, GoalValue);
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            viewmodel.countries = _adminPrepository.getCountryList();
+            viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
+            return PartialView("_MissionPartial", viewmodel);
+        }
+        public IActionResult SaveEditedMission(int MissionId, string MissionTitle, string ShortDescription, string Description, int CountryId, int CityId, string OrganisationName, string Missiontype, DateTime MisStartDate, DateTime MisEndDate, string Organizationdetails, int TotalSeats, DateTime MisRegEndDate, int MissionTheme, string myAvailability, string VideoUrl, List<string> imgpathlist, List<string> docpathlist, List<string> selectedMissionSkill, string goaltext, int GoalValue)
+        {
+            var deleteUserdetails = _adminPrepository.forSaveEditedMissionDetails(MissionId, MissionTitle, ShortDescription, Description, CountryId, CityId, OrganisationName, Missiontype, MisStartDate, MisEndDate, Organizationdetails, TotalSeats, MisRegEndDate, MissionTheme, myAvailability, VideoUrl, imgpathlist, docpathlist, selectedMissionSkill, goaltext, GoalValue);
             var viewmodel = new AdminViewModel();
             viewmodel.users = _adminPrepository.getUserList();
             viewmodel.Missions = _adminPrepository.getMissionList();
@@ -463,6 +482,22 @@ namespace CI_PLATFORM.Controllers
             viewmodel.BannerList = _adminPrepository.getBannerList();
             return PartialView("_BannerManagementPartial", viewmodel);
         }
+        public IActionResult DeleteMissionDetails(int MissionId)
+        {
+            var deletemission = _adminPrepository.forDeleteMission(MissionId);
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            viewmodel.countries = _adminPrepository.getCountryList();
+            viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
+            return PartialView("_MissionPartial", viewmodel);
+        }
         [HttpPost]
         public IActionResult SaveImage(IFormFile file)
         {
@@ -489,6 +524,6 @@ namespace CI_PLATFORM.Controllers
 
             return Content("/BannerImage/" + fileName);
         }
-        
+
     }
 }

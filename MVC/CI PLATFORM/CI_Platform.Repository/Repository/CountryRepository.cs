@@ -18,11 +18,7 @@ namespace CI_Platform.Repository.Repository
             _db = db;
         }
 
-        //public List<Country> GetCountryDetails()
-        //{
-        //    List<Country> country_details = _db.Countries.ToList();
-        //    return country_details;
-        //}
+      
         public IEnumerable<Country> GetAllCountries()
         {
             return _db.Countries.ToList();

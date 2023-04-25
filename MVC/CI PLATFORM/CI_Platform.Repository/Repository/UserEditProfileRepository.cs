@@ -116,8 +116,7 @@ namespace CI_Platform.Repository.Repository
                         };
                         _db.UserSkills.Add(myskill);
                     }
-                    //change in UpdatedAt field if new skillList conatins in database
-                    //if (existingSkillIds.Contains(skillId))
+                    
                     else
                     {
                         var myexistskill = _db.UserSkills.Where(u => u.SkillId == skillId && u.UserId == userid).FirstOrDefault();

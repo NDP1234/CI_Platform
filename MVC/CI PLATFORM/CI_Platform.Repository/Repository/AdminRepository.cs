@@ -364,18 +364,119 @@ namespace CI_Platform.Repository.Repository
             return true;
         }
 
+        public bool forSaveEditedMissionDetails(int MissionId, string MissionTitle, string ShortDescription, string Description, int CountryId, int CityId, string OrganisationName, string Missiontype, DateTime MisStartDate, DateTime MisEndDate, string Organizationdetails, int TotalSeats, DateTime MisRegEndDate, int MissionTheme, string myAvailability, string VideoUrl, List<string> imgpathlist, List<string> docpathlist, List<string> selectedMissionSkill, string goaltext, int GoalValue)
+        {
+            var isExistMisssionData = _db.Missions.Where(m => m.MissionId == MissionId).FirstOrDefault();
+            isExistMisssionData.Title = MissionTitle;
+            isExistMisssionData.ShortDescription = ShortDescription;
+            isExistMisssionData.Description = Description;
+            isExistMisssionData.CountryId = CountryId;
+            isExistMisssionData.CityId = CityId;
+            isExistMisssionData.OrganizationName = OrganisationName;
+            isExistMisssionData.MissionType = Missiontype;
+            isExistMisssionData.StartDate = MisStartDate;
+            isExistMisssionData.EndDate = MisEndDate;
+            isExistMisssionData.OrganizationDetail = Organizationdetails;
+            isExistMisssionData.SeatsVacancy = TotalSeats;
+            isExistMisssionData.ThemeId = MissionTheme;
+            isExistMisssionData.Availability = myAvailability;
+            isExistMisssionData.UpdatedAt = DateTime.UtcNow;
+            _db.Missions.Update(isExistMisssionData);
+            _db.SaveChanges();
+
+
+            var isExistMissionMedia = _db.MissionMedia.Where(m => m.MissionId == MissionId && m.MediaType != "url").ToList();
+            if (isExistMissionMedia != null)
+            {
+                foreach (var photo in isExistMissionMedia)
+                {
+                    _db.MissionMedia.Remove(photo);
+                    _db.SaveChanges();
+                }
+            }
+            var isExistUrl = _db.MissionMedia.Where(md => md.MissionId == MissionId && md.MediaType == "url").FirstOrDefault();
+            if (isExistUrl != null)
+            {
+                isExistUrl.MediaType = "url";
+                isExistUrl.MediaPath = VideoUrl;
+                isExistUrl.UpdatedAt = DateTime.UtcNow;
+                _db.MissionMedia.Update(isExistUrl);
+                _db.SaveChanges();
+            }
+            foreach (var path in imgpathlist)
+            {
+                MissionMedium image = new MissionMedium()
+                {
+                    MediaPath = path,
+                    MissionId = MissionId,
+                    CreatedAt = DateTime.UtcNow,
+                    MediaType = "img",
+                };
+                _db.MissionMedia.Add(image);
+                _db.SaveChanges();
+            }
+
+            var isExistMissionDoc = _db.MissionDocuments.Where(md => md.MissionId == MissionId).ToList();
+            if (isExistMissionDoc != null)
+            {
+                foreach (var doc in isExistMissionDoc)
+                {
+                    _db.MissionDocuments.Remove(doc);
+                    _db.SaveChanges();
+                }
+            }
+            foreach (var doc in docpathlist)
+            {
+                MissionDocument document = new MissionDocument()
+                {
+                    DocumentPath = doc,
+                    MissionId = MissionId,
+                    CreatedAt = DateTime.UtcNow,
+                    DocumentName = "document",
+                    DocumentType = "document"
+                };
+                _db.MissionDocuments.Add(document);
+                _db.SaveChanges();
+            }
+
+            var isExistMissionSkills = _db.MissionSkills.Where(ms=>ms.MissionId==MissionId).ToList();
+            if(isExistMissionSkills != null)
+            {
+                foreach (var skill in isExistMissionSkills)
+                {
+                    _db.MissionSkills.Remove(skill);
+                    _db.SaveChanges();
+                }
+            }
+            foreach (var skl in selectedMissionSkill)
+            {
+                MissionSkill mskl = new MissionSkill()
+                {
+
+                    MissionId = MissionId,
+                    SkillId = long.Parse(skl)
+
+                };
+                _db.MissionSkills.Add(mskl);
+                _db.SaveChanges();
+            }
+            return true;
+        }
+
 
 
         public MissionSendViewModel getMissionData(int missionId)
         {
-            //var isExistMissionData = _db.Missions.Where(m => m.MissionId == missionId).FirstOrDefault();
-            var isExistMissionData = _db.Missions.FirstOrDefault(m => m.MissionId == missionId);
-            var MissionMediaData = _db.MissionMedia.Where(md => md.MissionId == missionId && md.MediaType!="url").Select(md=>md.MediaPath).ToList();
-            //var urlinfo = _db.MissionMedia.Where(md => md.MissionId == missionId && md.MediaType=="url").Select(md=>md.MediaPath).First();
-            var missionSkill = _db.MissionSkills.Where(ms => ms.MissionId == missionId).Select(m => m.SkillId).ToList();
-            var missionDoc = _db.MissionDocuments.Where(md => md.MissionId == missionId).Select(mdoc=>mdoc.DocumentPath).ToList();
-            var missionGoal = _db.GoalMissions.Where(mg => mg.MissionId == missionId).FirstOrDefault();
+            string urlinfo;
             
+            var isExistMissionData = _db.Missions.FirstOrDefault(m => m.MissionId == missionId);
+            var MissionMediaData = _db.MissionMedia.Where(md => md.MissionId == missionId && md.MediaType != "url").Select(md => md.MediaPath).ToList();
+
+           
+            var missionSkill = _db.MissionSkills.Where(ms => ms.MissionId == missionId).Select(m => m.SkillId).ToList();
+            var missionDoc = _db.MissionDocuments.Where(md => md.MissionId == missionId).Select(mdoc => mdoc.DocumentPath).ToList();
+            var missionGoal = _db.GoalMissions.Where(mg => mg.MissionId == missionId).FirstOrDefault();
+
 
             MissionSendViewModel mymodel = new MissionSendViewModel()
             {
@@ -397,19 +498,33 @@ namespace CI_Platform.Repository.Repository
                 MissionDocuments = missionDoc,
                 MissionMediums = MissionMediaData,
                 MissionSkills = missionSkill
-               
+
+
             };
             if (mymodel.MissionType == "GOAL")
             {
                 mymodel.GoalObjectiveText = missionGoal.GoalObjectiveText;
                 mymodel.GoalValue = missionGoal.GoalValue;
             }
+
+            if (_db.MissionMedia.Any(md => md.MissionId == missionId && md.MediaType == "url"))
+            {
+                mymodel.url = _db.MissionMedia.Where(md => md.MissionId == missionId && md.MediaType == "url").Select(md => md.MediaPath).First();
+
+            }
             return mymodel;
 
 
         }
 
-
+        public bool forDeleteMission(int MissionId)
+        {
+            var isExistMission = _db.Missions.Where(m => m.MissionId == MissionId).FirstOrDefault();
+            isExistMission.DeletedAt = DateTime.UtcNow;
+            _db.Missions.Update(isExistMission);
+            _db.SaveChanges();
+            return true;
+        }
 
         public bool forAddBannerDetails(string Text, int Ordervalue, string image)
         {

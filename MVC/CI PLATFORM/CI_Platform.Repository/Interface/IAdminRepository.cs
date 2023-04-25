@@ -14,7 +14,7 @@ namespace CI_Platform.Repository.Interface
         public List<Mission> getMissionList();
         public List<MissionApplication> getMissionApplicationList();
         public List<Story> getStoryDetailList();
-        //public AdminViewModel getMissionSkillList();
+       
         public List<Skill> getMissionSkillList();
         public List<MissionTheme> getMissionThemeList();
         public List<CmsPage> getCMSPageList();
@@ -29,7 +29,7 @@ namespace CI_Platform.Repository.Interface
          public bool forAddMissionTheme(string Title, int Status);
         public bool forEditMissionTheme(int MissionThemeId, string Title, int Status);
 
-        //public List<AdminViewModel.MissionSkill> forAddMissionSkill(string Title, int Status);
+        
         public bool forAddMissionSkill(string Title, int Status);
         public bool forEditMissionSkill(int SkillId, string Title, int Status);
         public bool forDeleteMissionSkill(int skillid);
@@ -42,10 +42,13 @@ namespace CI_Platform.Repository.Interface
         public bool SaveEditedUserinfo(int userId, string FirstName, string LastName, string Email, string Password, string EmployeeId, int CountryId, int CityId, string ProfileText, string Department, int Status, string PhoneNumber, string Avatar);
         public bool DeleteUserDetails(int userId);
         public bool forAddMissionDetails(string MissionTitle, string ShortDescription, string Description, int CountryId, int CityId, string OrganisationName, string Missiontype, DateTime MisStartDate, DateTime MisEndDate, string Organizationdetails, int TotalSeats, DateTime MisRegEndDate, int MissionTheme, string myAvailability, string VideoUrl, List<string> imgpathlist, List<string> docpathlist, List<string> selectedMissionSkill, string goaltext, int GoalValue);
+        public bool forSaveEditedMissionDetails(int MissionId, string MissionTitle, string ShortDescription, string Description, int CountryId, int CityId, string OrganisationName, string Missiontype, DateTime MisStartDate, DateTime MisEndDate, string Organizationdetails, int TotalSeats, DateTime MisRegEndDate, int MissionTheme, string myAvailability, string VideoUrl, List<string> imgpathlist, List<string> docpathlist, List<string> selectedMissionSkill, string goaltext, int GoalValue);
+
         public MissionSendViewModel getMissionData(int missionId);
         public bool forAddBannerDetails(string Text, int Ordervalue, string image);
         public bool forEditBannerDetails(string Text, int Ordervalue, string image, int BannerId);
 
         public bool forDeleteBannerDetails(int BannerId);
+        public bool forDeleteMission(int MissionId);
     }
 }

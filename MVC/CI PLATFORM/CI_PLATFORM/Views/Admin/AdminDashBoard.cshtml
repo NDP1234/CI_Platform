@@ -160,30 +160,29 @@
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0 mrg-start">
 
                                 <li class="nav-item currentTime">
-                                    @*Thursday, November 3, 2022, 10:06 AM*@
-                                    @*@DateTime.Now.ToString("dddd, MMMM d, yyyy, h:mm tt")*@
                                     <span id="current-time"></span>
-
-
                                 </li>
                             </ul>
-                            <form class="d-flex" role="search">
+
+                            <div class="d-flex" role="search">
 
                                 <div class="dropdown">
-                                    <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
-                                       data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="/images/user-img.png" alt="" style="border-radius: 50%;" height="30px"
-                                             width="30px">
-                                        <span>Nirav Patel</span>
-                                    </a>
+                                    <button type="button" class="btn  dropdown-toggle p-0 b-filter"   id="AdminDropDown"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="@ViewBag.UserDetails.Avatar" alt="" style="border-radius: 50%;" height="30px"
+                                    width="30px">
+                                    <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
+                                    </button>
 
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item" href="#">Something else </a></li>
+                                    <ul class="dropdown-menu" aria-labelledby="AdminDropDown">
+                                    <li><a class="dropdown-item" asp-action="AdminDashBoard" asp-controller="Admin">Dashboard</a></li>
+                                    <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
+                                    <li><a class="dropdown-item" asp-action="VolunteeringTimesheet" asp-controller="Timesheet">Volunteering Timesheet</a></li>
+                                    <li><a class="dropdown-item" asp-action="Logout" asp-controller="Authentication">Logout </a></li>
                                     </ul>
-                                </div>
-                            </form>
+                                    </div>
+                                
+                            </div>
                         </div>
                     </div>
                 </nav>
@@ -198,7 +197,7 @@
                         <hr class="w-100 mtop">
 
                         <div class="d-flex w-100 my-4">
-                           
+
                             <div class="ms-auto me-5 mt-4">
                                 <button class="btn addUserBtn" data-bs-toggle="modal" data-bs-target="#addUserModal"><span>Add</span><i class="bi bi-plus"></i></button>
                             </div>
@@ -348,7 +347,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-secondary" id="addUserCloseBtn" data-bs-dismiss="modal">Close</button>
                                                 <button type="button" class="btn btn-primary" id="AddUserBtn">Add User</button>
                                             </div>
                                         </div>
@@ -360,7 +359,7 @@
 
 
                         <!-- User table -->
-                        
+
                         <div class="table-responsive">
                             <table class="table table-borderless DataTablesId" style="width:100%">
                                 <thead>
@@ -529,7 +528,7 @@
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" id="editUserCloseBtn" data-bs-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary" data-user-id="" id="UserSaveChangesBtn">Save Changes</button>
                                     </div>
                                 </div>
@@ -547,7 +546,7 @@
                         <div class="cmscontent">
                             <div class="d-flex w-100 my-4">
                                 <!-- searchbar -->
-                                
+
                                 <div class="ms-auto me-5 mt-4">
                                     <button type="button" class="btn addUserBtn" id="addCMS"><span>Add</span><i class="bi bi-plus"></i></button>
                                 </div>
@@ -583,8 +582,8 @@
                         <hr class="w-100 mtop">
 
                         <div class="d-flex w-100 my-4">
-                           
-                           
+
+
                             <div class="ms-auto me-5 mt-4">
                                 <button class="btn addUserBtn" data-bs-toggle="modal" data-bs-target="#addMissionModal"><span>Add</span><i class="bi bi-plus"></i></button>
                             </div>
@@ -834,7 +833,7 @@
 
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-secondary" id="addMissionCloseBtn" data-bs-dismiss="modal">Close</button>
                                                 <button type="button" class="btn btn-primary" id="AddMissionDetailBtn">Add Mission</button>
                                             </div>
                                         </div>
@@ -866,260 +865,260 @@
                             </table>
                         </div>
 
-                         @*modal for edit mission*@
-                            <div class="modal fade" id="editMissionDetailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog  modal-xl">
-                                    <form class="row g-3 needs-validation addMissionDetailsValidate " novalidate>
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Add Mission</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="mb-3">
-                                                            <label for="MyMissionTitle2" class="form-label">Mission Title</label>
-                                                            <input type="text" class="form-control" id="MyMissionTitle2" required>
-                                                            <div class="invalid-feedback">
-                                                                Please enter a Mission Title.
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="mb-3">
-                                                            <label for="sDescription2" class="form-label">Short Description</label>
-                                                            <textarea class="form-control" id="sDescription2" rows="1" required></textarea>
-                                                            <div class="invalid-feedback">
-                                                                Please enter Short Description.
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="col">
-                                                            <label for="Missioneditoreditable">Description</label>
-                                                            <textarea cols="80" id="Missioneditoreditable" class="mydescription" name="Missioneditoreditable" rows="2" required>&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href=&quot;https://ckeditor.com/&quot;&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea>
-                                                            <div class="invalid-feedback">
-                                                                Please enter  Description.
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <div class="col">
-                                                        <label for="MissionCountry2" class="form-label">Country</label>
-                                                        <select class="form-select" id="MissionCountry2" aria-label="Default select example" required>
-                                                            <option selected disabled value="">Select a country</option>
-                                                            @foreach (var item in Model.countries)
-                                                            {
-                                                                <option value="@item.CountryId">@item.Name</option>
-                                                            }
-                                                        </select>
-                                                        <div class="invalid-feedback">
-                                                            Please select a country.
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <label for="MissionCity2" class="form-label">City</label>
-                                                        <select class="form-select" id="MissionCity2" aria-label="Default select example" required>
-                                                            <option selected disabled value="">Select a City</option>
-                                                            @foreach (var item in Model.cities)
-                                                            {
-                                                                <option value="@item.CityId">@item.Name</option>
-                                                            }
-                                                        </select>
-                                                        <div class="invalid-feedback">
-                                                            Please select a city.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="mb-3">
-                                                            <label for="OrganisationName2" class="form-label"> Organisation Name </label>
-                                                            <input type="text" class="form-control" id="OrganisationName2" required>
-                                                            <div class="invalid-feedback">
-                                                                Please enter Organisation name.
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <label for="MissionType2" class="form-label">Mission Type</label>
-                                                        <select class="form-select" id="MissionType2" aria-label="Default select example" required>
-                                                            <option selected disabled value="">Select a mission type</option>
-                                                            <option value="TIME">Time</option>
-                                                            <option value="GOAL">Goal</option>
-                                                        </select>
-                                                        <div class="invalid-feedback">
-                                                            Please select a type.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <div class="col">
-                                                        <label class="mb-2" for="MisStartDate2" class="form-label">Mission Start Date</label>
-                                                        <input type="date" class="form-control" id="MisStartDate2" placeholder="Select start date" required>
-                                                        <div class="invalid-feedback">
-                                                            Please select a Mission Start Date.
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <label class="mb-2" for="MisEndDate2" class="form-label">Mission End Date</label>
-                                                        <input type="date" class="form-control" id="MisEndDate2" placeholder="Select end date" required>
-                                                        <div class="invalid-feedback">
-                                                            Please select a Mission End Date.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <div class="col">
-                                                        <div class="mb-3">
-                                                            <label for="Organizationdetails2" class="form-label"> Organization details</label>
-                                                            <textarea class="form-control" id="Organizationdetails2" rows="2" required></textarea>
-                                                            <div class="invalid-feedback">
-                                                                Please enter Organisation details.
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label for="TotalSeats2" class="form-label"> Total Seats</label>
-                                                        <input type="number" class="form-control" id="TotalSeats2" required>
-                                                        <div class="invalid-feedback">
-                                                            Please enter Total numbers of Seats.
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <label class="mb-2" for="MisRegEndDate2" class="form-label">Mission registration deadline</label>
-                                                        <input type="date" class="form-control" id="MisRegEndDate2" placeholder="Select mission registration deadline" required>
-                                                        <div class="invalid-feedback">
-                                                            Please select Mission registration deadline.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class-="row">
-                                                    <div class="col">
-
-                                                        <label for="goaltext2" class="form-label"> Goal text </label>
-                                                        <input type="text" class="form-control" id="goaltext2" required>
-                                                        <div class="invalid-feedback">
-                                                            Please enter goal text.
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col">
-                                                        <label for="GoalValue2" class="form-label"> Goal Value</label>
-                                                        <input type="number" class="form-control" id="GoalValue2" required>
-                                                        <div class="invalid-feedback">
-                                                            Please enter goal value.
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <div class="col">
-                                                        <label for="MissionThemedata2" class="form-label">Mission Theme</label>
-                                                        <select class="form-select" id="MissionThemedata2" aria-label="Default select example" required>
-                                                            <option selected>Select a mission theme</option>
-                                                            @foreach (var item in Model.MissionThemes.Where(m => m.DeletedAt == null))
-                                                            {
-                                                                <option value="@item.MissionThemeId">@item.Title</option>
-                                                            }
-                                                        </select>
-                                                        <div class="invalid-feedback">
-                                                            Please select a Mission Theme.
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="dropdown d-inline  ">
-                                                            <a class="btn  dropdown-toggle b-filter w-100 mt-4 py-2 border text-start" href="#" role="button" id="dropdownMenuLink"
-                                                               data-bs-toggle="dropdown" aria-expanded="false">
-                                                                <span>Select Skills </span>
-                                                            </a>
-                                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" id="theme" required>
-
-                                                                @foreach (var item in Model.missionSkills.Where(ms => ms.DeletedAt == null))
-                                                                {
-                                                                    <input class="form-check-input themeDropdown" id="@item.SkillId" type="checkbox" value="@item.SkillName">
-                                                                    <label class="form-check-label" for="themeDropdown">
-                                                                        @item.SkillName
-                                                                    </label>
-                                                                    <br>
-
-                                                                }
-                                                            </ul>
-                                                            <div class="invalid-feedback">
-                                                                Please select skills .
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label for="myAvailability2" class="form-label">Select Availability</label>
-                                                        <select class="form-select" id="myAvailability2" aria-label="Default select example" required>
-                                                            <option selected>Select Availability</option>
-                                                            <option value="daily">Daily</option>
-                                                            <option value="weekly">Weekly</option>
-                                                            <option value="week-end">Week-end</option>
-                                                            <option value="monthly">Monthly</option>
-                                                        </select>
-                                                        <div class="invalid-feedback">
-                                                            Please select Availability.
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <label for="VideoUrl2" class="form-label">video-Url</label>
-                                                        <input type="text" class="form-control" id="VideoUrl2" required>
-                                                        <div class="invalid-feedback">
-                                                            Please enter  video url.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row mt-3">
-                                                    <label for="dragAndDrop" class="form-label">Upload photos</label>
-                                                    <div class="col">
-                                                        <div id="dragAndDrop" class="border text-center">
-                                                            <label for="fileInputForMission">
-                                                                <img class="mx-auto d-block my-3" src="~/Images/drag-and-drop.png" alt="unable to load">
-                                                            </label>
-                                                            <input type="file" multiple id="fileInputForMission" style="display: none;">
-                                                        </div>
-
-                                                        <div class="selectedImageEditable">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row mt-3">
-                                                    <label for="dragAndDropDoc" class="form-label">Upload Documents</label>
-                                                    <div class="col">
-                                                        <div id="dragAndDropDoc" class="border text-center">
-                                                            <label for="fileInputForMissionDoc">
-                                                                <img class="mx-auto d-block my-3" src="~/Images/drag-and-drop.png" alt="unable to load">
-                                                            </label>
-                                                            <input type="file" multiple id="fileInputForMissionDoc" style="display: none;">
-                                                        </div>
-
-                                                        <div class="selectedDoc">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" id="AddMissionDetailBtn">Add Mission</button>
-                                            </div>
+                        @*modal for edit mission*@
+                        <div class="modal fade" id="editMissionDetailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog  modal-xl">
+                                <form class="row g-3 needs-validation editMissionDetailsValidate " novalidate>
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Add Mission</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                    </form>
-                                </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label for="MyMissionTitle2" class="form-label">Mission Title</label>
+                                                        <input type="text" class="form-control" id="MyMissionTitle2" required>
+                                                        <div class="invalid-feedback">
+                                                            Please enter a Mission Title.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label for="sDescription2" class="form-label">Short Description</label>
+                                                        <textarea class="form-control" id="sDescription2" rows="1" required></textarea>
+                                                        <div class="invalid-feedback">
+                                                            Please enter Short Description.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="col">
+                                                        <label for="Missioneditoreditable">Description</label>
+                                                        <textarea cols="80" id="Missioneditoreditable" class="mydescription" name="Missioneditoreditable" rows="2" required>&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href=&quot;https://ckeditor.com/&quot;&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea>
+                                                        <div class="invalid-feedback">
+                                                            Please enter  Description.
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <label for="MissionCountry2" class="form-label">Country</label>
+                                                    <select class="form-select" id="MissionCountry2" aria-label="Default select example" required>
+                                                        <option selected disabled value="">Select a country</option>
+                                                        @foreach (var item in Model.countries)
+                                                        {
+                                                            <option value="@item.CountryId">@item.Name</option>
+                                                        }
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                        Please select a country.
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <label for="MissionCity2" class="form-label">City</label>
+                                                    <select class="form-select" id="MissionCity2" aria-label="Default select example" required>
+                                                        <option selected disabled value="">Select a City</option>
+                                                        @foreach (var item in Model.cities)
+                                                        {
+                                                            <option value="@item.CityId">@item.Name</option>
+                                                        }
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                        Please select a city.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label for="OrganisationName2" class="form-label"> Organisation Name </label>
+                                                        <input type="text" class="form-control" id="OrganisationName2" required>
+                                                        <div class="invalid-feedback">
+                                                            Please enter Organisation name.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <label for="MissionType2" class="form-label">Mission Type</label>
+                                                    <select class="form-select" id="MissionType2" aria-label="Default select example" required>
+                                                        <option selected disabled value="">Select a mission type</option>
+                                                        <option value="TIME">Time</option>
+                                                        <option value="GOAL">Goal</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                        Please select a type.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <label class="mb-2" for="MisStartDate2" class="form-label">Mission Start Date</label>
+                                                    <input type="date" class="form-control" id="MisStartDate2" placeholder="Select start date" required>
+                                                    <div class="invalid-feedback">
+                                                        Please select a Mission Start Date.
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <label class="mb-2" for="MisEndDate2" class="form-label">Mission End Date</label>
+                                                    <input type="date" class="form-control" id="MisEndDate2" placeholder="Select end date" required>
+                                                    <div class="invalid-feedback">
+                                                        Please select a Mission End Date.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label for="Organizationdetails2" class="form-label"> Organization details</label>
+                                                        <textarea class="form-control" id="Organizationdetails2" rows="2" required></textarea>
+                                                        <div class="invalid-feedback">
+                                                            Please enter Organisation details.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label for="TotalSeats2" class="form-label"> Total Seats</label>
+                                                    <input type="number" class="form-control" id="TotalSeats2" required>
+                                                    <div class="invalid-feedback">
+                                                        Please enter Total numbers of Seats.
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <label class="mb-2" for="MisRegEndDate2" class="form-label">Mission registration deadline</label>
+                                                    <input type="date" class="form-control" id="MisRegEndDate2" placeholder="Select mission registration deadline" required>
+                                                    <div class="invalid-feedback">
+                                                        Please select Mission registration deadline.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class-="row">
+                                                <div class="col">
+
+                                                    <label for="goaltext2" class="form-label"> Goal text </label>
+                                                    <input type="text" class="form-control" id="goaltext2" required>
+                                                    <div class="invalid-feedback">
+                                                        Please enter goal text.
+                                                    </div>
+
+                                                </div>
+                                                <div class="col">
+                                                    <label for="GoalValue2" class="form-label"> Goal Value</label>
+                                                    <input type="number" class="form-control" id="GoalValue2" required>
+                                                    <div class="invalid-feedback">
+                                                        Please enter goal value.
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <label for="MissionThemedata2" class="form-label">Mission Theme</label>
+                                                    <select class="form-select" id="MissionThemedata2" aria-label="Default select example" required>
+                                                        <option selected>Select a mission theme</option>
+                                                        @foreach (var item in Model.MissionThemes.Where(m => m.DeletedAt == null))
+                                                        {
+                                                            <option value="@item.MissionThemeId">@item.Title</option>
+                                                        }
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                        Please select a Mission Theme.
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="dropdown d-inline  ">
+                                                        <a class="btn  dropdown-toggle b-filter w-100 mt-4 py-2 border text-start" href="#" role="button" id="dropdownMenuLink"
+                                                           data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <span>Select Skills </span>
+                                                        </a>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" id="theme" required>
+
+                                                            @foreach (var item in Model.missionSkills.Where(ms => ms.DeletedAt == null))
+                                                            {
+                                                                <input class="form-check-input skilldropdown2" id="@item.SkillId" type="checkbox" value="@item.SkillName">
+                                                                <label class="form-check-label" for="skilldropdown2">
+                                                                    @item.SkillName
+                                                                </label>
+                                                                <br>
+
+                                                            }
+                                                        </ul>
+                                                        <div class="invalid-feedback">
+                                                            Please select skills .
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label for="myAvailability2" class="form-label">Select Availability</label>
+                                                    <select class="form-select" id="myAvailability2" aria-label="Default select example" required>
+                                                        <option selected>Select Availability</option>
+                                                        <option value="daily">Daily</option>
+                                                        <option value="weekly">Weekly</option>
+                                                        <option value="week-end">Week-end</option>
+                                                        <option value="monthly">Monthly</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                        Please select Availability.
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <label for="VideoUrl2" class="form-label">video-Url</label>
+                                                    <input type="text" class="form-control" id="VideoUrl2" required>
+                                                    <div class="invalid-feedback">
+                                                        Please enter  video url.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-3">
+                                                <label for="dragAndDrop" class="form-label">Upload photos</label>
+                                                <div class="col">
+                                                    <div id="dragAndDrop" class="border text-center">
+                                                        <label for="fileInputForMissionEditable">
+                                                            <img class="mx-auto d-block my-3" src="~/Images/drag-and-drop.png" alt="unable to load">
+                                                        </label>
+                                                        <input type="file" multiple id="fileInputForMissionEditable" style="display: none;">
+                                                    </div>
+
+                                                    <div class="selectedImageEditable">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-3">
+                                                <label for="dragAndDropDoc" class="form-label">Upload Documents</label>
+                                                <div class="col">
+                                                    <div id="dragAndDropDoc" class="border text-center">
+                                                        <label for="fileInputForMissionDoc2">
+                                                            <img class="mx-auto d-block my-3" src="~/Images/drag-and-drop.png" alt="unable to load">
+                                                        </label>
+                                                        <input type="file" multiple id="fileInputForMissionDoc2" style="display: none;">
+                                                    </div>
+
+                                                    <div class="selectedDoceditable">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" id="editMissionCloseBtn" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary SaveChangesForMission" id="SaveChangesForMission">Save Changes</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                         @*modal for edit mission*@
+                        </div>
+                        @*modal for edit mission*@
 
 
 
@@ -1133,7 +1132,7 @@
                         <hr class="w-100 mtop">
 
                         <div class="d-flex w-100 my-4">
-                           
+
                             <div class="ms-auto me-5 mt-4">
                                 <button class="btn addthemeBtn" data-bs-toggle="modal" data-bs-target="#AddMissionThemeModal"><span>Add</span><i class="bi bi-plus"></i></button>
                             </div>
@@ -1172,7 +1171,7 @@
 
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-secondary" id="closeAddTheme" data-bs-dismiss="modal">Close</button>
                                                 <button type="button" class="btn btn-primary " id="addthemeBtn">Add Theme</button>
                                             </div>
                                         </form>
@@ -1233,7 +1232,7 @@
 
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-secondary" id="closeEditTheme" data-bs-dismiss="modal">Close</button>
                                             <button type="button" class="btn btn-primary " id="EditablethemeBtn" data-missionTheme-id="">Save Theme</button>
                                         </div>
                                     </form>
@@ -1250,7 +1249,7 @@
                         <hr class="w-100 mtop">
 
                         <div class="d-flex w-100 my-4">
-                           
+
                             <div class="ms-auto me-5 mt-4">
                                 <button class="btn addSkillBtn" data-bs-toggle="modal" data-bs-target="#AddSkillModal"><span>Add</span><i class="bi bi-plus"></i></button>
                             </div>
@@ -1288,8 +1287,8 @@
 
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary " id="addSkillBtn">Add Skill</button>
+                                                <button type="button" class="btn btn-secondary"  id="closeAddSkill" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary " id="addSkillBtn" >Add Skill</button>
                                             </div>
                                         </form>
                                     </div>
@@ -1348,7 +1347,7 @@
 
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-secondary" id="closeEditSkill" data-bs-dismiss="modal">Close</button>
                                             <button type="button" class="btn btn-primary " data-skill-id="" id="EditSkillBtn">Edit Skill</button>
                                         </div>
                                     </form>
@@ -1365,7 +1364,7 @@
                         <span class="mb-0 border-bottom border-dark fs-3">Mission Application</span>
                         <hr class="w-100 mtop">
 
-                       
+
                         <!-- Mission Application table -->
                         <div class="table-responsive">
                             <table class="table table-borderless DataTablesId" style="width:100%">
@@ -1394,7 +1393,7 @@
                         <span class="mb-0 border-bottom border-dark fs-3">Story</span>
                         <hr class="w-100 mtop">
 
-                        
+
                         <!-- Story table -->
                         <div class="table-responsive ">
                             <table class="table table-borderless DataTablesId" style="width:100%">
@@ -1422,8 +1421,8 @@
                         <hr class="w-100 mtop">
 
                         <div class="d-flex w-100 my-4">
-                       
-                            
+
+
                             <div class="ms-auto me-5 mt-4">
                                 <button class="btn addUserBtn" data-bs-toggle="modal" data-bs-target="#addBannerModal"><span>Add</span><i class="bi bi-plus"></i></button>
                             </div>
@@ -1471,7 +1470,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-secondary" id="forAddBannerClose" data-bs-dismiss="modal">Close</button>
                                                 <button type="button" id="SaveBanner" class="btn btn-primary">Save Banner</button>
                                             </div>
                                         </div>
@@ -1542,7 +1541,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-secondary" id="forEditBannerClose" data-bs-dismiss="modal">Close</button>
                                             <button type="button" id="SaveChangedBanner" class="btn btn-primary">Save Changes</button>
                                         </div>
                                     </div>
@@ -1567,7 +1566,7 @@
           baseFloatZIndex: 10005
 
         });
-           
+
         CKEDITOR.replace('Missioneditoreditable', {
           height: 200,
           baseFloatZIndex: 10005
@@ -1576,9 +1575,6 @@
 
     </script>
     <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/DataTable/js/jquery.dataTables.min.js"></script>
     <script src="~/DataTable/js/dataTables.responsive.min.js"></script>

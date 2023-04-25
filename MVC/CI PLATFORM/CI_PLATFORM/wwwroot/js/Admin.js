@@ -1,4 +1,5 @@
 ﻿
+//for displaying date on top
 $(document).ready(function () {
     setInterval(function () {
         var now = new Date();
@@ -30,7 +31,7 @@ $(document).ready(function () {
 
 
 
-
+//for approve the mission Application
 $(document).on("click", ".missionApplicationApproved", function () {
     var maID = $(this).data('missionapplication-id');
 
@@ -54,7 +55,7 @@ $(document).on("click", ".missionApplicationApproved", function () {
     })
 })
 
-
+//for decline the mission Application
 $(document).on("click", ".missionApplicationDeclined", function () {
     var maID = $(this).data('missionapplication-id');
 
@@ -76,6 +77,8 @@ $(document).on("click", ".missionApplicationDeclined", function () {
     })
 })
 
+
+//for approve the story
 $(document).on("click", ".storyApproved", function () {
     var sID = $(this).data('story-id');
 
@@ -98,7 +101,7 @@ $(document).on("click", ".storyApproved", function () {
     })
 })
 
-
+//for decline the story
 $(document).on("click", ".storyDeclined", function () {
     var sID = $(this).data('story-id');
 
@@ -121,6 +124,7 @@ $(document).on("click", ".storyDeclined", function () {
     })
 })
 
+//for add the theme
 $('#addthemeBtn').on('click', function () {
     (function () {
         'use strict'
@@ -157,7 +161,7 @@ $('#addthemeBtn').on('click', function () {
             },
             success: function (data) {
                 console.log(data);
-
+                $('#closeAddTheme').click();
                 $('.Missionthemelisting').html(data);
                 alert("data is  successfully added");
 
@@ -167,6 +171,7 @@ $('#addthemeBtn').on('click', function () {
 
 });
 
+//for open the modal for edit the Theme
 function OpenEditThemeModal(themename, status, themeid) {
     console.log(themename);
     console.log(status);
@@ -182,7 +187,7 @@ function OpenEditThemeModal(themename, status, themeid) {
 
 
 
-
+//for save the edited theme
 $(document).on('click', '#EditablethemeBtn', function () {
 
     var MissionThemeId = $(this).attr('data-missionTheme-id');
@@ -204,7 +209,7 @@ $(document).on('click', '#EditablethemeBtn', function () {
         },
         success: function (data) {
             console.log(data);
-
+            $('#closeEditTheme').click();
             $('.Missionthemelisting').html(data);
             alert("Edited data is successfully saved");
 
@@ -213,7 +218,7 @@ $(document).on('click', '#EditablethemeBtn', function () {
 
 })
 
-
+//for add the skill
 $('#addSkillBtn').on('click', function () {
     (function () {
         'use strict'
@@ -251,7 +256,7 @@ $('#addSkillBtn').on('click', function () {
             },
             success: function (data) {
                 console.log(data);
-
+                $('#closeAddSkill').click();
                 $('#missionskillPartialView').html(data);
                 alert("data is  successfully added");
 
@@ -264,7 +269,7 @@ $('#addSkillBtn').on('click', function () {
 
 
 
-
+//for open the modal for edit the skill
 function OpenEditSkillModal(skillname, status, skillid) {
     console.log(skillname);
     console.log(status);
@@ -278,7 +283,7 @@ function OpenEditSkillModal(skillname, status, skillid) {
     $('#editMissionSkillModal').modal('show');
 
 }
-
+//for save the edited skill
 $(document).on('click', '#EditSkillBtn', function () {
 
     var SkillId = $(this).attr('data-skill-id');
@@ -303,7 +308,7 @@ $(document).on('click', '#EditSkillBtn', function () {
         },
         success: function (data) {
             console.log(data);
-
+            $('#closeEditSkill').click();
             $('#missionskillPartialView').html(data);
             alert("Edited data is successfully saved");
 
@@ -312,7 +317,7 @@ $(document).on('click', '#EditSkillBtn', function () {
 
 })
 
-
+//for delete skill
 $(document).on('click', '.deleteMissionSkill', function () {
     var skillId = $(this).attr('mission-skill-id')
 
@@ -324,7 +329,7 @@ $(document).on('click', '.deleteMissionSkill', function () {
         },
         success: function (data) {
             console.log(data);
-
+            
             $('#missionskillPartialView').html(data);
             alert(" data is successfully deleted");
 
@@ -332,6 +337,7 @@ $(document).on('click', '.deleteMissionSkill', function () {
     })
 })
 
+//for delete the theme
 $(document).on('click', '.deleteMissionTheme', function () {
     var themeId = $(this).attr('data-missionTheme-id')
 
@@ -351,6 +357,7 @@ $(document).on('click', '.deleteMissionTheme', function () {
     })
 })
 
+//for delete the story
 $(document).on('click', '.deleteStory', function () {
     var storyid = $(this).attr('data-story-id')
 
@@ -370,6 +377,7 @@ $(document).on('click', '.deleteStory', function () {
     })
 })
 
+//for getting _CMSAddPage partial view 
 $('#addCMS').on('click', function () {
     $.ajax({
         url: "/Admin/_CMSAddPage",
@@ -380,8 +388,28 @@ $('#addCMS').on('click', function () {
 })
 
 
-
+//for add the cms detail
 $(document).on('click', "#CMSAdd", function () {
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation.addcmsvalidation')
+        console.log(forms);
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+
+            })
+    })()
+    
     var Cmstitle = $('#cmstitle').val();
     var description = CKEDITOR.instances.editor1.editable().getText();
     var slug = $('#cmsSlug').val();
@@ -390,22 +418,27 @@ $(document).on('click', "#CMSAdd", function () {
     console.log(description);
     console.log(slug);
     console.log(selectedValue);
-    $.ajax({
-        type: "POST",
-        url: "/Admin/AddCmsDetails",
-        data: {
-            Title: Cmstitle,
-            Description: description,
-            Slug: slug,
-            Status: selectedValue
-        },
-        success: function (data) {
-            $('.cmsdata').html(data);
-            alert(" data is successfully added");
-        }
-    })
+    if (Cmstitle && slug && selectedValue ) {
+        $.ajax({
+            type: "POST",
+            url: "/Admin/AddCmsDetails",
+            data: {
+                Title: Cmstitle,
+                Description: description,
+                Slug: slug,
+                Status: selectedValue
+            },
+            success: function (data) {
+                $('.cmsdata').html(data);
+                alert(" data is successfully added");
+            }
+        })
+    }
+  
 })
 
+
+//for edit the cms detail
 function editCmms(Title, Status, CmsPageId, Description, Slug) {
 
     console.log(Title);
@@ -456,6 +489,7 @@ function editCmms(Title, Status, CmsPageId, Description, Slug) {
 
 }
 
+//for delete the cms detail
 $(document).on('click', '#DeleteBtnForCmsPage', function () {
     var cmspageid = $(this).attr('data-cms-id');
     console.log(cmspageid);
@@ -473,7 +507,7 @@ $(document).on('click', '#DeleteBtnForCmsPage', function () {
 })
 
 
-
+//for cascading dropdown
 $('#Country').on('change', function () {
     var countryId = $(this).val(); // get the selected country id
     $('#City').empty(); // clear the city dropdown
@@ -500,6 +534,7 @@ $('#Country').on('change', function () {
     });
 });
 
+//for alert if email already exist
 $(document).ready(function () {
     $('#myemail').on('blur', function () {
         var email = $(this).val();
@@ -516,6 +551,7 @@ $(document).ready(function () {
     });
 });
 
+//for add the user
 $(document).on('click', '#AddUserBtn', function () {
     (function () {
         'use strict'
@@ -587,6 +623,7 @@ $(document).on('click', '#AddUserBtn', function () {
             },
             success: function (data) {
                 console.log(data);
+                $('#addUserCloseBtn').click();
                 $('.userlist').html(data);
                 alert(" data is successfully added");
 
@@ -598,7 +635,7 @@ $(document).on('click', '#AddUserBtn', function () {
 })
 
 
-
+//for open the modal for edit user detail
 function OpenEditUserModal(UserId, FirstName, LastName, Email, Password, EmployeeId, CountryId, CityId, ProfileText, Department, Status, PhoneNumber, Avatar) {
 
     $('#UserSaveChangesBtn').attr('data-user-id', UserId);
@@ -618,7 +655,7 @@ function OpenEditUserModal(UserId, FirstName, LastName, Email, Password, Employe
 
 }
 
-
+//for save edited detail of user
 $(document).on('click', '#UserSaveChangesBtn', function () {
 
     var userId = $(this).attr('data-user-id');
@@ -669,7 +706,7 @@ $(document).on('click', '#UserSaveChangesBtn', function () {
             },
             success: function (data) {
                 console.log(data);
-
+                $('#editUserCloseBtn').click();
                 $('.userlist').html(data);
                 alert(" edited data is successfully saved");
 
@@ -680,7 +717,7 @@ $(document).on('click', '#UserSaveChangesBtn', function () {
 
 })
 
-
+//for delete the user details
 $(document).on('click', '.deleteUserBtn', function () {
     var userId = $(this).attr('data-user-id')
 
@@ -700,7 +737,7 @@ $(document).on('click', '.deleteUserBtn', function () {
     })
 })
 
-
+//for cascading dropdown
 $('#Country2').on('change', function () {
     var countryId = $(this).val(); // get the selected country id
     $('#City2').empty(); // clear the city dropdown
@@ -726,7 +763,7 @@ $('#Country2').on('change', function () {
     });
 });
 
-
+//for cascading dropdown
 $('#MissionCountry').on('change', function () {
     var countryId = $(this).val(); // get the selected country id
     $('#MissionCity').empty(); // clear the city dropdown
@@ -751,6 +788,8 @@ $('#MissionCountry').on('change', function () {
         }
     });
 });
+
+//for cascading dropdown
 $('#MissionCountry2').on('change', function () {
     var countryId = $(this).val(); // get the selected country id
     $('#MissionCity2').empty(); // clear the city dropdown
@@ -777,7 +816,7 @@ $('#MissionCountry2').on('change', function () {
 });
 
 
-
+//for display the password
 const togglePassword = document
     .querySelector('#togglePassword');
 
@@ -799,7 +838,7 @@ togglePassword.addEventListener('click', () => {
 
 
 
-
+//for add mission
 $(document).on('click', '#AddMissionDetailBtn', function () {
 
     (function () {
@@ -836,7 +875,7 @@ $(document).on('click', '#AddMissionDetailBtn', function () {
     var MisRegEndDate = $('#MisRegEndDate').val();
     var MissionTheme = $('#MissionThemedata').val();
     var myAvailability = $('#myAvailability').val();
-    var VideoUrl = $('#VideoUrl').val();
+    var VideoUrl = $('#VideoUrl2').val();
     var imgpathlist = selectedImagesBase64;
     var docpathlist = selectedDocsBase64;
     var goaltext = $('#goaltext').val();
@@ -871,8 +910,7 @@ $(document).on('click', '#AddMissionDetailBtn', function () {
     console.log(goaltext)
     console.log(GoalValue)
 
-    if (MissionTitle && ShortDescription && Description && CountryId && CityId && OrganisationName && Missiontype && MisStartDate && MisEndDate && Organizationdetails   && MissionTheme && myAvailability && VideoUrl && imgpathlist && docpathlist && selectedMissionSkill)
-    {
+    if (MissionTitle && ShortDescription && Description && CountryId && CityId && OrganisationName && Missiontype && MisStartDate && MisEndDate && Organizationdetails && MissionTheme && myAvailability  && imgpathlist && docpathlist && selectedMissionSkill) {
         $.ajax({
             type: "POST",
             url: "/Admin/SaveMission",
@@ -897,11 +935,11 @@ $(document).on('click', '#AddMissionDetailBtn', function () {
                 selectedMissionSkill: selectedMissionSkill,
                 goaltext: goaltext,
                 GoalValue: GoalValue
-                
+
             },
             success: function (data) {
                 console.log(data);
-
+                $('#addMissionCloseBtn').click();
                 $('.missionList').html(data);
                 alert("  data is successfully saved");
 
@@ -912,13 +950,15 @@ $(document).on('click', '#AddMissionDetailBtn', function () {
 
 })
 
+//for getting missiondata and open filled modal
 var paths = [];
+var docs = [];
 $(document).on('click', '.EditMissionDetailBtn', function () {
     var missionId = $(this).attr('data-mission-id');
     console.log(missionId);
 
 
-   
+
 
     $.ajax({
         type: 'POST',
@@ -932,7 +972,7 @@ $(document).on('click', '.EditMissionDetailBtn', function () {
 
             $('#editMissionDetailModal').modal('show');
 
-            /*alert("  data is successfully get");*/
+            
             $('#MyMissionTitle2').val(data.title);
             $('#sDescription2').val(data.shortDescription);
             CKEDITOR.instances.Missioneditoreditable.editable().setText(data.description);
@@ -951,10 +991,11 @@ $(document).on('click', '.EditMissionDetailBtn', function () {
             $('#MissionCountry2').val(data.countryId);
             $('#MissionCity2').val(data.cityId);
             $('#VideoUrl2').val(data.url);
+            $('.SaveChangesForMission').attr('data-mission-id', data.missionId)
             var imagelist = data.missionMediums;
             var doclist = data.missionDocuments;
             paths = imagelist;
-
+            docs = doclist;
             var imagesHtml = '';
             for (var i = 0; i < paths.length; i++) {
                 imagesHtml += '<div class="selectedImageItem"><img src="' + paths[i] + '" /><span class="removeImageIcon" data-index="' + i + '">x</span></div>';
@@ -962,7 +1003,25 @@ $(document).on('click', '.EditMissionDetailBtn', function () {
             }
             $(".selectedImageEditable").html(imagesHtml);
 
-            var docHtml = '';
+            var dochtml = '';
+            for (var j = 0; j < docs.length; j++) {
+                dochtml += '<div class="border selectedDocitem"><a href=' + docs[j] + '>document</a><span class="removeDocIcon" data-index="' + j + '">x</span></div>'
+            }
+            $(".selectedDoceditable").html(dochtml);
+
+           
+
+            var skillIds = data.missionSkills;
+
+
+            $('.skilldropdown2').each(function () {
+                var checkbox = $(this);
+                var skillId = parseInt(checkbox.attr('id'));
+                if (skillIds.includes(skillId)) {
+                    checkbox.prop('checked', true);
+                }
+            });
+
 
         },
 
@@ -974,7 +1033,143 @@ $(document).on('click', '.removeImageIcon', function () {
     $(this).closest('.selectedImageItem').remove(); // Remove the corresponding image tag
     console.log(paths);
 });
+$(document).on('click', '.removeDocIcon', function () {
+    var index = $(this).data('index');
+    paths.splice(index, 1); // Remove the element from the array
+    $(this).closest('.selectedDocitem').remove(); // Remove the corresponding image tag
+    console.log(paths);
+});
 
+//for save edited mission detail
+$(document).on('click', '.SaveChangesForMission', function () {
+    var MissionId = $(this).attr('data-mission-id');
+    (function () {
+        'use strict'
+
+
+        var forms = document.querySelectorAll('.needs-validation.editMissionDetailsValidate')
+        console.log(forms);
+
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+
+            })
+    })()
+
+    var MissionTitle = $('#MyMissionTitle2').val();
+    var ShortDescription = $('#sDescription2').val();
+    var Description = CKEDITOR.instances.Missioneditoreditable.editable().getText();
+    var CountryId = $('#MissionCountry2').val();
+    var CityId = $('#MissionCity2').val();
+    var OrganisationName = $('#OrganisationName2').val();
+    var Missiontype = $('#MissionType2').val();
+    var MisStartDate = $('#MisStartDate2').val();
+    var MisEndDate = $('#MisEndDate2').val();
+    var Organizationdetails = $('#Organizationdetails2').val();
+    var TotalSeats = $('#TotalSeats2').val();
+    var MisRegEndDate = $('#MisRegEndDate2').val();
+    var MissionTheme = $('#MissionThemedata2').val();
+    var myAvailability = $('#myAvailability2').val();
+    var VideoUrl = $('#VideoUrl2').val();
+    var imgpathlist = selectedImagesBase64Editable.concat(paths);
+    var docpathlist = selectedDocsBase64Editable.concat(docs);
+    var goaltext = $('#goaltext2').val();
+    var GoalValue = $('#GoalValue2').val();
+    var selectedSkills = [];
+
+    $('.skilldropdown2').each(function () {
+        if ($(this).is(':checked')) {
+            selectedSkills.push($(this).attr('id'));
+        }
+    });
+
+    var selectedMissionSkill = selectedSkills;
+    console.log(MissionTitle)
+    console.log(ShortDescription)
+    console.log(Description)
+    console.log(CountryId)
+    console.log(CityId)
+    console.log(OrganisationName)
+    console.log(Missiontype)
+    console.log(MisStartDate)
+    console.log(MisEndDate)
+    console.log(Organizationdetails)
+    console.log(TotalSeats)
+    console.log(MisRegEndDate)
+    console.log(MissionTheme)
+    console.log(myAvailability)
+    console.log(VideoUrl)
+    console.log(imgpathlist)
+    console.log(docpathlist)
+    console.log(selectedMissionSkill)
+    console.log(goaltext)
+    console.log(GoalValue)
+
+    $.ajax({
+        type: "POST",
+        url: "/Admin/SaveEditedMission",
+        data: {
+            MissionId: MissionId,
+            MissionTitle: MissionTitle,
+            ShortDescription: ShortDescription,
+            Description: Description,
+            CountryId: CountryId,
+            CityId: CityId,
+            OrganisationName: OrganisationName,
+            Missiontype: Missiontype,
+            MisStartDate: MisStartDate,
+            MisEndDate: MisEndDate,
+            Organizationdetails: Organizationdetails,
+            TotalSeats: TotalSeats,
+            MisRegEndDate: MisRegEndDate,
+            MissionTheme: MissionTheme,
+            myAvailability: myAvailability,
+            VideoUrl: VideoUrl,
+            imgpathlist: imgpathlist,
+            docpathlist: docpathlist,
+            selectedMissionSkill: selectedMissionSkill,
+            goaltext: goaltext,
+            GoalValue: GoalValue
+
+        },
+        success: function (data) {
+            console.log(data);
+            $('#editMissionCloseBtn').click();
+            $('.missionList').html(data);
+            alert("  data is successfully saved");
+
+        },
+    })
+    
+
+
+})
+
+//for delete mission
+$(document).on('click', '#DeleteBtnForMission', function () {
+    var MissionId = $(this).attr('data-mission-id');
+   
+    $.ajax({
+        type: "POST",
+        url: "/Admin/DeleteMissionDetails",
+        data: {
+            MissionId: MissionId
+        },
+        success: function (data) {
+            $('.missionList').html(data);
+            alert(" data is successfully deleted");
+        }
+    })
+})
+
+//for formating a date
 function formatedate(datetime) {
     const inputDateStr = datetime;
     const date = new Date(inputDateStr);
@@ -989,40 +1184,40 @@ function formatedate(datetime) {
 }
 
 
-        // Get references to the form fields
-        const missionTypeSelect = document.getElementById("MissionType");
-        const goalText = document.getElementById("goaltext");
-        const goalValue = document.getElementById("GoalValue");
-        const totalSeats = document.getElementById("TotalSeats");
-        const regDeadline = document.getElementById("MisRegEndDate");
+// Get references to the form fields
+const missionTypeSelect = document.getElementById("MissionType");
+const goalText = document.getElementById("goaltext");
+const goalValue = document.getElementById("GoalValue");
+const totalSeats = document.getElementById("TotalSeats");
+const regDeadline = document.getElementById("MisRegEndDate");
 
-        // Disable all fields initially
+// Disable all fields initially
+goalText.disabled = true;
+goalValue.disabled = true;
+totalSeats.disabled = true;
+regDeadline.disabled = true;
+
+// Listen for changes on the mission type select element
+missionTypeSelect.addEventListener("change", () => {
+    // Enable/disable fields based on the selected value
+    if (missionTypeSelect.value === "GOAL") {
+        goalText.disabled = false;
+        goalValue.disabled = false;
+        totalSeats.disabled = true;
+        regDeadline.disabled = true;
+    } else if (missionTypeSelect.value === "TIME") {
+        goalText.disabled = true;
+        goalValue.disabled = true;
+        totalSeats.disabled = false;
+        regDeadline.disabled = false;
+    } else {
+        // If the selected value is neither "GOAL" nor "TIME", disable all fields
         goalText.disabled = true;
         goalValue.disabled = true;
         totalSeats.disabled = true;
         regDeadline.disabled = true;
-
-        // Listen for changes on the mission type select element
-        missionTypeSelect.addEventListener("change", () => {
-            // Enable/disable fields based on the selected value
-            if (missionTypeSelect.value === "GOAL") {
-                goalText.disabled = false;
-                goalValue.disabled = false;
-                totalSeats.disabled = true;
-                regDeadline.disabled = true;
-            } else if (missionTypeSelect.value === "TIME") {
-                goalText.disabled = true;
-                goalValue.disabled = true;
-                totalSeats.disabled = false;
-                regDeadline.disabled = false;
-            } else {
-                // If the selected value is neither "GOAL" nor "TIME", disable all fields
-                goalText.disabled = true;
-                goalValue.disabled = true;
-                totalSeats.disabled = true;
-                regDeadline.disabled = true;
-            }
-        })
+    }
+})
 
 
 // Get references to the form fields
@@ -1116,6 +1311,7 @@ $(document).ready(function () {
     });
 });
 
+//for save banner details
 $(document).on('click', "#SaveBanner", function () {
 
     (function () {
@@ -1141,7 +1337,7 @@ $(document).on('click', "#SaveBanner", function () {
     var Text = $('#myText').val();
     var Ordervalue = $('#SortOrderValue').val();
     var image = $('.BannerImage').attr('src');
-    
+
     console.log(Text);
     console.log(Ordervalue);
     console.log(image);
@@ -1157,16 +1353,17 @@ $(document).on('click', "#SaveBanner", function () {
 
             },
             success: function (data) {
+                $('#forAddBannerClose').click();
                 $('.Bannerdata').html(data);
                 alert(" data is successfully added");
             }
         })
     }
- 
+
 })
 
-function EditBannerDetails(BannerId, Text, SortOrder, Image)
-{
+//for edit banner details
+function EditBannerDetails(BannerId, Text, SortOrder, Image) {
     console.log(Text);
     console.log(SortOrder);
     console.log(Image);
@@ -1209,26 +1406,28 @@ $(document).on('click', "#SaveChangedBanner", function () {
     console.log(Ordervalue);
     console.log(image);
 
-   
-        $.ajax({
-            type: "POST",
-            url: "/Admin/EditBannerDetails",
-            data: {
-                Text: Text,
-                Ordervalue: Ordervalue,
-                image: image,
-                BannerId: bannerid
 
-            },
-            success: function (data) {
-                $('.Bannerdata').html(data);
-                alert(" data is successfully added");
-            }
-        })
-    
+    $.ajax({
+        type: "POST",
+        url: "/Admin/EditBannerDetails",
+        data: {
+            Text: Text,
+            Ordervalue: Ordervalue,
+            image: image,
+            BannerId: bannerid
+
+        },
+        success: function (data) {
+            $('#forEditBannerClose').click();
+            $('.Bannerdata').html(data);
+            alert(" data is successfully added");
+        }
+    })
+
 
 })
 
+//for delete the banner detail
 $(document).on('click', '#trashBanner', function () {
     var bannerId = $('#trashBanner').attr('data-banner-id');
     console.log(bannerId);
@@ -1410,6 +1609,74 @@ function handleRemoveIconClick() {
 
 
 // -----------------------------------------------------------------------------------------------------------------  
+// for select images or videos and displayed at below      
+// -----------------------------------------------------------------------------------------------------------------  
+// Global array for storing selected image paths in base64 format
+const selectedImagesBase64Editable = [];
+
+// Get the selectedImage div
+const selectedImageedited = document.querySelector('.selectedImageEditable');
+
+// Handle the change event for the file input element
+const fileInputEdited = document.getElementById('fileInputForMissionEditable');
+fileInputEdited.addEventListener('change', function (event) {
+    for (const file of event.target.files) {
+        // Create a new image element for each selected file
+        if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
+            const newImage = document.createElement(file.type.startsWith('image/') ? 'img' : 'video');
+            newImage.src = URL.createObjectURL(file);
+            newImage.controls = true;
+
+            // Convert the file to base64 and add it to the selectedImagesBase64 array
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                const base64Image2 = reader.result;
+                selectedImagesBase64Editable.push(base64Image2);
+            };
+
+            // Create a new remove icon for each selected image
+            const removeIcon = document.createElement('span');
+            removeIcon.innerHTML = 'x';
+            removeIcon.className = 'remove';
+
+            // Add the new image and remove icon to the selectedImage div
+            const newDiv = document.createElement('div');
+            newDiv.className = 'selectedImageItem';
+            newDiv.appendChild(newImage);
+            newDiv.appendChild(removeIcon);
+            selectedImageedited.appendChild(newDiv);
+
+            // Add a horizontal line between images
+            selectedImageedited.appendChild(document.createElement('hr'));
+        }
+    }
+    console.log(selectedImagesBase64Editable);
+    // Call the function to handle remove icon clicks
+    handleRemoveIconClick4();
+});
+
+// Handle remove icon clicks
+function handleRemoveIconClick4() {
+    const removeIcons = document.querySelectorAll('.selectedImageItem .remove');
+    removeIcons.forEach(icon => {
+        icon.addEventListener('click', function () {
+            // Remove the image path from the selectedImagesBase64 array
+            const imageElement = this.previousSibling;
+            const index = selectedImagesBase64Editable.indexOf(imageElement.src);
+            if (index !== -1) {
+                selectedImagesBase64Editable.splice(index, 1);
+            }
+
+            // Remove the selected image item from the selectedImage div
+            this.parentElement.remove();
+        });
+    });
+}
+
+
+
+// -----------------------------------------------------------------------------------------------------------------  
 // for select documents and displayed at below      
 // -----------------------------------------------------------------------------------------------------------------  
 // Global array for storing selected document paths in base64 format
@@ -1468,6 +1735,73 @@ function handleRemoveIconClickDoc() {
             const index = Array.from(selectedDoc.children).indexOf(this.parentElement);
             if (index !== -1) {
                 selectedDocsBase64.splice(index, 1);
+            }
+
+            // Remove the selected document item from the selectedDoc div
+            this.parentElement.remove();
+        });
+    });
+}
+
+// -----------------------------------------------------------------------------------------------------------------  
+// for select documents and displayed at below      
+// -----------------------------------------------------------------------------------------------------------------  
+// Global array for storing selected document paths in base64 format
+const selectedDocsBase64Editable = [];
+
+// Get the selectedDoc div
+const selectedDocEditable = document.querySelector('.selectedDoceditable');
+
+// Handle the change event for the file input element
+const fileInputDocEdit = document.getElementById('fileInputForMissionDoc2');
+fileInputDocEdit.addEventListener('change', function (event) {
+    for (const file of event.target.files) {
+        // Create a new element for each selected file
+        if (!file.type.startsWith('image/') && !file.type.startsWith('video/')) {
+            const newDoc = document.createElement('div');
+            newDoc.className = 'selectedDocItem';
+
+            // Create a new remove icon for each selected document
+            const removeIcon = document.createElement('span');
+            removeIcon.innerHTML = 'x';
+            removeIcon.className = 'remove';
+
+            // Display the document name
+            const docName = document.createElement('span');
+            docName.innerHTML = file.name;
+            docName.className = 'docName';
+
+            // Add the new document, remove icon and document name to the selectedDoc div
+            newDoc.appendChild(docName);
+            newDoc.appendChild(removeIcon);
+            selectedDocEditable.appendChild(newDoc);
+
+            // Convert the file to base64 and add it to the selectedDocsBase64 array
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                const base64Doc = reader.result;
+                selectedDocsBase64Editable.push(base64Doc);
+            };
+
+            // Add a horizontal line between documents
+            selectedDocEditable.appendChild(document.createElement('hr'));
+        }
+    }
+    console.log(selectedDocsBase64Editable);
+    // Call the function to handle remove icon clicks
+    handleRemoveIconClickDoc2();
+});
+
+// Handle remove icon clicks
+function handleRemoveIconClickDoc2() {
+    const removeIcons = document.querySelectorAll('.selectedDocItem .remove');
+    removeIcons.forEach(icon => {
+        icon.addEventListener('click', function () {
+            // Remove the document path from the selectedDocsBase64 array
+            const index = Array.from(selectedDocEditable.children).indexOf(this.parentElement);
+            if (index !== -1) {
+                selectedDocsBase64Editable.splice(index, 1);
             }
 
             // Remove the selected document item from the selectedDoc div

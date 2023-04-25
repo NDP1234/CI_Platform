@@ -25,7 +25,7 @@ namespace CI_Platform.Repository.Repository
         public List<PlatformLandingViewModel> GetAllMission(int userId)
         {
             List<Mission> mission = _db.Missions.ToList();
-            List<MissionMedium> image = _db.MissionMedia.ToList();
+            List<MissionMedium> image = _db.MissionMedia.Where(md=>md.MediaType!="url").ToList();
             List<MissionTheme> theme = _db.MissionThemes.ToList();
             List<Country> countries = _db.Countries.ToList();
             List<City> city = _db.Cities.ToList();
@@ -33,6 +33,7 @@ namespace CI_Platform.Repository.Repository
             List<MissionSkill> missionSkills = _db.MissionSkills.ToList();
             List<User> users = _db.Users.ToList();
             var Missions = (from m in mission
+                            where m.DeletedAt == null
                             join i in image on m.MissionId equals i.MissionId into data
                             from i in data.DefaultIfEmpty().Take(1)
                             join r in _db.MissionRatings on m.MissionId equals r.MissionId into ratings
@@ -51,41 +52,10 @@ namespace CI_Platform.Repository.Repository
             return Missions;
         }
 
-        //public List<PlatformLandingViewModel> GetMissionSorting(string sort)
-        //{
-        //    List<PlatformLandingViewModel> missionsortdata = GetAllMission();
-
-
-        //    if (sort == "newest")
-        //    {
-        //        return missionsortdata.OrderByDescending(m => m.Missions.CreatedAt).ToList();
-        //    }
-        //    else if (sort == "oldest")
-        //    {
-        //        return missionsortdata.OrderBy(m => m.Missions.CreatedAt).ToList();
-        //    }
-        //    else if (sort == "seats_asc")
-        //    {
-        //        return missionsortdata.OrderByDescending(m => m.Missions.SeatsVacancy).ToList();
-        //    }
-        //    else if (sort == "seats_desc")
-        //    {
-        //        return missionsortdata.OrderBy(m => m.Missions.SeatsVacancy).ToList();
-        //    }
-        //    else if (sort == "deadline")
-        //    {
-        //        return missionsortdata.OrderByDescending(m => m.Missions.EndDate).ToList();
-        //    }
-        //    else
-        //    {
-        //        return missionsortdata.OrderByDescending(m => m.Missions.CreatedAt).ToList();
-        //    }
-        //}
-
-        //14-03
+        
         public List<PlatformLandingViewModel> GetMissionSorting(string sort, List<PlatformLandingViewModel> finalMission)
         {
-            //List<PlatformLandingViewModel> missionsortdata = GetAllMission();
+            
 
 
             if (sort == "newest")
@@ -110,7 +80,7 @@ namespace CI_Platform.Repository.Repository
             }
             else
             {
-                //return finalMission.OrderByDescending(m => m.Missions.CreatedAt).ToList();
+                
                 return finalMission.ToList();
             }
         }
@@ -321,11 +291,6 @@ namespace CI_Platform.Repository.Repository
         }
 
 
-        //public List<PlatformLandingViewModel> GetItemsBySearchString(int themeid)
-        //{
-
-        //    List<PlatformLandingViewModel> missionthemedata = GetAllMission();
-        //    return missionthemedata.Where(m => m.Missions.ThemeId == themeid).ToList();
-        //}
+        
     }
 }

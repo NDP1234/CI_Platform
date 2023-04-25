@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,8 +31,11 @@ namespace CI_Platform.Entities.Models.VM
         public long CountryId { get; set; }
         public long CityId { get; set; }
 
+        
         public string OldPassword { get; set; } = null!;
+       
         public string NewPassword { get; set; } = null!;
+        
         public string ConfirmPassword { get; set; } = null!;
         //
         public long ContactUsId { get; set; }
@@ -44,7 +48,7 @@ namespace CI_Platform.Entities.Models.VM
 
         public string Message { get; set; } = null!;
         //
-        public List<UserSkillViewModel> userSkills { get; set; } = new List<UserSkillViewModel>(); // Initialize with an empty list
+        public List<UserSkillViewModel> userSkills { get; set; } = new List<UserSkillViewModel>(); 
 
         public class UserSkillViewModel
         {

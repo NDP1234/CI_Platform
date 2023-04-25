@@ -1,6 +1,6 @@
 ﻿@using CI_Platform.Entities.Models.VM
 @model AdminViewModel;
-@foreach (var item in Model.Missions)
+@foreach (var item in Model.Missions.Where(m=>m.DeletedAt==null))
     {
     <tr class="border">
     <td>@item.Title</td>
@@ -11,8 +11,9 @@
     <button class="border-0 bg-white EditMissionDetailBtn" id="EditMissionDetailBtn" data-mission-id="@item.MissionId" ><i class="bi bi-pencil-square "></i></button>
 
 
-    <button class="border-0 bg-white"><i class="bi bi-trash  "></i></button>
+    <button class="border-0 bg-white TrashMissionDetail" id="DeleteBtnForMission" data-mission-id="@item.MissionId"><i class="bi bi-trash  "></i></button>
     </td>
     </tr>
     }
   
+

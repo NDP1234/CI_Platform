@@ -4,6 +4,9 @@
 @{
     Layout = null;
 }
+@using CI_Platform.Entities.Models.VM
+
+@model CMSPrivacyPolicy;
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,7 +61,7 @@
                                 <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Dashboard</a></li>
+
                                 <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
                                  <li><a class="dropdown-item" asp-action="VolunteeringTimesheet" asp-controller="Timesheet">Volunteering Timesheet</a></li>
                                 <li><a class="dropdown-item" asp-action="Logout" asp-controller="Authentication">Logout </a></li>
@@ -111,9 +114,11 @@
             <div class="col-md-3">
                 <nav id="navbar-example3" class="navbar navbar-light bg-light flex-column align-items-stretch p-3">
                     <nav class="nav nav-pills flex-column">
-                        <a class="nav-link" href="#intro">Introduction </a>
-                        <a class="nav-link" href="#hduc">How does use cookies?</a>
-                        <a class="nav-link" href="#mcp">How to manage your cookie preferences?</a>
+                        @foreach (var item in Model.CmsList)
+                        {
+                            <a class="nav-link" href="#@item.Slug">@item.Title </a>
+                        }
+                        
                     </nav>
                 </nav>
 
@@ -123,114 +128,16 @@
                 <div class="container overflow-auto forscroll" data-bs-spy="scroll" data-bs-target="#navbar-example3"
                     data-bs-offset="0" tabindex="0">
                     <div class="contentOfPrivacy">
-                        <div class="intro" id="intro">
-                            <h4>Introduction</h4>
-                            <p class="p-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                deserunt mollit anim id est laborum.</p>
-                            <p class="p-text"> Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                                veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-                                voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
-                                dolores eos qui ratione voluptatem sequi nesciunt.</p>
-                            <p class="p-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                deserunt mollit anim id est laborum.</p>
-                        </div>
-                        <div class="hduc" id="hduc">
-                            <h4>How does use cookies?</h4>
-                            <p class="p-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                                doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et
-                                quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-                                voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
-                                ratione voluptatem sequi nesciunt.</p>
-                            <h5>Why Optimy Uses These Technologies? </h5>
-                            <p class="p-text">We use these technologies for a number of purposes, such as:</p>
-                            <div class="p-text">
-                                <ul>
-                                    <li> But I must explain to you how all this mistaken idea of denouncing pleasure and
-                                        praising pain.</li>
-                                    <li>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                                        praesentium voluptatum deleniti atque excepturi sint occaecati cupiditate non
-                                        provident, similique sunt in culpa qui officia deserunt mollitia animi.</li>
-                                    <li>On the other hand, we denounce with righteous indignation and dislike men who
-                                        are so beguiled and demoralized. </li>
-                                    <li>But I must explain to you how all this mistaken idea of denouncing pleasure and
-                                        praising pain.</li>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore.</li>
-                                </ul>
-                            </div>
-                            <p class="p-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                                doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et
-                                quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-                                voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
-                                ratione voluptatem sequi nesciunt.</p>
-                        </div>
-                        <div class="mcp" id="mcp">
-                            <h4>How to manage your cookie preferences?</h4>
-                            <p class="p-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                deserunt mollit anim id est laborum.</p>
-                            <p class="p-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                                doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et
-                                quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-                                voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
-                                ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
-                                dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora
-                                incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
-                                veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid
-                                ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate
-                                velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
-                                voluptas nulla pariatur.</p>
-                            <h5>Why Optimy Uses These Technologies? </h5>
-                            <p class="p-text">We use these technologies for a number of purposes, such as:</p>
-                            <div class="p-text">
-                                <h5>Subtitle goes here</h5>
-                                <ol class="list-group list-group-numbered">
-                                    <li>But I must explain to you how all this mistaken idea of denouncing pleasure and
-                                        praising pain. </li>
-                                    <ol>
-                                        <li> On the other hand, we denounce with righteous indignation and dislike men
-                                            who are so beguiled. </li>
-                                        <li> On the other hand, we denounce with righteous indignation and dislike men
-                                            who are so beguiled.</li>
-                                    </ol>
-                                    <li>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                                        praesentium voluptatum deleniti atque excepturi sint occaecati cupiditate non
-                                        provident, similique sunt in culpa qui officia deserunt mollitia animi. </li>
-                                    <li>On the other hand, we denounce with righteous indignation and dislike men who
-                                        are so beguiled and demoralized</li>
-                                    <li> But I must explain to you how all this mistaken idea of denouncing pleasure and
-                                        praising pain. </li>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore</li>
-                                </ol>
-                                <div class="heading my-3">
-                                    <h1>The first level heading - H1</h1>
-                                    <h2>The second level heading - H2</h2>
-                                    <h3>The third level heading - H3 </h3>
-                                    <h4>The forth level heading - H4 </h4>
-                                    <h5>The fifth level heading - H5 </h5>
-                                    <h6>The sixth level heading - H6</h6>
-                                </div>
-                            </div>
-                            <p class="p-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                deserunt mollit anim id est laborum.</p>
-                        </div>
+                        @foreach (var item in Model.CmsList)
+                        {
+                           <div class="intro" id="@item.Slug">
+                            <h4>@item.Title</h4>
+                            <p class="p-text">@item.Description</p>
+                          
+                        </div>  
+                        }
+                       
+
                     </div>
                 </div>
             </div>

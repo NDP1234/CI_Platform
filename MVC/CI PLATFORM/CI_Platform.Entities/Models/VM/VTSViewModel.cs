@@ -12,7 +12,7 @@ namespace CI_Platform.Entities.Models.VM
         public List<Timesheet> timesheets { get; set; }
         public List<Timesheet> timesheetsGoalBased { get; set; }
 
-        //public long MissionId { get; set; }
+        
         public long TimesheetId { get; set; }
 
         public long? UserId { get; set; }

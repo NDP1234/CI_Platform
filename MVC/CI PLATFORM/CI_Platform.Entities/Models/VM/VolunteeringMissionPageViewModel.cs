@@ -20,7 +20,7 @@ namespace CI_Platform.Entities.Models.VM
         public List<MissionApplication>? MissionApplications { get; set; }
         public List<Mission>? RelatedMissions { get; set; } = new List<Mission>();
       
-        //added at below
+      
         public List<Comment> Comments { get; set; }
         public List<User> Users { get; set; }
         public IEnumerable<User> UserDetail { get; set; }

@@ -99,7 +99,9 @@ namespace CI_PLATFORM.Controllers
             List<User> users = _users.GetUserList();
             var profile = users.FirstOrDefault(m => m.Email == session_details);
             ViewBag.UserDetails = profile;
-            return View();
+            var cmsdetail = new CMSPrivacyPolicy();
+            cmsdetail.CmsList = _db.CmsPages.Where(cms=>cms.DeletedAt==null).ToList();
+            return View(cmsdetail);
         }
         public bool SaveContactUs(string username, string useremail, string subject, string message)
         {

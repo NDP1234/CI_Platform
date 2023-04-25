@@ -9,7 +9,6 @@
                                             <td>
                                                 <a class="btn addUserBtn " asp-action="Story_detail_page" asp-controller="StoryRelated" asp-route-id="@item.StoryId"><span>View</span></a>
                                                 <button class="border-0 bg-white storyApproved" data-story-id="@item.StoryId">
-                                                    @*<i class="bi bi-check-circle icon-green"></i>*@
                                                     @if (item.Status == "PUBLISHED")
                                                     {
                                                         <i class="bi bi-check-circle-fill icon-green"></i>
@@ -20,7 +19,6 @@
                                                     }
                                                 </button>
                                                 <button class="border-0 bg-white storyDeclined" data-story-id="@item.StoryId">
-                                                    @*<i class="bi bi-x-circle icon-red"></i>*@
                                                     @if (item.Status == "DECLINED")
                                                     {
                                                         <i class="bi bi-x-circle-fill icon-red"></i>

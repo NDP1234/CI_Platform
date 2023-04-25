@@ -26,7 +26,11 @@ namespace CI_PLATFORM.Controllers
         [Route("Authentication/login", Name = "UserLogin2")]
         public IActionResult login()
         {
-            return View();
+            var myBanner = new loginViewModel();
+            myBanner.BannerList = _db.Banners.OrderBy(b=>b.SortOrder).Where(b=>b.DeletedAt==null).ToList();
+
+            ViewBag.FirstImage = _db.Banners.OrderBy(b => b.SortOrder).FirstOrDefault(b => b.DeletedAt == null);
+            return View(myBanner);
         }
 
         [HttpPost]
@@ -67,7 +71,11 @@ namespace CI_PLATFORM.Controllers
 
 
             // ModelState is invalid, or user does not exist, return to the login view with errors
-            return View(model);
+            var myBanner = new loginViewModel();
+            myBanner.BannerList = _db.Banners.OrderBy(b => b.SortOrder).Where(b => b.DeletedAt == null).ToList();
+
+            ViewBag.FirstImage = _db.Banners.OrderBy(b => b.SortOrder).FirstOrDefault(b => b.DeletedAt == null);
+            return View(myBanner);
         }
 
 
@@ -76,7 +84,12 @@ namespace CI_PLATFORM.Controllers
         [Route("Authentication/Forgot_Password")]
         public IActionResult Forgot_Password()
         {
-            return View();
+            var myBanner = new ForgotViewModel();
+            myBanner.BannerList = _db.Banners.OrderBy(b => b.SortOrder).Where(b => b.DeletedAt == null).ToList();
+
+            ViewBag.FirstImage = _db.Banners.OrderBy(b => b.SortOrder).FirstOrDefault(b => b.DeletedAt == null);
+            return View(myBanner);
+           
         }
         //------
         [HttpPost]
@@ -150,7 +163,11 @@ namespace CI_PLATFORM.Controllers
                     ModelState.AddModelError("", "User not exist.. please enter correct email address");
                 }
             }
-            return View(model);
+            ForgotViewModel myBanner = new ForgotViewModel();
+             myBanner.BannerList = _db.Banners.OrderBy(b => b.SortOrder).Where(b => b.DeletedAt == null).ToList();
+            myBanner.Email = model.Email;
+            ViewBag.FirstImage = _db.Banners.OrderBy(b => b.SortOrder).FirstOrDefault(b => b.DeletedAt == null);
+            return View(myBanner);
         }
         //----
 
@@ -171,14 +188,21 @@ namespace CI_PLATFORM.Controllers
                 CreatedAt = temail.CreateAt,
 
             };
+            ViewBag.emailDetails = temail.Email;
+
+            var myBanner = new ResetPwdModel();
+            myBanner.BannerList = _db.Banners.OrderBy(b => b.SortOrder).Where(b => b.DeletedAt == null).ToList();
+
+            ViewBag.FirstImage = _db.Banners.OrderBy(b => b.SortOrder).FirstOrDefault(b => b.DeletedAt == null);
             var curTime = DateTime.Now;
+
             if (ExpiredAt.CompareTo(curTime) < 0)
             {
                 return RedirectToAction("Forgot_Password");
             }
             
-            ViewBag.emailDetails = temail.Email;
-            return View();
+           
+            return View(myBanner);
         }
 
 
@@ -205,14 +229,18 @@ namespace CI_PLATFORM.Controllers
                 else
                 {
                     ModelState.AddModelError("Token", "Reset Passwordword Link is Invalid");
-                    return View();
+                    return View(); 
                 }
             }
             else
             {
-                return View();
+                var myBanner = new ResetPwdModel();
+                myBanner.BannerList = _db.Banners.OrderBy(b => b.SortOrder).Where(b => b.DeletedAt == null).ToList();
+
+                ViewBag.FirstImage = _db.Banners.OrderBy(b => b.SortOrder).FirstOrDefault(b => b.DeletedAt == null);
+                return View(myBanner);
             }
-            return View();
+            return RedirectToAction("login");
         }
 
 
@@ -221,7 +249,12 @@ namespace CI_PLATFORM.Controllers
         //Regisration
         public IActionResult Registration()
         {
-            return View();
+            var myBanner = new RegistrationViewModel();
+            myBanner.BannerList = _db.Banners.OrderBy(b => b.SortOrder).Where(b => b.DeletedAt == null).ToList();
+
+            ViewBag.FirstImage = _db.Banners.OrderBy(b => b.SortOrder).FirstOrDefault(b => b.DeletedAt == null);
+            return View(myBanner);
+            
         }
         [HttpPost]
         [Route("Authentication/Registration", Name = "UserRegistration1")]
@@ -251,8 +284,11 @@ namespace CI_PLATFORM.Controllers
                 TempData["SuccessMessage"] = "Registration successful. Please login to continue.";
                 return RedirectToAction("login");
             }
-
-            return View(model);
+            RegistrationViewModel myBanner = new RegistrationViewModel();
+            myBanner.BannerList = _db.Banners.OrderBy(b => b.SortOrder).Where(b => b.DeletedAt == null).ToList();
+            //myBanner.Email = model.Email;
+            ViewBag.FirstImage = _db.Banners.OrderBy(b => b.SortOrder).FirstOrDefault(b => b.DeletedAt == null);
+            return View(myBanner);
         }
 
         public IActionResult Logout()

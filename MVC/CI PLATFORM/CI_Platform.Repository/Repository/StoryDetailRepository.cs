@@ -25,7 +25,6 @@ namespace CI_Platform.Repository.Repository
             User user = _db.Users.Where(u => u.UserId == stories.UserId).First();
             List<User> users = _db.Users.ToList();
 
-            //for increment view on the basis of distinct user
             bool isStoryViewExist = _db.StoryViews.Any(s => s.StoryId == id && s.UserId == userId);
 
             if (!isStoryViewExist)

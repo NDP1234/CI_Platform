@@ -10,14 +10,14 @@
         <td>@item.Title</td>
         @if (@item.Status == 1)
         {
-            <td class="greentext text-center">Active</td>
+            <td class="greentext ">Active</td>
         }
         else
         {
-            <td class="redtext text-center">Inactive</td>
+            <td class="redtext ">Inactive</td>
         }
 
-        <td class="text-center">
+        <td >
             <button class="border-0 bg-white text-dark editCMS" data-cms-id="@item.CmsPageId" onclick="editCmms('@item.Title','@item.Status','@item.CmsPageId','@item.Description', '@item.Slug' )"><i class="bi bi-pencil-square "></i></button>
             <button class="border-0 bg-white " id="DeleteBtnForCmsPage" data-cms-id="@item.CmsPageId"><i class="bi bi-trash "></i></button>
         </td>

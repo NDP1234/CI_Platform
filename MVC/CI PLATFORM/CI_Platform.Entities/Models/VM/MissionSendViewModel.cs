@@ -42,8 +42,8 @@ namespace CI_Platform.Entities.Models.VM
         public string? SkillName { get; set; }
         public string? GoalObjectiveText { get; set; }
         public int GoalValue { get; set; }
-        public List<string> MissionDocuments {get; set;}
-        public List<string> MissionMediums {get; set; }
+        public List<string> MissionDocuments { get; set; }
+        public List<string> MissionMediums { get; set; }
         public List<long> MissionSkills { get; set; }
         public string url { get; set; }
 

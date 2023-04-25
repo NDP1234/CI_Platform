@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CI_Platform.Entities.Models;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace CI_PLATFORM.Models.ViewModels
@@ -13,5 +14,7 @@ namespace CI_PLATFORM.Models.ViewModels
         //[Password(ErrorMessage = "Invalid Password")]
         [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
+
+        public List<Banner> BannerList { get; set; } = new List<Banner>();
     }
 }

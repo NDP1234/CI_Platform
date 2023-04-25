@@ -226,7 +226,7 @@
                                         var citydetails = @Model.cities.FirstOrDefault(c => c.CityId == @ViewBag.UserDetails.CityId);
                                     }
                                     <select class="form-select" id="cityInput" asp-for="CityId" aria-label="Default select example" required>
-                                        @*<option value="-1" >Select your city</option>*@
+                                       
                                         <option value="@citydetails.CityId" id="selectedCity" selected>@citydetails.Name</option>
                                     </select>
                                 </div>
@@ -238,7 +238,7 @@
                                         var countrydetails = @Model.countries.FirstOrDefault(c => c.CountryId == @ViewBag.UserDetails.CountryId);
                                     }
                                     <select class="form-select" id="CountryInput" asp-for="CountryId" aria-label="Default select example" required>
-                                        @*<option value="-1">Select your country</option>*@
+                                        
                                         <option value="@countrydetails.CountryId" selected>@countrydetails.Name</option>
                                         @foreach (var item in Model.countries.Where(c => c.CountryId != @ViewBag.UserDetails.CountryId))
                                         {
@@ -291,7 +291,7 @@
                                 </ul>
                             </div>
                         </div>
-                        @*<button type="button"  class="btn btn-outline-dark rounded-pill p-2" style="width:150px" >Add Skills</button>*@
+                       
                         <button type="button" class="btn btn-outline-dark rounded-pill p-2" data-bs-toggle="modal" style="width:150px" data-bs-target="#skillmodal">
                             Add Skills
                         </button>
@@ -300,7 +300,7 @@
                                 <button class="btn btn-primary SaveOrSubmitBtn float-end mx-2 " value="save" type="submit">Save</button>
                             </div>
                         </div>
-                        @*</form>*@
+                        
 
                     </div>
 
@@ -322,14 +322,17 @@
                             <div class="mb-3">
 
                                 <input type="password" class="form-control " id="oldpwd" asp-for="OldPassword" placeholder="Enter old password" required>
+                              
                             </div>
                             <div class="mb-3">
 
-                                <input type="password" class="form-control " id="newpwd" asp-for="NewPassword" placeholder="Enter new password" required>
+                                <input type="password" minlength="8" class="form-control " id="newpwd" asp-for="NewPassword" placeholder="Enter new password" required>
+                                 
                             </div>
                             <div class="mb-3">
 
-                                <input type="password" class="form-control " id="confirmpwd" asp-for="ConfirmPassword" placeholder="Enter confrim password" required>
+                                <input type="password" minlength="8" class="form-control " id="confirmpwd" asp-for="ConfirmPassword" placeholder="Enter confrim password" required>
+                                 
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -392,7 +395,7 @@
             <a asp-action="PrivacyPolicyPage" asp-controller="UserEditProfile" class="text-decoration-none text-dark"> Privacy Policy</a>
         </div>
         <div class=" mt-3 mb-5 d-inline">
-            @*<a href="#" class="text-decoration-none text-dark ms-5"> Contact Us </a>*@
+           
             <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#ContactUsModal"> Contact Us </button>
         </div>
         <div class="modal fade" id="ContactUsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -453,5 +456,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/UserEditProfile.js" asp-append-version="true"></script>
+    
 </body>
 </html>
