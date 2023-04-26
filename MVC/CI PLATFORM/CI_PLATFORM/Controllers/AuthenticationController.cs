@@ -179,6 +179,11 @@ namespace CI_PLATFORM.Controllers
         {
 
             var temail = _db.PasswordResets.FirstOrDefault(m => m.Token == token);
+
+            if (temail == null)
+            {
+             return  RedirectToAction("login");
+            }
             var CreatedAt = temail.CreateAt;
             var ExpiredAt = CreatedAt.AddMinutes(40);
             var details = new ResetPwdModel()
@@ -219,16 +224,32 @@ namespace CI_PLATFORM.Controllers
             {
                 if (model.NewPassword == model.ConfirmPassword)
                 {
-                    var x = context.Users.FirstOrDefault(e => e.Email == model.email);
-                    x.Password = model.NewPassword;
-                    _db.Users.Update(x);
-                    _db.SaveChanges();
-                    ViewBag.PassChange = "Password Changed Successfully!";
+                    var getUserInfo = context.Users.Where(u => u.Email == model.email).FirstOrDefault();
+                    if (getUserInfo.Password == model.ConfirmPassword)
+                    {
+                        ModelState.AddModelError("NewPassword", "Entered password is your old password so enter another password");
+
+                        var myBanner = new ResetPwdModel();
+                        myBanner.BannerList = _db.Banners.OrderBy(b => b.SortOrder).Where(b => b.DeletedAt == null).ToList();
+
+                        ViewBag.FirstImage = _db.Banners.OrderBy(b => b.SortOrder).FirstOrDefault(b => b.DeletedAt == null);
+                        return View(myBanner);
+                    }
+                    else
+                    {
+                        var x = context.Users.FirstOrDefault(e => e.Email == model.email);
+                        x.Password = model.NewPassword;
+                        _db.Users.Update(x);
+                        _db.SaveChanges();
+                        ViewBag.PassChange = "Password Changed Successfully!";
+                    }
+                    
 
                 }
                 else
                 {
                     ModelState.AddModelError("Token", "Reset Passwordword Link is Invalid");
+
                     return View(); 
                 }
             }

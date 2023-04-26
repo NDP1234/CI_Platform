@@ -28,7 +28,7 @@ namespace CI_Platform.Repository.Repository
 
         public int GetStoryCount()
         {
-            return _db.Stories.Count();
+            return _db.Stories.Where(s=>s.DeletedAt==null&& s.Status== "PUBLISHED").Count();
         }
 
     }

@@ -70,7 +70,9 @@ $(document).on("click", ".missionApplicationDeclined", function () {
 
 
             $('.missionApplicationListing').html(data);
-            alert(" Mission application is successfully Declined");
+            //alert(" Mission application is successfully Declined");
+            toastr.success('Mission application is successfully Declined');
+
 
 
         },
@@ -383,6 +385,19 @@ $('#addCMS').on('click', function () {
         url: "/Admin/_CMSAddPage",
         success: function (data) {
             $('.cmscontent').html(data);
+
+            $.ajax({
+                type: "POST",
+                url: "/Admin/_CMSPage",
+                
+                success: function (data) {
+                    console.log(data);
+
+                    $('.StoryListing').html(data);
+                    alert(" data is successfully deleted");
+
+                },
+            })
         }
     })
 })

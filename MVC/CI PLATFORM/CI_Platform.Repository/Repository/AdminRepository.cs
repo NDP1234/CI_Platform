@@ -190,6 +190,10 @@ namespace CI_Platform.Repository.Repository
             myCMS.Status = Status;
             _db.CmsPages.Add(myCMS);
             _db.SaveChanges();
+
+            myCMS.Status = Status;
+            _db.CmsPages.Update(myCMS);
+            _db.SaveChanges();
             return true;
         }
         public bool forEditCMSDetails(int CMSid, string Title, string Description, string Slug, int Status)

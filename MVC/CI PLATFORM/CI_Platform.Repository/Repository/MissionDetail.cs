@@ -22,9 +22,9 @@ namespace CI_Platform.Repository.Repository
         public VolunteeringMissionPageViewModel GetMissionDetaiil(int id, int userID)
         {
 
-            //var userId = 
+             
             List<Mission> mission = _db.Missions.ToList();
-            List<MissionMedium> image = _db.MissionMedia.ToList();
+            List<MissionMedium> image = _db.MissionMedia.Where(m=>m.MediaType!="url").ToList();
             List<MissionTheme> theme = _db.MissionThemes.ToList();
             List<Country> countries = _db.Countries.ToList();
             List<City> city = _db.Cities.ToList();
@@ -46,7 +46,7 @@ namespace CI_Platform.Repository.Repository
 
             ;
             var relatedMissions = _db.Missions
-                                .Where(m => (m.City.Name == Missionsdetail.Missions.City.Name || m.Theme.Title == Missionsdetail.Missions.Theme.Title) && m.MissionId != id)
+                                .Where(m => (m.City.Name == Missionsdetail.Missions.City.Name || m.Theme.Title == Missionsdetail.Missions.Theme.Title) && m.MissionId != id && m.DeletedAt==null)
                                 .Join(_db.MissionMedia, m => m.MissionId, i => i.MissionId, (m, i) => new { Mission = m, Image = i })
                                 .GroupBy(x => x.Mission.MissionId)
                                 .Select(x => new { Mission = x.First().Mission, Image = x.First().Image })
