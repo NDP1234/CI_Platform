@@ -47,7 +47,8 @@ $(document).on("click", ".missionApplicationApproved", function () {
 
             $('.missionApplicationListing').html(data);
 
-            alert(" Mission application is successfully approved");
+            //alert(" Mission application is successfully approved");
+            toastr.success(' Mission application is successfully approved');
 
 
 
@@ -96,8 +97,8 @@ $(document).on("click", ".storyApproved", function () {
 
             $('.StoryListing').html(data);
 
-            alert(" story is sccessfully published");
-
+            //alert(" story is sccessfully published");
+            toastr.success(' story is sccessfully published');
 
         },
     })
@@ -119,8 +120,8 @@ $(document).on("click", ".storyDeclined", function () {
 
             $('.StoryListing').html(data);
 
-            alert(" story is sccessfully declined ");
-
+            /*   alert(" story is sccessfully declined ");*/
+            toastr.success(' story is sccessfully declined');
 
         },
     })
@@ -165,8 +166,8 @@ $('#addthemeBtn').on('click', function () {
                 console.log(data);
                 $('#closeAddTheme').click();
                 $('.Missionthemelisting').html(data);
-                alert("data is  successfully added");
-
+                //alert("data is  successfully added");
+                toastr.success(' data is  successfully added');
             },
         })
     }
@@ -213,8 +214,8 @@ $(document).on('click', '#EditablethemeBtn', function () {
             console.log(data);
             $('#closeEditTheme').click();
             $('.Missionthemelisting').html(data);
-            alert("Edited data is successfully saved");
-
+            //alert("Edited data is successfully saved");
+            toastr.success(' Edited data is successfully saved');
         },
     })
 
@@ -260,8 +261,8 @@ $('#addSkillBtn').on('click', function () {
                 console.log(data);
                 $('#closeAddSkill').click();
                 $('#missionskillPartialView').html(data);
-                alert("data is  successfully added");
-
+                //alert("data is  successfully added");
+                toastr.success(' data is  successfully added');
             },
         })
     }
@@ -312,92 +313,161 @@ $(document).on('click', '#EditSkillBtn', function () {
             console.log(data);
             $('#closeEditSkill').click();
             $('#missionskillPartialView').html(data);
-            alert("Edited data is successfully saved");
-
+            //alert("Edited data is successfully saved");
+            toastr.success(' Edited data is successfully saved');
         },
     })
 
 })
 
-//for delete skill
+
+////for delete skill
 $(document).on('click', '.deleteMissionSkill', function () {
-    var skillId = $(this).attr('mission-skill-id')
+    var skillId = $(this).attr('mission-skill-id');
 
-    $.ajax({
-        type: "POST",
-        url: "/Admin/deleteMissionSkill",
-        data: {
-            skillId: skillId
-        },
-        success: function (data) {
-            console.log(data);
-            
-            $('#missionskillPartialView').html(data);
-            alert(" data is successfully deleted");
+    // show a toaster confirm before deleting the data
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You would not be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // if the user confirms, delete the data
+            $.ajax({
+                type: "POST",
+                url: "/Admin/deleteMissionSkill",
+                data: {
+                    skillId: skillId
+                },
+                success: function (data) {
+                    console.log(data);
+                    $('#missionskillPartialView').html(data);
+                    Swal.fire(
+                        'Deleted!',
+                        'Your data has been deleted.',
+                        'success'
+                    );
+                },
+            });
+        }
+    });
+});
 
-        },
-    })
-})
 
 //for delete the theme
 $(document).on('click', '.deleteMissionTheme', function () {
     var themeId = $(this).attr('data-missionTheme-id')
 
-    $.ajax({
-        type: "POST",
-        url: "/Admin/deleteMissionTheme",
-        data: {
-            themeId: themeId
-        },
-        success: function (data) {
-            console.log(data);
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You would not be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
 
-            $('.Missionthemelisting').html(data);
-            alert(" data is successfully deleted");
+            $.ajax({
+                type: "POST",
+                url: "/Admin/deleteMissionTheme",
+                data: {
+                    themeId: themeId
+                },
+                success: function (data) {
+                    console.log(data);
 
-        },
-    })
-})
+                    $('.Missionthemelisting').html(data);
+                    //alert(" data is successfully deleted");
+                    Swal.fire(
+                        'Deleted!',
+                        'Your data has been deleted.',
+                        'success'
+                    );
+                },
+            })
+        }
+    });
+});
 
 //for delete the story
 $(document).on('click', '.deleteStory', function () {
     var storyid = $(this).attr('data-story-id')
 
-    $.ajax({
-        type: "POST",
-        url: "/Admin/deleteStory",
-        data: {
-            StoryId: storyid
-        },
-        success: function (data) {
-            console.log(data);
 
-            $('.StoryListing').html(data);
-            alert(" data is successfully deleted");
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You would not be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
 
-        },
-    })
-})
-
-//for getting _CMSAddPage partial view 
-$('#addCMS').on('click', function () {
-    $.ajax({
-        url: "/Admin/_CMSAddPage",
-        success: function (data) {
-            $('.cmscontent').html(data);
 
             $.ajax({
                 type: "POST",
-                url: "/Admin/_CMSPage",
-                
+                url: "/Admin/deleteStory",
+                data: {
+                    StoryId: storyid
+                },
                 success: function (data) {
                     console.log(data);
 
                     $('.StoryListing').html(data);
-                    alert(" data is successfully deleted");
-
+                    //alert(" data is successfully deleted");
+                    Swal.fire(
+                        'Deleted!',
+                        'Your data has been deleted.',
+                        'success'
+                    );
                 },
             })
+        }
+    });
+});
+
+//for getting _CMSAddPage partial view 
+
+$(document).on('click', '#addCMS2', function () {
+    console.log("clicked");
+    $.ajax({
+        url: "/Admin/_CMSAddPage",
+        success: function (data) {
+            $('.cmsdetailcontent').html(data);
+
+        }
+    })
+})
+
+
+$(document).on('click', '.CMSBack', function () {
+    $.ajax({
+        type: "POST",
+        url: "/Admin/_CMSPage",
+        success: function (data) {
+
+            $('.cmsdetailcontent').html(data);
+            $(document).ready(function () {
+                $('#DataTablesId2').DataTable({
+                    info: false,
+                    lengthChange: false,
+                    dom: '<"float-start"f><"#DataTablesId"t>i<"#paginatorId"lp>',
+                    responsive: true,
+                    pageLength: 10,
+                    language: {
+                        searchPlaceholder: "Search Records"
+                    },
+
+                });
+            });
         }
     })
 })
@@ -424,7 +494,7 @@ $(document).on('click', "#CMSAdd", function () {
 
             })
     })()
-    
+
     var Cmstitle = $('#cmstitle').val();
     var description = CKEDITOR.instances.editor1.editable().getText();
     var slug = $('#cmsSlug').val();
@@ -433,7 +503,7 @@ $(document).on('click', "#CMSAdd", function () {
     console.log(description);
     console.log(slug);
     console.log(selectedValue);
-    if (Cmstitle && slug && selectedValue ) {
+    if (Cmstitle && slug && selectedValue) {
         $.ajax({
             type: "POST",
             url: "/Admin/AddCmsDetails",
@@ -444,12 +514,26 @@ $(document).on('click', "#CMSAdd", function () {
                 Status: selectedValue
             },
             success: function (data) {
-                $('.cmsdata').html(data);
-                alert(" data is successfully added");
+                $('.cmsdetailcontent').html(data);
+                //alert(" data is successfully added");
+                toastr.success('data is successfully saved');
+
+                $('#DataTablesId2').DataTable({
+                    info: false,
+                    lengthChange: false,
+                    dom: '<"float-start"f><"#DataTablesId"t>i<"#paginatorId"lp>',
+                    responsive: true,
+                    pageLength: 10,
+                    language: {
+                        searchPlaceholder: "Search Records"
+                    },
+
+                });
+
             }
         })
     }
-  
+
 })
 
 
@@ -495,8 +579,21 @@ function editCmms(Title, Status, CmsPageId, Description, Slug) {
                 Status: editedStatus
             },
             success: function (data) {
+                $('.cmsdetailcontent').html(data);
+                //alert("Edited data is successfully saved");
+                toastr.success(' Edited data is successfully saved');
 
-                alert("Edited data is successfully saved");
+                $('#DataTablesId2').DataTable({
+                    info: false,
+                    lengthChange: false,
+                    dom: '<"float-start"f><"#DataTablesId"t>i<"#paginatorId"lp>',
+                    responsive: true,
+                    pageLength: 10,
+                    language: {
+                        searchPlaceholder: "Search Records"
+                    },
+
+                });
             }
         })
     })
@@ -506,21 +603,51 @@ function editCmms(Title, Status, CmsPageId, Description, Slug) {
 
 //for delete the cms detail
 $(document).on('click', '#DeleteBtnForCmsPage', function () {
+
     var cmspageid = $(this).attr('data-cms-id');
     console.log(cmspageid);
-    $.ajax({
-        type: "POST",
-        url: "/Admin/DeleteCmsDetails",
-        data: {
-            CMSPageId: cmspageid
-        },
-        success: function (data) {
-            $('.cmsdata').html(data);
-            alert(" data is successfully deleted");
-        }
-    })
-})
 
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You would not be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            $.ajax({
+                type: "POST",
+                url: "/Admin/DeleteCmsDetails",
+                data: {
+                    CMSPageId: cmspageid
+                },
+                success: function (data) {
+                    $('.cmsdetailcontent').html(data);
+                    /*alert(" data is successfully deleted");*/
+                    Swal.fire(
+                        'Deleted!',
+                        'Your data has been deleted.',
+                        'success'
+                    );
+                    $('#DataTablesId2').DataTable({
+                        info: false,
+                        lengthChange: false,
+                        dom: '<"float-start"f><"#DataTablesId"t>i<"#paginatorId"lp>',
+                        responsive: true,
+                        pageLength: 10,
+                        language: {
+                            searchPlaceholder: "Search Records"
+                        },
+
+                    });
+                }
+            })
+        }
+    });
+});
 
 //for cascading dropdown
 $('#Country').on('change', function () {
@@ -538,7 +665,7 @@ $('#Country').on('change', function () {
             console.log(data);
             // populate the city dropdown with the returned data
             $('#cityInput').empty();
-
+            $('#City').append($('<option>').val('').text('Select City').prop('disabled', true).prop('selected', true));
             $.each(data, function (i, city) {
                 $('#City').append($('<option>').attr('value', city.cityId).text(city.name));
             });
@@ -640,8 +767,8 @@ $(document).on('click', '#AddUserBtn', function () {
                 console.log(data);
                 $('#addUserCloseBtn').click();
                 $('.userlist').html(data);
-                alert(" data is successfully added");
-
+                //alert(" data is successfully added");
+                toastr.success(' data is successfully saved');
             },
         })
     }
@@ -660,7 +787,32 @@ function OpenEditUserModal(UserId, FirstName, LastName, Email, Password, Employe
     $('#myPwd2').val(Password);
     $('#EmpId2').val(EmployeeId);
     $('#Country2').val(CountryId);
-    $('#City2').val(CityId);
+
+    $.ajax({
+        type: "POST",
+        url: '/Admin/citiesBasedOnCountryForUser',
+        data: {
+            CountryId: CountryId
+        },
+        success: function (cities) {
+            console.log(cities);
+
+            $('#City2').empty();
+
+            $('#City2').append($('<option>').val('').text('Select City').disabled);
+
+            cities.forEach(function (city) {
+                $('#City2').append($('<option>').val(city.id).text(city.name));
+            });
+            //Select the existing city if it exists in the list of cities
+            if (CityId && cities.find(function (city) { return city.id == CityId })) {
+                $('#City2').val(CityId);
+            }
+
+        }
+    });
+
+    //$('#City2').val(CityId);
     $('#pText2').val(ProfileText);
     $('#Department2').val(Department);
     $('#Status2').val(Status);
@@ -723,8 +875,8 @@ $(document).on('click', '#UserSaveChangesBtn', function () {
                 console.log(data);
                 $('#editUserCloseBtn').click();
                 $('.userlist').html(data);
-                alert(" edited data is successfully saved");
-
+                //alert(" edited data is successfully saved");
+                toastr.success(' Edited data is successfully saved');
             },
         })
     }
@@ -734,23 +886,40 @@ $(document).on('click', '#UserSaveChangesBtn', function () {
 
 //for delete the user details
 $(document).on('click', '.deleteUserBtn', function () {
-    var userId = $(this).attr('data-user-id')
+    var userId = $(this).attr('data-user-id');
 
-    $.ajax({
-        type: "POST",
-        url: "/Admin/deleteUser",
-        data: {
-            UserId: userId
-        },
-        success: function (data) {
-            console.log(data);
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You would not be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
 
-            $('.userlist').html(data);
-            alert(" data is successfully deleted");
+            $.ajax({
+                type: "POST",
+                url: "/Admin/deleteUser",
+                data: {
+                    UserId: userId
+                },
+                success: function (data) {
+                    console.log(data);
 
-        },
-    })
-})
+                    $('.userlist').html(data);
+                    //alert(" data is successfully deleted");
+                    Swal.fire(
+                        'Deleted!',
+                        'Your data has been deleted.',
+                        'success'
+                    );
+                },
+            })
+        }
+    });
+});
 
 //for cascading dropdown
 $('#Country2').on('change', function () {
@@ -767,6 +936,8 @@ $('#Country2').on('change', function () {
             console.log(data);
             // populate the city dropdown with the returned data
             $('#cityInput').empty();
+
+            $('#City2').append($('<option>').val('').text('Select City').prop('disabled', true).prop('selected', true));
 
             $.each(data, function (i, city) {
                 $('#City2').append($('<option>').attr('value', city.cityId).text(city.name));
@@ -791,8 +962,8 @@ $('#MissionCountry').on('change', function () {
         data: { countryId: countryId },
         success: function (data) {
             console.log(data);
-            // populate the city dropdown with the returned data
-            /*  $('#cityInput').empty();*/
+
+            $('#MissionCity').append($('<option>').val('').text('Select City').prop('disabled', true).prop('selected', true));
 
             $.each(data, function (i, city) {
                 $('#MissionCity').append($('<option>').attr('value', city.cityId).text(city.name));
@@ -817,8 +988,8 @@ $('#MissionCountry2').on('change', function () {
         data: { countryId: countryId },
         success: function (data) {
             console.log(data);
-            // populate the city dropdown with the returned data
-            /*  $('#cityInput').empty();*/
+
+            $('#MissionCity2').append($('<option>').val('').text('Select City').prop('disabled', true).prop('selected', true));
 
             $.each(data, function (i, city) {
                 $('#MissionCity2').append($('<option>').attr('value', city.cityId).text(city.name));
@@ -925,7 +1096,7 @@ $(document).on('click', '#AddMissionDetailBtn', function () {
     console.log(goaltext)
     console.log(GoalValue)
 
-    if (MissionTitle && ShortDescription && Description && CountryId && CityId && OrganisationName && Missiontype && MisStartDate && MisEndDate && Organizationdetails && MissionTheme && myAvailability  && imgpathlist && docpathlist && selectedMissionSkill) {
+    if (MissionTitle && ShortDescription && Description && CountryId && CityId && OrganisationName && Missiontype && MisStartDate && MisEndDate && Organizationdetails && MissionTheme && myAvailability && imgpathlist && docpathlist && selectedMissionSkill) {
         $.ajax({
             type: "POST",
             url: "/Admin/SaveMission",
@@ -956,7 +1127,8 @@ $(document).on('click', '#AddMissionDetailBtn', function () {
                 console.log(data);
                 $('#addMissionCloseBtn').click();
                 $('.missionList').html(data);
-                alert("  data is successfully saved");
+                //alert("  data is successfully saved");
+                toastr.success(' data is successfully saved');
 
             },
         })
@@ -987,7 +1159,7 @@ $(document).on('click', '.EditMissionDetailBtn', function () {
 
             $('#editMissionDetailModal').modal('show');
 
-            
+
             $('#MyMissionTitle2').val(data.title);
             $('#sDescription2').val(data.shortDescription);
             CKEDITOR.instances.Missioneditoreditable.editable().setText(data.description);
@@ -1004,7 +1176,33 @@ $(document).on('click', '.EditMissionDetailBtn', function () {
             $('#MissionThemedata2').val(data.themeId);
             $('#myAvailability2').val(data.availability);
             $('#MissionCountry2').val(data.countryId);
-            $('#MissionCity2').val(data.cityId);
+
+            //for displaying citylist on the basis of country and select the city on the basis of city exist in db
+            $.ajax({
+                type: "POST",
+                url: '/Admin/citiesBasedOnCountryForUser',
+                data: {
+                    CountryId: data.countryId
+                },
+                success: function (cities) {
+                    console.log(cities);
+
+                    $('#MissionCity2').empty();
+
+                    $('#MissionCity2').append($('<option>').val('').text('Select City').disabled);
+
+                    cities.forEach(function (city) {
+                        $('#MissionCity2').append($('<option>').val(city.id).text(city.name));
+                    });
+                    //Select the existing city if it exists in the list of cities
+                    if (CityId && cities.find(function (city) { return city.id == CityId })) {
+                        $('#MissionCity2').val(CityId);
+                    }
+
+                }
+            });
+
+            //$('#MissionCity2').val(data.cityId);
             $('#VideoUrl2').val(data.url);
             $('.SaveChangesForMission').attr('data-mission-id', data.missionId)
             var imagelist = data.missionMediums;
@@ -1018,13 +1216,14 @@ $(document).on('click', '.EditMissionDetailBtn', function () {
             }
             $(".selectedImageEditable").html(imagesHtml);
 
+
             var dochtml = '';
             for (var j = 0; j < docs.length; j++) {
-                dochtml += '<div class="border selectedDocitem"><a href=' + docs[j] + '>document</a><span class="removeDocIcon" data-index="' + j + '">x</span></div>'
+                dochtml += '<div class="selectedDocitem"><a href=' + docs[j] + '>document</a><span class="removeDocIcon" data-index="' + j + '">x</span></div>';
             }
-            $(".selectedDoceditable").html(dochtml);
+            $(".selectedDoceditable").html('<div class="selectedDoceditable">' + dochtml + '</div>');
 
-           
+
 
             var skillIds = data.missionSkills;
 
@@ -1158,11 +1357,12 @@ $(document).on('click', '.SaveChangesForMission', function () {
             console.log(data);
             $('#editMissionCloseBtn').click();
             $('.missionList').html(data);
-            alert("  data is successfully saved");
+            //alert("  data is successfully saved");
+            toastr.success(' Edited data is successfully saved');
 
         },
     })
-    
+
 
 
 })
@@ -1170,7 +1370,7 @@ $(document).on('click', '.SaveChangesForMission', function () {
 //for delete mission
 $(document).on('click', '#DeleteBtnForMission', function () {
     var MissionId = $(this).attr('data-mission-id');
-   
+
     $.ajax({
         type: "POST",
         url: "/Admin/DeleteMissionDetails",
@@ -1180,6 +1380,7 @@ $(document).on('click', '#DeleteBtnForMission', function () {
         success: function (data) {
             $('.missionList').html(data);
             alert(" data is successfully deleted");
+
         }
     })
 })
@@ -1370,7 +1571,8 @@ $(document).on('click', "#SaveBanner", function () {
             success: function (data) {
                 $('#forAddBannerClose').click();
                 $('.Bannerdata').html(data);
-                alert(" data is successfully added");
+                //alert(" data is successfully added");
+                toastr.success('data is successfully saved');
             }
         })
     }
@@ -1435,7 +1637,8 @@ $(document).on('click', "#SaveChangedBanner", function () {
         success: function (data) {
             $('#forEditBannerClose').click();
             $('.Bannerdata').html(data);
-            alert(" data is successfully added");
+            //alert(" data is successfully added");
+            toastr.success('Edited data is successfully saved');
         }
     })
 
@@ -1443,21 +1646,40 @@ $(document).on('click', "#SaveChangedBanner", function () {
 })
 
 //for delete the banner detail
-$(document).on('click', '#trashBanner', function () {
-    var bannerId = $('#trashBanner').attr('data-banner-id');
+$(document).on('click', '.trashBanner', function () {
+    var bannerId = $(this).attr('data-banner-id');
     console.log(bannerId);
-    $.ajax({
-        type: "POST",
-        url: "/Admin/DeleteBannerDetails",
-        data: {
-            BannerId: bannerId
-        },
-        success: function (data) {
-            $('.Bannerdata').html(data);
-            alert(" data is successfully deleted");
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You would not be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            $.ajax({
+                type: "POST",
+                url: "/Admin/DeleteBannerDetails",
+                data: {
+                    BannerId: bannerId
+                },
+                success: function (data) {
+                    $('.Bannerdata').html(data);
+                    //alert(" data is successfully deleted");
+                    Swal.fire(
+                        'Deleted!',
+                        'Your data has been deleted.',
+                        'success'
+                    );
+                }
+            })
         }
-    })
-})
+    });
+});
 
 
 

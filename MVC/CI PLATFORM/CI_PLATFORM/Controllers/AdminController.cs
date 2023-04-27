@@ -37,7 +37,7 @@ namespace CI_PLATFORM.Controllers
 
                 return RedirectToAction("logout", "Authentication");
             }
-            
+
             var viewmodel = new AdminViewModel();
             viewmodel.users = _adminPrepository.getUserList();
             viewmodel.Missions = _adminPrepository.getMissionList();
@@ -56,6 +56,10 @@ namespace CI_PLATFORM.Controllers
         {
             return PartialView("_CMSAddPage");
         }
+        //public IActionResult _CMSAddPage2()
+        //{
+        //    return PartialView("_CMSAddPage");
+        //}
         public IActionResult _BannerManagementPartial()
         {
             return PartialView("_BannerManagementPartial");
@@ -66,7 +70,19 @@ namespace CI_PLATFORM.Controllers
         }
         public IActionResult _CMSPage()
         {
-            return PartialView("_CMSPage");
+            var viewmodel = new AdminViewModel();
+            viewmodel.users = _adminPrepository.getUserList();
+            viewmodel.Missions = _adminPrepository.getMissionList();
+            viewmodel.MissionApplications = _adminPrepository.getMissionApplicationList();
+            viewmodel.Stories = _adminPrepository.getStoryDetailList();
+            viewmodel.missionSkills = _adminPrepository.getMissionSkillList();
+            viewmodel.MissionThemes = _adminPrepository.getMissionThemeList();
+            viewmodel.cmsPages = _adminPrepository.getCMSPageList();
+            viewmodel.countries = _adminPrepository.getCountryList();
+            viewmodel.cities = _adminPrepository.getCityList();
+            viewmodel.BannerList = _adminPrepository.getBannerList();
+            return PartialView("_CMSPage", viewmodel);
+
         }
         public IActionResult _MissionSkill()
         {
@@ -525,5 +541,10 @@ namespace CI_PLATFORM.Controllers
             return Content("/BannerImage/" + fileName);
         }
 
+        public IActionResult citiesBasedOnCountryForUser(int CountryId)
+        {
+            var cities = _db.Cities.Where(c => c.CountryId == CountryId).Select(c => new { cityId = c.CityId, name = c.Name }).ToList();
+            return Json(cities);
+        }
     }
 }

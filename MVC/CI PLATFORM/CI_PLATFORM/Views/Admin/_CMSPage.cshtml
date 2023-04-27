@@ -3,23 +3,55 @@
 *@
 @using CI_Platform.Entities.Models.VM
 @model AdminViewModel;
+<span class="mb-0 border-bottom border-dark fs-3">CMS Page</span>
+<hr class="w-100 mtop">
+<div class="cmscontent">
+    <div class="d-flex w-100 my-4">
+        <!-- searchbar -->
 
-@foreach (var item in Model.cmsPages.Where(c=>c.DeletedAt==null))
-{
-    <tr class="border ">
-        <td>@item.Title</td>
-        @if (@item.Status == 1)
-        {
-            <td class="greentext ">Active</td>
-        }
-        else
-        {
-            <td class="redtext ">Inactive</td>
-        }
+        <div class="ms-auto me-5 mt-4">
+            <button type="button" class="btn addUserBtn addCMS2" id="addCMS2"><span>Add</span><i class="bi bi-plus"></i></button>
+        </div>
+    </div>
 
-        <td >
-            <button class="border-0 bg-white text-dark editCMS" data-cms-id="@item.CmsPageId" onclick="editCmms('@item.Title','@item.Status','@item.CmsPageId','@item.Description', '@item.Slug' )"><i class="bi bi-pencil-square "></i></button>
-            <button class="border-0 bg-white " id="DeleteBtnForCmsPage" data-cms-id="@item.CmsPageId"><i class="bi bi-trash "></i></button>
-        </td>
-    </tr>
-}
+    <!-- CMS table -->
+    <div class="table-responsive">
+        <table class="table table-borderless DataTablesId" id="DataTablesId2" style="width:100%">
+            <thead class="text-center">
+                <tr class="bg-light">
+                    <th scope="col">Title</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+
+                </tr>
+            </thead>
+            <tbody class="cmsdata">
+                @foreach (var item in Model.cmsPages.Where(c => c.DeletedAt == null))
+                {
+                    <tr class="border ">
+                        <td>@item.Title</td>
+                        @if (@item.Status == 1)
+                        {
+                            <td class="greentext ">Active</td>
+                        }
+                        else
+                        {
+                            <td class="redtext ">Inactive</td>
+                        }
+
+                        <td>
+                            <button class="border-0 bg-white text-dark editCMS" data-cms-id="@item.CmsPageId" onclick="editCmms('@item.Title','@item.Status','@item.CmsPageId','@item.Description', '@item.Slug' )"><i class="bi bi-pencil-square "></i></button>
+                            <button class="border-0 bg-white " id="DeleteBtnForCmsPage" data-cms-id="@item.CmsPageId"><i class="bi bi-trash "></i></button>
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+    <!-- CMS table -->
+</div>
+
+
+

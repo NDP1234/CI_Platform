@@ -26,6 +26,13 @@ namespace CI_PLATFORM.Controllers
         [Route("Authentication/login", Name = "UserLogin2")]
         public IActionResult login()
         {
+            var sessiondetail = HttpContext.Session.GetString("Login");
+            if(sessiondetail!= null)
+            {
+                return RedirectToAction("Platform_Landing_Page", "Content");
+            }
+           
+           
             var myBanner = new loginViewModel();
             myBanner.BannerList = _db.Banners.OrderBy(b=>b.SortOrder).Where(b=>b.DeletedAt==null).ToList();
 
@@ -58,6 +65,7 @@ namespace CI_PLATFORM.Controllers
                     }
                     else
                     {
+                        
                         return RedirectToAction("Platform_Landing_Page", "Content");
                     }
 
@@ -218,13 +226,14 @@ namespace CI_PLATFORM.Controllers
         {
             CiPlatformContext context = new CiPlatformContext();
 
-            var ResetPasswordData = context.PasswordResets.Any(e => e.Email == model.email && e.Token == model.Token);
+            var ResetPasswordData = context.PasswordResets.Where(e => e.Email == model.email &&  e.Token == model.Token).FirstOrDefault();
 
             if (ModelState.IsValid)
             {
                 if (model.NewPassword == model.ConfirmPassword)
                 {
-                    var getUserInfo = context.Users.Where(u => u.Email == model.email).FirstOrDefault();
+                    //var getUserInfo = context.Users.Where(u => u.Email == model.email).FirstOrDefault();
+                    var getUserInfo = context.Users.Where(u => u.Email == ResetPasswordData.Email).FirstOrDefault();
                     if (getUserInfo.Password == model.ConfirmPassword)
                     {
                         ModelState.AddModelError("NewPassword", "Entered password is your old password so enter another password");
@@ -241,9 +250,10 @@ namespace CI_PLATFORM.Controllers
                         x.Password = model.NewPassword;
                         _db.Users.Update(x);
                         _db.SaveChanges();
-                        ViewBag.PassChange = "Password Changed Successfully!";
+                        //ViewBag.PassChange = "Password Changed Successfully!";
+                        return RedirectToAction("login");
                     }
-                    
+
 
                 }
                 else
@@ -261,7 +271,7 @@ namespace CI_PLATFORM.Controllers
                 ViewBag.FirstImage = _db.Banners.OrderBy(b => b.SortOrder).FirstOrDefault(b => b.DeletedAt == null);
                 return View(myBanner);
             }
-            return RedirectToAction("login");
+            //return RedirectToAction("login");
         }
 
 
@@ -282,28 +292,40 @@ namespace CI_PLATFORM.Controllers
         public IActionResult Registration(RegistrationViewModel model)
         {
 
-
-
-
+          
             if (ModelState.IsValid)
             {
-
-                var user = new CI_Platform.Entities.Models.User
+               
+                var isExistEmail = _db.Users.Where(u => u.Email == model.Email).Any();
+                if (!isExistEmail)
                 {
+                    var user = new CI_Platform.Entities.Models.User
+                    {
 
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    Email = model.Email,
-                    PhoneNumber = model.PhoneNumber,
-                    Password = model.Password,
-                    CityId = 1,
-                    CountryId = 1
-                };
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        Email = model.Email,
+                        PhoneNumber = model.PhoneNumber,
+                        Password = model.Password,
+                        CityId = 1,
+                        CountryId = 1
+                    };
 
-                _db.Users.Add(user);
-                _db.SaveChanges();
-                TempData["SuccessMessage"] = "Registration successful. Please login to continue.";
-                return RedirectToAction("login");
+                    _db.Users.Add(user);
+                    _db.SaveChanges();
+                    TempData["SuccessMessage"] = "Registration successful. Please login to continue.";
+                    return RedirectToAction("login");
+                }
+                else
+                {
+                    var mybannerError = new RegistrationViewModel();
+                    ModelState.AddModelError("Email", "Email already exist");
+                    mybannerError.BannerList = _db.Banners.OrderBy(b => b.SortOrder).Where(b => b.DeletedAt == null).ToList();
+
+                    ViewBag.FirstImage = _db.Banners.OrderBy(b => b.SortOrder).FirstOrDefault(b => b.DeletedAt == null);
+                    return View(mybannerError);
+                }
+                
             }
             RegistrationViewModel myBanner = new RegistrationViewModel();
             myBanner.BannerList = _db.Banners.OrderBy(b => b.SortOrder).Where(b => b.DeletedAt == null).ToList();
@@ -319,3 +341,4 @@ namespace CI_PLATFORM.Controllers
         }
     }
 }
+

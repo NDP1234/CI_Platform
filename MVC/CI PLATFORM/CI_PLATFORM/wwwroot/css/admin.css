@@ -1,14 +1,57 @@
-﻿
+﻿.selectedDoceditable {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.selectedDocitem {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    background-color: #f5f5f5;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+    .selectedDocitem a {
+        color: #333;
+        text-decoration: none;
+        margin-right: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+.removeDocIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    color: #666;
+    background-color: #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+    .removeDocIcon:hover {
+        background-color: #ccc;
+        color: #333;
+    }
+
 
 .selectedDoc {
     margin-top: 10px;
 }
 
-.selectedDocItem {
+/*.selectedDocItem {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-}
+}*/
 
 .docName {
     flex-grow: 1;

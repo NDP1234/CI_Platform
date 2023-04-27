@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "uozKlHsircVPM2HJ8hLuxG64ZOw0gJ81/4PqjvwfOtc=",
+  "Hash": "91ryPvCLznsnJ23+KsmKx5G33Eaj1NLjPffbHA+Lx0Q=",
   "Source": "CI_PLATFORM",
   "BasePath": "_content/CI_PLATFORM",
   "Mode": "Default",
@@ -117,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\BannerImage\\dan-stark-hEceQrBaIiE-unsplash.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\BannerImage\\education-day-arrangement-table-with-copy-space.jpg",
+      "SourceId": "CI_PLATFORM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\",
+      "BasePath": "_content/CI_PLATFORM",
+      "RelativePath": "BannerImage/education-day-arrangement-table-with-copy-space.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\BannerImage\\education-day-arrangement-table-with-copy-space.jpg"
     },
     {
       "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\BannerImage\\Education-Supplies-for-Every--Pair-of-Shoes-Sold-1.png",
@@ -236,6 +253,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\BannerImage\\jimmy-chang-NP8gd2KUnfw-unsplash.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\BannerImage\\pexels-olia-danilevich-5088180.jpg",
+      "SourceId": "CI_PLATFORM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\",
+      "BasePath": "_content/CI_PLATFORM",
+      "RelativePath": "BannerImage/pexels-olia-danilevich-5088180.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\BannerImage\\pexels-olia-danilevich-5088180.jpg"
     },
     {
       "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\BannerImage\\Plantation-and-Afforestation-programme-1.png",
@@ -5185,6 +5219,23 @@
       "OriginalItemSpec": "wwwroot\\profileImg\\Education-Supplies-for-Every--Pair-of-Shoes-Sold-2.png"
     },
     {
+      "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\profileImg\\graph.png",
+      "SourceId": "CI_PLATFORM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\",
+      "BasePath": "_content/CI_PLATFORM",
+      "RelativePath": "profileImg/graph.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\profileImg\\graph.png"
+    },
+    {
       "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\profileImg\\Grow-Trees-On-the-path-to-environment-sustainability-1.png",
       "SourceId": "CI_PLATFORM",
       "SourceType": "Discovered",
@@ -5236,6 +5287,40 @@
       "OriginalItemSpec": "wwwroot\\profileImg\\Grow-Trees-On-the-path-to-environment-sustainability-login.png"
     },
     {
+      "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\profileImg\\heart1.png",
+      "SourceId": "CI_PLATFORM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\",
+      "BasePath": "_content/CI_PLATFORM",
+      "RelativePath": "profileImg/heart1.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\profileImg\\heart1.png"
+    },
+    {
+      "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\profileImg\\img1.png",
+      "SourceId": "CI_PLATFORM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\",
+      "BasePath": "_content/CI_PLATFORM",
+      "RelativePath": "profileImg/img1.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\profileImg\\img1.png"
+    },
+    {
       "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\profileImg\\img2.png",
       "SourceId": "CI_PLATFORM",
       "SourceType": "Discovered",
@@ -5251,6 +5336,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\profileImg\\img2.png"
+    },
+    {
+      "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\profileImg\\Nourish-the-Children-in--African-country.png",
+      "SourceId": "CI_PLATFORM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\",
+      "BasePath": "_content/CI_PLATFORM",
+      "RelativePath": "profileImg/Nourish-the-Children-in--African-country.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\profileImg\\Nourish-the-Children-in--African-country.png"
     },
     {
       "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\profileImg\\user-img.png",
@@ -5370,6 +5472,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\profileImg\\volunteer7.png"
+    },
+    {
+      "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\profileImg\\volunteer8.png",
+      "SourceId": "CI_PLATFORM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\",
+      "BasePath": "_content/CI_PLATFORM",
+      "RelativePath": "profileImg/volunteer8.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\profileImg\\volunteer8.png"
     }
   ]
 }
