@@ -2,12 +2,7 @@
 using CI_Platform.Entities.Models;
 using CI_Platform.Entities.Models.VM;
 using CI_Platform.Repository.Interface;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace CI_Platform.Repository.Repository
 {
@@ -22,9 +17,9 @@ namespace CI_Platform.Repository.Repository
         public VolunteeringMissionPageViewModel GetMissionDetaiil(int id, int userID)
         {
 
-             
+
             List<Mission> mission = _db.Missions.ToList();
-            List<MissionMedium> image = _db.MissionMedia.Where(m=>m.MediaType!="url").ToList();
+            List<MissionMedium> image = _db.MissionMedia.Where(m => m.MediaType != "url").ToList();
             List<MissionTheme> theme = _db.MissionThemes.ToList();
             List<Country> countries = _db.Countries.ToList();
             List<City> city = _db.Cities.ToList();
@@ -44,16 +39,22 @@ namespace CI_Platform.Repository.Repository
 
                                   select new VolunteeringMissionPageViewModel { image = i, Missions = m, Country = countries, themes = theme, skills = skills, UserDetail = users, isValid = _db.FavouriteMissions.Any(f => f.UserId == userID && f.MissionId == m.MissionId), MissionDocuments = missionDocuments, MissionApplications = missionApplications }).First();
 
-            ;
-            var relatedMissions = _db.Missions
-                                .Where(m => (m.City.Name == Missionsdetail.Missions.City.Name || m.Theme.Title == Missionsdetail.Missions.Theme.Title) && m.MissionId != id && m.DeletedAt==null)
-                                .Join(_db.MissionMedia, m => m.MissionId, i => i.MissionId, (m, i) => new { Mission = m, Image = i })
-                                .GroupBy(x => x.Mission.MissionId)
-                                .Select(x => new { Mission = x.First().Mission, Image = x.First().Image })
-                                .ToList();
+
+            //var relatedMissions = _db.Missions
+            //                    .Where(m => (m.City.Name == Missionsdetail.Missions.City.Name || m.Theme.Title == Missionsdetail.Missions.Theme.Title) && m.MissionId != id && m.DeletedAt == null)
+            //                    .Join(_db.MissionMedia, m => m.MissionId, i => i.MissionId, (m, i) => new { Mission = m, Image = i })
+            //                    .GroupBy(x => x.Mission.MissionId)
+            //                        .Select(x => new { Mission = x.First().Mission, Image = x.FirstOrDefault().Image })
+            //                    //.Select(x => new { Mission = x.First().Mission, Image = x.OrderBy(i => i.Image.CreatedAt).FirstOrDefault().Image })
+
+            //                    .ToList();
+
+            var relatedMissions = _db.Missions.Include(m => m.MissionMedia).Where(m => (m.City.Name == Missionsdetail.Missions.City.Name || m.Theme.Title == Missionsdetail.Missions.Theme.Title) && (m.MissionId != id && m.DeletedAt == null)).Take(3).ToList();
 
 
-            Missionsdetail.RelatedMissions = relatedMissions.Select(x => x.Mission).ToList();
+
+
+            Missionsdetail.RelatedMissions = relatedMissions;
             return Missionsdetail;
 
         }

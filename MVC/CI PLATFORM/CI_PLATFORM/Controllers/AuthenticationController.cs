@@ -23,6 +23,7 @@ namespace CI_PLATFORM.Controllers
 
 
         //login
+
         [Route("Authentication/login", Name = "UserLogin2")]
         public IActionResult login()
         {

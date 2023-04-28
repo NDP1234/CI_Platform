@@ -46,7 +46,7 @@ $(document).on("click", ".missionApplicationApproved", function () {
 
 
             $('.missionApplicationListing').html(data);
-
+            forMissionApplicationPagenation();
             //alert(" Mission application is successfully approved");
             toastr.success(' Mission application is successfully approved');
 
@@ -71,6 +71,7 @@ $(document).on("click", ".missionApplicationDeclined", function () {
 
 
             $('.missionApplicationListing').html(data);
+            forMissionApplicationPagenation();
             //alert(" Mission application is successfully Declined");
             toastr.success('Mission application is successfully Declined');
 
@@ -96,7 +97,7 @@ $(document).on("click", ".storyApproved", function () {
 
 
             $('.StoryListing').html(data);
-
+            forStoryPagenation();
             //alert(" story is sccessfully published");
             toastr.success(' story is sccessfully published');
 
@@ -119,7 +120,7 @@ $(document).on("click", ".storyDeclined", function () {
 
 
             $('.StoryListing').html(data);
-
+            forStoryPagenation();
             /*   alert(" story is sccessfully declined ");*/
             toastr.success(' story is sccessfully declined');
 
@@ -165,9 +166,20 @@ $('#addthemeBtn').on('click', function () {
             success: function (data) {
                 console.log(data);
                 $('#closeAddTheme').click();
+                $('.DataTablesId').DataTable().destroy();
                 $('.Missionthemelisting').html(data);
+
+                //LoadDataTable();
                 //alert("data is  successfully added");
                 toastr.success(' data is  successfully added');
+                $('#MissionThemeTitle').val(''); // Clear enteredThemeName input field
+                $("#myStatusOfTheme").prop('selectedIndex', 0); // Reset the status dropdown to the first option
+                $('.needs-validation.addthemevalidation').removeClass('was-validated'); // Remove the validation message
+
+                forMissionThemePagenation();
+              
+
+
             },
         })
     }
@@ -216,6 +228,8 @@ $(document).on('click', '#EditablethemeBtn', function () {
             $('.Missionthemelisting').html(data);
             //alert("Edited data is successfully saved");
             toastr.success(' Edited data is successfully saved');
+
+            forMissionThemePagenation();
         },
     })
 
@@ -262,7 +276,16 @@ $('#addSkillBtn').on('click', function () {
                 $('#closeAddSkill').click();
                 $('#missionskillPartialView').html(data);
                 //alert("data is  successfully added");
+             
                 toastr.success(' data is  successfully added');
+                $('#MissionSkillTitle').val(''); // Clear enteredThemeName input field
+                $("#myStatus").prop('selectedIndex', 0); // Reset the status dropdown to the first option
+                $('.needs-validation.addskillvalidation').removeClass('was-validated'); // Remove the validation message
+
+                forMissionSkillPagenation();
+               
+
+
             },
         })
     }
@@ -315,6 +338,7 @@ $(document).on('click', '#EditSkillBtn', function () {
             $('#missionskillPartialView').html(data);
             //alert("Edited data is successfully saved");
             toastr.success(' Edited data is successfully saved');
+            forMissionSkillPagenation();
         },
     })
 
@@ -346,6 +370,7 @@ $(document).on('click', '.deleteMissionSkill', function () {
                 success: function (data) {
                     console.log(data);
                     $('#missionskillPartialView').html(data);
+                    forMissionSkillPagenation();
                     Swal.fire(
                         'Deleted!',
                         'Your data has been deleted.',
@@ -383,6 +408,7 @@ $(document).on('click', '.deleteMissionTheme', function () {
                     console.log(data);
 
                     $('.Missionthemelisting').html(data);
+                    forMissionThemePagenation();
                     //alert(" data is successfully deleted");
                     Swal.fire(
                         'Deleted!',
@@ -423,6 +449,7 @@ $(document).on('click', '.deleteStory', function () {
 
                     $('.StoryListing').html(data);
                     //alert(" data is successfully deleted");
+                    forStoryPagenation();
                     Swal.fire(
                         'Deleted!',
                         'Your data has been deleted.',
@@ -442,7 +469,7 @@ $(document).on('click', '#addCMS2', function () {
         url: "/Admin/_CMSAddPage",
         success: function (data) {
             $('.cmsdetailcontent').html(data);
-
+            
         }
     })
 })
@@ -455,19 +482,7 @@ $(document).on('click', '.CMSBack', function () {
         success: function (data) {
 
             $('.cmsdetailcontent').html(data);
-            $(document).ready(function () {
-                $('#DataTablesId2').DataTable({
-                    info: false,
-                    lengthChange: false,
-                    dom: '<"float-start"f><"#DataTablesId"t>i<"#paginatorId"lp>',
-                    responsive: true,
-                    pageLength: 10,
-                    language: {
-                        searchPlaceholder: "Search Records"
-                    },
-
-                });
-            });
+            forCmsPagenation();
         }
     })
 })
@@ -518,17 +533,7 @@ $(document).on('click', "#CMSAdd", function () {
                 //alert(" data is successfully added");
                 toastr.success('data is successfully saved');
 
-                $('#DataTablesId2').DataTable({
-                    info: false,
-                    lengthChange: false,
-                    dom: '<"float-start"f><"#DataTablesId"t>i<"#paginatorId"lp>',
-                    responsive: true,
-                    pageLength: 10,
-                    language: {
-                        searchPlaceholder: "Search Records"
-                    },
-
-                });
+                forCmsPagenation();
 
             }
         })
@@ -557,6 +562,27 @@ function editCmms(Title, Status, CmsPageId, Description, Slug) {
     })
     $(document).on('click', '#EditBtnForCmsPage', function () {
 
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation.editcmsvalidation')
+            console.log(forms);
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+
+                })
+        })()
+
+
         var editedTitle = $('#cmstitle2').val();
 
         var editedDescription = CKEDITOR.instances.CMSeditor2.editable().getText();
@@ -568,34 +594,32 @@ function editCmms(Title, Status, CmsPageId, Description, Slug) {
         console.log(editedSlug)
         console.log(editedStatus)
         console.log(cmsid)
-        $.ajax({
-            type: "POST",
-            url: "/Admin/EditCmsDetails",
-            data: {
-                CMSPageId: cmsid,
-                Title: editedTitle,
-                Description: editedDescription,
-                Slug: editedSlug,
-                Status: editedStatus
-            },
-            success: function (data) {
-                $('.cmsdetailcontent').html(data);
-                //alert("Edited data is successfully saved");
-                toastr.success(' Edited data is successfully saved');
 
-                $('#DataTablesId2').DataTable({
-                    info: false,
-                    lengthChange: false,
-                    dom: '<"float-start"f><"#DataTablesId"t>i<"#paginatorId"lp>',
-                    responsive: true,
-                    pageLength: 10,
-                    language: {
-                        searchPlaceholder: "Search Records"
-                    },
+        if (editedTitle && editedDescription!='' && editedSlug && editedStatus && cmsid) {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/EditCmsDetails",
+                data: {
+                    CMSPageId: cmsid,
+                    Title: editedTitle,
+                    Description: editedDescription,
+                    Slug: editedSlug,
+                    Status: editedStatus
+                },
+                success: function (data) {
+                   
+                    $('.cmsdetailcontent').html(data);
+                    
+                    toastr.options.preventDuplicates = true;
+                    toastr.success(' Edited data is successfully saved');
+                    //alert("Edited data is successfully saved");
+                    
+                    forCmsPagenation();
 
-                });
-            }
-        })
+                }
+            })
+        }
+        
     })
 
 
@@ -632,17 +656,7 @@ $(document).on('click', '#DeleteBtnForCmsPage', function () {
                         'Your data has been deleted.',
                         'success'
                     );
-                    $('#DataTablesId2').DataTable({
-                        info: false,
-                        lengthChange: false,
-                        dom: '<"float-start"f><"#DataTablesId"t>i<"#paginatorId"lp>',
-                        responsive: true,
-                        pageLength: 10,
-                        language: {
-                            searchPlaceholder: "Search Records"
-                        },
-
-                    });
+                    forCmsPagenation();
                 }
             })
         }
@@ -740,6 +754,18 @@ $(document).on('click', '#AddUserBtn', function () {
     console.log(phone);
     console.log(profilepic);
 
+    if (!/^\d{10}$/.test(phone)) {
+        // Display error message
+        $('#phonenumber2').addClass('is-invalid');
+        $('#phonenumber2').siblings('.invalid-feedback').text('Please enter a valid 10 digit phone number.');
+        return; // Stop further execution
+    } else {
+        // Remove any existing error messages
+        $('#phonenumber2').removeClass('is-invalid');
+        $('#phonenumber2').siblings('.invalid-feedback').text('');
+    }
+
+
     if (pwd.length < 8) {
         $('#pwdValid').removeClass('d-none');
     }
@@ -767,8 +793,23 @@ $(document).on('click', '#AddUserBtn', function () {
                 console.log(data);
                 $('#addUserCloseBtn').click();
                 $('.userlist').html(data);
+                forUserPagenation();
                 //alert(" data is successfully added");
                 toastr.success(' data is successfully saved');
+                $('#myFirstName').val('');
+                $('#myLastName').val('');
+                $('#myemail').val('');
+                $('#myPwd').val('');
+                $('#EmpId').val('');
+                $('#Country').prop('selectedIndex', 0);
+                $('#City').prop('selectedIndex', 0);
+                $('#pText').val('');
+                $('#Department').val('');
+                $('#Status').val('');
+                $('#phonenumber').val('');
+                $('#userProfile').attr('src', '/profileImg/NicePng_watsapp-icon-png_9332131.png');
+                $('.needs-validation.adduservalidation').removeClass('was-validated'); // Remove the validation message
+                $('#pwdValid').removeClass('d-block');
             },
         })
     }
@@ -802,7 +843,7 @@ function OpenEditUserModal(UserId, FirstName, LastName, Email, Password, Employe
             $('#City2').append($('<option>').val('').text('Select City').disabled);
 
             cities.forEach(function (city) {
-                $('#City2').append($('<option>').val(city.id).text(city.name));
+                $('#City2').append($('<option>').val(city.cityId).text(city.name));
             });
             //Select the existing city if it exists in the list of cities
             if (CityId && cities.find(function (city) { return city.id == CityId })) {
@@ -838,6 +879,18 @@ $(document).on('click', '#UserSaveChangesBtn', function () {
     var Status = $(`#Status2`).val();
     var PhoneNumber = $(`#phonenumber2`).val();
     var Avatar = $(`#userProfile2`).attr('src');
+
+    if (!/^\d{10}$/.test(PhoneNumber)) {
+        // Display error message
+        $('#phonenumber2').addClass('is-invalid');
+        $('#phonenumber2').siblings('.invalid-feedback').text('Please enter a valid 10 digit phone number.');
+        return; // Stop further execution
+    } else {
+        // Remove any existing error messages
+        $('#phonenumber2').removeClass('is-invalid');
+        $('#phonenumber2').siblings('.invalid-feedback').text('');
+    }
+
 
     console.log(userId);
     console.log(FirstName);
@@ -875,6 +928,7 @@ $(document).on('click', '#UserSaveChangesBtn', function () {
                 console.log(data);
                 $('#editUserCloseBtn').click();
                 $('.userlist').html(data);
+                forUserPagenation();
                 //alert(" edited data is successfully saved");
                 toastr.success(' Edited data is successfully saved');
             },
@@ -909,6 +963,7 @@ $(document).on('click', '.deleteUserBtn', function () {
                     console.log(data);
 
                     $('.userlist').html(data);
+                    forUserPagenation();
                     //alert(" data is successfully deleted");
                     Swal.fire(
                         'Deleted!',
@@ -1096,6 +1151,28 @@ $(document).on('click', '#AddMissionDetailBtn', function () {
     console.log(goaltext)
     console.log(GoalValue)
 
+    var startDate = new Date($('#MisStartDate').val());
+    var endDate = new Date($('#MisEndDate').val());
+
+    // Compare the dates
+    if (startDate >= endDate) {
+        // Show error message and add "is-invalid" class to date fields
+        $('#MisStartDate, #MisEndDate').addClass('is-invalid').siblings('.invalid-feedback').text('Please select valid start and end date');
+       
+        // Disable submit button
+        $('#submitBtn').prop('disabled', true);
+
+        // Prevent form submission
+        e.preventDefault();
+    } else {
+        // Hide error message and remove "is-invalid" class from date fields
+        $('#MisStartDate, #MisEndDate').removeClass('is-invalid').siblings('.invalid-feedback').text('');
+
+        // Enable submit button
+        $('#submitBtn').prop('disabled', false);
+    }
+
+
     if (MissionTitle && ShortDescription && Description && CountryId && CityId && OrganisationName && Missiontype && MisStartDate && MisEndDate && Organizationdetails && MissionTheme && myAvailability && imgpathlist && docpathlist && selectedMissionSkill) {
         $.ajax({
             type: "POST",
@@ -1127,8 +1204,35 @@ $(document).on('click', '#AddMissionDetailBtn', function () {
                 console.log(data);
                 $('#addMissionCloseBtn').click();
                 $('.missionList').html(data);
+                forMissionPagenation();
                 //alert("  data is successfully saved");
                 toastr.success(' data is successfully saved');
+
+               $('#MyMissionTitle').val('');
+                $('#sDescription').val('');
+                CKEDITOR.instances.Missioneditor.editable().setText('');
+                $('#MissionCountry').prop('selectedIndex', 0);
+                $('#MissionCity').prop('selectedIndex', 0);
+                $('#OrganisationName').val('');
+                $('#MissionType').prop('selectedIndex', 0);
+               $('#MisStartDate').val('');
+                $('#MisEndDate').val('');
+                $('#Organizationdetails').val('');
+                $('#TotalSeats').val('');
+                $('#MisRegEndDate').val('');
+               $('#MissionThemedata').val('');
+                $('#myAvailability').prop('selectedIndex', 0);
+               $('#VideoUrl2').val('');
+                
+                $('#goaltext').val('');
+                $('#GoalValue').val('');
+                $('.themeDropdown').each(function () {
+                    if ($(this).is(':checked')) {
+                        $(this).prop('checked', false);
+                    }
+                });
+
+
 
             },
         })
@@ -1176,7 +1280,7 @@ $(document).on('click', '.EditMissionDetailBtn', function () {
             $('#MissionThemedata2').val(data.themeId);
             $('#myAvailability2').val(data.availability);
             $('#MissionCountry2').val(data.countryId);
-
+            var CityId = data.cityId;
             //for displaying citylist on the basis of country and select the city on the basis of city exist in db
             $.ajax({
                 type: "POST",
@@ -1192,10 +1296,10 @@ $(document).on('click', '.EditMissionDetailBtn', function () {
                     $('#MissionCity2').append($('<option>').val('').text('Select City').disabled);
 
                     cities.forEach(function (city) {
-                        $('#MissionCity2').append($('<option>').val(city.id).text(city.name));
+                        $('#MissionCity2').append($('<option>').val(city.cityId).text(city.name));
                     });
                     //Select the existing city if it exists in the list of cities
-                    if (CityId && cities.find(function (city) { return city.id == CityId })) {
+                    if (CityId && cities.find(function (city) { return city.cityid == CityId })) {
                         $('#MissionCity2').val(CityId);
                     }
 
@@ -1357,6 +1461,7 @@ $(document).on('click', '.SaveChangesForMission', function () {
             console.log(data);
             $('#editMissionCloseBtn').click();
             $('.missionList').html(data);
+            forMissionPagenation();
             //alert("  data is successfully saved");
             toastr.success(' Edited data is successfully saved');
 
@@ -1379,6 +1484,7 @@ $(document).on('click', '#DeleteBtnForMission', function () {
         },
         success: function (data) {
             $('.missionList').html(data);
+            forMissionPagenation();
             alert(" data is successfully deleted");
 
         }
@@ -1571,8 +1677,15 @@ $(document).on('click', "#SaveBanner", function () {
             success: function (data) {
                 $('#forAddBannerClose').click();
                 $('.Bannerdata').html(data);
+                forBannerPagenation();
                 //alert(" data is successfully added");
                 toastr.success('data is successfully saved');
+                $('#myText').val(''); // Clear enteredThemeName input field
+                $("#SortOrderValue").val(''); // Reset the status dropdown to the first option
+                $('.BannerImage').attr('src','');
+                $('.needs-validation.addbannervalidation').removeClass('was-validated'); // Remove the validation message
+
+
             }
         })
     }
@@ -1637,6 +1750,7 @@ $(document).on('click', "#SaveChangedBanner", function () {
         success: function (data) {
             $('#forEditBannerClose').click();
             $('.Bannerdata').html(data);
+            forBannerPagenation();
             //alert(" data is successfully added");
             toastr.success('Edited data is successfully saved');
         }
@@ -1670,6 +1784,7 @@ $(document).on('click', '.trashBanner', function () {
                 success: function (data) {
                     $('.Bannerdata').html(data);
                     //alert(" data is successfully deleted");
+                    forBannerPagenation();
                     Swal.fire(
                         'Deleted!',
                         'Your data has been deleted.',
@@ -2046,3 +2161,126 @@ function handleRemoveIconClickDoc2() {
         });
     });
 }
+
+
+   
+
+function forMissionThemePagenation() {
+    $('#DataTablesIdForMissionTheme').DataTable({
+        info: false,
+        lengthChange: false,
+        dom: '<"float-start"f><"#DataTablesId"t>i<"#paginatorId"lp>',
+        responsive: true,
+        pageLength: 10,
+        language: {
+            searchPlaceholder: "Search Records"
+        },
+
+    });
+}
+function forMissionSkillPagenation() {
+    $('#DataTablesIdForMissionSkill').DataTable({
+        info: false,
+        lengthChange: false,
+        dom: '<"float-start"f><"#DataTablesId"t>i<"#paginatorId"lp>',
+        responsive: true,
+        pageLength: 10,
+        language: {
+            searchPlaceholder: "Search Records"
+        },
+
+    });
+}
+function forMissionApplicationPagenation() {
+    $('#DataTablesIdForMissionApplication').DataTable({
+        info: false,
+        lengthChange: false,
+        dom: '<"float-start"f><"#DataTablesId"t>i<"#paginatorId"lp>',
+        responsive: true,
+        pageLength: 10,
+        language: {
+            searchPlaceholder: "Search Records"
+        },
+
+    });
+}
+function forStoryPagenation() {
+    $('#DataTablesIdForStory').DataTable({
+        info: false,
+        lengthChange: false,
+        dom: '<"float-start"f><"#DataTablesId"t>i<"#paginatorId"lp>',
+        responsive: true,
+        pageLength: 10,
+        language: {
+            searchPlaceholder: "Search Records"
+        },
+
+    });
+}
+
+function forBannerPagenation() {
+    $('#DataTablesIdForBanner').DataTable({
+        info: false,
+        lengthChange: false,
+        dom: '<"float-start"f><"#DataTablesId"t>i<"#paginatorId"lp>',
+        responsive: true,
+        pageLength: 10,
+        language: {
+            searchPlaceholder: "Search Records"
+        },
+
+    });
+}
+function forUserPagenation() {
+    $('#DataTablesIdForUser').DataTable({
+        info: false,
+        lengthChange: false,
+        dom: '<"float-start"f><"#DataTablesId"t>i<"#paginatorId"lp>',
+        responsive: true,
+        pageLength: 10,
+        language: {
+            searchPlaceholder: "Search Records"
+        },
+
+    });
+}
+function forCmsPagenation() {
+    $('#DataTablesIdForCMS').DataTable({
+        info: false,
+        lengthChange: false,
+        dom: '<"float-start"f><"#DataTablesId"t>i<"#paginatorId"lp>',
+        responsive: true,
+        pageLength: 10,
+        language: {
+            searchPlaceholder: "Search Records"
+        },
+
+    });
+}
+function forMissionPagenation() {
+    $('#DataTablesIdForMission').DataTable({
+        info: false,
+        lengthChange: false,
+        dom: '<"float-start"f><"#DataTablesId"t>i<"#paginatorId"lp>',
+        responsive: true,
+        pageLength: 10,
+        language: {
+            searchPlaceholder: "Search Records"
+        },
+
+    });
+}
+
+$(document).ready(function () {
+    $('.DataTablesId').DataTable({
+        info: false,
+        lengthChange: false,
+        dom: '<"float-start"f><"#DataTablesId"t>i<"#paginatorId"lp>',
+        responsive: true,
+        pageLength: 10,
+        language: {
+            searchPlaceholder: "Search Records"
+        },
+
+    });
+});

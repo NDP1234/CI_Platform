@@ -21,10 +21,10 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
 
     @*for toastr*@
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
-   @*for swal*@
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+    @*for swal*@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
 
 
     <link rel="stylesheet" href="~/css/admin.css">
@@ -177,21 +177,21 @@
                             <div class="d-flex" role="search">
 
                                 <div class="dropdown">
-                                    <button type="button" class="btn  dropdown-toggle p-0 b-filter"   id="AdminDropDown"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="@ViewBag.UserDetails.Avatar" alt="" style="border-radius: 50%;" height="30px"
-                                    width="30px">
-                                    <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
+                                    <button type="button" class="btn  dropdown-toggle p-0 b-filter" id="AdminDropDown"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="@ViewBag.UserDetails.Avatar" alt="" style="border-radius: 50%;" height="30px"
+                                             width="30px">
+                                        <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
                                     </button>
 
                                     <ul class="dropdown-menu" aria-labelledby="AdminDropDown">
-                                    <li><a class="dropdown-item" asp-action="AdminDashBoard" asp-controller="Admin">Dashboard</a></li>
-                                    <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
-                                    <li><a class="dropdown-item" asp-action="VolunteeringTimesheet" asp-controller="Timesheet">Volunteering Timesheet</a></li>
-                                    <li><a class="dropdown-item" asp-action="Logout" asp-controller="Authentication">Logout </a></li>
+                                        <li><a class="dropdown-item" asp-action="AdminDashBoard" asp-controller="Admin">Dashboard</a></li>
+                                        <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
+                                        <li><a class="dropdown-item" asp-action="VolunteeringTimesheet" asp-controller="Timesheet">Volunteering Timesheet</a></li>
+                                        <li><a class="dropdown-item" asp-action="Logout" asp-controller="Authentication">Logout </a></li>
                                     </ul>
-                                    </div>
-                                
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -225,7 +225,7 @@
                                                     <div class="col-md-4 text-center">
                                                         <input type="file" id="fileInput" style="display:none;" onchange="previewImage()">
 
-                                                        <img class="rounded-circle mx-auto d-block w-50 h-50" id="userProfile" src="/Images/volunteer1.png" alt="profile picture" onclick="selectFile()">
+                                                        <img class="rounded-circle mx-auto d-block w-50 h-70" id="userProfile" src="/profileImg/NicePng_watsapp-icon-png_9332131.png" alt="profile picture" onclick="selectFile()">
                                                         <input type="hidden" id="avatarInput" />
                                                     </div>
                                                     <div class="col-md-8">
@@ -348,7 +348,7 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <label for="phonenumber" class="form-label">Phone Number</label>
-                                                        <input type="tel" id="phonenumber" class="d-block w-100 form-control" required />
+                                                        <input type="tel" id="phonenumber" class="d-block w-100 form-control" pattern="^[0-9]{10}$" maxlength="10" required />
                                                         <div class="invalid-feedback">
                                                             Please enter phone number.
                                                         </div>
@@ -369,25 +369,8 @@
 
 
                         <!-- User table -->
-
-                        <div class="table-responsive">
-                            <table class="table table-borderless DataTablesId" style="width:100%">
-                                <thead>
-                                    <tr class="bg-light">
-                                        <th scope="col">First Name</th>
-                                        <th scope="col">Last Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Employee Id</th>
-                                        <th scope="col">Department</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="userlist">
-                                    @await Html.PartialAsync("_userPartial", Model)
-
-                                </tbody>
-                            </table>
+                        <div class="userlist">
+                            @await Html.PartialAsync("_userPartial", Model)
                         </div>
                         <!-- User table -->
                         @*edit User Modal*@
@@ -483,7 +466,6 @@
                                             <div class="col">
                                                 <label for="City2" class="form-label">City</label>
                                                 <select class="form-select" id="City2" aria-label="Default select example" required>
-                                                    
                                                 </select>
                                                 <div class="invalid-feedback">
                                                     Please select city.
@@ -524,7 +506,9 @@
                                         <div class="row">
                                             <div class="col">
                                                 <label for="phonenumber2" class="form-label">Phone Number</label>
-                                                <input type="tel" id="phonenumber2" class="d-block w-100 form-control" required />
+                                                @*<input type="tel" id="phonenumber2" class="d-block w-100 form-control" pattern="^\d{10}$" maxlength="10" required />*@
+                                                  <input type="tel" id="phonenumber2" class="d-block w-100 form-control is-valid" pattern="^\d{10}$" maxlength="10" required />
+
                                                 <div class="invalid-feedback">
                                                     Please enter phone number.
                                                 </div>
@@ -547,7 +531,7 @@
                     <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
                     <!-- CMS-Page Tab -->
                     <div class="tab-pane fade cmsdetailcontent" id="v-pills-CMSPage" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                         @await Html.PartialAsync("_CMSPage", Model)
+                        @await Html.PartialAsync("_CMSPage", Model)
 
                     </div>
                     <!-- CMS-Page Tab -->
@@ -721,7 +705,7 @@
                                                     <div class="col">
                                                         <label for="MissionThemedata" class="form-label">Mission Theme</label>
                                                         <select class="form-select" id="MissionThemedata" aria-label="Default select example" required>
-                                                            <option selected>Select a mission theme</option>
+                                                            <option selected disabled value=''>Select a mission theme</option>
                                                             @foreach (var item in Model.MissionThemes.Where(m => m.DeletedAt == null))
                                                             {
                                                                 <option value="@item.MissionThemeId">@item.Title</option>
@@ -759,7 +743,7 @@
                                                     <div class="col">
                                                         <label for="myAvailability" class="form-label">Select Availability</label>
                                                         <select class="form-select" id="myAvailability" aria-label="Default select example" required>
-                                                            <option selected>Select Availability</option>
+                                                            <option selected disabled value=''>Select Availability</option>
                                                             <option value="daily">Daily</option>
                                                             <option value="weekly">Weekly</option>
                                                             <option value="week-end">Week-end</option>
@@ -823,23 +807,11 @@
                             <!-- ---- -->
                         </div>
                         <!-- Mission table -->
-                        <div class="table-responsive">
-                            <table class="table table-borderless DataTablesId" style="width:100%">
-                                <thead>
-                                    <tr class="bg-light">
-                                        <th scope="col">Mission Title</th>
-                                        <th scope="col">Mission Type</th>
-                                        <th scope="col">Start Date</th>
-                                        <th scope="col">End Date</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="missionList">
-                                    @await Html.PartialAsync("_MissionPartial", Model)
-
-                                </tbody>
-                            </table>
+                        <div class="missionList">
+                             @await Html.PartialAsync("_MissionPartial", Model)
                         </div>
+                        <!-- Mission table -->
+                       
 
                         @*modal for edit mission*@
                         <div class="modal fade" id="editMissionDetailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1158,22 +1130,10 @@
                         </div>
 
                         <!-- mission theme table -->
-                        <div class="table-responsive">
-                            <table class="table table-borderless DataTablesId" style="width:100%">
-                                <thead>
-                                    <tr class="bg-light">
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col" class="text-center">Action</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody class="Missionthemelisting">
-                                    @await Html.PartialAsync("_MissionTheme", Model)
-
-                                </tbody>
-                            </table>
+                        <div class="Missionthemelisting">
+                            @await Html.PartialAsync("_MissionTheme", Model)
                         </div>
+
                         <!-- mission theme table -->
                         @*modal for edit missiontheme*@
                         <!-- Modal -->
@@ -1263,8 +1223,8 @@
 
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"  id="closeAddSkill" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary " id="addSkillBtn" >Add Skill</button>
+                                                <button type="button" class="btn btn-secondary" id="closeAddSkill" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary " id="addSkillBtn">Add Skill</button>
                                             </div>
                                         </form>
                                     </div>
@@ -1274,21 +1234,11 @@
                         </div>
 
                         <!-- Mission skill table -->
-                        <div class="table-responsive">
-                            <table class="table table-borderless DataTablesId" style="width:100%">
-                                <thead>
-                                    <tr class="bg-light">
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col" class="text-center">Action</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody id="missionskillPartialView">
-                                    @await Html.PartialAsync("_MissionSkill", Model)
-                                </tbody>
-                            </table>
-                        </div>
+                            <div id="missionskillPartialView">
+                                @await Html.PartialAsync("_MissionSkill", Model)
+                            </div>
+                        <!-- Mission skill table -->
+                       
                         @*modal for edit missionskill*@
                         <!-- Modal -->
                         <div class="modal fade " id="editMissionSkillModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1342,23 +1292,8 @@
 
 
                         <!-- Mission Application table -->
-                        <div class="table-responsive">
-                            <table class="table table-borderless DataTablesId" style="width:100%">
-                                <thead>
-                                    <tr class="bg-light">
-                                        <th scope="col">Mission Title</th>
-                                        <th scope="col">Mission Id</th>
-                                        <th scope="col">User Id</th>
-                                        <th scope="col">User Name</th>
-                                        <th scope="col">Application Date</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="missionApplicationListing">
-                                    @await Html.PartialAsync("_MissionApplication", Model)
-
-                                </tbody>
-                            </table>
+                        <div class="missionApplicationListing">
+                            @await Html.PartialAsync("_MissionApplication", Model)
                         </div>
                         <!-- Mission Application table -->
                     </div>
@@ -1371,21 +1306,8 @@
 
 
                         <!-- Story table -->
-                        <div class="table-responsive ">
-                            <table class="table table-borderless DataTablesId" style="width:100%">
-                                <thead>
-                                    <tr class="bg-light">
-                                        <th scope="col">Story Title</th>
-                                        <th scope="col">Full Name</th>
-                                        <th scope="col">Mission Title</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="StoryListing">
-                                    @await Html.PartialAsync("_StoryPartial", Model)
-
-                                </tbody>
-                            </table>
+                        <div  class="StoryListing">
+                            @await Html.PartialAsync("_StoryPartial", Model)
                         </div>
                         <!-- Story table -->
                     </div>
@@ -1457,22 +1379,8 @@
                         </div>
 
                         <!-- BannerManagement table -->
-                        <div class="table-responsive ">
-                            <table class="table table-borderless DataTablesId" style="width:100%">
-                                <thead>
-                                    <tr class="bg-light">
-                                        <th scope="col">Banner Id</th>
-                                        <th scope="col">Sort Order</th>
-                                        <th scope="col">Banner Name</th>
-                                        <th scope="col">Image</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="Bannerdata">
-                                    @await Html.PartialAsync("_BannerManagementPartial", Model)
-
-                                </tbody>
-                            </table>
+                        <div class="Bannerdata">
+                             @await Html.PartialAsync("_BannerManagementPartial", Model)
                         </div>
                         <!--edit BannerManagement modal -->
                         <div class="modal fade" id="editBannerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1558,28 +1466,14 @@
     <script src="~/DataTable/js/dataTables.responsive.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-       @*for toastr*@
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    @*for toastr*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-       @*for swel*@
-       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
+    @*for swel*@
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
 
     <script src="~/js/Admin.js" asp-append-version="true"></script>
-    <script>
-        $(document).ready(function(){
-        $('.DataTablesId').DataTable({
-        info:false,
-        lengthChange: false,
-        dom: '<"float-start"f><"#DataTablesId"t>i<"#paginatorId"lp>',
-        responsive: true,
-        pageLength:10,
-        language: {
-        searchPlaceholder: "Search Records"
-        },
 
-        });
-        });
-    </script>
 </body>
 
 </html>

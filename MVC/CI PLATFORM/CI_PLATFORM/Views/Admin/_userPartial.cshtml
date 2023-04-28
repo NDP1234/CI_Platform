@@ -1,27 +1,48 @@
 ﻿@using CI_Platform.Entities.Models.VM
 @model AdminViewModel;
-  @foreach (var item in Model.users.Where(u=>u.DeletedAt == null  ))
-{
-    <tr class="border">
-        <td>@item.FirstName</td>
-        <td>@item.LastName</td>
-        <td>@item.Email</td>
-        <td>@item.EmployeeId</td>
-        <td>@item.Department</td>
-        @if (@item.Status == 1)
-        {
-            <td class="greentext">
-                Active
-            </td>
-        }
-        else
-        {
-            <td class="redtext">Inactive</td>
-        }
-        <td>
-            <button class="border-0 bg-white editUserModal" type="button" id="editUserDetails" data-user-id="@item.UserId" onclick="OpenEditUserModal('@item.UserId', '@item.FirstName','@item.LastName','@item.Email', '@item.Password', '@item.EmployeeId', '@item.CountryId', '@item.CityId', '@item.ProfileText', '@item.Department', '@item.Status','@item.PhoneNumber', '@item.Avatar' )"><i class="bi bi-pencil-square "></i></button>
-            <button class="border-0 bg-white deleteUserBtn"  data-user-id="@item.UserId"><i class="bi bi-trash  "></i></button>
-        </td>
-        
-    </tr>
-}
+
+
+
+<div class="table-responsive">
+    <table class="table table-borderless DataTablesId" id="DataTablesIdForUser" style="width:100%">
+        <thead>
+            <tr class="bg-light">
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Employee Id</th>
+                <th scope="col">Department</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.users.Where(u => u.DeletedAt == null))
+            {
+                <tr class="border">
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Email</td>
+                    <td>@item.EmployeeId</td>
+                    <td>@item.Department</td>
+                    @if (@item.Status == 1)
+                    {
+                        <td class="greentext">
+                            Active
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="redtext">Inactive</td>
+                    }
+                    <td>
+                        <button class="border-0 bg-white editUserModal" type="button" id="editUserDetails" data-user-id="@item.UserId" onclick="OpenEditUserModal('@item.UserId', '@item.FirstName','@item.LastName','@item.Email', '@item.Password', '@item.EmployeeId', '@item.CountryId', '@item.CityId', '@item.ProfileText', '@item.Department', '@item.Status','@item.PhoneNumber', '@item.Avatar' )"><i class="bi bi-pencil-square "></i></button>
+                        <button class="border-0 bg-white deleteUserBtn" data-user-id="@item.UserId"><i class="bi bi-trash  "></i></button>
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

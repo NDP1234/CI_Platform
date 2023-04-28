@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "91ryPvCLznsnJ23+KsmKx5G33Eaj1NLjPffbHA+Lx0Q=",
+  "Hash": "OM9FTJ83PJG7LyLjdS20pfMR4Oi054PTq6xwkFK50AY=",
   "Source": "CI_PLATFORM",
   "BasePath": "_content/CI_PLATFORM",
   "Mode": "Default",
@@ -5336,6 +5336,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\profileImg\\img2.png"
+    },
+    {
+      "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\profileImg\\img33.png",
+      "SourceId": "CI_PLATFORM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\",
+      "BasePath": "_content/CI_PLATFORM",
+      "RelativePath": "profileImg/img33.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\profileImg\\img33.png"
+    },
+    {
+      "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\profileImg\\NicePng_watsapp-icon-png_9332131.png",
+      "SourceId": "CI_PLATFORM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\",
+      "BasePath": "_content/CI_PLATFORM",
+      "RelativePath": "profileImg/NicePng_watsapp-icon-png_9332131.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\profileImg\\NicePng_watsapp-icon-png_9332131.png"
     },
     {
       "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\profileImg\\Nourish-the-Children-in--African-country.png",

@@ -21,7 +21,7 @@ namespace CI_Platform.Repository.Repository
         public StoryDetailViewModel storyDetailPageInfo(int id, int userId)
         {
             Story stories = _db.Stories.Where(s => s.StoryId == id).First();
-            List<StoryMedium> storyMedium = _db.StoryMedia.Where(s => s.StoryId == id).ToList();
+            List<StoryMedium> storyMedium = _db.StoryMedia.Where(s => s.StoryId == id).OrderBy(m=>m.Type).ToList();
             User user = _db.Users.Where(u => u.UserId == stories.UserId).First();
             List<User> users = _db.Users.ToList();
 

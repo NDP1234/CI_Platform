@@ -1,34 +1,50 @@
 ﻿@using CI_Platform.Entities.Models.VM
 @model AdminViewModel;
-@foreach (var item in Model.Stories.Where(st=>st.DeletedAt==null))
-                                    {
-                                        <tr class="border">
-                                            <td>@item.Title</td>
-                                            <td>@item.User.FirstName @item.User.LastName</td>
-                                            <td>@item.Mission.Title</td>
-                                            <td>
-                                                <a class="btn addUserBtn " asp-action="Story_detail_page" asp-controller="StoryRelated" asp-route-id="@item.StoryId"><span>View</span></a>
-                                                <button class="border-0 bg-white storyApproved" data-story-id="@item.StoryId">
-                                                    @if (item.Status == "PUBLISHED")
-                                                    {
-                                                        <i class="bi bi-check-circle-fill icon-green"></i>
-                                                    }
-                                                    else
-                                                    {
-                                                        <i class="bi bi-check-circle icon-green"></i>
-                                                    }
-                                                </button>
-                                                <button class="border-0 bg-white storyDeclined" data-story-id="@item.StoryId">
-                                                    @if (item.Status == "DECLINED")
-                                                    {
-                                                        <i class="bi bi-x-circle-fill icon-red"></i>
-                                                    }
-                                                    else
-                                                    {
-                                                        <i class="bi bi-x-circle icon-red"></i>
-                                                    }
-                                                </button>
-                                                <button class="border-0 bg-white deleteStory" data-story-id="@item.StoryId"><i class="bi bi-trash  "></i></button>
-                                            </td>
-                                        </tr>
-                                    }
+
+<div class="table-responsive ">
+    <table class="table table-borderless DataTablesId" id="DataTablesIdForStory" style="width:100%">
+        <thead>
+            <tr class="bg-light">
+                <th scope="col">Story Title</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Mission Title</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Stories.Where(st => st.DeletedAt == null))
+            {
+                <tr class="border">
+                    <td>@item.Title</td>
+                    <td>@item.User.FirstName @item.User.LastName</td>
+                    <td>@item.Mission.Title</td>
+                    <td>
+                        <a class="btn addUserBtn " asp-action="Story_detail_page" asp-controller="StoryRelated" asp-route-id="@item.StoryId"><span>View</span></a>
+                        <button class="border-0 bg-white storyApproved" data-story-id="@item.StoryId">
+                            @if (item.Status == "PUBLISHED")
+                            {
+                                <i class="bi bi-check-circle-fill icon-green"></i>
+                            }
+                            else
+                            {
+                                <i class="bi bi-check-circle icon-green"></i>
+                            }
+                        </button>
+                        <button class="border-0 bg-white storyDeclined" data-story-id="@item.StoryId">
+                            @if (item.Status == "DECLINED")
+                            {
+                                <i class="bi bi-x-circle-fill icon-red"></i>
+                            }
+                            else
+                            {
+                                <i class="bi bi-x-circle icon-red"></i>
+                            }
+                        </button>
+                        <button class="border-0 bg-white deleteStory" data-story-id="@item.StoryId"><i class="bi bi-trash  "></i></button>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

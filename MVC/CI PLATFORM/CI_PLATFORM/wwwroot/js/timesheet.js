@@ -35,7 +35,8 @@ $('#SaveBtn').on('click', function () {
     console.log(myMinutes);
     console.log(myMessage);
 
-    if (userId && selectedTitleid && myDate && myHour && myMinutes && myMessage) {
+
+    if (userId && selectedTitleid && myDate && myHour >= 0 && myHour <= 24 && myMinutes >= 0 && myMinutes <= 60 && myMessage) {
         $.ajax({
             type: "POST",
             url: "/Timesheet/SaveTimeBasedTimesheet",
@@ -170,7 +171,7 @@ $('#SaveBtn3').on('click', function () {
     console.log(myAction);
     console.log(myMessage);
 
-    if (userId && selectedTitleid && myDate && myDate && myAction && myMessage) {
+    if (userId && selectedTitleid  && myDate && myAction && myMessage) {
         $.ajax({
             type: "POST",
             url: "/Timesheet/SaveGoalBasedTimesheet",

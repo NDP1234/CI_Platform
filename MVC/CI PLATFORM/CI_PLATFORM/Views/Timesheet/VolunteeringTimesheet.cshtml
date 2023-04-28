@@ -304,7 +304,7 @@
                                                             <div class="row mb-3">
                                                                 <div class="col">
                                                                     <label class="mb-2" for="myAction-@item.TimesheetId" class="form-label">Actions</label>
-                                                                    <input type="text" class="form-control" id="myAction-@item.TimesheetId"
+                                                                    <input type="number" class="form-control" id="myAction-@item.TimesheetId"
                                                                        placeholder="Enter Actions" value="@item.Action">
                                                                     <div class="invalid-feedback">
                                                                         Please specify a valid action.
@@ -373,7 +373,7 @@
                                             <select class="form-select" id="mymission"
                                                     aria-label="Default select example" required>
 
-                                                <option selected value="-1">Select your mission</option>
+                                                <option selected value="" disabled>Select your mission</option>
                                                 @foreach (var item in Model.Missions.Where(m => m.MissionType == "TIME"))
                                                 {
                                                     <option value="@item.MissionId" data-user-id="@ViewBag.UserDetails.UserId" data-start-date="@item.StartDate" data-end-date="@item.EndDate" >@item.Title</option>
@@ -388,7 +388,7 @@
                                         <div class="col">
                                             <label class="mb-2" for="myDate" class="form-label">Date Volunteered</label>
                                             <input type="date" class="form-control" id="myDate"
-                                                   placeholder="Select date"  max="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                                                   placeholder="Select date"  max="@DateTime.Now.ToString("yyyy-MM-dd")" data-provide="datepicker" required>
                                             <div class="invalid-feedback">
                                                 Please select a valid date.
                                             </div>
@@ -398,7 +398,7 @@
                                         <div class="col-md-6">
                                             <label class="mb-2" for="myHour" class="form-label">Hours</label>
                                             <input type="number" class="form-control" id="myHour"
-                                                   placeholder="Enter Spent Hours " required>
+                                                   placeholder="Enter Spent Hours " min="0" max="24" required>
                                             <div class="invalid-feedback">
                                                 Please select a valid Hours.
                                             </div>
@@ -406,7 +406,7 @@
                                         <div class="col-md-6">
                                             <label class="mb-2" for="myMinutes" class="form-label">Minutes</label>
                                             <input type="number" class="form-control" id="myMinutes"
-                                                   placeholder="Enter Spent Minutes " required>
+                                                   placeholder="Enter Spent Minutes " min="1" max="60" required>
                                             <div class="invalid-feedback">
                                                 Please select a valid Minutes.
                                             </div>
@@ -453,7 +453,7 @@
                                             <label class="mb-2" for="mymission2">Mission</label>
                                             <select class="form-select" id="mymission2"
                                                     aria-label="Default select example" required>
-                                                <option selected value="-1">Select your mission</option>
+                                                <option selected value="" disabled>Select your mission</option>
                                                 @foreach (var item in Model.Missions.Where(m => m.MissionType == "GOAL"))
                                                 {
                                                     <option value="@item.MissionId" data-user-id="@ViewBag.UserDetails.UserId" data-start-date="@item.StartDate" data-end-date="@item.EndDate">@item.Title</option>
@@ -468,7 +468,7 @@
                                     <div class="row mb-3">
                                         <div class="col">
                                             <label class="mb-2" for="myAction" class="form-label">Actions</label>
-                                            <input type="text" class="form-control" id="myAction"
+                                            <input type="number" class="form-control" id="myAction"
                                                    placeholder="Enter Actions" required>
                                             <div class="invalid-feedback">
                                                 Please specify a valid action.
@@ -481,7 +481,7 @@
                                                 Date Volunteered
                                             </label>
                                             <input type="date" class="form-control" id="myDate2"
-                                                   placeholder="Select date"  max="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                                                   placeholder="Select date"  max="@DateTime.Now.ToString("yyyy-MM-dd")" data-provide="datepicker" required>
                                             <div class="invalid-feedback">
                                                 Please select a valid date.
                                             </div>

@@ -52,7 +52,7 @@ namespace CI_PLATFORM.Controllers
 
         //for save the edited time based timesheet
         [HttpPost]
-        public bool editTimeBasedTimesheetDetails(int uesrId, int timesheetId,  DateTime Date, int Hour, int Minute, string Message)
+        public bool editTimeBasedTimesheetDetails(int uesrId, int timesheetId, DateTime Date, int Hour, int Minute, string Message)
         {
             var ExistTimesheet = _db.Timesheets.Where(t => t.TimesheetId == timesheetId).FirstOrDefault();
             ExistTimesheet.UserId = uesrId;
@@ -107,5 +107,7 @@ namespace CI_PLATFORM.Controllers
             return true;
         }
 
+
+        
     }
 }

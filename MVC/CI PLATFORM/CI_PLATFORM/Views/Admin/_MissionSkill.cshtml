@@ -1,21 +1,38 @@
 ﻿@using CI_Platform.Entities.Models.VM
 @model AdminViewModel;
-@foreach (var item in Model.missionSkills.Where(s=>s.DeletedAt==null))
-                                    {
-                                        <tr class="border">
-                                            <td>@item.SkillName</td>
-                                            @if (@item.Status == 1)
-                                            {
-                                                <td class="greentext">Active</td>
-                                            }
-                                             else
-                                            {
-                                                <td class="redtext">Inactive</td>
-                                            }
-                                            <td class="text-center">
-                                                <button class="border-0 bg-white editMissionSkillModal"  data-skill-id="@item.SkillId" onclick="OpenEditSkillModal('@item.SkillName','@item.Status','@item.SkillId')"><i class="bi bi-pencil-square "></i></button>
-                                                <button class="border-0 bg-white deleteMissionSkill" mission-skill-id="@item.SkillId"><i class="bi bi-trash  "></i></button>
-                                            </td>
-                                             
-                                        </tr>
-                                    }
+
+<div class="table-responsive">
+    <table class="table table-borderless DataTablesId" id="DataTablesIdForMissionSkill" style="width:100%">
+        <thead>
+            <tr class="bg-light">
+                <th scope="col">Title</th>
+                <th scope="col">Status</th>
+                <th scope="col" class="text-center">Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @* @await Html.PartialAsync("_MissionSkill", Model)*@
+            @foreach (var item in Model.missionSkills.Where(s => s.DeletedAt == null))
+            {
+                <tr class="border">
+                    <td>@item.SkillName</td>
+                    @if (@item.Status == 1)
+                    {
+                        <td class="greentext">Active</td>
+                    }
+                    else
+                    {
+                        <td class="redtext">Inactive</td>
+                    }
+                    <td class="text-center">
+                        <button class="border-0 bg-white editMissionSkillModal" data-skill-id="@item.SkillId" onclick="OpenEditSkillModal('@item.SkillName','@item.Status','@item.SkillId')"><i class="bi bi-pencil-square "></i></button>
+                        <button class="border-0 bg-white deleteMissionSkill" mission-skill-id="@item.SkillId"><i class="bi bi-trash  "></i></button>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+</div>

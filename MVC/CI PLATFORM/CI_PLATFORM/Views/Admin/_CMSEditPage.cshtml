@@ -12,26 +12,35 @@
             <h4 class="ps-4">Edit</h4>
         </div>
     </div>
+    <form class="row g-3 needs-validation editcmsvalidation " novalidate>
     <div class="row">
         <div class="col">
             <div class="my-3">
                 <label for="cmstitle2" class="form-label ">Title</label>
-                <input type="text" class="form-control" id="cmstitle2" aria-describedby="titleHelp">
+                <input type="text" class="form-control" id="cmstitle2" aria-describedby="titleHelp" required>
+                 <div class="invalid-feedback">
+                        Please enter Title.
+                 </div>
             </div>
         </div>
     </div>
     <div class="row mt-3">
         <div class="col">
             <label for="CMSeditor2">Description</label>
-            <textarea cols="80" id="CMSeditor2" class="mydescription" name="CMSeditor2" rows="4">&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href=&quot;https://ckeditor.com/&quot;&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea>
+            <textarea cols="80" required id="CMSeditor2" class="mydescription" name="CMSeditor2" rows="4">&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href=&quot;https://ckeditor.com/&quot;&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea>
+            <div class="invalid-feedback">
+                    Please enter description.
+            </div>
          </div>
-       
     </div>
     <div class="row">
         <div class="col">
             <div class="my-3">
                 <label for="cmsSlug2" class="form-label ">Slug</label>
-                <input type="text" class="form-control" id="cmsSlug2" aria-describedby="SlugHelp">
+                <input type="text" class="form-control" id="cmsSlug2" aria-describedby="SlugHelp" required>               
+                <div class="invalid-feedback">
+                        Please enter Slug.
+                </div>
             </div>
         </div>
     </div>
@@ -40,10 +49,13 @@
             <div>
                 <label for="myStatusOfCMS2">Status</label>
                 <select class="form-select" id="myStatusOfCMS2" aria-label="Default select example" required>
-                    <option selected>Select a status</option>
+                    <option selected value="" disabled>Select a status</option>
                     <option value="0">Inactive</option>
                     <option value="1">Active</option>
                 </select>
+                <div class="invalid-feedback">
+                        Please select Status.
+                </div>
             </div>
         </div>
     </div>
@@ -53,6 +65,7 @@
             <button class="btn btn-primary cancelBtn float-end mx-2 CMSBack"  type="button">cancel</button>
         </div>
     </div>
+    </form>
 </div>
 
 
