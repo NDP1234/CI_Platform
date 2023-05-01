@@ -131,7 +131,7 @@ function cityfun(city) {
     console.log(cityid);
     console.log(cityname);
 
-    
+
     var filterchipCity = 2 + cityname;
     if (cityIndex == -1) {
         citychip.push(cityname);
@@ -140,12 +140,22 @@ function cityfun(city) {
                         <button class="border-0 bg-white"  onclick="clear2(this);" value="${filterchipCity}"> <i class="bi bi-x" ></i> </button>
                     </div>`));
     }
+    else {
+        // City is unchecked
+        if (cityIndex != -1) {
+            // Remove city from citychip
+            citychip.splice(cityIndex, 1);
+            $(`#chip${cityname}`).remove();
+        }
+    }
+
+
     console.log(citychip);
     $("#FilterBtn").click();
-   
+
 }
 
- 
+
 function clear2(clearnow) {
     //alert("calling clear");
     var arrayId = clearnow.value[0];
@@ -166,7 +176,7 @@ function clear2(clearnow) {
         $("#FilterBtn").click();
     }
 };
- 
+
 
 
 //14-03
@@ -192,7 +202,7 @@ function misfun(theme) {
     console.log(themeid);
     console.log(themename);
 
-    
+
     var filterchipTheme = 3 + themename;
     if (themeIndex == -1) {
         themechip.push(themename);
@@ -201,9 +211,17 @@ function misfun(theme) {
                         <button class="border-0 bg-white"  onclick="clear3(this);" value="${filterchipTheme}"> <i class="bi bi-x" ></i> </button>
                     </div>`));
     }
+    else {
+        // theme is unchecked
+        if (themeIndex != -1) {
+            // Remove theme from themechip
+            themechip.splice(themeIndex, 1);
+            $(`#chip${themename}`).remove();
+        }
+    }
     console.log(themechip);
     $("#FilterBtn").click();
-     
+
 }
 
 
@@ -227,7 +245,7 @@ function clear3(clearnow) {
         $("#FilterBtn").click();
     }
 };
- 
+
 
 
 //for pushing selected skill in array
@@ -242,7 +260,7 @@ function skillfun(skill) {
     console.log(skillid);
     console.log(skillname);
 
-    
+
     var filterchipSkill = 4 + skillname;
     if (skillIndex == -1) {
         skillchip.push(skillname);
@@ -251,9 +269,17 @@ function skillfun(skill) {
                         <button class="border-0 bg-white"  onclick="clear4(this);" value="${filterchipSkill}"> <i class="bi bi-x" ></i> </button>
                     </div>`));
     }
+    else {
+        // skill is unchecked
+        if (skillIndex != -1) {
+            // Remove theme from themechip
+            skillchip.splice(skillIndex, 1);
+            $(`#chip${skillname}`).remove();
+        }
+    }
     console.log(skillchip);
     $("#FilterBtn").click();
-    
+
 }
 
 
@@ -278,7 +304,7 @@ function clear4(clearnow) {
     }
 };
 
- 
+
 
 
 
@@ -303,7 +329,7 @@ $("#FilterBtn").on('click', function () {
         type: 'GET',
         traditional: true,
         data: {
-            userId : userId,
+            userId: userId,
             country: countrychip,
             city: citychip,
             theme: themechip,
@@ -382,7 +408,7 @@ $("#FilterBtn").on('click', function () {
 
                         <div class="row">
                             <div class="col-xs-12 col-md-6 mx-auto">
-                                <a class="btn btnapp " asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id=`+ item.value.missionId +`>Apply <img src="/images/right-arrow.png" alt=""></a>
+                                <a class="btn btnapp " href="/Content/Volunteering_Mission_Page?id=`+ item.value.missionId+`"    >Apply <img src="/images/right-arrow.png" alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -416,7 +442,7 @@ $("#FilterBtn").on('click', function () {
                     <table>
                         <tr>
                             <td rowspan="2"><img src="/images/deadline.png" alt=""></td>
-                                <td>09/01/2019 </td>
+                                <td>`+ item.value.deadline+` </td>
                                     </tr>
                             <tr>
                                 <td class="fsize">Deadline</td>
@@ -512,11 +538,17 @@ $("#FilterBtn").on('click', function () {
 
 
                     `</div>
-                <div class="col-xs-12 col-md-6 mx-auto ">
-                    <div class="row mt-4 cle">`+
+                <div class="row">
+                            <div class="col-xs-12 col-md-6 mx-auto">
+                                <a class="btn btnapp " href="/Content/Volunteering_Mission_Page?id=`+ item.value.missionId +`"    >Apply <img src="/images/right-arrow.png" alt=""></a>
+                            </div>
+                            <div class="col-xs-12 col-md-6 mx-auto ">
+                                <div class="row mt-4 cle">`+
 
-                    `<div>
-                </div >
+                                `<div>
+                            </div >
+                        </div>
+                
 
             </div >
 
@@ -546,7 +578,7 @@ $("#FilterBtn").on('click', function () {
                         <table>
                             <tr>
                                 <td rowspan="2"><img src="/images/deadline.png" alt=""></td>
-                                    <td>09/01/2019 </td>
+                                    <td>`+ item.value.deadline+`</td>
                                 </tr>
                                 <tr>
                                     <td class="fsize">Deadline</td>
@@ -649,7 +681,7 @@ function addtofav() {
     });
 };
 
-$('.myfavbtn2').on('click', function() {
+$('.myfavbtn2').on('click', function () {
     var favBtn = this;
     var missionId = $(favBtn).data('mission-id');
     var userId = $(favBtn).data('user-id');
@@ -667,11 +699,11 @@ $('.myfavbtn2').on('click', function() {
                 console.log("successfully added to favorite")
                 if (isFavorite) {
                     $(favBtn).find("i").removeClass("filled-heart");
-                 
+
                 }
                 else {
                     $(favBtn).find("i").addClass("filled-heart");
-                   
+
                 }
             }
         },
@@ -699,6 +731,7 @@ $('#RecommandationBtn button').on('click', function () {
         url: url,
         success: function (data) {
             window.location.reload();
+            toastr.success(' Mail sent successfully ');
         },
     });
 })
@@ -818,12 +851,12 @@ function formatDateTime(dateTimeStr) {
 //for displaying average rating
 $(function () {
     // Get the average mission rating from the server
-    var mId= $('#avg-rating').data('mission-id');
+    var mId = $('#avg-rating').data('mission-id');
     $.ajax({
         type: 'GET',
         url: '/Content/GetAverageMissionRating',
-        
-        data: { missionId: mId  },
+
+        data: { missionId: mId },
         success: function (avgRating) {
             // Create the star rating HTML based on the average rating
             var starsHtml = '';
@@ -946,19 +979,14 @@ next_vol.addEventListener("click", () => {
 
 function recentpagination() {
     for (i = 0; i < recent_vol.length; i++) {
-        if (i < (page*pageSize) && i > (((page - 1)*pageSize) - 1)) {
+        if (i < (page * pageSize) && i > (((page - 1) * pageSize) - 1)) {
             recent_vol[i].classList.remove("d-none");
         }
-else {
+        else {
             recent_vol[i].classList.add("d-none");
         }
     }
     recentvolpagenumber.innerHTML = `<a class="page-link" href="#" style="color:black">${((page - 1) * 6) + 1
-        } - ${(page)*6 < recent_vol.length ? (page)*6 : recent_vol.length
-} of ${ recent_vol.length } Recent Volunteers</a > `
+        } - ${(page) * 6 < recent_vol.length ? (page) * 6 : recent_vol.length
+        } of ${recent_vol.length} Recent Volunteers</a > `
 }
-
-
-
-
-

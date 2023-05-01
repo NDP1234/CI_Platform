@@ -20,5 +20,8 @@ namespace CI_Platform.Entities.Models.VM
         public List<User> Users { get; set; }
         public double AvgRating { get; set; }
         public string GoalObjectiveText { get; set; }
+        public long Goalvalue { get; set; }
+
+        public long totalAchieve { get; set; }
     }
 }

@@ -20,5 +20,6 @@ namespace CI_Platform.Entities.Models.VM
         public string? LastName { get; set; }
         public List<User> Users { get; set; }
         public long? Views { get; set; }
+        public List<StoryInvite> StoryInvites { get; set; }
     }
 }

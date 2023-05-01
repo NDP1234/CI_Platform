@@ -106,6 +106,12 @@ namespace CI_Platform.Repository.Repository
 
         public bool forAddMissionTheme(string Title, int Status)
         {
+            var existTheme = _db.MissionThemes.Any(m => m.Title == Title && m.DeletedAt==null);
+            if (existTheme)
+            {
+                return false;
+            }
+
             var MissionThemeData = new MissionTheme();
             MissionThemeData.Title = Title;
             MissionThemeData.Status = (byte)Status;
@@ -131,6 +137,12 @@ namespace CI_Platform.Repository.Repository
 
         public bool forAddMissionSkill(string Title, int Status)
         {
+            var existSkill = _db.Skills.Any(m => m.SkillName == Title && m.DeletedAt == null);
+            if (existSkill)
+            {
+                return false;
+            }
+
 
             Skill MissionSkillData = new Skill();
 

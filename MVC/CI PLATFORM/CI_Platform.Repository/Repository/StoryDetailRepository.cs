@@ -21,7 +21,7 @@ namespace CI_Platform.Repository.Repository
         public StoryDetailViewModel storyDetailPageInfo(int id, int userId)
         {
             Story stories = _db.Stories.Where(s => s.StoryId == id).First();
-            List<StoryMedium> storyMedium = _db.StoryMedia.Where(s => s.StoryId == id).OrderBy(m=>m.Type).ToList();
+            List<StoryMedium> storyMedium = _db.StoryMedia.Where(s => s.StoryId == id).OrderBy(m => m.Type).ToList();
             User user = _db.Users.Where(u => u.UserId == stories.UserId).First();
             List<User> users = _db.Users.ToList();
 
@@ -43,7 +43,7 @@ namespace CI_Platform.Repository.Repository
             long storyViews = _db.StoryViews.Where(s => s.StoryId == id).Count();
 
 
-           
+
             var viewModel = new StoryDetailViewModel
             {
                 StoryId = stories.StoryId,
@@ -57,7 +57,8 @@ namespace CI_Platform.Repository.Repository
                 LastName = user.LastName,
                 WhyIVolunteer = user.WhyIVolunteer,
                 Users = users,
-                Views = storyViews
+                Views = storyViews,
+                StoryInvites = _db.StoryInvites.ToList()
             };
 
             return viewModel;

@@ -3,7 +3,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-       Layout = null;
+    Layout = null;
 }
 @model StoryDetailViewModel;
 
@@ -14,18 +14,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Story_detail_page </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+
+    @*for toastr*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
     <link rel="stylesheet" href="~/css/sdp.css">
     <style>
         .image-container {
-            width: 900px; 
-            height: 300px; 
-            overflow: hidden; 
+            width: 900px;
+            height: 300px;
+            overflow: hidden;
         }
 
             .image-container img {
-                max-width: 100%; 
-                max-height: 100%; 
+                max-width: 100%;
+                max-height: 100%;
             }
     </style>
 </head>
@@ -34,8 +39,8 @@
         <nav class="navbar navbar-expand-lg navbar-light d-none d-md-block">
             <div class="container">
                 <button class="navbar-toggler bg-light " type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -46,16 +51,12 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                               data-bs-toggle="dropdown" aria-expanded="false">
                                 Policy
                             </a>
-                            <ul class="dropdown-menu ">
-                                <li><a class="dropdown-item " href="#">Policy-1</a></li>
-                                <li><a class="dropdown-item" href="#">Policy-2</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                           <ul class="dropdown-menu text-center">
+                                <li class="mx-auto"><a asp-action="PrivacyPolicyPage" asp-controller="UserEditProfile" class="text-decoration-none text-dark"> Privacy Policy</a></li>
+                                
                             </ul>
                         </li>
 
@@ -64,15 +65,18 @@
 
                         <div class="dropdown">
                             <a class="btn  dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                               data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="@ViewBag.UserDetails.Avatar" alt="" style="border-radius: 50%;" height="30px"
-                                    width="30px">
+                                     width="30px">
                                 <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
                             </a>
 
-                           
+
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                                 @if(@ViewBag.UserDetails.Role == "admin")
+                                {
+                                    <li><a class="dropdown-item" asp-action="AdminDashBoard" asp-controller="Admin">Dashboard</a></li>
+                                }
                                 <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
                                 <li><a class="dropdown-item" asp-action="VolunteeringTimesheet" asp-controller="Timesheet">Volunteering Timesheet</a></li>
                                 <li><a class="dropdown-item" asp-action="Logout" asp-controller="Authentication">Logout </a></li>
@@ -94,7 +98,7 @@
                 <a href="#">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                           aria-expanded="false">
                             Policy
                         </a>
                         <ul class="dropdown-menu ">
@@ -117,18 +121,18 @@
         <hr class="hr" />
         <div class="container mt-5">
             <div class="row">
-              @*carousal*@
+                @*carousal*@
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="image">
                         <img id="selectedImage" class="img-fluid image-container" src="@Model.paths.FirstOrDefault()">
-                        <iframe id="video1"  height="360px" src="" class="d-none w-100 " frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <iframe id="video1" height="360px" src="" class="d-none w-100 " frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
 
                     <div class="container text-center p-0">
                         <div class="row justify-content-center">
                             <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner" role="listbox">
-                                   @foreach (var item in Model.paths)
+                                    @foreach (var item in Model.paths)
                                     {
                                         <div class="carousel-item @(item == Model.paths.FirstOrDefault() ? "active" : "")">
                                             <div class="col-md-3">
@@ -136,12 +140,12 @@
                                                     @if (item.Contains("youtube.com/embed/"))
                                                     {
                                                         <div class="card-img">
-                                                        @{
-                                                            string videoId = item.Substring(item.LastIndexOf("/") + 1);
-                                                            string thumbUrl = string.Format("https://img.youtube.com/vi/{0}/maxresdefault.jpg", videoId);
-                                                        }
-                                                        <img src="@thumbUrl" data-url="@item" class="img-fluid img2 if" id="ivideo" onclick="displayVideo(this)">
-                                                    </div>
+                                                            @{
+                                                                string videoId = item.Substring(item.LastIndexOf("/") + 1);
+                                                                string thumbUrl = string.Format("https://img.youtube.com/vi/{0}/maxresdefault.jpg", videoId);
+                                                            }
+                                                            <img src="@thumbUrl" data-url="@item" class="img-fluid img2 if" id="ivideo" onclick="displayVideo(this)">
+                                                        </div>
 
 
                                                     }
@@ -156,7 +160,7 @@
                                         </div>
                                     }
 
-                                    
+
                                 </div>
                                 <a class="carousel-control-prev bg-transparent w-auto" href="#recipeCarousel" role="button"
                                    data-bs-slide="prev">
@@ -170,42 +174,43 @@
                         </div>
                     </div>
                 </div>
-                
 
 
-                
+
+
 
 
                 <div class="col-lg-6 col-md-12 col-sm-12 ">
                     <div class="d-flex  mb-3">
                         <div class="p-2 ">
                             <img src="@Model.Avatar" class="rounded-pill" alt="unable to load an image">
-                            <div>@Model.FirstName @Model.LastName</div> 
+                            <div>@Model.FirstName @Model.LastName</div>
                         </div>
                         <div class="ms-auto  mt-auto p-2">
                             <div class="rounded-pill border p-1 px-3">
                                 <img src="/images/eye.png" alt="">
-                                <span class="views" >@Model.Views Views</span>
+                                <span class="views">@Model.Views Views</span>
                             </div>
                         </div>
                     </div>
                     <div>
                         <p class="p-text">
-                            
-                            @Model.WhyIVolunteer                        
+
+                            @Model.WhyIVolunteer
                         </p>
-                       
+
                     </div>
                     <div class="row">
                         <div class="col-md-7 mob-margin">
                             <button class="rounded-pill px-2 pt-2 pb-2 bg-white w-100" data-bs-toggle="modal" data-bs-target="#RecommendModel" type="button">
                                 <img src="/images/add1.png" alt="">
-                                <span >Recommanded To Co-Worker</span>
+                                <span>Recommanded To Co-Worker</span>
                             </button>
                         </div>
                         <div class="col-md-5  mob-margin">
-                            <a class="btn btnlist pt-2 pb-2  text-center w-100" asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id ="@Model.MissionId">Open Mission <img src="/images/right-arrow.png"
-                                alt="unable to load an image">
+                            <a class="btn btnlist pt-2 pb-2  text-center w-100" asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id="@Model.MissionId">
+                                Open Mission <img src="/images/right-arrow.png"
+                                                  alt="unable to load an image">
                             </a>
                         </div>
                     </div>
@@ -213,193 +218,81 @@
             </div>
             <div class="mt-5">
                 <h4>
-                   
+
                     @Model.Title
                 </h4>
                 <hr class="hr" />
                 <P class="p-text">
-                    @Model.Description 
-               </P>
-                <P class="p-text">
-                     @Model.Description 
-               </P>
-               
+                    @Html.Raw(Model.Description)
+                </P>
+                
+
             </div>
         </div>
-                @*Modal for Recommand to co-worker*@
-                    <div class="modal fade" id="RecommendModel" tabindex="-1" aria-hidden="true" aria-labelledby="exampleModalLabel">
-                      <div class="modal-dialog modal-dialog-centered" >
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h4 class="modal-title" id="exampleModalLabel">Select coworkers for recommendation </h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
-                          </div>
-                          <div class="modal-body">
-                              @foreach (var coworker in Model.Users)
-                              {
-                                <div  class="d-flex flex-row justify-content-between border-bottom mt-1 py-1">
-                                     <div class="d-flex flex-row gap-2">
-                                        <img src="~/Images/volunteer1.png" class="rounded-circle" width="40px" height="40px"/>
-                                        <span>@coworker.FirstName @coworker.LastName </span>
-                                    </div>
-                                     <div id="RecommandationBtn">
-                                         <button type="button"  class="btn btn-primary" id="@coworker.UserId" value="@Model.StoryId @ViewBag.UserDetails.UserId @coworker.UserId @coworker.Email">
-                                             <img src="~/Images/user.png" class="rounded-circle" width="35px" height="35px"/>Recommanded</button>
-                                    </div>
-                                </div>
-                              }
-                          </div>
-                          <div class="modal-footer">
-                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                          </div>
-                        </div>
-                      </div>
+        @*Modal for Recommand to co-worker*@
+        <div class="modal fade" id="RecommendModel" tabindex="-1" aria-hidden="true" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel">Select coworkers for recommendation </h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
                     </div>
+                    <div class="modal-body">
+                        @foreach (var coworker in Model.Users)
+                        {
+                            <div class="d-flex flex-row justify-content-between border-bottom mt-1 py-1">
+                                <div class="d-flex flex-row gap-2">
+                                    <img src="~/Images/volunteer1.png" class="rounded-circle" width="40px" height="40px" />
+                                    <span>@coworker.FirstName @coworker.LastName </span>
+                                </div>
+                                <div id="RecommandationBtn">
+                                    @{
+                                        bool emailSent = Model.StoryInvites.Any(mi => mi.ToUserId == coworker.UserId && mi.StoryId == Model.StoryId && mi.FromUserId == ViewBag.UserDetails.UserId);
+
+                                    }
+                                    @if (emailSent)
+                                    {
+                                        <span class="text-success me-2">
+                                            <i class="bi bi-check-lg"></i>
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-primary" id="@coworker.UserId" value="@Model.StoryId @ViewBag.UserDetails.UserId @coworker.UserId @coworker.Email">
+                                            <img src="~/Images/user.png" class="rounded-circle" width="35px" height="35px" />Recommanded
+                                        </button>
+                                    }
+                                    
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <hr class="hr mt-5" />
 
-        <div class="container">
-        
+    <div class="container">
+
         <div class="privacy-policy mt-3 mb-3">
             <a asp-action="PrivacyPolicyPage" asp-controller="UserEditProfile" style="text-decoration:none;"> Privacy Policy</a>
         </div>
     </div>
-     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+   
     <script src="https://code.jquery.com/jquery-3.6.3.js"
-        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-        <script src="~/js/story.js"></script>
-    <script>
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    
+    @*for toastr*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-        function openNav() {
-            document.getElementById("mySidebar1").style.width = "250px";
-            document.getElementById("main1").style.marginLeft = "250px";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidebar1").style.width = "0";
-            document.getElementById("main1").style.marginLeft = "0";
-        }
-        function openNav2() {
-            document.getElementById("mySidebar2").style.width = "250px";
-            document.getElementById("main2").style.marginLeft = "250px";
-        }
-
-        function closeNav2() {
-            document.getElementById("mySidebar2").style.width = "0";
-            document.getElementById("main2").style.marginLeft = "0";
-        }
-
-
-        function showView(viewName) {
-            $('.all-view').addClass('d-none')
-
-            if (viewName == 'grid') {
-                $('#products').removeClass("d-none")
-            }
-            else if (viewName == "list") {
-                $('#myListView').removeClass("d-none")
-            }
-        }
-
-        function show(image_id) {
-            console.log("run");
-
-            document.getElementById('id12')
-                .style.display = "none";
-            document.getElementById('id1')
-                .style.display = "none";
-            document.getElementById('id2')
-                .style.display = "none";
-            document.getElementById('id3')
-                .style.display = "none";
-            document.getElementById('id4')
-                .style.display = "none";
-            document.getElementById('id5')
-                .style.display = "none";
-            document.getElementById('id6')
-                .style.display = "none";
-            document.getElementById(image_id)
-                .style.display = "block";
-
-
-
-        }
-        let items = document.querySelectorAll('.carousel .carousel-item')
-
-        items.forEach((el) => {
-            const minPerSlide = 4
-            let next = el.nextElementSibling
-            for (var i = 1; i < minPerSlide; i++) {
-                if (!next) {
-                    next = items[0]
-                }
-                let cloneChild = next.cloneNode(true)
-                el.appendChild(cloneChild.children[0])
-                next = next.nextElementSibling
-            }
-        })
-       
-        
-
-
-    //for recommanded to coworker
-        $("#RecommandationBtn button").on('click', function () {
-    console.log("click");
-    var udetails = $(this).attr('value');
-    var arr = udetails.split(" ");
-    var Recommanded = {
-        SId: arr[0],
-        FromUid: arr[1],
-        Uid: arr[2],
-        Uemail: arr[3]
-    };
-    console.log(Recommanded);
-    var url = "/StoryRelated/RecommandToCoWorker?Recommanded=" + JSON.stringify(Recommanded);
-
-    $.ajax({
-        url: url,
-        success: function (data) {
-            window.location.reload();
-        },
-    });
-})
-        //for displaying images in story carousal
-        function displayImage(img) {
-            var selectedImage = document.getElementById("selectedImage");
-            var videoFrame = document.getElementById("video1");
-            selectedImage.classList.remove("d-none");
-            videoFrame.classList.add("d-none");
-
-            selectedImage.src = img.src;
-        }
-
-        //for displaying VIDEO in story carousal
-       function displayVideo(img) {
-           
-           var selectedImage = document.getElementById("selectedImage");
-           var videoFrame = document.getElementById("video1");
-            selectedImage.classList.add("d-none");
-            videoFrame.classList.remove("d-none");
-            videoFrame.classList.add("d-block");
-            var videoUrl = $('#ivideo').data('url');
-            console.log(videoUrl);
-            
-            videoFrame.src = videoUrl;
-            console.log(selectedImage);
-            console.log(videoFrame);
-            
-        }
-
-
-
-        
-
-
-        
-
-
-    </script>
+        <script src="~/js/StoryDetail.js"></script>
 
 </body>
 </html>

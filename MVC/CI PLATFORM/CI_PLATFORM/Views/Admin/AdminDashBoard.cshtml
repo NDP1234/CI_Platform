@@ -38,6 +38,7 @@
 <body>
     <div class="container-fluid">
         <div class="row">
+
             <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
             <!-- sidebar -->
             <div class="col-md-12 col-lg-3 col-12 col-xs-12 col-xl-2">
@@ -199,7 +200,10 @@
                 <!-- navbar-top -->
                 <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
                 <!-- for displaying tabs -->
+
                 <div class="tab-content col-md-10 col-8 w-100 me-5" id="v-pills-tabContent">
+                   
+
                     <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
                     <!-- UserTAB -->
                     <div class="tab-pane fade  show active " id="v-pills-User" role="tabpanel" aria-labelledby="v-pills-home-tab">
@@ -427,7 +431,7 @@
                                                     <label for="myPwd2" class="form-label">Password</label>
                                                     <div class="d-flex w-100">
                                                         <input type="password" class="form-control border border-end-0" id="myPwd2" required> <i class="bi bi-eye-slash border border-start-0 "
-                                                                                                                                                 id="togglePassword"></i>
+                                                                                                                                                 id="togglePassword2"></i>
 
                                                     </div>
                                                     <div class="invalid-feedback">
@@ -507,7 +511,7 @@
                                             <div class="col">
                                                 <label for="phonenumber2" class="form-label">Phone Number</label>
                                                 @*<input type="tel" id="phonenumber2" class="d-block w-100 form-control" pattern="^\d{10}$" maxlength="10" required />*@
-                                                  <input type="tel" id="phonenumber2" class="d-block w-100 form-control is-valid" pattern="^\d{10}$" maxlength="10" required />
+                                                <input type="tel" id="phonenumber2" class="d-block w-100 form-control is-valid" pattern="^\d{10}$" maxlength="10" required />
 
                                                 <div class="invalid-feedback">
                                                     Please enter phone number.
@@ -808,11 +812,9 @@
                         </div>
                         <!-- Mission table -->
                         <div class="missionList">
-                             @await Html.PartialAsync("_MissionPartial", Model)
+                            @await Html.PartialAsync("_MissionPartial", Model)
                         </div>
                         <!-- Mission table -->
-                       
-
                         @*modal for edit mission*@
                         <div class="modal fade" id="editMissionDetailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog  modal-xl">
@@ -1234,11 +1236,10 @@
                         </div>
 
                         <!-- Mission skill table -->
-                            <div id="missionskillPartialView">
-                                @await Html.PartialAsync("_MissionSkill", Model)
-                            </div>
+                        <div id="missionskillPartialView">
+                            @await Html.PartialAsync("_MissionSkill", Model)
+                        </div>
                         <!-- Mission skill table -->
-                       
                         @*modal for edit missionskill*@
                         <!-- Modal -->
                         <div class="modal fade " id="editMissionSkillModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1306,7 +1307,7 @@
 
 
                         <!-- Story table -->
-                        <div  class="StoryListing">
+                        <div class="StoryListing">
                             @await Html.PartialAsync("_StoryPartial", Model)
                         </div>
                         <!-- Story table -->
@@ -1380,7 +1381,7 @@
 
                         <!-- BannerManagement table -->
                         <div class="Bannerdata">
-                             @await Html.PartialAsync("_BannerManagementPartial", Model)
+                            @await Html.PartialAsync("_BannerManagementPartial", Model)
                         </div>
                         <!--edit BannerManagement modal -->
                         <div class="modal fade" id="editBannerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

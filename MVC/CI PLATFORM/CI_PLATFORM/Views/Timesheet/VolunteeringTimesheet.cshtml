@@ -18,6 +18,9 @@
     <title>Volunterring Timesheet</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+
+    
+
     <link rel="stylesheet" href="~/css/vts.css">
 
 </head>
@@ -43,13 +46,9 @@
                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Policy
                             </a>
-                            <ul class="dropdown-menu ">
-                                <li><a class="dropdown-item " href="#">Policy-1</a></li>
-                                <li><a class="dropdown-item" href="#">Policy-2</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                            <ul class="dropdown-menu text-center">
+                                <li class="mx-auto"><a asp-action="PrivacyPolicyPage" asp-controller="UserEditProfile" class="text-decoration-none text-dark"> Privacy Policy</a></li>
+                                
                             </ul>
                         </li>
 
@@ -65,7 +64,10 @@
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                                @if(@ViewBag.UserDetails.Role == "admin")
+                                {
+                                    <li><a class="dropdown-item" asp-action="AdminDashBoard" asp-controller="Admin">Dashboard</a></li>
+                                }
                                 <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
                                 <li><a class="dropdown-item" asp-action="VolunteeringTimesheet" asp-controller="Timesheet">Volunteering Timesheet</a></li>
                                 <li><a class="dropdown-item" asp-action="Logout" asp-controller="Authentication">Logout </a></li>
@@ -159,7 +161,7 @@
                                          aria-hidden="true">
 
                                             <div class="modal-dialog modal-lg">
-                                                <form class="row g-3 needs-validation  timebasedtimesheet " novalidate>
+                                                <form class="row g-3 needs-validation editabletimebasedtimesheet " novalidate>
                                                     <div class="modal-content">
 
                                                         <div class="modal-header">
@@ -184,7 +186,7 @@
                                                                     <div class="col">
                                                                         <label class="mb-2" for="myDate-@item.TimesheetId" class="form-label">Date Volunteered</label>
                                                                         <input type="date" class="form-control" id="myDate-@item.TimesheetId"
-                                                                           placeholder="Select date" value="@item.DateVolunteered.ToString("yyyy-MM-dd")" required>
+                                                                               placeholder="Select date" value="@item.DateVolunteered.ToString("yyyy-MM-dd")" data-start-date="@item.Mission.StartDate" data-end-date="@item.Mission.EndDate" required>
                                                                         <div class="invalid-feedback">
                                                                             Please select a valid date.
                                                                         </div>
@@ -193,7 +195,7 @@
                                                                 <div class="row mb-3">
                                                                     <div class="col-md-6">
                                                                         <label class="mb-2" for="myHour-@item.TimesheetId" class="form-label">Hours</label>
-                                                                        <input type="number" class="form-control" id="myHour-@item.TimesheetId"
+                                                                        <input type="number" class="form-control" min="0" max="23" id="myHour-@item.TimesheetId"
                                                                            placeholder="Enter Spent Hours " value="@item.Time.Value.Hour" required>
                                                                         <div class="invalid-feedback">
                                                                             Please select a valid Hours.
@@ -201,7 +203,7 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <label class="mb-2" for="myMinutes-@item.TimesheetId" class="form-label">Minutes</label>
-                                                                        <input type="number" class="form-control" id="myMinutes-@item.TimesheetId"
+                                                                        <input type="number" class="form-control" min="1" max="60" id="myMinutes-@item.TimesheetId"
                                                                            placeholder="Enter Spent Minutes " value="@item.Time.Value.Minute" required>
                                                                         <div class="invalid-feedback">
                                                                             Please select a valid Minutes.
@@ -287,7 +289,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form class="row g-3 needs-validation " novalidate>
+                                                        <form class="row g-3 needs-validation editableGoalbasedTimesheetValidation" novalidate>
                                                         <div class="container">
                                                             <div class="row mb-3">
                                                                 <div class="col">
@@ -304,8 +306,8 @@
                                                             <div class="row mb-3">
                                                                 <div class="col">
                                                                     <label class="mb-2" for="myAction-@item.TimesheetId" class="form-label">Actions</label>
-                                                                    <input type="number" class="form-control" id="myAction-@item.TimesheetId"
-                                                                       placeholder="Enter Actions" value="@item.Action">
+                                                                        <input type="number" class="form-control" id="myAction-@item.TimesheetId"
+                                                                               placeholder="Enter Actions" min="1" value="@item.Action" required>
                                                                     <div class="invalid-feedback">
                                                                         Please specify a valid action.
                                                                     </div>
@@ -317,7 +319,7 @@
                                                                         Date Volunteered
                                                                     </label>
                                                                     <input type="date" class="form-control" id="myDate2-@item.TimesheetId"
-                                                                       placeholder="Select date" value="@item.DateVolunteered.ToString("yyyy-MM-dd")" >
+                                                                               placeholder="Select date" value="@item.DateVolunteered.ToString("yyyy-MM-dd")" data-start-date="@item.Mission.StartDate" data-end-date="@item.Mission.EndDate" required>
                                                                     <div class="invalid-feedback">
                                                                         Please select a valid date.
                                                                     </div>
@@ -327,7 +329,7 @@
                                                                 <div class="col">
                                                                     <label class="mb-2" for="myMessage2-@item.TimesheetId" class="form-label">Message</label>
                                                                     <textarea type="date" class="form-control" id="myMessage2-@item.TimesheetId"
-                                                                          placeholder="Enter your message" rows="4">@item.Notes</textarea>
+                                                                                  placeholder="Enter your message" rows="4" required>@item.Notes</textarea>
                                                                     <div class="invalid-feedback">
                                                                         Please write message here.
                                                                     </div>
@@ -398,7 +400,7 @@
                                         <div class="col-md-6">
                                             <label class="mb-2" for="myHour" class="form-label">Hours</label>
                                             <input type="number" class="form-control" id="myHour"
-                                                   placeholder="Enter Spent Hours " min="0" max="24" required>
+                                                   placeholder="Enter Spent Hours " min="0" max="23" required>
                                             <div class="invalid-feedback">
                                                 Please select a valid Hours.
                                             </div>
@@ -469,7 +471,7 @@
                                         <div class="col">
                                             <label class="mb-2" for="myAction" class="form-label">Actions</label>
                                             <input type="number" class="form-control" id="myAction"
-                                                   placeholder="Enter Actions" required>
+                                                   placeholder="Enter Actions" min="1" required>
                                             <div class="invalid-feedback">
                                                 Please specify a valid action.
                                             </div>
@@ -524,6 +526,9 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+   
+
     <script src="~/js/timesheet.js" asp-append-version="true"></script>
 </body>
 

@@ -53,6 +53,10 @@ namespace CI_PLATFORM.Controllers
                 
                 if (userExists != null)
                 {
+                    if (userExists.DeletedAt != null)
+                    {
+                        return RedirectToAction("login", "Authentication");
+                    }
                     // User exists
                     HttpContext.Session.SetString("Login", userExists.Email);
 

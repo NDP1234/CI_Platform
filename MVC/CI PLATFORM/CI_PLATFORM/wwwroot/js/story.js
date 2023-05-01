@@ -15,7 +15,7 @@ fileInput.addEventListener('change', function (event) {
         if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
             const newImage = document.createElement(file.type.startsWith('image/') ? 'img' : 'video');
             newImage.src = URL.createObjectURL(file);
-            newImage.controls = true; 
+            newImage.controls = true;
 
             // Convert the file to base64 and add it to the selectedImagesBase64 array
             const reader = new FileReader();
@@ -57,7 +57,7 @@ function handleRemoveIconClick() {
             if (index !== -1) {
                 selectedImagesBase64.splice(index, 1);
             }
-            
+
             // Remove the selected image item from the selectedImage div
             this.parentElement.remove();
         });
@@ -73,13 +73,15 @@ $("#SaveBtn").on('click', function () {
     var missiontitle = $("#myInputSelect option:selected").text();
     var publisheddate = $("#myStoryDate").val();
     var status = "DRAFT";
-    var description = CKEDITOR.instances.editor1.editable().getText();
+    //var description = CKEDITOR.instances.editor1.editable().getText();
+    var description = CKEDITOR.instances.editor1.getData();
+
     var videoUrl = $("#myStoryVideo").val();
     let vId = videoUrl.split('v=')[1];
     var url = "https://www.youtube.com/embed/" + vId;
     var pathlist = selectedImagesBase64.concat(paths);
     console.log(pathlist);
-    
+
     console.log(pathlist)
     console.log("User ID:", userid);
     console.log("Mission ID:", missionid);
@@ -126,14 +128,15 @@ $("#submitBtn").on('click', function () {
     var missiontitle = $("#myInputSelect option:selected").text();
     var publisheddate = $("#myStoryDate").val();
     var status = "PUBLISHED";
-    var description = CKEDITOR.instances.editor1.editable().getText();
+    //var description = CKEDITOR.instances.editor1.editable().getText();
+    var description = CKEDITOR.instances.editor1.getData();
     var videoUrl = $("#myStoryVideo").val();
     console.log(videoUrl);
     var vId = videoUrl.split('v=')[1];
-    var url = "https://www.youtube.com/embed/"+vId;
-   
+    var url = "https://www.youtube.com/embed/" + vId;
 
-    
+
+
     console.log("User ID:", userid);
     console.log("Mission ID:", missionid);
     console.log("Story Title:", storytitle);
@@ -156,7 +159,7 @@ $("#submitBtn").on('click', function () {
 
         },
         success: function (data) {
-         
+
             alert("data is successfully stored");
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -204,7 +207,7 @@ missionSelect.addEventListener("change", function () {
             $("#SaveBtn").prop("disabled", false);
             $("#previewbtn").prop("disabled", true);
             console.log('failed while storing: ' + textStatus + ', ' + errorThrown);
-           
+
             alert("please save the draft before submit");
         }
     });
@@ -225,20 +228,21 @@ $(document).ready(function () {
                 if (data.length > 0) {
                     console.log(data);
 
-                    CKEDITOR.instances.editor1.editable().setText(data[0].description);
+                    //CKEDITOR.instances.editor1.editable().setText(data[0].description);
+                    CKEDITOR.instances.editor1.setData(data[0].description);
                     $("#storyTitle").val(data[0].title);
                     var publishedDate = data[0].publishedAt;
                     var yyyymmdd = formatedate(publishedDate);
                     $("#myStoryDate").val(yyyymmdd);
 
-                    paths = data[0].paths; 
+                    paths = data[0].paths;
 
                     var videoURLs = [];
 
                     // Loop through each path in the paths array
                     for (var i = 0; i < paths.length; i++) {
 
-                        
+
                         if (paths[i].includes("https://www.youtube.com/embed/")) {
 
                             // Extract the video ID(token) from the link using a regular expression
@@ -267,15 +271,16 @@ $(document).ready(function () {
 
                     }
                     $(".selectedImage").html(imagesHtml);
-   
+
                 }
                 else {
-                    CKEDITOR.instances.editor1.editable().setText('');
+                    CKEDITOR.instances.editor1.setData('')
+                    //CKEDITOR.instances.editor1.editable().setText('');
                     $("#storyTitle").val('');
                     $("#myStoryDate").val('');
                     $(".selectedImage").html('');
                     $("#myStoryVideo").val('');
-                    
+
                 }
 
             },
@@ -298,7 +303,7 @@ $(document).ready(function () {
 
 
 /*function that converts datetime to yyyy-mm-dd format*/
-function formatedate(datetime){
+function formatedate(datetime) {
     const inputDateStr = datetime;
     const date = new Date(inputDateStr);
 
@@ -306,35 +311,7 @@ function formatedate(datetime){
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
     const outputDateStr = `${year}-${month}-${day}`;
-    console.log(outputDateStr); 
+    console.log(outputDateStr);
     return outputDateStr;
 
 }
-
-//for recommended to co-worker functionality
-$("#RecommandationBtn").on('click', function () {
-    cosole.log("click");
-    var udetails = $(this).attr('value');
-    var arr = udetails.split(" ");
-    var Recommanded = {
-        SId: arr[0],
-        FromUid: arr[1],
-        Uid: arr[2],
-        Uemail: arr[3]
-    };
-    console.log(Recommanded);
-    var url = "/StoryRelated/RecommandToCoWorker?Recommanded=" + JSON.stringify(Recommanded);
-
-    $.ajax({
-        url: url,
-        success: function (data) {
-            window.location.reload();
-        },
-    });
-})
-
-
-   
-    
-
-

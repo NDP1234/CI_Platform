@@ -36,7 +36,29 @@ $('#SaveBtn').on('click', function () {
     console.log(myMessage);
 
 
-    if (userId && selectedTitleid && myDate && myHour >= 0 && myHour <= 24 && myMinutes >= 0 && myMinutes <= 60 && myMessage) {
+    //  custom validation for the date field
+    const myDateForTimeBasedTimesheet = document.getElementById('myDate');
+    myDateForTimeBasedTimesheet.addEventListener('change', function () {
+        const missionSelect = document.getElementById('mymission');
+        const selectedOption = missionSelect.options[missionSelect.selectedIndex];
+        const startDate = new Date(selectedOption.getAttribute('data-start-date'));
+        const endDate = new Date(selectedOption.getAttribute('data-end-date'));
+        const selectedDate = new Date(this.value);
+
+        if (selectedDate >= startDate && selectedDate <= endDate) {
+            myDateForTimeBasedTimesheet.classList.add('is-valid');
+            myDateForTimeBasedTimesheet.classList.remove('is-invalid');
+        } else {
+            myDateForTimeBasedTimesheet.classList.add('is-invalid');
+            myDateForTimeBasedTimesheet.classList.remove('is-valid');
+        }
+    });
+
+
+    if (userId && selectedTitleid && myDate && myHour >= 0 && myHour < 24 && myMinutes >= 0 && myMinutes <= 60 && myMessage) {
+
+
+
         $.ajax({
             type: "POST",
             url: "/Timesheet/SaveTimeBasedTimesheet",
@@ -51,9 +73,9 @@ $('#SaveBtn').on('click', function () {
             success: function (data) {
                 console.log(data);
                 location.reload();
-                
+
                 alert("data is  successfully added");
-               
+
             },
         })
     }
@@ -64,7 +86,7 @@ $('#SaveBtn').on('click', function () {
 var timesheetId;
 
 $("#editableBtn").on("click", function () {
-    
+
 
     timesheetId = $(this).data("timesheet-id");
 
@@ -77,7 +99,28 @@ $("#editableBtn").on("click", function () {
 
 //for update and save the edited timesheet details  
 
-$(document).on('click','#SaveBtn2', function () {
+$(document).on('click', '#SaveBtn2', function () {
+
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation .editabletimebasedtimesheet')
+        console.log(forms);
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+
+            })
+    })()
+
     console.log("click on sv btn")
     var timesheetId = $(this).data('timesheet-id');
     var userId = $('#SaveBtn2').data('user-id');
@@ -85,37 +128,71 @@ $(document).on('click','#SaveBtn2', function () {
     var mHour = $(`#myHour-${timesheetId}`).val();
     var mMinute = $(`#myMinutes-${timesheetId}`).val();
     var mMessage = $(`#myMessage-${timesheetId}`).val();
- 
+
     console.log(timesheetId);
     console.log(userId);
     console.log(mDate);
     console.log(mHour);
     console.log(mMinute);
     console.log(mMessage);
+
+    //custome validation for date
+    const myDateForEditedTimeBasedTimesheet = document.getElementById(`myDate-${timesheetId}`);
+
+
+    var selectedEditedDate = mDate;
+
+    var startDateEditedTimesheet = $(`#myDate-${timesheetId}`).attr('data-start-date');
+    var endDateEditedTimesheet = $(`#myDate-${timesheetId}`).attr('data-end-date');
+    var EditedStartDateTimeBased = DateFormatting(startDateEditedTimesheet);
+    var EditedEndDateTimeBased = DateFormatting(endDateEditedTimesheet);
+
+
+    if (selectedEditedDate >= EditedStartDateTimeBased && selectedEditedDate <= EditedEndDateTimeBased) {
+        myDateForEditedTimeBasedTimesheet.classList.add('is-valid');
+        myDateForEditedTimeBasedTimesheet.classList.remove('is-invalid');
+    } else {
+        myDateForEditedTimeBasedTimesheet.classList.add('is-invalid');
+        myDateForEditedTimeBasedTimesheet.classList.remove('is-valid');
+    }
+    //custom validation for hour and minutes
+    if (mHour < 0 || mHour > 24 || isNaN(mHour)) {
+        $(`#myHour-${timesheetId}`).addClass('is-invalid');
+    } else {
+        $(`#myHour-${timesheetId}`).removeClass('is-invalid');
+    }
+    if (mMinute < 1 || mMinute > 60 || isNaN(mMinute)) {
+        $(`#myMinutes-${timesheetId}`).addClass('is-invalid');
+    } else {
+        $(`#myMinutes-${timesheetId}`).removeClass('is-invalid');
+    }
+
+
+    if ($('.is-invalid').length === 0) {
         $.ajax({
-        type: "POST",
+            type: "POST",
             url: "/Timesheet/editTimeBasedTimesheetDetails",
             data: {
-            uesrId: userId,
-            TimesheetId: timesheetId,
-            Date: mDate,
-            Hour: mHour,
-            Minute: mMinute,
-            Message: mMessage
-        },
-        success: function (data) {
-            console.log(data);
-            location.reload();
-            alert("eidted data is successfully saved");
-           
-        },
-    })
+                uesrId: userId,
+                TimesheetId: timesheetId,
+                Date: mDate,
+                Hour: mHour,
+                Minute: mMinute,
+                Message: mMessage
+            },
+            success: function (data) {
+                console.log(data);
+                location.reload();
+                alert("eidted data is successfully saved");
 
+            },
+        })
+    }
 })
 
 //for remove  timesheet detail while click on trash button 
 $(document).ready(function () {
-  
+
     $('.TrashBtn').on('click', function () {
         var timesheetId = $(this).data('timesheet-id');
         if (confirm("Are you sure  want to delete this detail?")) {
@@ -129,7 +206,7 @@ $(document).ready(function () {
                         alert("data is successfully removed");
                     }
                 },
-               
+
             });
         }
     });
@@ -164,6 +241,30 @@ $('#SaveBtn3').on('click', function () {
     var myAction = $('#myAction').val();
     var myMessage = $('#myMessage2').val();
 
+    //  custom validation for the date field
+    const myDateForGoalBasedTimesheet = document.getElementById('myDate2');
+    myDateForGoalBasedTimesheet.addEventListener('change', function () {
+        const missionSelect2 = document.getElementById('mymission2');
+        const selectedOption2 = missionSelect2.options[missionSelect2.selectedIndex];
+        const startDate2 = new Date(selectedOption2.getAttribute('data-start-date'));
+        const endDate2 = new Date(selectedOption2.getAttribute('data-end-date'));
+        const selectedDate = new Date(this.value);
+
+        if (selectedDate >= startDate2 && selectedDate <= endDate2) {
+            myDateForGoalBasedTimesheet.classList.add('is-valid');
+            myDateForGoalBasedTimesheet.classList.remove('is-invalid');
+        } else {
+            myDateForGoalBasedTimesheet.classList.add('is-invalid');
+            myDateForGoalBasedTimesheet.classList.remove('is-valid');
+        }
+    });
+
+
+    if (myAction < 1) {
+        $('#myAction').addClass('is-invalid');
+    } else {
+        $('#myAction').removeClass('is-invalid');
+    }
 
     console.log(userId);
     console.log(selectedTitleid);
@@ -171,7 +272,7 @@ $('#SaveBtn3').on('click', function () {
     console.log(myAction);
     console.log(myMessage);
 
-    if (userId && selectedTitleid  && myDate && myAction && myMessage) {
+    if (userId && selectedTitleid && myDate && myAction > 0 && myMessage) {
         $.ajax({
             type: "POST",
             url: "/Timesheet/SaveGoalBasedTimesheet",
@@ -210,8 +311,29 @@ $("#editableBtn2").on("click", function () {
 
 
 //for update and save the edited goal based timesheet details 
-//$('#SaveBtn4').on('click', function () {
+
 $(document).on('click', '#SaveBtn4', function () {
+
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation.editableGoalbasedTimesheetValidation')
+        console.log(forms);
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+
+            })
+    })()
+
     var timesheetId = $(this).data('timesheet-id');
     var userId = $('#SaveBtn4').data('user-id');
     var myDate = $(`#myDate2-${timesheetId}`).val();
@@ -223,66 +345,96 @@ $(document).on('click', '#SaveBtn4', function () {
     console.log(myDate);
     console.log(myAction);
     console.log(myMessage);
-    $.ajax({
-        type: "POST",
-        url: "/Timesheet/editGoalBasedTimesheetDetails",
-        data: {
-            uesrId: userId,
-            TimesheetId: timesheetId,
-            Date: myDate,
-            Action: myAction,
-            Message: myMessage
-        },
-        success: function (data) {
-            console.log(data);
-            location.reload();
-            alert("eidted data is successfully saved");
 
-        },
-    })
+    //custome validation for date
+    const myDateForEditedGoalBasedTimesheet = document.getElementById(`myDate2-${timesheetId}`);
 
+
+    var selectedEditedDate = myDate;
+
+    var startDateEditedTimesheetForGoalBased = $(`#myDate2-${timesheetId}`).attr('data-start-date');
+    var endDateEditedTimesheetForGoalBased = $(`#myDate2-${timesheetId}`).attr('data-end-date');
+    var EditedStartDateTimeBased = DateFormatting(startDateEditedTimesheetForGoalBased);
+    var EditedEndDateTimeBased = DateFormatting(endDateEditedTimesheetForGoalBased);
+
+
+    if (selectedEditedDate >= EditedStartDateTimeBased && selectedEditedDate <= EditedEndDateTimeBased) {
+        myDateForEditedGoalBasedTimesheet.classList.add('is-valid');
+        myDateForEditedGoalBasedTimesheet.classList.remove('is-invalid');
+    } else {
+        myDateForEditedGoalBasedTimesheet.classList.add('is-invalid');
+        myDateForEditedGoalBasedTimesheet.classList.remove('is-valid');
+    }
+
+    //custom validation for myAction
+    if (myAction < 1) {
+        $(`#myAction-${timesheetId}`).addClass('is-invalid');
+    } else {
+        $(`#myAction-${timesheetId}`).removeClass('is-invalid');
+    }
+
+    //if (userId && timesheetId &&  myDate && myAction > 0 && myMessage) {
+    if ($('.is-invalid').length === 0) {
+        $.ajax({
+            type: "POST",
+            url: "/Timesheet/editGoalBasedTimesheetDetails",
+            data: {
+                uesrId: userId,
+                TimesheetId: timesheetId,
+                Date: myDate,
+                Action: myAction,
+                Message: myMessage
+            },
+            success: function (data) {
+                console.log(data);
+                location.reload();
+                alert("eidted data is successfully saved");
+
+            },
+        })
+    }
 })
 
 
-    $(document).ready(function () {
-        // add event listener to mymission select element
-        $("#mymission").change(function () {
-            var selectedMission = $(this).find(":selected");
-            var startTime = selectedMission.data("start-date");
-  
-
-            var formatedStartTime = DateFormatting(startTime);
+$(document).ready(function () {
+    // add event listener to mymission select element
+    $("#mymission").change(function () {
+        var selectedMission = $(this).find(":selected");
+        var startTime = selectedMission.data("start-date");
 
 
-            console.log(selectedMission);
-            console.log(startTime);
-            console.log(formatedStartTime);
+        var formatedStartTime = DateFormatting(startTime);
 
-            // update myDate input element's min and max attributes based on selected mission's start and end times
-            $("#myDate").attr("min", formatedStartTime);
 
-        });
+        console.log(selectedMission);
+        console.log(startTime);
+        console.log(formatedStartTime);
+
+        // update myDate input element's min and max attributes based on selected mission's start and end times
+        $("#myDate").attr("min", formatedStartTime);
+
     });
+});
 
- $(document).ready(function () {
-        // add event listener to mymission select element
-     $("#mymission2").change(function () {
-            var selectedMission = $(this).find(":selected");
-            var startTime = selectedMission.data("start-date");
-  
-
-            var formatedStartTime = DateFormatting(startTime);
+$(document).ready(function () {
+    // add event listener to mymission select element
+    $("#mymission2").change(function () {
+        var selectedMission = $(this).find(":selected");
+        var startTime = selectedMission.data("start-date");
 
 
-            console.log(selectedMission);
-            console.log(startTime);
-            console.log(formatedStartTime);
+        var formatedStartTime = DateFormatting(startTime);
 
-            // update myDate input element's min and max attributes based on selected mission's start and end times
-            $("#myDate2").attr("min", formatedStartTime);
 
-        });
+        console.log(selectedMission);
+        console.log(startTime);
+        console.log(formatedStartTime);
+
+        // update myDate input element's min and max attributes based on selected mission's start and end times
+        $("#myDate2").attr("min", formatedStartTime);
+
     });
+});
 
 
 function DateFormatting(dateStr) {
@@ -293,5 +445,5 @@ function DateFormatting(dateStr) {
 }
 
 
-    
+
 

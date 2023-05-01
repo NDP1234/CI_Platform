@@ -42,13 +42,9 @@
                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Policy
                             </a>
-                            <ul class="dropdown-menu ">
-                                <li><a class="dropdown-item " href="#">Policy-1</a></li>
-                                <li><a class="dropdown-item" href="#">Policy-2</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                            <ul class="dropdown-menu text-center">
+                                <li class="mx-auto"><a asp-action="PrivacyPolicyPage" asp-controller="UserEditProfile" class="text-decoration-none text-dark"> Privacy Policy</a></li>
+                                
                             </ul>
                         </li>
 
@@ -65,7 +61,10 @@
 
                            
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                                @if(@ViewBag.UserDetails.Role == "admin")
+                                {
+                                    <li><a class="dropdown-item" asp-action="AdminDashBoard" asp-controller="Admin">Dashboard</a></li>
+                                }
                                 <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
                                 <li><a class="dropdown-item" asp-action="VolunteeringTimesheet" asp-controller="Timesheet">Volunteering Timesheet</a></li>
                                 <li><a class="dropdown-item" asp-action="Logout" asp-controller="Authentication">Logout </a></li>
@@ -165,7 +164,7 @@
                                 @item.Title
                             </h4>
                             <p class="group inner list-group-item-text">
-                                @item.Description
+                                @Html.Raw(item.Description)
                             </p>
                             <div class="row">
                                 <div class="profile-name ">

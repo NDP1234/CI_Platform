@@ -18,7 +18,7 @@ using System.Text.Json.Serialization;
 
 namespace CI_PLATFORM.Controllers
 {
-    //[ServiceFilter(typeof(IsUserProfileValidated))]
+    
     public class ContentController : Controller
     {
         private IConfiguration _configuration;

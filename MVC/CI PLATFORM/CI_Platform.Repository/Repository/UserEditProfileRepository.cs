@@ -115,6 +115,7 @@ namespace CI_Platform.Repository.Repository
                             CreatedAt = DateTime.UtcNow
                         };
                         _db.UserSkills.Add(myskill);
+                        _db.SaveChanges();
                     }
                     
                     else

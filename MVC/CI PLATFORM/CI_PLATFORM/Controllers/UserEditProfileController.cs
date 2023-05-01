@@ -45,8 +45,12 @@ namespace CI_PLATFORM.Controllers
             ViewBag.UserDetails = profile;
             int userId = (int)profile.UserId;
             _UEPrepository.saveUserDetails(userId, mymodel);
+
+            
+
             TempData["Message"] = "data is saved successfully.";
             return RedirectToAction("UserEditProfilePage");
+
         }
 
         //for cascading dropdown
@@ -100,7 +104,7 @@ namespace CI_PLATFORM.Controllers
             var profile = users.FirstOrDefault(m => m.Email == session_details);
             ViewBag.UserDetails = profile;
             var cmsdetail = new CMSPrivacyPolicy();
-            cmsdetail.CmsList = _db.CmsPages.Where(cms=>cms.DeletedAt==null).ToList();
+            cmsdetail.CmsList = _db.CmsPages.Where(cms => cms.DeletedAt == null).ToList();
             return View(cmsdetail);
         }
         public bool SaveContactUs(string username, string useremail, string subject, string message)
@@ -132,6 +136,15 @@ namespace CI_PLATFORM.Controllers
         }
 
 
+        public IActionResult citiesBasedOnCountryForUser()
+        {
+            var session_details = HttpContext.Session.GetString("Login");
+            List<User> users = _users.GetUserList();
+            var profile = users.FirstOrDefault(m => m.Email == session_details);
+            int userId = (int)profile.UserId;
 
+            var cities = _db.Cities.Where(c => c.CountryId == profile.CountryId).Select(c => new { cityId = c.CityId, name = c.Name }).ToList();
+            return Json(cities);
+        }
     }
 }

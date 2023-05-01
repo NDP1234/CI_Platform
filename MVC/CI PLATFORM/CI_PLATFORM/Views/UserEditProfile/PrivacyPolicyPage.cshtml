@@ -40,13 +40,9 @@
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Policy
                             </a>
-                            <ul class="dropdown-menu ">
-                                <li><a class="dropdown-item " href="#">Policy-1</a></li>
-                                <li><a class="dropdown-item" href="#">Policy-2</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                            <ul class="dropdown-menu text-center">
+                                <li class="mx-auto"><a asp-action="PrivacyPolicyPage" asp-controller="UserEditProfile" class="text-decoration-none text-dark"> Privacy Policy</a></li>
+                                
                             </ul>
                         </li>
 
@@ -61,7 +57,10 @@
                                 <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
+                                @if(@ViewBag.UserDetails.Role == "admin")
+                                {
+                                    <li><a class="dropdown-item" asp-action="AdminDashBoard" asp-controller="Admin">Dashboard</a></li>
+                                }
                                 <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
                                  <li><a class="dropdown-item" asp-action="VolunteeringTimesheet" asp-controller="Timesheet">Volunteering Timesheet</a></li>
                                 <li><a class="dropdown-item" asp-action="Logout" asp-controller="Authentication">Logout </a></li>
@@ -132,7 +131,7 @@
                         {
                            <div class="intro" id="@item.Slug">
                             <h4>@item.Title</h4>
-                            <p class="p-text">@item.Description</p>
+                            <p class="p-text">@Html.Raw(item.Description)</p>
                           
                         </div>  
                         }

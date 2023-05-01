@@ -21,6 +21,10 @@
 
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
+
+    @*for toastr*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
     <link rel="stylesheet" href="~/css/vmp.css">
 
 </head>
@@ -48,13 +52,9 @@
                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Policy
                             </a>
-                            <ul class="dropdown-menu ">
-                                <li><a class="dropdown-item " href="#">Policy-1</a></li>
-                                <li><a class="dropdown-item" href="#">Policy-2</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else </a></li>
+                            <ul class="dropdown-menu text-center">
+                                <li class="mx-auto"><a asp-action="PrivacyPolicyPage" asp-controller="UserEditProfile" class="text-decoration-none text-dark"> Privacy Policy</a></li>
+
                             </ul>
                         </li>
 
@@ -75,7 +75,10 @@
                                 <li><a class="dropdown-item" href="#">Something else </a></li>
                                 </ul>*@
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                                @if (@ViewBag.UserDetails.Role == "admin")
+                                {
+                                    <li><a class="dropdown-item" asp-action="AdminDashBoard" asp-controller="Admin">Dashboard</a></li>
+                                }
                                 <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
                                 <li><a class="dropdown-item" asp-action="VolunteeringTimesheet" asp-controller="Timesheet">Volunteering Timesheet</a></li>
                                 <li><a class="dropdown-item" asp-action="Logout" asp-controller="Authentication">Logout </a></li>
@@ -250,20 +253,49 @@
                     </div>
                     <div class="col-auto w-50 ">
                         <div>
-                            <table>
-                                <tr>
-                                    <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
-                                    <td class="td6">
-                                        <div class="progress">
-                                            <div class="progress-bar bgw" role="progressbar" style="width: 75%"
-                                                 aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>8000 Achieved</td>
-                                </tr>
-                            </table>
+                            @if (Model.Missions.MissionType == "GOAL")
+                            {
+
+                                <div class="d-flex justify-content-end w-75">
+                                    <table>
+                                        <tr>
+                                            <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
+                                            <td class="td6">
+                                                <div class="progress">
+                                                    <div class="progress-bar bgw" role="progressbar"
+                                                     aria-valuenow="@Model.totalAchieve" aria-valuemin="0" aria-valuemax="@Model.Goalvalue"
+                                                     style="width: @((Model.totalAchieve * 100) / Model.Goalvalue)%;">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Model.totalAchieve Achieved</td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+
+
+
+                            }
+                            else
+                            {
+                                <div  class="d-flex justify-content-end">
+                                    <table>
+                                        <tr>
+                                            <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
+                                            <td class="td6">
+                                                @Model.Missions.StartDate.Value.AddDays(-1).ToShortDateString()
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Deadline</td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            }
                         </div>
                     </div>
                 </div>
@@ -399,7 +431,7 @@
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                          aria-labelledby="pills-home-tab">
                         <h3>Introduction</h3>
-                        <p class="p-text"> @Model.Missions.Description</p>
+                        <p class="p-text"> @Html.Raw(Model.Missions.Description)</p>
 
 
                         <div class="doc">
@@ -428,11 +460,12 @@
                                     else
                                     {
                                         <div class="d-flex align-items-center rounded-pill border p-lg-1 mt-1 w-50 flex-row">
-                                            <a href="@item.DocumentPath"  class="text-decoration-none"><img src="~/images/xlsx.png" class="p-1" width="22px" height="22px" alt=""><span
-                                            style="font-size: 14px;">@item.DocumentName</span></a>
-                                            </div>
+                                            <a href="@item.DocumentPath" class="text-decoration-none">
+                                                <img src="~/images/xlsx.png" class="p-1" width="22px" height="22px" alt=""><span style="font-size: 14px;">@item.DocumentName</span>
+                                            </a>
+                                        </div>
 
-                                        
+
                                     }
 
                                 }
@@ -627,7 +660,8 @@
                                         <table>
                                             <tr>
                                                 <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
-                                                <td>09/01/2019 </td>
+
+                                                <td>@item.StartDate.Value.AddDays(-1).ToShortDateString() </td>
                                             </tr>
                                             <tr>
                                                 <td class="fsize">Deadline</td>
@@ -699,9 +733,25 @@
                                     <span>@coworker.FirstName @coworker.LastName </span>
                                 </div>
                                 <div id="RecommandationBtn">
-                                    <button type="button" class="btn btn-success" id="@coworker.UserId" value="@Model.Missions.MissionId @ViewBag.UserDetails.UserId @coworker.UserId @coworker.Email">
-                                        <img src="~/Images/user.png" class="rounded-circle" width="35px" height="35px" />Recommanded
-                                    </button>
+                                    @{
+                                        bool emailSent = Model.MissionInvites.Any(mi => mi.ToUserId == coworker.UserId && mi.MissionId == Model.Missions.MissionId && mi.FromUserId == ViewBag.UserDetails.UserId);
+
+                                    }
+
+                                    @if (emailSent)
+                                    {
+                                        <span class="text-success me-2">
+                                            <i class="bi bi-check-lg"></i>
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-success" id="@coworker.UserId" value="@Model.Missions.MissionId @ViewBag.UserDetails.UserId @coworker.UserId @coworker.Email">
+                                            <img src="~/Images/user.png" class="rounded-circle" width="35px" height="35px" />Recommanded
+                                        </button>
+                                    }
+
+
                                 </div>
                             </div>
                         }
@@ -725,83 +775,87 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @*for toastr*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.6.3.js"
             integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     <script>
 
-                function openNav() {
-                    document.getElementById("mySidebar1").style.width = "250px";
-                    document.getElementById("main1").style.marginLeft = "250px";
+        function openNav() {
+            document.getElementById("mySidebar1").style.width = "250px";
+            document.getElementById("main1").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar1").style.width = "0";
+            document.getElementById("main1").style.marginLeft = "0";
+        }
+        function openNav2() {
+            document.getElementById("mySidebar2").style.width = "250px";
+            document.getElementById("main2").style.marginLeft = "250px";
+        }
+
+        function closeNav2() {
+            document.getElementById("mySidebar2").style.width = "0";
+            document.getElementById("main2").style.marginLeft = "0";
+        }
+
+
+        function showView(viewName) {
+            $('.all-view').addClass('d-none')
+
+            if (viewName == 'grid') {
+                $('#products').removeClass("d-none")
+            }
+            else if (viewName == "list") {
+                $('#myListView').removeClass("d-none")
+            }
+        }
+
+        function show(image_id) {
+            console.log("run");
+
+            document.getElementById('id12')
+                .style.display = "none";
+            document.getElementById('id1')
+                .style.display = "none";
+            document.getElementById('id2')
+                .style.display = "none";
+            document.getElementById('id3')
+                .style.display = "none";
+            document.getElementById('id4')
+                .style.display = "none";
+            document.getElementById('id5')
+                .style.display = "none";
+            document.getElementById('id6')
+                .style.display = "none";
+            document.getElementById(image_id)
+                .style.display = "block";
+
+
+
+        }
+        let items = document.querySelectorAll('.carousel .carousel-item')
+
+        items.forEach((el) => {
+            const minPerSlide = 4
+            let next = el.nextElementSibling
+            for (var i = 1; i < minPerSlide; i++) {
+                if (!next) {
+                    next = items[0]
                 }
-
-                function closeNav() {
-                    document.getElementById("mySidebar1").style.width = "0";
-                    document.getElementById("main1").style.marginLeft = "0";
-                }
-                function openNav2() {
-                    document.getElementById("mySidebar2").style.width = "250px";
-                    document.getElementById("main2").style.marginLeft = "250px";
-                }
-
-                function closeNav2() {
-                    document.getElementById("mySidebar2").style.width = "0";
-                    document.getElementById("main2").style.marginLeft = "0";
-                }
-
-
-                function showView(viewName) {
-                    $('.all-view').addClass('d-none')
-
-                    if (viewName == 'grid') {
-                        $('#products').removeClass("d-none")
-                    }
-                    else if (viewName == "list") {
-                        $('#myListView').removeClass("d-none")
-                    }
-                }
-
-                function show(image_id) {
-                    console.log("run");
-
-                    document.getElementById('id12')
-                        .style.display = "none";
-                    document.getElementById('id1')
-                        .style.display = "none";
-                    document.getElementById('id2')
-                        .style.display = "none";
-                    document.getElementById('id3')
-                        .style.display = "none";
-                    document.getElementById('id4')
-                        .style.display = "none";
-                    document.getElementById('id5')
-                        .style.display = "none";
-                    document.getElementById('id6')
-                        .style.display = "none";
-                    document.getElementById(image_id)
-                        .style.display = "block";
+                let cloneChild = next.cloneNode(true)
+                el.appendChild(cloneChild.children[0])
+                next = next.nextElementSibling
+            }
+        })
 
 
 
-                }
-                let items = document.querySelectorAll('.carousel .carousel-item')
-
-                items.forEach((el) => {
-                    const minPerSlide = 4
-                    let next = el.nextElementSibling
-                    for (var i = 1; i < minPerSlide; i++) {
-                        if (!next) {
-                            next = items[0]
-                        }
-                        let cloneChild = next.cloneNode(true)
-                        el.appendChild(cloneChild.children[0])
-                        next = next.nextElementSibling
-                    }
-                })
-
-
-       
 
 
     </script>

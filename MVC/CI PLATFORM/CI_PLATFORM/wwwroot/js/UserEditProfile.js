@@ -58,6 +58,7 @@ function cascading() {
                 console.log(data);
                 // populate the city dropdown with the returned data
                 $('#cityInput').empty();
+                $('#cityInput').append($('<option>').val('').text('Select City').prop('disabled', true).prop('selected', true));
 
                 $.each(data, function (i, city) {
                     $('#cityInput').append($('<option>').attr('value', city.cityId).text(city.name));
@@ -85,6 +86,7 @@ $(document).ready(function () {
         data: { userid: userid },
         success: function (data) {
             if (data) {
+               
                 console.log(data);
                 $('#userProfile').attr('src', data.avatar);
                 var uname = data.firstName + ' ' + data.lastName;
@@ -175,13 +177,13 @@ $("#rightArrow").click(function () {
         });
 
         $("#leftArrow").click(function () {
-        // Check if a skill is selected in the selected skill container
-        var selectedSelectedSkill = $(".selectedskillcontainer .border.selected");
-        if (selectedSelectedSkill.length > 0) {
-            // Remove the selected skill from the selected skill container
-            selectedSelectedSkill.remove();
-        }
-    });
+            // Check if a skill is selected in the selected skill container
+            var selectedSelectedSkill = $(".selectedskillcontainer .border.selected");
+            if (selectedSelectedSkill.length > 0) {
+                // Remove the selected skill from the selected skill container
+                selectedSelectedSkill.remove();
+            }
+        });
     }
 });
 
@@ -221,10 +223,7 @@ saveBtn.addEventListener('click', function () {
 });
 
 
-//for visible alert message till 5 seconds
-setTimeout(function () {
-    $('#alert-message').fadeOut('fast');
-}, 5000)
+
 
 
 $('#SaveBtn2').on('click', function () {
@@ -237,14 +236,14 @@ $('#SaveBtn2').on('click', function () {
         // Loop over them and prevent submission
         Array.prototype.slice.call(forms)
             .forEach(function (form) {
-               
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
 
-                    form.classList.add('was-validated')
-                
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+
             })
     })()
 
@@ -256,19 +255,19 @@ $('#SaveBtn2').on('click', function () {
 
     if (username && useremail && subject && message) {
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '/UserEditProfile/SaveContactUs',
             data: {
-                username : username,
-                useremail :useremail,
-                subject:subject,
+                username: username,
+                useremail: useremail,
+                subject: subject,
                 message: message
             },
             success: function (data) {
                 if (data) {
                     console.log("success");
                     $('#successDiv').removeClass('d-none');
-                  
+
                 }
                 else {
                     console.log("fail to save");
@@ -278,7 +277,7 @@ $('#SaveBtn2').on('click', function () {
         })
     }
 
-   
+
 })
 
 
@@ -315,6 +314,30 @@ function previewImage() {
         };
         xhr.send(formData);
     }
-   
+
 }
 
+$(document).ready(function () {
+
+
+    $.ajax({
+        url: '/UserEditProfile/citiesBasedOnCountryForUser',
+        type: 'POST',
+        dataType: 'json',
+
+        success: function (data) {
+            console.log(data);
+            // populate the city dropdown with the returned data
+            $('#cityInput').empty();
+            
+            $.each(data, function (i, city) {
+                $('#cityInput').append($('<option>').attr('value', city.cityId).text(city.name));
+            });
+        },
+        error: function (xhr, textStatus, errorThrown) {
+
+            console.log(xhr.responseText);
+        }
+    });
+
+})

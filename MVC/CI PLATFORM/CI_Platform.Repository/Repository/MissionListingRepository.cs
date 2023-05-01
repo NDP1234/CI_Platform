@@ -47,7 +47,9 @@ namespace CI_Platform.Repository.Repository
                                 skills = skills,
                                 isValid = _db.FavouriteMissions.Any(f => f.UserId == userId && f.MissionId == m.MissionId),
                                 AvgRating = avgRating,
-                                GoalObjectiveText = m.MissionType == "GOAL" ? _db.GoalMissions.Where(g => g.MissionId == m.MissionId).FirstOrDefault().GoalObjectiveText : null
+                                GoalObjectiveText = m.MissionType == "GOAL" ? _db.GoalMissions.Where(g => g.MissionId == m.MissionId).FirstOrDefault().GoalObjectiveText : null,
+                                Goalvalue = m.MissionType == "GOAL" ? _db.GoalMissions.Where(g => g.MissionId == m.MissionId).FirstOrDefault().GoalValue : 0,
+                                totalAchieve = (long)_db.Timesheets.Where(t=>t.MissionId==m.MissionId && t.Action != null ).Sum(t=>t.Action)
                             }).ToList();
             return Missions;
         }
@@ -76,7 +78,7 @@ namespace CI_Platform.Repository.Repository
             }
             else if (sort == "deadline")
             {
-                return finalMission.OrderByDescending(m => m.Missions.EndDate).ToList();
+                return finalMission.OrderByDescending(m => m.Missions.StartDate.Value.AddDays(-1).ToShortDateString()).ToList();
             }
             else
             {

@@ -2,6 +2,18 @@
 @model AdminViewModel;
 
 
+ @if (TempData["error1"] != null)
+                    {
+                        <div class="alert alert-danger" id="alert-message1">
+                            @TempData["error1"]
+                        </div>
+                    }
+@if (TempData["success1"] != null){
+                        <div class="alert alert-success" id="alert-message2">
+                            @TempData["success1"]
+                        </div>
+                    }
+
 <div class="table-responsive">
     <table class="table table-borderless DataTablesId" id="DataTablesIdForMissionTheme" style="width:100%">
         <thead>
@@ -41,3 +53,14 @@
   
 
 </div>
+<script>
+//for visible alert message till 5 seconds
+setTimeout(function () {
+    $('#alert-message1').fadeOut('fast');
+
+}, 5000);
+setTimeout(function () {
+    $('#alert-message2').fadeOut('fast');
+
+}, 5000);
+</script>

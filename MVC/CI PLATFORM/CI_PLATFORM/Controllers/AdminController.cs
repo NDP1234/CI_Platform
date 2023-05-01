@@ -191,6 +191,14 @@ namespace CI_PLATFORM.Controllers
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
             viewmodel.BannerList = _adminPrepository.getBannerList();
+            if (addmissiontheme==false)
+            {
+                TempData["error1"] = "data is already exists.";
+            }
+            else
+            {
+                TempData["success1"] = "data is successfully added.";
+            }
             return PartialView("_MissionTheme", viewmodel);
         }
         public IActionResult editMissionTheme(int MissionThemeId, string Title, int Status)
@@ -226,6 +234,16 @@ namespace CI_PLATFORM.Controllers
             viewmodel.countries = _adminPrepository.getCountryList();
             viewmodel.cities = _adminPrepository.getCityList();
             viewmodel.BannerList = _adminPrepository.getBannerList();
+
+            if (addmissionskill == false)
+            {
+                TempData["error2"] = "data is already exists.";
+            }
+            else
+            {
+                TempData["success2"] = "data is successfully added.";
+            }
+
             return PartialView("_MissionSkill", viewmodel);
 
         }

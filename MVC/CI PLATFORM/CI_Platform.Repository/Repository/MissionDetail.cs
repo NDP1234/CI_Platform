@@ -28,7 +28,7 @@ namespace CI_Platform.Repository.Repository
             List<User> users = _db.Users.ToList();
             List<MissionDocument> missionDocuments = _db.MissionDocuments.Where(m => m.MissionId == id).ToList(); // retrieve mission documents based on mission id
             List<MissionApplication> missionApplications = _db.MissionApplications.Where(m => m.UserId != userID && m.MissionId == id).ToList();
-
+            List<MissionInvite> myInvite = _db.MissionInvites.ToList();
 
             var Missionsdetail = (from m in mission
                                   where m.MissionId.Equals(id)
@@ -37,17 +37,13 @@ namespace CI_Platform.Repository.Repository
                                   from i in data.DefaultIfEmpty().Take(1)
                                   from s in data1.DefaultIfEmpty().Take(1)
 
-                                  select new VolunteeringMissionPageViewModel { image = i, Missions = m, Country = countries, themes = theme, skills = skills, UserDetail = users, isValid = _db.FavouriteMissions.Any(f => f.UserId == userID && f.MissionId == m.MissionId), MissionDocuments = missionDocuments, MissionApplications = missionApplications }).First();
+                                  select new VolunteeringMissionPageViewModel { image = i, Missions = m, Country = countries, themes = theme, skills = skills, UserDetail = users, isValid = _db.FavouriteMissions.Any(f => f.UserId == userID && f.MissionId == m.MissionId), MissionDocuments = missionDocuments, MissionApplications = missionApplications, MissionInvites = myInvite,
+                                      Goalvalue = m.MissionType == "GOAL" ? _db.GoalMissions.Where(g => g.MissionId == m.MissionId).FirstOrDefault().GoalValue : 0,
+                                      totalAchieve = (long)_db.Timesheets.Where(t => t.MissionId == m.MissionId && t.Action != null).Sum(t => t.Action)
+                                  }).First();
 
 
-            //var relatedMissions = _db.Missions
-            //                    .Where(m => (m.City.Name == Missionsdetail.Missions.City.Name || m.Theme.Title == Missionsdetail.Missions.Theme.Title) && m.MissionId != id && m.DeletedAt == null)
-            //                    .Join(_db.MissionMedia, m => m.MissionId, i => i.MissionId, (m, i) => new { Mission = m, Image = i })
-            //                    .GroupBy(x => x.Mission.MissionId)
-            //                        .Select(x => new { Mission = x.First().Mission, Image = x.FirstOrDefault().Image })
-            //                    //.Select(x => new { Mission = x.First().Mission, Image = x.OrderBy(i => i.Image.CreatedAt).FirstOrDefault().Image })
-
-            //                    .ToList();
+         
 
             var relatedMissions = _db.Missions.Include(m => m.MissionMedia).Where(m => (m.City.Name == Missionsdetail.Missions.City.Name || m.Theme.Title == Missionsdetail.Missions.Theme.Title) && (m.MissionId != id && m.DeletedAt == null)).Take(3).ToList();
 

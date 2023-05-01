@@ -1,6 +1,18 @@
 ﻿@using CI_Platform.Entities.Models.VM
 @model AdminViewModel;
 
+ @if (TempData["error2"] != null)
+                    {
+                        <div class="alert alert-danger" id="alert-message3">
+                            @TempData["error2"]
+                        </div>
+                    }
+@if (TempData["success2"] != null){
+                        <div class="alert alert-success" id="alert-message4">
+                            @TempData["success2"]
+                        </div>
+                    }
+
 <div class="table-responsive">
     <table class="table table-borderless DataTablesId" id="DataTablesIdForMissionSkill" style="width:100%">
         <thead>
@@ -36,3 +48,13 @@
     </table>
     
 </div>
+<script>
+    setTimeout(function () {
+    $('#alert-message3').fadeOut('fast');
+
+}, 5000);
+setTimeout(function () {
+    $('#alert-message4').fadeOut('fast');
+
+}, 5000);
+</script>

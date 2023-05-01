@@ -19,15 +19,19 @@ namespace CI_Platform.Entities.Models.VM
         public List<MissionDocument>? MissionDocuments { get; set; }
         public List<MissionApplication>? MissionApplications { get; set; }
         public List<Mission>? RelatedMissions { get; set; } = new List<Mission>();
-      
-      
+
+        public List<MissionInvite> MissionInvites { get; set; }
         public List<Comment> Comments { get; set; }
         public List<User> Users { get; set; }
         public IEnumerable<User> UserDetail { get; set; }
 
         public bool isValid { get; set; }
         public bool isValid2 { get; set; }
+
+        public long Goalvalue { get; set; }
+
+        public long totalAchieve { get; set; }
     }
-    
+
 
 }

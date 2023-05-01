@@ -1,5 +1,4 @@
-﻿
-//for displaying date on top
+﻿//for displaying date on top
 $(document).ready(function () {
     setInterval(function () {
         var now = new Date();
@@ -171,13 +170,13 @@ $('#addthemeBtn').on('click', function () {
 
                 //LoadDataTable();
                 //alert("data is  successfully added");
-                toastr.success(' data is  successfully added');
+                /*toastr.success(' data is  successfully added');*/
                 $('#MissionThemeTitle').val(''); // Clear enteredThemeName input field
                 $("#myStatusOfTheme").prop('selectedIndex', 0); // Reset the status dropdown to the first option
                 $('.needs-validation.addthemevalidation').removeClass('was-validated'); // Remove the validation message
 
                 forMissionThemePagenation();
-              
+
 
 
             },
@@ -185,6 +184,11 @@ $('#addthemeBtn').on('click', function () {
     }
 
 });
+
+
+
+
+
 
 //for open the modal for edit the Theme
 function OpenEditThemeModal(themename, status, themeid) {
@@ -276,14 +280,14 @@ $('#addSkillBtn').on('click', function () {
                 $('#closeAddSkill').click();
                 $('#missionskillPartialView').html(data);
                 //alert("data is  successfully added");
-             
-                toastr.success(' data is  successfully added');
+
+                //toastr.success(' data is  successfully added');
                 $('#MissionSkillTitle').val(''); // Clear enteredThemeName input field
                 $("#myStatus").prop('selectedIndex', 0); // Reset the status dropdown to the first option
                 $('.needs-validation.addskillvalidation').removeClass('was-validated'); // Remove the validation message
 
                 forMissionSkillPagenation();
-               
+
 
 
             },
@@ -461,7 +465,7 @@ $(document).on('click', '.deleteStory', function () {
     });
 });
 
-//for getting _CMSAddPage partial view 
+//for getting _CMSAddPage partial view
 
 $(document).on('click', '#addCMS2', function () {
     console.log("clicked");
@@ -469,7 +473,7 @@ $(document).on('click', '#addCMS2', function () {
         url: "/Admin/_CMSAddPage",
         success: function (data) {
             $('.cmsdetailcontent').html(data);
-            
+
         }
     })
 })
@@ -511,7 +515,7 @@ $(document).on('click', "#CMSAdd", function () {
     })()
 
     var Cmstitle = $('#cmstitle').val();
-    var description = CKEDITOR.instances.editor1.editable().getText();
+    var description = CKEDITOR.instances.editor1.getData();
     var slug = $('#cmsSlug').val();
     var selectedValue = $('#myStatusOfCMS').val();
     console.log(Cmstitle);
@@ -555,6 +559,8 @@ function editCmms(Title, Status, CmsPageId, Description, Slug) {
         $('#cmstitle2').val(Title);
         $('#myStatusOfCMS2').val(Status);
         $('.mydescription').text(Description);
+        /* CKEDITOR.instances.CMSeditor2.setData(Description);*/
+
         $('#cmsSlug2').val(Slug);
         $('#EditBtnForCmsPage').attr('data-cms-id', CmsPageId);
 
@@ -585,7 +591,7 @@ function editCmms(Title, Status, CmsPageId, Description, Slug) {
 
         var editedTitle = $('#cmstitle2').val();
 
-        var editedDescription = CKEDITOR.instances.CMSeditor2.editable().getText();
+        var editedDescription = CKEDITOR.instances.CMSeditor2.editable().getData();
         var editedSlug = $('#cmsSlug2').val();
         var editedStatus = $('#myStatusOfCMS2').val();
         var cmsid = $(this).attr('data-cms-id');
@@ -595,7 +601,7 @@ function editCmms(Title, Status, CmsPageId, Description, Slug) {
         console.log(editedStatus)
         console.log(cmsid)
 
-        if (editedTitle && editedDescription!='' && editedSlug && editedStatus && cmsid) {
+        if (editedTitle && editedDescription != '' && editedSlug && editedStatus && cmsid) {
             $.ajax({
                 type: "POST",
                 url: "/Admin/EditCmsDetails",
@@ -607,19 +613,19 @@ function editCmms(Title, Status, CmsPageId, Description, Slug) {
                     Status: editedStatus
                 },
                 success: function (data) {
-                   
+
                     $('.cmsdetailcontent').html(data);
-                    
+
                     toastr.options.preventDuplicates = true;
                     toastr.success(' Edited data is successfully saved');
                     //alert("Edited data is successfully saved");
-                    
+
                     forCmsPagenation();
 
                 }
             })
         }
-        
+
     })
 
 
@@ -685,6 +691,7 @@ $('#Country').on('change', function () {
             });
         },
         error: function (xhr, textStatus, errorThrown) {
+
             console.log(xhr.responseText);
         }
     });
@@ -1078,6 +1085,25 @@ togglePassword.addEventListener('click', () => {
 });
 
 
+const togglePassword2 = document
+    .querySelector('#togglePassword2');
+
+const password2 = document.querySelector('#myPwd2');
+
+togglePassword2.addEventListener('click', () => {
+
+    // Toggle the type attribute using
+    // getAttribure() method
+    const type = password2
+        .getAttribute('type') === 'password' ?
+        'text' : 'password';
+
+    password2.setAttribute('type', type);
+
+    // Toggle the eye and bi-eye icon
+    this.classList.toggle('bi-eye');
+});
+
 
 //for add mission
 $(document).on('click', '#AddMissionDetailBtn', function () {
@@ -1104,7 +1130,9 @@ $(document).on('click', '#AddMissionDetailBtn', function () {
 
     var MissionTitle = $('#MyMissionTitle').val();
     var ShortDescription = $('#sDescription').val();
-    var Description = CKEDITOR.instances.Missioneditor.editable().getText();
+    //var Description = CKEDITOR.instances.Missioneditor.editable().getText();
+    var Description = CKEDITOR.instances.Missioneditor.getData();
+
     var CountryId = $('#MissionCountry').val();
     var CityId = $('#MissionCity').val();
     var OrganisationName = $('#OrganisationName').val();
@@ -1158,7 +1186,7 @@ $(document).on('click', '#AddMissionDetailBtn', function () {
     if (startDate >= endDate) {
         // Show error message and add "is-invalid" class to date fields
         $('#MisStartDate, #MisEndDate').addClass('is-invalid').siblings('.invalid-feedback').text('Please select valid start and end date');
-       
+
         // Disable submit button
         $('#submitBtn').prop('disabled', true);
 
@@ -1208,22 +1236,22 @@ $(document).on('click', '#AddMissionDetailBtn', function () {
                 //alert("  data is successfully saved");
                 toastr.success(' data is successfully saved');
 
-               $('#MyMissionTitle').val('');
+                $('#MyMissionTitle').val('');
                 $('#sDescription').val('');
                 CKEDITOR.instances.Missioneditor.editable().setText('');
                 $('#MissionCountry').prop('selectedIndex', 0);
                 $('#MissionCity').prop('selectedIndex', 0);
                 $('#OrganisationName').val('');
                 $('#MissionType').prop('selectedIndex', 0);
-               $('#MisStartDate').val('');
+                $('#MisStartDate').val('');
                 $('#MisEndDate').val('');
                 $('#Organizationdetails').val('');
                 $('#TotalSeats').val('');
                 $('#MisRegEndDate').val('');
-               $('#MissionThemedata').val('');
+                $('#MissionThemedata').val('');
                 $('#myAvailability').prop('selectedIndex', 0);
-               $('#VideoUrl2').val('');
-                
+                $('#VideoUrl2').val('');
+
                 $('#goaltext').val('');
                 $('#GoalValue').val('');
                 $('.themeDropdown').each(function () {
@@ -1266,7 +1294,8 @@ $(document).on('click', '.EditMissionDetailBtn', function () {
 
             $('#MyMissionTitle2').val(data.title);
             $('#sDescription2').val(data.shortDescription);
-            CKEDITOR.instances.Missioneditoreditable.editable().setText(data.description);
+            //CKEDITOR.instances.Missioneditoreditable.editable().setText(data.description);
+            CKEDITOR.instances.Missioneditoreditable.setData(data.description);
             $("#OrganisationName2").val(data.organizationName);
             $('#MissionType2').val(data.missionType);
             var startdate = data.startDate;
@@ -1320,7 +1349,6 @@ $(document).on('click', '.EditMissionDetailBtn', function () {
             }
             $(".selectedImageEditable").html(imagesHtml);
 
-
             var dochtml = '';
             for (var j = 0; j < docs.length; j++) {
                 dochtml += '<div class="selectedDocitem"><a href=' + docs[j] + '>document</a><span class="removeDocIcon" data-index="' + j + '">x</span></div>';
@@ -1353,9 +1381,9 @@ $(document).on('click', '.removeImageIcon', function () {
 });
 $(document).on('click', '.removeDocIcon', function () {
     var index = $(this).data('index');
-    paths.splice(index, 1); // Remove the element from the array
+    docs.splice(index, 1); // Remove the element from the array
     $(this).closest('.selectedDocitem').remove(); // Remove the corresponding image tag
-    console.log(paths);
+    console.log(docs);
 });
 
 //for save edited mission detail
@@ -1383,7 +1411,8 @@ $(document).on('click', '.SaveChangesForMission', function () {
 
     var MissionTitle = $('#MyMissionTitle2').val();
     var ShortDescription = $('#sDescription2').val();
-    var Description = CKEDITOR.instances.Missioneditoreditable.editable().getText();
+    //var Description = CKEDITOR.instances.Missioneditoreditable.editable().getText();
+    var Description = CKEDITOR.instances.Missioneditoreditable.getData();
     var CountryId = $('#MissionCountry2').val();
     var CityId = $('#MissionCity2').val();
     var OrganisationName = $('#OrganisationName2').val();
@@ -1475,21 +1504,36 @@ $(document).on('click', '.SaveChangesForMission', function () {
 //for delete mission
 $(document).on('click', '#DeleteBtnForMission', function () {
     var MissionId = $(this).attr('data-mission-id');
-
-    $.ajax({
-        type: "POST",
-        url: "/Admin/DeleteMissionDetails",
-        data: {
-            MissionId: MissionId
-        },
-        success: function (data) {
-            $('.missionList').html(data);
-            forMissionPagenation();
-            alert(" data is successfully deleted");
-
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You would not be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/DeleteMissionDetails",
+                data: {
+                    MissionId: MissionId
+                },
+                success: function (data) {
+                    $('.missionList').html(data);
+                    forMissionPagenation();
+                   /* alert(" data is successfully deleted");*/
+                    Swal.fire(
+                        'Deleted!',
+                        'Your data has been deleted.',
+                        'success'
+                    );
+                }
+            })
         }
-    })
-})
+    });
+});
 
 //for formating a date
 function formatedate(datetime) {
@@ -1682,7 +1726,7 @@ $(document).on('click', "#SaveBanner", function () {
                 toastr.success('data is successfully saved');
                 $('#myText').val(''); // Clear enteredThemeName input field
                 $("#SortOrderValue").val(''); // Reset the status dropdown to the first option
-                $('.BannerImage').attr('src','');
+                $('.BannerImage').attr('src', '');
                 $('.needs-validation.addbannervalidation').removeClass('was-validated'); // Remove the validation message
 
 
@@ -2163,7 +2207,7 @@ function handleRemoveIconClickDoc2() {
 }
 
 
-   
+
 
 function forMissionThemePagenation() {
     $('#DataTablesIdForMissionTheme').DataTable({
