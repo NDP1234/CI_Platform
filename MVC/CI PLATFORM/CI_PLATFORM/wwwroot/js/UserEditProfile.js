@@ -20,6 +20,11 @@ function closeNav2() {
 }
 
 
+setTimeout(function () {
+    $('#alert-message').fadeOut('fast');
+
+}, 5000);
+
 (function () {
     'use strict';
 

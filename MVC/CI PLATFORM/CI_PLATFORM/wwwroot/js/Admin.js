@@ -1201,7 +1201,7 @@ $(document).on('click', '#AddMissionDetailBtn', function () {
     }
 
 
-    if (MissionTitle && ShortDescription && Description && CountryId && CityId && OrganisationName && Missiontype && MisStartDate && MisEndDate && Organizationdetails && MissionTheme && myAvailability && imgpathlist && docpathlist && selectedMissionSkill) {
+    if (MissionTitle && ShortDescription && Description && CountryId && CityId && OrganisationName && Missiontype && MisStartDate && MisEndDate && Organizationdetails && MissionTheme && myAvailability && imgpathlist.length > 0 && docpathlist.length>0 && selectedMissionSkill) {
         $.ajax({
             type: "POST",
             url: "/Admin/SaveMission",
@@ -1309,6 +1309,7 @@ $(document).on('click', '.EditMissionDetailBtn', function () {
             $('#MissionThemedata2').val(data.themeId);
             $('#myAvailability2').val(data.availability);
             $('#MissionCountry2').val(data.countryId);
+            $('#VideoUrl2').val(data.url);
             var CityId = data.cityId;
             //for displaying citylist on the basis of country and select the city on the basis of city exist in db
             $.ajax({
@@ -1458,44 +1459,46 @@ $(document).on('click', '.SaveChangesForMission', function () {
     console.log(selectedMissionSkill)
     console.log(goaltext)
     console.log(GoalValue)
+    if (imgpathlist.length > 0 && docpathlist.length > 0) {
+        $.ajax({
+            type: "POST",
+            url: "/Admin/SaveEditedMission",
+            data: {
+                MissionId: MissionId,
+                MissionTitle: MissionTitle,
+                ShortDescription: ShortDescription,
+                Description: Description,
+                CountryId: CountryId,
+                CityId: CityId,
+                OrganisationName: OrganisationName,
+                Missiontype: Missiontype,
+                MisStartDate: MisStartDate,
+                MisEndDate: MisEndDate,
+                Organizationdetails: Organizationdetails,
+                TotalSeats: TotalSeats,
+                MisRegEndDate: MisRegEndDate,
+                MissionTheme: MissionTheme,
+                myAvailability: myAvailability,
+                VideoUrl: VideoUrl,
+                imgpathlist: imgpathlist,
+                docpathlist: docpathlist,
+                selectedMissionSkill: selectedMissionSkill,
+                goaltext: goaltext,
+                GoalValue: GoalValue
 
-    $.ajax({
-        type: "POST",
-        url: "/Admin/SaveEditedMission",
-        data: {
-            MissionId: MissionId,
-            MissionTitle: MissionTitle,
-            ShortDescription: ShortDescription,
-            Description: Description,
-            CountryId: CountryId,
-            CityId: CityId,
-            OrganisationName: OrganisationName,
-            Missiontype: Missiontype,
-            MisStartDate: MisStartDate,
-            MisEndDate: MisEndDate,
-            Organizationdetails: Organizationdetails,
-            TotalSeats: TotalSeats,
-            MisRegEndDate: MisRegEndDate,
-            MissionTheme: MissionTheme,
-            myAvailability: myAvailability,
-            VideoUrl: VideoUrl,
-            imgpathlist: imgpathlist,
-            docpathlist: docpathlist,
-            selectedMissionSkill: selectedMissionSkill,
-            goaltext: goaltext,
-            GoalValue: GoalValue
+            },
+            success: function (data) {
+                console.log(data);
+                $('#editMissionCloseBtn').click();
+                $('.missionList').html(data);
+                forMissionPagenation();
+                //alert("  data is successfully saved");
+                toastr.success(' Edited data is successfully saved');
 
-        },
-        success: function (data) {
-            console.log(data);
-            $('#editMissionCloseBtn').click();
-            $('.missionList').html(data);
-            forMissionPagenation();
-            //alert("  data is successfully saved");
-            toastr.success(' Edited data is successfully saved');
+            },
+        })
+    }
 
-        },
-    })
 
 
 

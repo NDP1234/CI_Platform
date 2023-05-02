@@ -90,34 +90,36 @@ $("#SaveBtn").on('click', function () {
     console.log("Published Date:", publisheddate);
     console.log("Description:", description);
     console.log("url:", url);
+    if (pathlist.length > 0) {
+        $.ajax({
+            type: "POST",
+            url: "/StoryRelated/DraftStory",
 
-    $.ajax({
-        type: "POST",
-        url: "/StoryRelated/DraftStory",
 
+            data:
+            {
+                userID: userid,
+                missionId: missionid,
+                title: storytitle,
+                publishedAt: publisheddate,
+                description: description,
+                status: status,
+                pathlist: pathlist,
+                url: url
 
-        data:
-        {
-            userID: userid,
-            missionId: missionid,
-            title: storytitle,
-            publishedAt: publisheddate,
-            description: description,
-            status: status,
-            pathlist: pathlist,
-            url: url
+            },
+            success: function (data) {
 
-        },
-        success: function (data) {
+                alert("data successfully stored as draft");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('failed while storing: ' + textStatus + ', ' + errorThrown);
 
-            alert("data successfully stored as draft");
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log('failed while storing: ' + textStatus + ', ' + errorThrown);
+            }
 
-        }
-
-    });
+        });
+    }
+  
 });
 
 /*for submit story*/
@@ -191,9 +193,10 @@ missionSelect.addEventListener("change", function () {
             }
             else if (data.status == "PUBLISHED") {
                 $("#submitBtn").prop("disabled", true);
-                $("#SaveBtn").prop("disabled", false);
-                $("#previewbtn").prop("disabled", false);
-                alert("there is alredy submitted story for this mission , you can also store another story for this mission...... ")
+                $("#SaveBtn").prop("disabled", true);
+                $("#previewbtn").prop("disabled", true);
+                //alert("there is alredy submitted story for this mission , you can also store another story for this mission...... ")
+                alert("there is alredy submitted story for this mission ")
             }
             else {
                 $("#submitBtn").prop("disabled", true);

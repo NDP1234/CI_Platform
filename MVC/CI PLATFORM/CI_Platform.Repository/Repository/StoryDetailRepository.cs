@@ -43,7 +43,6 @@ namespace CI_Platform.Repository.Repository
             long storyViews = _db.StoryViews.Where(s => s.StoryId == id).Count();
 
 
-
             var viewModel = new StoryDetailViewModel
             {
                 StoryId = stories.StoryId,

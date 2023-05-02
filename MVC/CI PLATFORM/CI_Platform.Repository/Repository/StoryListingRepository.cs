@@ -22,7 +22,7 @@ namespace CI_Platform.Repository.Repository
 
         public List<Story> GetAllStory()
         {
-            List<Story> stories = _db.Stories.Include(m => m.User).Include(m => m.StoryMedia).Include(m => m.Mission).Include(m => m.Mission.Theme).Where(s=>s.Status== "PUBLISHED").ToList();
+            List<Story> stories = _db.Stories.Include(m => m.User).Include(m => m.StoryMedia).Include(m => m.Mission).Include(m => m.Mission.Theme).Where(s=>s.Status== "PUBLISHED" && s.DeletedAt==null ).ToList();
             return stories;
         }
 

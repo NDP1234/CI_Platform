@@ -120,7 +120,7 @@
                 <label for="myInputSelect" class="form-label">Select Mission</label>
                 
                 <select class="form-select myMissionTitles" id="myInputSelect" aria-label="Select your mission" data-user-id="@ViewBag.UserDetails.UserId" required>
-                    <option selected value="-1">Select your mission</option>
+                    <option selected value="" disabled>Select your mission</option>
                     @foreach (Mission item in Model)
                     {
                         <option value="@item.MissionId" data-user-id="@ViewBag.UserDetails.UserId">@item.Title</option>
@@ -185,7 +185,7 @@
 
         <div class="row mt-3">
             <div class="col">
-                <button class="btn btn-success cancelBtn float-start" id="previewbtn" type="button">Preview</button>
+                <button class="btn btn-success cancelBtn float-start" id="previewbtn" disabled type="button">Preview</button>
                 <a class="btn btn-danger cancelBtn float-start mx-2" asp-action="Story_Listing_Page" asp-controller="StoryRelated" type="button">Cancel</a>
                 <button class="btn btn-primary SaveOrSubmitBtn float-end mx-2" id="submitBtn" type="button">Submit</button>
                 <button class="btn btn-success SaveOrSubmitBtn float-end " id="SaveBtn" type="button">  Save</button>
