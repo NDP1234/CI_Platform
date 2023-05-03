@@ -54,6 +54,7 @@ namespace CI_Platform.Repository.Repository
                     foreach (var photo in existingPhotos)
                     {
                         _db.StoryMedia.Remove(photo);
+                        _db.SaveChanges();
                     }
                     
                 }
@@ -76,11 +77,11 @@ namespace CI_Platform.Repository.Repository
                     };
                     _db.StoryMedia.Add(image);
 
-
+                    _db.SaveChanges();
                 }
 
 
-                _db.SaveChanges();
+              
 
             }
             else
@@ -110,13 +111,14 @@ namespace CI_Platform.Repository.Repository
                         Path = path,
                         StoryId = storyid,
                         CreatedAt = DateTime.UtcNow,
-                        Type = ".png",
+                        Type = ".jpg",
 
 
                     };
                     _db.StoryMedia.Add(image);
+                    _db.SaveChanges();
                 }
-                _db.SaveChanges();
+               
                 CI_Platform.Entities.Models.StoryMedium urllink = new StoryMedium()
                 {
 

@@ -156,12 +156,12 @@ $(document).on('click', '#SaveBtn2', function () {
         myDateForEditedTimeBasedTimesheet.classList.remove('is-valid');
     }
     //custom validation for hour and minutes
-    if (mHour < 0 || mHour > 24 || isNaN(mHour)) {
+    if (mHour < 0 || mHour >= 24 || isNaN(mHour)) {
         $(`#myHour-${timesheetId}`).addClass('is-invalid');
     } else {
         $(`#myHour-${timesheetId}`).removeClass('is-invalid');
     }
-    if (mMinute < 1 || mMinute > 60 || isNaN(mMinute)) {
+    if (mMinute < 0 || mMinute >= 60 || isNaN(mMinute)) {
         $(`#myMinutes-${timesheetId}`).addClass('is-invalid');
     } else {
         $(`#myMinutes-${timesheetId}`).removeClass('is-invalid');

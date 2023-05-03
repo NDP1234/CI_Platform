@@ -67,8 +67,33 @@ function handleRemoveIconClick() {
 
 /*for save draft*/
 $("#SaveBtn").on('click', function () {
+
+    (function () {
+        'use strict'
+
+
+        var forms = document.querySelectorAll('.needs-validation s.sysvalidation')
+        console.log(forms);
+
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+
+            })
+    })()
+
+
     var userid = $("#myInputSelect").data('user-id');
+    var mission_start_date = $("#myInputSelect option:selected").attr('data-start-date');
     var missionid = $("#myInputSelect").val();
+
+
     var storytitle = $("#storyTitle").val();
     var missiontitle = $("#myInputSelect option:selected").text();
     var publisheddate = $("#myStoryDate").val();
@@ -90,7 +115,57 @@ $("#SaveBtn").on('click', function () {
     console.log("Published Date:", publisheddate);
     console.log("Description:", description);
     console.log("url:", url);
-    if (pathlist.length > 0) {
+
+    var pdate = publisheddate.split(' ');
+    var tempdate = pdate[0].split('-');
+    var StoryPublishedDate = tempdate[2] + '-' + tempdate[1] + '-' + tempdate[0];
+
+    //for today date
+    var todayDate = new Date();
+    var day = todayDate.getDate();
+    var month = todayDate.getMonth() + 1;
+    var year = todayDate.getFullYear();
+
+    // Add leading zeros to day and month if they are single digit
+    if (day < 10) {
+        day = '0' + day;
+    }
+    if (month < 10) {
+        month = '0' + month;
+    }
+
+    var formattedDateOfToday = day + '-' + month + '-' + year;
+
+    //for mission StartDate date
+    var TempStartDate = mission_start_date.split(' ');
+    var tempvarforStartDate = TempStartDate[0].split('-');
+    var startDateOfMission = tempvarforStartDate[0] + '-' + tempvarforStartDate[1] + '-' + tempvarforStartDate[2];
+
+    var pattern = /^([0-9]{4})-([0-9]{2})-([0-9]{2})$/;
+
+    if (pattern.test(publisheddate)) {
+        $('#myStoryDate').removeClass('is-invalid');
+    }
+    else {
+        $('#myStoryDate').addClass('is-invalid').siblings('.invalid-feedback').text('Please select valid date');
+    }
+
+    var dateFormOfStartDate = new Date(startDateOfMission);
+    var dateFormOfChoosenDate = new Date(StoryPublishedDate);
+    var dateFormOfToday = new Date(formattedDateOfToday);
+
+    if (dateFormOfChoosenDate < dateFormOfStartDate || dateFormOfChoosenDate > dateFormOfToday) {
+        $('#myStoryDate').addClass('is-invalid').siblings('.invalid-feedback').text('Please select valid date');
+        console.log("hitted");
+    }
+    else {
+        $('#myStoryDate').removeClass('is-invalid');
+    }
+    
+
+    
+
+    if (pathlist.length > 0 && $('.is-invalid').length === 0) {
         $.ajax({
             type: "POST",
             url: "/StoryRelated/DraftStory",
@@ -109,7 +184,7 @@ $("#SaveBtn").on('click', function () {
 
             },
             success: function (data) {
-
+                location.reload();
                 alert("data successfully stored as draft");
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -121,6 +196,14 @@ $("#SaveBtn").on('click', function () {
     }
   
 });
+
+//function for  DateFormatting
+function DateFormattingforyyyymmdd(dateStr) {
+    var dateParts = dateStr.split(" ");
+    var date = dateParts[0].split("-");
+    var formattedDate = date[2] + "-" + date[1] + "-" + date[0];
+    return formattedDate;
+}
 
 /*for submit story*/
 $("#submitBtn").on('click', function () {
@@ -146,6 +229,29 @@ $("#submitBtn").on('click', function () {
     console.log("Published Date:", publisheddate);
     console.log("Description:", description);
     console.log("url:", url);
+
+    (function () {
+        'use strict'
+
+
+        var forms = document.querySelectorAll('.needs-validation.sysvalidation')
+        console.log(forms);
+
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+
+            })
+    })()
+
+    
+
     $.ajax({
         type: "POST",
         url: "/StoryRelated/SubmitStory",
@@ -161,7 +267,7 @@ $("#submitBtn").on('click', function () {
 
         },
         success: function (data) {
-
+            location.reload();
             alert("data is successfully stored");
         },
         error: function (jqXHR, textStatus, errorThrown) {

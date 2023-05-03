@@ -20,7 +20,7 @@ namespace CI_Platform.Repository.Repository
 
         public List<MissionTheme> GetThemeDetails()
         {
-            List<MissionTheme> mission_details = _db.MissionThemes.Where(mt=>mt.DeletedAt==null).ToList();
+            List<MissionTheme> mission_details = _db.MissionThemes.Where(mt=>mt.DeletedAt==null && mt.Status==1).ToList();
             return mission_details;
         }
     }

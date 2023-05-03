@@ -20,7 +20,7 @@ namespace CI_Platform.Repository.Repository
 
         public List<Skill> GetSkillDetails()
         {
-            List<Skill> skill_details = _db.Skills.Where(ms => ms.DeletedAt == null).ToList();
+            List<Skill> skill_details = _db.Skills.Where(ms => ms.DeletedAt == null && ms.Status==1).ToList();
             return skill_details;
         }
 

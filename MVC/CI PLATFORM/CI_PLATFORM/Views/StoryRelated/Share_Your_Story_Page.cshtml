@@ -111,7 +111,7 @@
     </div>
     <hr class="hr" />
     <div class="container">
-        <form class="row g-3 needs-validation" novalidate>
+        <form class="row g-3 needs-validation sysvalidation" novalidate>
         <p class="my-3 fs-1">
             Share your story
         </p>
@@ -123,7 +123,7 @@
                     <option selected value="" disabled>Select your mission</option>
                     @foreach (Mission item in Model)
                     {
-                        <option value="@item.MissionId" data-user-id="@ViewBag.UserDetails.UserId">@item.Title</option>
+                        <option value="@item.MissionId" data-user-id="@ViewBag.UserDetails.UserId" data-start-date="@item.StartDate">@item.Title</option>
                     }
                 </select>
                 <div class="invalid-feedback">
@@ -207,7 +207,7 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.ckeditor.com/4.21.0/basic/ckeditor.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*<script src="~/js/site.js" asp-append-version="true"></script>*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/story.js"></script>
 

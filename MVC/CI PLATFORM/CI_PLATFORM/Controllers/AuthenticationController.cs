@@ -33,6 +33,7 @@ namespace CI_PLATFORM.Controllers
                 return RedirectToAction("Platform_Landing_Page", "Content");
             }
 
+          
 
             var myBanner = new loginViewModel();
             myBanner.BannerList = _db.Banners.OrderBy(b => b.SortOrder).Where(b => b.DeletedAt == null).ToList();
@@ -54,6 +55,10 @@ namespace CI_PLATFORM.Controllers
                 if (userExists != null)
                 {
                     if (userExists.DeletedAt != null)
+                    {
+                        return RedirectToAction("login", "Authentication");
+                    }
+                    if (userExists.Status == 0)
                     {
                         return RedirectToAction("login", "Authentication");
                     }
