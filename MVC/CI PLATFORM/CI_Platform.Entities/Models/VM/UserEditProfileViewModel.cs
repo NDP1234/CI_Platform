@@ -37,7 +37,7 @@ namespace CI_Platform.Entities.Models.VM
         public string NewPassword { get; set; } = null!;
         
         public string ConfirmPassword { get; set; } = null!;
-        //
+        
         public long ContactUsId { get; set; }
 
         public string UserName { get; set; } = null!;
@@ -47,7 +47,7 @@ namespace CI_Platform.Entities.Models.VM
         public string Subject { get; set; } = null!;
 
         public string Message { get; set; } = null!;
-        //
+        
         public List<UserSkillViewModel> userSkills { get; set; } = new List<UserSkillViewModel>(); 
 
         public class UserSkillViewModel

@@ -1,19 +1,5 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
-/*i.filled-heart {*/
-    /*font-size: 14px;*/
-    /*font-size: 2.0rem;
-    / Set a font size for the heart icon /
-}
 
-    i.filled-heart::before {
-        content: "\2665";
-        / Use a Unicode character for the filled heart symbol / top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        color: red;
-        font-size: inherit;
-    }*/
 .bi.bi-star-fill {
     color: gold;
 }
@@ -186,18 +172,7 @@ ul, li {
     border-radius: 20px;
 }
 
-/* 17/02/2023 */
 
-/* .bottom-right {
-    position: relative;
-    bottom: 30px;
-    roght: 16px;
-    background-color: white;
-    color: black;
-    width: 30%;
-    left: 34%; 
-     text-align: center;
-} */
 .filter-wrapper {
     border: 1px solid gray;
 }
@@ -218,7 +193,7 @@ ul, li {
     position: absolute;
     bottom: 66px;
     right: 16px;
-    /* border: 2px solid black; */
+ 
     width: 9%;
     height: 15%;
     left: 90%;
@@ -230,7 +205,7 @@ ul, li {
     position: absolute;
     bottom: 18px;
     right: 16px;
-    /* border: 2px solid black; */
+
     width: 9%;
     height: 19%;
     left: 90%;
@@ -241,8 +216,7 @@ ul, li {
     background-color: rgba(0,0,0, 0.5);
     position: absolute;
     bottom: 160px;
-    /* right: 40%; */
-    /* border: 2px solid black; */
+ 
     color: white;
     width: 29%;
     height: 15%;
@@ -307,9 +281,7 @@ ul, li {
     .fsize2 {
         font-size: 10px;
     }
-    /* .item{
-        height: 300px;
-    } */
+
     .mt1 {
         margin-top: -1.75rem;
     }
@@ -384,9 +356,7 @@ ul, li {
     .fsize2 {
         font-size: 14px;
     }
-    /* .item{
-        height: 300px;
-    } */
+  
     .mt1 {
         margin-top: 0.75rem;
     }
@@ -543,10 +513,6 @@ ul, li {
 }
 
 
-/*  /////////////////// */
-/* body {
-    font-family: "Lato", sans-serif;
-  } */
 
 .sidebar {
     height: 100%;
@@ -616,7 +582,7 @@ ul, li {
     position: absolute;
     bottom: 50%;
     right: 16px;
-    /* border: 2px solid black; */
+  
     width: 6%;
     height: 10%;
     left: 90%;
@@ -628,7 +594,7 @@ ul, li {
     position: absolute;
     bottom: 30%;
     right: -7px;
-    /* border: 2px solid black; */
+   
     width: 6%;
     height: 10%;
     left: 90%;
@@ -638,10 +604,9 @@ ul, li {
 .bottom-right6 {
     background-color: rgba(0,0,0, 0.5);
     position: absolute;
-    /* bottom: 260px; */
+    
     bottom: 85%;
-    /* right: 40%; */
-    /* border: 2px solid black; */
+    
     color: white;
     width: 27%;
     height: 13%;
@@ -652,7 +617,7 @@ ul, li {
 .bl1 {
     position: absolute;
     bottom: -5px;
-    /* top: -20px; */
+  
     left: 16px;
     background-color: white;
     color: black;
@@ -664,7 +629,7 @@ ul, li {
 
 .thumbimg {
     width: 100%;
-    /*height: 100%;*/
+   
     height: 200px;
 }
 
@@ -688,7 +653,7 @@ ul, li {
         position: absolute;
         bottom: 50%;
         right: 16px;
-        /* border: 2px solid black; */
+       
         width: 7%;
         height: 14%;
         left: 89%;
@@ -699,8 +664,7 @@ ul, li {
         background-color: rgba(0,0,0, 0.5);
         position: absolute;
         bottom: 31%;
-        /* right: 12px; */
-        /* border: 2px solid black; */
+        
         width: 8%;
         height: 15%;
         left: 88%;
@@ -714,7 +678,7 @@ ul, li {
         position: absolute;
         bottom: 46%;
         right: 16px;
-        /* border: 2px solid black; */
+        
         width: 7%;
         height: 14%;
         left: 89%;
@@ -726,7 +690,7 @@ ul, li {
         position: absolute;
         bottom: 26%;
         right: -7px;
-        /* border: 2px solid black; */
+        
         width: 7%;
         height: 16%;
         left: 89%;
@@ -738,10 +702,9 @@ ul, li {
     .bottom-right6 {
         background-color: rgba(0,0,0, 0.5);
         position: absolute;
-        /* bottom: 260px; */
+       
         bottom: 83%;
-        /* right: 40%; */
-        /* border: 2px solid black; */
+        
         color: white;
         width: 40%;
         height: 13%;
@@ -754,7 +717,7 @@ ul, li {
         position: absolute;
         bottom: 50%;
         right: 16px;
-        /* border: 2px solid black; */
+       
         width: 10%;
         height: 15%;
         left: 84%;
@@ -766,7 +729,7 @@ ul, li {
         position: absolute;
         bottom: 30%;
         right: -7px;
-        /* border: 2px solid black; */
+        
         width: 9%;
         height: 16%;
         left: 85%;
@@ -778,10 +741,9 @@ ul, li {
     .bottom-right6 {
         background-color: rgba(0,0,0, 0.5);
         position: absolute;
-        /* bottom: 260px; */
+       
         bottom: 88%;
-        /* right: 40%; */
-        /* border: 2px solid black; */
+        
         color: white;
         width: 21%;
         height: 10%;

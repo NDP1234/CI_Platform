@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 
-//namespace CI_PLATFORM.Models.ViewModels
+
 namespace CI_Platform.Entities.Models.VM
 {
     public class PlatformLandingViewModel

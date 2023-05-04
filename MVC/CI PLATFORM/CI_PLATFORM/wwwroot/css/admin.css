@@ -47,11 +47,7 @@
     margin-top: 10px;
 }
 
-/*.selectedDocItem {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}*/
+
 
 .docName {
     flex-grow: 1;

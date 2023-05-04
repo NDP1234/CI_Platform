@@ -250,7 +250,7 @@ ul, li   {
     .bottom-center {
         position: absolute;
         bottom: -10px;
-        /* top: -20px; */
+       
         left: 16px;
         background-color: white;
         color: black;
@@ -328,7 +328,7 @@ ul, li   {
         margin-top: -1.75rem;
     }
 
-    /* 24-02 */
+    
     .middle{
         left: 50%;
     }

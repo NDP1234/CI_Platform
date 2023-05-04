@@ -1,6 +1,6 @@
 ﻿using CI_Platform.Entities.Data;
 using CI_Platform.Entities.Models;
-//using CI_PLATFORM.Data;
+
 using CI_PLATFORM.Models;
 using CI_PLATFORM.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +9,7 @@ using System.Net.Mail;
 
 namespace CI_PLATFORM.Controllers
 {
-    //[Route("Authentication")]
+    
     public class AuthenticationController : Controller
     {
 
@@ -242,7 +242,7 @@ namespace CI_PLATFORM.Controllers
             {
                 if (model.NewPassword == model.ConfirmPassword)
                 {
-                    //var getUserInfo = context.Users.Where(u => u.Email == model.email).FirstOrDefault();
+                   
                     var getUserInfo = context.Users.Where(u => u.Email == ResetPasswordData.Email).FirstOrDefault();
                     if (getUserInfo.Password == model.ConfirmPassword)
                     {
@@ -260,7 +260,7 @@ namespace CI_PLATFORM.Controllers
                         x.Password = model.NewPassword;
                         _db.Users.Update(x);
                         _db.SaveChanges();
-                        //ViewBag.PassChange = "Password Changed Successfully!";
+                       
                         return RedirectToAction("login");
                     }
 
@@ -281,7 +281,7 @@ namespace CI_PLATFORM.Controllers
                 ViewBag.FirstImage = _db.Banners.OrderBy(b => b.SortOrder).FirstOrDefault(b => b.DeletedAt == null);
                 return View(myBanner);
             }
-            //return RedirectToAction("login");
+            
         }
 
 
@@ -339,7 +339,7 @@ namespace CI_PLATFORM.Controllers
             }
             RegistrationViewModel myBanner = new RegistrationViewModel();
             myBanner.BannerList = _db.Banners.OrderBy(b => b.SortOrder).Where(b => b.DeletedAt == null).ToList();
-            //myBanner.Email = model.Email;
+          
             ViewBag.FirstImage = _db.Banners.OrderBy(b => b.SortOrder).FirstOrDefault(b => b.DeletedAt == null);
             return View(myBanner);
         }

@@ -6,29 +6,26 @@
 
 .bi-star.filled {
     color: gold !important;
-    /*fill: gold !important;*/
+    
 }
 .star-icon.filled {
     color: gold !important;
-    /*fill: yellow !important;*/
+    
 }
 .star-icon {
     margin-right: 10px;
 }
 
-    /*.star-icon.filled {
-        color: gold !important;
-        fill: red !important;
-    }*/
+    
 
 ul, li {
     list-style-type: none;
 }
 
 i.filled-heart {
-    /*font-size: 14px;*/
+    
     font-size: 2.0rem;
-    / Set a font size for the heart icon /
+   
 }
 
     i.filled-heart::before {
@@ -64,11 +61,7 @@ i.filled-heart {
     display: flex;
     flex: none;
 }
-/* @media(min-width:426px) and (max-width:842px){
-    .be{
-        border: none;
-    }
-} */
+
 .input-group .btn {
     position: relative;
     z-index: 2;
@@ -169,13 +162,7 @@ i.filled-heart {
         border: 1px solid #dee2e6
     }
 }
-/* @media (max-width:425px)
-{
-    .row .btn{
-        margin-left: 35%;
-    }
-} */
-/* ////// */
+
 
 
 .img2 {
@@ -215,14 +202,7 @@ i.filled-heart {
     background-color: white;
     height:90% ;
 }
-/*
-.dt2 {
-    border: none;
-    width: 27%;
-    bottom: 4px;
-    left: 37%;
-    background-color: white;
-}*/
+
 .dt2 {
     border: none;
     width: 18%;
@@ -745,17 +725,7 @@ i.filled-heart {
         width: 73px;
     }
 }
-/* 22-02-2023 */
 
-/* @media (max-width: 767px) {
-    .carousel-inner .carousel-item>div {
-        display: none;
-    }
-
-    .carousel-inner .carousel-item>div:first-child {
-        display: block;
-    }
-} */
 
 .carousel-inner .carousel-item.active,
 .carousel-inner .carousel-item-next,
@@ -763,8 +733,7 @@ i.filled-heart {
     display: flex;
 }
 
-/* medium and up screens */
-/* @media (min-width: 768px) { */
+
 
 .carousel-inner .carousel-item-end.active,
 .carousel-inner .carousel-item-next {
@@ -775,14 +744,14 @@ i.filled-heart {
 .carousel-inner .carousel-item-prev {
     transform: translateX(-25%);
 }
-/* } */
+
 
 .carousel-inner .carousel-item-end,
 .carousel-inner .carousel-item-start {
     transform: translateX(0);
 }
 
-/*23-02  */
+
 .p-text {
     text-align: justify;
 }
@@ -840,11 +809,7 @@ i.filled-heart {
 .mt7 {
     margin-top: 5%;
 }
-/* .cmt1{
-    height: 800px;
-        overflow-x: hidden;
-        overflow-y: auto;
-} */
+
 .privacy-policy a {
     text-decoration: none;
     color: black;

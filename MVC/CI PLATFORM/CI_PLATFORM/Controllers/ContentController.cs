@@ -14,7 +14,7 @@ using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-//using CI_PLATFORM.FILTERS;
+
 
 namespace CI_PLATFORM.Controllers
 {
@@ -73,10 +73,7 @@ namespace CI_PLATFORM.Controllers
         public JsonResult[] Filter(int userId, string[] country, string[] city, string[] theme, string[] skill, string sort)
         {
             var session_details = HttpContext.Session.GetString("Login");
-            //if (session_details == null)
-            //{
-            //    return RedirectToAction("login", "Authentication");
-            //}
+            
 
             var filter = _db2.GetFilterData(userId,country, city, theme, skill, sort);
             var filterlist = new JsonResult[filter.ToList().Count];

@@ -2,12 +2,12 @@
 using CI_Platform.Entities.Models;
 using CI_Platform.Entities.Models.VM;
 using CI_Platform.Repository.Interface;
-//using CI_PLATFORM.FILTERS;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace CI_PLATFORM.Controllers
 {
-    //[ServiceFilter(typeof(IsUserProfileValidated))]
+    
     public class TimesheetController : Controller
     {
         private readonly IUserList _users;

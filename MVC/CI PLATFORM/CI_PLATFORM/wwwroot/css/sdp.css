@@ -12,9 +12,7 @@
 #id6 {
     display: none;
 }
-/* ul, li   {
-    list-style-type: none;
-  } */
+
 .sidebar {
     height: 100%;
     width: 0;
@@ -108,7 +106,7 @@
     }
 
     .selectedImageItem img {
-        /* max-width: 100%; */
+        
         max-width: 100px;
         max-height: 100px;
     }

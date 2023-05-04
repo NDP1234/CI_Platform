@@ -46,7 +46,7 @@ $(document).on("click", ".missionApplicationApproved", function () {
 
             $('.missionApplicationListing').html(data);
             forMissionApplicationPagenation();
-            //alert(" Mission application is successfully approved");
+            
             toastr.success(' Mission application is successfully approved');
 
 
@@ -71,7 +71,7 @@ $(document).on("click", ".missionApplicationDeclined", function () {
 
             $('.missionApplicationListing').html(data);
             forMissionApplicationPagenation();
-            //alert(" Mission application is successfully Declined");
+           
             toastr.success('Mission application is successfully Declined');
 
 
@@ -97,7 +97,7 @@ $(document).on("click", ".storyApproved", function () {
 
             $('.StoryListing').html(data);
             forStoryPagenation();
-            //alert(" story is sccessfully published");
+          
             toastr.success(' story is sccessfully published');
 
         },
@@ -120,7 +120,7 @@ $(document).on("click", ".storyDeclined", function () {
 
             $('.StoryListing').html(data);
             forStoryPagenation();
-            /*   alert(" story is sccessfully declined ");*/
+           
             toastr.success(' story is sccessfully declined');
 
         },
@@ -168,9 +168,7 @@ $('#addthemeBtn').on('click', function () {
                 $('.DataTablesId').DataTable().destroy();
                 $('.Missionthemelisting').html(data);
 
-                //LoadDataTable();
-                //alert("data is  successfully added");
-                /*toastr.success(' data is  successfully added');*/
+                
                 $('#MissionThemeTitle').val(''); // Clear enteredThemeName input field
                 $("#myStatusOfTheme").prop('selectedIndex', 0); // Reset the status dropdown to the first option
                 $('.needs-validation.addthemevalidation').removeClass('was-validated'); // Remove the validation message
@@ -230,7 +228,7 @@ $(document).on('click', '#EditablethemeBtn', function () {
             console.log(data);
             $('#closeEditTheme').click();
             $('.Missionthemelisting').html(data);
-            //alert("Edited data is successfully saved");
+            
             toastr.success(' Edited data is successfully saved');
 
             forMissionThemePagenation();
@@ -279,9 +277,7 @@ $('#addSkillBtn').on('click', function () {
                 console.log(data);
                 $('#closeAddSkill').click();
                 $('#missionskillPartialView').html(data);
-                //alert("data is  successfully added");
-
-                //toastr.success(' data is  successfully added');
+               
                 $('#MissionSkillTitle').val(''); // Clear enteredThemeName input field
                 $("#myStatus").prop('selectedIndex', 0); // Reset the status dropdown to the first option
                 $('.needs-validation.addskillvalidation').removeClass('was-validated'); // Remove the validation message
@@ -340,7 +336,7 @@ $(document).on('click', '#EditSkillBtn', function () {
             console.log(data);
             $('#closeEditSkill').click();
             $('#missionskillPartialView').html(data);
-            //alert("Edited data is successfully saved");
+            
             toastr.success(' Edited data is successfully saved');
             forMissionSkillPagenation();
         },
@@ -413,7 +409,7 @@ $(document).on('click', '.deleteMissionTheme', function () {
 
                     $('.Missionthemelisting').html(data);
                     forMissionThemePagenation();
-                    //alert(" data is successfully deleted");
+                   
                     Swal.fire(
                         'Deleted!',
                         'Your data has been deleted.',
@@ -452,7 +448,7 @@ $(document).on('click', '.deleteStory', function () {
                     console.log(data);
 
                     $('.StoryListing').html(data);
-                    //alert(" data is successfully deleted");
+                    
                     forStoryPagenation();
                     Swal.fire(
                         'Deleted!',
@@ -534,7 +530,7 @@ $(document).on('click', "#CMSAdd", function () {
             },
             success: function (data) {
                 $('.cmsdetailcontent').html(data);
-                //alert(" data is successfully added");
+                
                 toastr.success('data is successfully saved');
 
                 forCmsPagenation();
@@ -559,7 +555,7 @@ function editCmms(Title, Status, CmsPageId, Description, Slug) {
         $('#cmstitle2').val(Title);
         $('#myStatusOfCMS2').val(Status);
         $('.mydescription').text(Description);
-        /* CKEDITOR.instances.CMSeditor2.setData(Description);*/
+        
 
         $('#cmsSlug2').val(Slug);
         $('#EditBtnForCmsPage').attr('data-cms-id', CmsPageId);
@@ -618,7 +614,7 @@ function editCmms(Title, Status, CmsPageId, Description, Slug) {
 
                     toastr.options.preventDuplicates = true;
                     toastr.success(' Edited data is successfully saved');
-                    //alert("Edited data is successfully saved");
+                   
 
                     forCmsPagenation();
 
@@ -656,7 +652,7 @@ $(document).on('click', '#DeleteBtnForCmsPage', function () {
                 },
                 success: function (data) {
                     $('.cmsdetailcontent').html(data);
-                    /*alert(" data is successfully deleted");*/
+                   
                     Swal.fire(
                         'Deleted!',
                         'Your data has been deleted.',
@@ -765,7 +761,7 @@ $(document).on('click', '#AddUserBtn', function () {
         // Display error message
         $('#phonenumber2').addClass('is-invalid');
         $('#phonenumber2').siblings('.invalid-feedback').text('Please enter a valid 10 digit phone number.');
-        return; // Stop further execution
+        return; 
     } else {
         // Remove any existing error messages
         $('#phonenumber2').removeClass('is-invalid');
@@ -801,7 +797,7 @@ $(document).on('click', '#AddUserBtn', function () {
                 $('#addUserCloseBtn').click();
                 $('.userlist').html(data);
                 forUserPagenation();
-                //alert(" data is successfully added");
+
                 toastr.success(' data is successfully saved');
                 $('#myFirstName').val('');
                 $('#myLastName').val('');
@@ -891,7 +887,7 @@ $(document).on('click', '#UserSaveChangesBtn', function () {
         // Display error message
         $('#phonenumber2').addClass('is-invalid');
         $('#phonenumber2').siblings('.invalid-feedback').text('Please enter a valid 10 digit phone number.');
-        return; // Stop further execution
+        return; 
     } else {
         // Remove any existing error messages
         $('#phonenumber2').removeClass('is-invalid');
@@ -936,7 +932,7 @@ $(document).on('click', '#UserSaveChangesBtn', function () {
                 $('#editUserCloseBtn').click();
                 $('.userlist').html(data);
                 forUserPagenation();
-                //alert(" edited data is successfully saved");
+                
                 toastr.success(' Edited data is successfully saved');
             },
         })
@@ -971,7 +967,7 @@ $(document).on('click', '.deleteUserBtn', function () {
 
                     $('.userlist').html(data);
                     forUserPagenation();
-                    //alert(" data is successfully deleted");
+                   
                     Swal.fire(
                         'Deleted!',
                         'Your data has been deleted.',
@@ -1072,8 +1068,7 @@ const password = document.querySelector('#myPwd');
 
 togglePassword.addEventListener('click', () => {
 
-    // Toggle the type attribute using
-    // getAttribure() method
+   
     const type = password
         .getAttribute('type') === 'password' ?
         'text' : 'password';
@@ -1092,8 +1087,7 @@ const password2 = document.querySelector('#myPwd2');
 
 togglePassword2.addEventListener('click', () => {
 
-    // Toggle the type attribute using
-    // getAttribure() method
+    
     const type = password2
         .getAttribute('type') === 'password' ?
         'text' : 'password';
@@ -1130,7 +1124,7 @@ $(document).on('click', '#AddMissionDetailBtn', function () {
 
     var MissionTitle = $('#MyMissionTitle').val();
     var ShortDescription = $('#sDescription').val();
-    //var Description = CKEDITOR.instances.Missioneditor.editable().getText();
+    
     var Description = CKEDITOR.instances.Missioneditor.getData();
 
     var CountryId = $('#MissionCountry').val();
@@ -1233,7 +1227,7 @@ $(document).on('click', '#AddMissionDetailBtn', function () {
                 $('#addMissionCloseBtn').click();
                 $('.missionList').html(data);
                 forMissionPagenation();
-                //alert("  data is successfully saved");
+                
                 toastr.success(' data is successfully saved');
 
                 $('#MyMissionTitle').val('');
@@ -1294,7 +1288,7 @@ $(document).on('click', '.EditMissionDetailBtn', function () {
 
             $('#MyMissionTitle2').val(data.title);
             $('#sDescription2').val(data.shortDescription);
-            //CKEDITOR.instances.Missioneditoreditable.editable().setText(data.description);
+            
             CKEDITOR.instances.Missioneditoreditable.setData(data.description);
             $("#OrganisationName2").val(data.organizationName);
             $('#MissionType2').val(data.missionType);
@@ -1336,7 +1330,7 @@ $(document).on('click', '.EditMissionDetailBtn', function () {
                 }
             });
 
-            //$('#MissionCity2').val(data.cityId);
+           
             $('#VideoUrl2').val(data.url);
             $('.SaveChangesForMission').attr('data-mission-id', data.missionId)
             var imagelist = data.missionMediums;
@@ -1412,7 +1406,7 @@ $(document).on('click', '.SaveChangesForMission', function () {
 
     var MissionTitle = $('#MyMissionTitle2').val();
     var ShortDescription = $('#sDescription2').val();
-    //var Description = CKEDITOR.instances.Missioneditoreditable.editable().getText();
+    
     var Description = CKEDITOR.instances.Missioneditoreditable.getData();
     var CountryId = $('#MissionCountry2').val();
     var CityId = $('#MissionCity2').val();
@@ -1492,7 +1486,7 @@ $(document).on('click', '.SaveChangesForMission', function () {
                 $('#editMissionCloseBtn').click();
                 $('.missionList').html(data);
                 forMissionPagenation();
-                //alert("  data is successfully saved");
+                
                 toastr.success(' Edited data is successfully saved');
 
             },
@@ -1526,7 +1520,7 @@ $(document).on('click', '#DeleteBtnForMission', function () {
                 success: function (data) {
                     $('.missionList').html(data);
                     forMissionPagenation();
-                   /* alert(" data is successfully deleted");*/
+                  
                     Swal.fire(
                         'Deleted!',
                         'Your data has been deleted.',
@@ -1725,7 +1719,7 @@ $(document).on('click', "#SaveBanner", function () {
                 $('#forAddBannerClose').click();
                 $('.Bannerdata').html(data);
                 forBannerPagenation();
-                //alert(" data is successfully added");
+               
                 toastr.success('data is successfully saved');
                 $('#myText').val(''); // Clear enteredThemeName input field
                 $("#SortOrderValue").val(''); // Reset the status dropdown to the first option
@@ -1798,7 +1792,7 @@ $(document).on('click', "#SaveChangedBanner", function () {
             $('#forEditBannerClose').click();
             $('.Bannerdata').html(data);
             forBannerPagenation();
-            //alert(" data is successfully added");
+           
             toastr.success('Edited data is successfully saved');
         }
     })
@@ -1830,7 +1824,7 @@ $(document).on('click', '.trashBanner', function () {
                 },
                 success: function (data) {
                     $('.Bannerdata').html(data);
-                    //alert(" data is successfully deleted");
+                   
                     forBannerPagenation();
                     Swal.fire(
                         'Deleted!',

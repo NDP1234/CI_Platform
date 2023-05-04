@@ -54,17 +54,16 @@ $("#countryDropdown ").on("change", function () {
 
 
 function clear1(clearnow) {
-    //alert("calling clear");
+    
     var arrayId = clearnow.value[0];
     var arrlength = clearnow.length;
     var data = clearnow.value.substring(1, arrlength);
-    //alert(arrayId);
-    //alert(data);
+    
     var idname = clearnow.value;
     if (arrayId == 1) {
         console.log("nirav", countrychip);
         var name = countrychip.indexOf(data);
-        //alert(name);
+       
         countrychip.splice(name, 1);
         $("#chip" + data).remove();
         console.log("patel", countrychip);
@@ -157,17 +156,16 @@ function cityfun(city) {
 
 
 function clear2(clearnow) {
-    //alert("calling clear");
+    
     var arrayId = clearnow.value[0];
     var arrlength = clearnow.length;
     var data = clearnow.value.substring(1, arrlength);
-    //alert(arrayId);
-    //alert(data);
+    
     var idname = clearnow.value;
     if (arrayId == 2) {
         console.log("nirav", citychip);
         var name = citychip.indexOf(data);
-        //alert(name);
+       
         citychip.splice(name, 1);
         $("#chip" + data).remove();
         console.log("patel", citychip);
@@ -193,7 +191,7 @@ var SortValue;
 //for pushing selected theme in array
 function misfun(theme) {
     console.log(theme.value);
-    //var theme = $(this).attr('value');
+    
     var theme = theme.value;
     var themeid = theme[0];
     var length = theme.length;
@@ -226,17 +224,13 @@ function misfun(theme) {
 
 
 function clear3(clearnow) {
-    //alert("calling clear");
     var arrayId = clearnow.value[0];
     var arrlength = clearnow.length;
     var data = clearnow.value.substring(1, arrlength);
-    //alert(arrayId);
-    //alert(data);
     var idname = clearnow.value;
     if (arrayId == 3) {
         console.log("nirav", themechip);
         var name = themechip.indexOf(data);
-        //alert(name);
         themechip.splice(name, 1);
         $("#chip" + data).remove();
         console.log("patel", themechip);
@@ -251,7 +245,7 @@ function clear3(clearnow) {
 //for pushing selected skill in array
 function skillfun(skill) {
     console.log(skill.value);
-    //var theme = $(this).attr('value');
+    
     var skill = skill.value;
     var skillid = skill[0];
     var length = skill.length;
@@ -284,17 +278,16 @@ function skillfun(skill) {
 
 
 function clear4(clearnow) {
-    //alert("calling clear");
+   
     var arrayId = clearnow.value[0];
     var arrlength = clearnow.value.length;
     var data = clearnow.value.substring(1, arrlength);
-    //alert(arrayId);
-    //alert(data);
+    
     var idname = clearnow.value;
     if (arrayId == 4) {
         console.log("nirav", skillchip);
         var name = skillchip.indexOf(data);
-        //alert(name);
+        
         skillchip.splice(name, 1);
         $("#chip" + data).remove();
         console.log("patel", skillchip);
@@ -311,7 +304,7 @@ function clear4(clearnow) {
 //for sortby functionality
 $("#sortby").on('change', function () {
     SortValue = $('#sortby').val();
-    //SortValue = $("#sortby").nextElementSibling.attr('value');
+   
     $("#FilterBtn").click();
 });
 
@@ -558,7 +551,7 @@ $("#FilterBtn").on('click', function () {
                 mission_list.html(contents)
                 if (item.value.missionType == "TIME") {
 
-                    var d = /*<hr style="z-index: -1;">*/
+                    var d = 
                         `<span class="fsize"> From` + item.value.startDate + ` until ` + item.value.endDate + `</span>`
                     $('.cld').eq(i).append(d)
 

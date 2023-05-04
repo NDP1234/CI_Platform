@@ -56,10 +56,7 @@ namespace CI_PLATFORM.Controllers
         {
             return PartialView("_CMSAddPage");
         }
-        //public IActionResult _CMSAddPage2()
-        //{
-        //    return PartialView("_CMSAddPage");
-        //}
+        
         public IActionResult _BannerManagementPartial()
         {
             return PartialView("_BannerManagementPartial");

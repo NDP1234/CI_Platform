@@ -24,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            @* @await Html.PartialAsync("_MissionSkill", Model)*@
+            
             @foreach (var item in Model.missionSkills.Where(s => s.DeletedAt == null))
             {
                 <tr class="border">

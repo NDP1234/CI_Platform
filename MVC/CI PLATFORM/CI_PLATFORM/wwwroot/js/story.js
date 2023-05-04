@@ -98,7 +98,7 @@ $("#SaveBtn").on('click', function () {
     var missiontitle = $("#myInputSelect option:selected").text();
     var publisheddate = $("#myStoryDate").val();
     var status = "DRAFT";
-    //var description = CKEDITOR.instances.editor1.editable().getText();
+    
     var description = CKEDITOR.instances.editor1.getData();
 
     var videoUrl = $("#myStoryVideo").val();
@@ -213,7 +213,7 @@ $("#submitBtn").on('click', function () {
     var missiontitle = $("#myInputSelect option:selected").text();
     var publisheddate = $("#myStoryDate").val();
     var status = "PUBLISHED";
-    //var description = CKEDITOR.instances.editor1.editable().getText();
+    
     var description = CKEDITOR.instances.editor1.getData();
     var videoUrl = $("#myStoryVideo").val();
     console.log(videoUrl);
@@ -301,7 +301,7 @@ missionSelect.addEventListener("change", function () {
                 $("#submitBtn").prop("disabled", true);
                 $("#SaveBtn").prop("disabled", true);
                 $("#previewbtn").prop("disabled", true);
-                //alert("there is alredy submitted story for this mission , you can also store another story for this mission...... ")
+                
                 alert("there is alredy submitted story for this mission ")
             }
             else {
@@ -337,7 +337,7 @@ $(document).ready(function () {
                 if (data.length > 0) {
                     console.log(data);
 
-                    //CKEDITOR.instances.editor1.editable().setText(data[0].description);
+                   
                     CKEDITOR.instances.editor1.setData(data[0].description);
                     $("#storyTitle").val(data[0].title);
                     var publishedDate = data[0].publishedAt;
@@ -384,7 +384,7 @@ $(document).ready(function () {
                 }
                 else {
                     CKEDITOR.instances.editor1.setData('')
-                    //CKEDITOR.instances.editor1.editable().setText('');
+                    
                     $("#storyTitle").val('');
                     $("#myStoryDate").val('');
                     $(".selectedImage").html('');
