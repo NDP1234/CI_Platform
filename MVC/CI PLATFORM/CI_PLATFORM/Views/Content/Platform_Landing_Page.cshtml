@@ -40,6 +40,23 @@
                         <li class="nav-item ">
                             <a class="nav-link text-dark" asp-action="Story_Listing_Page" asp-controller="StoryRelated">Stories</a>
                         </li>
+
+                        <!--  -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Explore</a>
+                            <ul class="dropdown-menu " >
+                                <li><a class="dropdown-item gthDp" value="TopThemes" type="button">Top Themes</a></li>
+                                <li><a class="dropdown-item gthDp" value="MostRanked" type="button">Most Ranked</a></li>
+                                <li><a class="dropdown-item gthDp" value="TopFavourite" type="button">Top Favourite</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item gthDp" value="Random" type="button">Random </a></li>
+                            </ul>
+                        </li>
+                        <!--  -->
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false">
@@ -327,18 +344,18 @@
                             <div class="bottom-left justify-content-center">
                                 @item.Missions?.Theme.Title
                             </div>
-                            <div class="bottom-right  opacity-50   ">
+                            <div class="bottom-right    text-center " style="background-color:rgba(0,0,0,0.5)">
 
                                 @if (item.isValid)
                                 {
-                                    <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="border-radius:20px;">
+                                    <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
                                         <i class="bi bi-heart filled-heart"></i>
                                     </button>
                                 }
                                 else
                                 {
-                                    <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="border-radius:20px;">
-                                        <i class="bi bi-heart w-100"></i>
+                                    <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
+                                        <i class="bi bi-heart w-100 text-white"></i>
                                     </button>
                                 }
 
@@ -493,18 +510,18 @@
                         <div class="bl1 justify-content-center">
                             @item.Missions?.Theme.Title
                         </div>
-                        <div class="bottom-right4  opacity-50   ">
+                        <div class="bottom-right4 text-center " style="background-color:rgba(0,0,0,0.5)">
 
                             @if (item.isValid)
                             {
-                                <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="border-radius:20px;">
+                                <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
                                     <i class="bi bi-heart filled-heart"></i>
                                 </button>
                             }
                             else
                             {
-                                <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="border-radius:20px;">
-                                    <i class="bi bi-heart w-100"></i>
+                                <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
+                                    <i class="bi bi-heart w-100 text-white"></i>
                                 </button>
                             }
                         </div>
@@ -724,6 +741,9 @@
             }
         });
        
+
+        
+      
 
     </script>
 </body>

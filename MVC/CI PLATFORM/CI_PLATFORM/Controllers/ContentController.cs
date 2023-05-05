@@ -101,8 +101,8 @@ namespace CI_PLATFORM.Controllers
                     Deadline = (mission.StartDate - TimeSpan.FromDays(1)).Value.ToShortDateString(),
                     mission.SeatsVacancy,
                     mission.MissionType,
-                    y.image.MediaPath
-
+                    y.image.MediaPath,
+                    y.AvgRating
 
                 });
                 filterlist[i] = missionObj;
@@ -428,7 +428,52 @@ namespace CI_PLATFORM.Controllers
         }
 
 
+        public JsonResult[] ExploredData(string ExploreBasedOnVal)
+        {
+            var session_details = HttpContext.Session.GetString("Login");
 
-       
+            List<User> users = _users.GetUserList();
+            var profile = users.FirstOrDefault(m => m.Email == session_details);
+            ViewBag.UserDetails = profile;
+            int userId = (int)profile.UserId;
+
+            List<PlatformLandingViewModel> missions = _db2.ExploreData(ExploreBasedOnVal, userId);
+            var Explorelist = new JsonResult[missions.ToList().Count];
+            //return Json(missions);
+            int i = 0;
+            foreach (PlatformLandingViewModel y in missions)
+            {
+                if (y.Missions == null)
+                {
+                    continue;
+                }
+                var mission = y.Missions;
+                var missionObj = new JsonResult(new
+                {
+                    mission.MissionId,
+                    mission.Title,
+                    mission.City.Name,
+                    mission.ShortDescription,
+                    Theme = mission.Theme.Title,
+                    mission.OrganizationName,
+                    //mission.OrganizationDetail,
+                    StartDate = mission.StartDate.Value.ToShortDateString(),
+                    EndDate = mission.EndDate.Value.ToShortDateString(),
+                    Deadline = (mission.StartDate - TimeSpan.FromDays(1)).Value.ToShortDateString(),
+                    mission.SeatsVacancy,
+                    mission.MissionType,
+                    y.image.MediaPath,
+                    y.AvgRating
+
+
+                });
+                Explorelist[i] = missionObj;
+                i++;
+
+            }
+            return Explorelist;
+        }
+
+
     }
 }

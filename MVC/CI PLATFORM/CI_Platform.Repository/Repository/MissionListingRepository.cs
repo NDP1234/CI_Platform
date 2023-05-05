@@ -25,7 +25,7 @@ namespace CI_Platform.Repository.Repository
         public List<PlatformLandingViewModel> GetAllMission(int userId)
         {
             List<Mission> mission = _db.Missions.ToList();
-            List<MissionMedium> image = _db.MissionMedia.Where(md=>md.MediaType!="url").ToList();
+            List<MissionMedium> image = _db.MissionMedia.Where(md => md.MediaType != "url").ToList();
             List<MissionTheme> theme = _db.MissionThemes.ToList();
             List<Country> countries = _db.Countries.ToList();
             List<City> city = _db.Cities.ToList();
@@ -49,15 +49,52 @@ namespace CI_Platform.Repository.Repository
                                 AvgRating = avgRating,
                                 GoalObjectiveText = m.MissionType == "GOAL" ? _db.GoalMissions.Where(g => g.MissionId == m.MissionId).FirstOrDefault().GoalObjectiveText : null,
                                 Goalvalue = m.MissionType == "GOAL" ? _db.GoalMissions.Where(g => g.MissionId == m.MissionId).FirstOrDefault().GoalValue : 0,
-                                totalAchieve = (long)_db.Timesheets.Where(t=>t.MissionId==m.MissionId && t.Action != null ).Sum(t=>t.Action)
+                                totalAchieve = (long)_db.Timesheets.Where(t => t.MissionId == m.MissionId && t.Action != null).Sum(t => t.Action)
                             }).ToList();
             return Missions;
         }
 
-        
+        public List<PlatformLandingViewModel> ExploreData(string ExploreBasedOnVal, int userId)
+        {
+            List<PlatformLandingViewModel> ExploreMission = GetAllMission(userId);
+            if (ExploreBasedOnVal == "TopThemes")
+            {
+                var topThemes = (from m in ExploreMission
+                                 from t in m.themes
+                                 group m by t into g
+                                 orderby g.Count() descending
+                                 select g.Key).Take(3).ToList();
+                return (from m in ExploreMission
+                        where m.themes.Any(t => topThemes.Contains(t))
+                        orderby m.AvgRating descending
+                        select m).ToList();
+            }
+            else if (ExploreBasedOnVal == "MostRanked")
+            {
+                return ExploreMission.OrderByDescending(m => m.AvgRating).ToList();
+            }
+            else if (ExploreBasedOnVal == "TopFavourite")
+            {
+                return (from m in ExploreMission
+                        join f in _db.FavouriteMissions on m.Missions.MissionId equals f.MissionId into favs
+                        orderby favs.Count() descending
+                        select m).ToList();
+            }
+            else if (ExploreBasedOnVal == "Random")
+            {
+                Random rnd = new Random();
+                return ExploreMission.OrderBy(m => rnd.Next()).ToList();
+            }
+            else
+            {
+                return ExploreMission;
+            }
+        }
+
+
         public List<PlatformLandingViewModel> GetMissionSorting(string sort, List<PlatformLandingViewModel> finalMission)
         {
-            
+
 
 
             if (sort == "newest")
@@ -82,7 +119,7 @@ namespace CI_Platform.Repository.Repository
             }
             else
             {
-                
+
                 return finalMission.ToList();
             }
         }
@@ -293,6 +330,6 @@ namespace CI_Platform.Repository.Repository
         }
 
 
-        
+
     }
 }
