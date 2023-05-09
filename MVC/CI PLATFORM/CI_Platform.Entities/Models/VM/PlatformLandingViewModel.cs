@@ -23,5 +23,7 @@ namespace CI_Platform.Entities.Models.VM
         public long Goalvalue { get; set; }
 
         public long totalAchieve { get; set; }
+
+        public bool missionApplications { get; set; }
     }
 }

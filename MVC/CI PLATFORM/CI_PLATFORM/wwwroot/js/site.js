@@ -401,7 +401,7 @@ $("#FilterBtn").on('click', function () {
 
                         <div class="row">
                             <div class="col-xs-12 col-md-6 mx-auto">
-                                <a class="btn btnapp " href="/Content/Volunteering_Mission_Page?id=`+ item.value.missionId+`"    >Apply <img src="/images/right-arrow.png" alt=""></a>
+                                <a class="btn btnapp " href="/Content/Volunteering_Mission_Page?id=`+ item.value.missionId+`"    >View Details <img src="/images/right-arrow.png" alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -533,7 +533,7 @@ $("#FilterBtn").on('click', function () {
                     `</div>
                 <div class="row">
                             <div class="col-xs-12 col-md-6 mx-auto">
-                                <a class="btn btnapp " href="/Content/Volunteering_Mission_Page?id=`+ item.value.missionId +`"    >Apply <img src="/images/right-arrow.png" alt=""></a>
+                                <a class="btn btnapp " href="/Content/Volunteering_Mission_Page?id=`+ item.value.missionId +`"    >View Details <img src="/images/right-arrow.png" alt=""></a>
                             </div>
                             <div class="col-xs-12 col-md-6 mx-auto ">
                                 <div class="row mt-4 cle">`+
@@ -923,10 +923,21 @@ $(function () {
         url: "/Content/GetApplicationStatus",
         data: { missionId: missionId, userId: userId },
         success: function (result) {
-            if (result.applied) {
-                button.text('Applied').addClass('disabled').prop('disabled', true);
+            //if (result.applied) {
+            console.log(result)
+                
+            if (result.approvalStatus == "APPROVE") {
+                button.text('Applied..').addClass('disabled btn-success').prop('disabled', true);
             }
+            else if (result.approvalStatus == "DECLINE") {
+                button.text('Declined!..').addClass('disabled btn-danger').prop('disabled', true);
+            }
+            else{
+                button.text('Pending!..').addClass('disabled btn-primary').prop('disabled', true);
+            }
+
         }
+        
     });
 
     $('a[data-mission-id]').click(function () {
@@ -936,7 +947,7 @@ $(function () {
             data: { missionId: missionId, userId: userId },
             success: function (result) {
                 if (result.success) {
-                    button.text('Applied').addClass('disabled').prop('disabled', true);
+                    button.text('Pending!..').addClass('disabled').prop('disabled', true);
                 }
             }
         });
@@ -1031,7 +1042,7 @@ $(document).ready(function () {
 
                         <div class="row">
                             <div class="col-xs-12 col-md-6 mx-auto">
-                                <a class="btn btnapp " href="/Content/Volunteering_Mission_Page?id=`+ item.value.missionId + `"    >Apply <img src="/images/right-arrow.png" alt=""></a>
+                                <a class="btn btnapp " href="/Content/Volunteering_Mission_Page?id=`+ item.value.missionId + `"    >View Details <img src="/images/right-arrow.png" alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -1169,7 +1180,7 @@ $(document).ready(function () {
                         `</div>
                 <div class="row">
                             <div class="col-xs-12 col-md-6 mx-auto">
-                                <a class="btn btnapp " href="/Content/Volunteering_Mission_Page?id=`+ item.value.missionId + `"    >Apply <img src="/images/right-arrow.png" alt=""></a>
+                                <a class="btn btnapp " href="/Content/Volunteering_Mission_Page?id=`+ item.value.missionId + `"    >View Details <img src="/images/right-arrow.png" alt=""></a>
                             </div>
                             <div class="col-xs-12 col-md-6 mx-auto ">
                                 <div class="row mt-4 cle">`+
@@ -1260,6 +1271,28 @@ $(document).ready(function () {
 
 
 
+
+//09-05
+const notificationSettingListButton = document.getElementById('notificationSettingList');
+const notificationSettingElement = document.querySelector('.notificationSetting');
+const notificationContentElement = document.querySelector('.notificationContent');
+
+notificationSettingListButton.addEventListener('click', function () {
+    notificationSettingElement.classList.remove('d-none');
+    notificationSettingElement.classList.add('d-block');
+    notificationContentElement.classList.add('d-none');
+});
+
+const backButton = document.querySelector('#backBtn');
+
+backButton.addEventListener('click', function () {
+    notificationSettingElement.classList.add('d-none');
+    notificationContentElement.classList.remove('d-none');
+    notificationContentElement.classList.add('d-block');
+});
+//09-05
+
+
 //for pagenation
 let recent_vol = document.getElementsByClassName("recent-vol");
 let prev_vol = document.getElementById("prev-vol");
@@ -1300,5 +1333,4 @@ function recentpagination() {
         } - ${(page) * 6 < recent_vol.length ? (page) * 6 : recent_vol.length
         } of ${recent_vol.length} Recent Volunteers</a > `
 }
-
 

@@ -212,7 +212,8 @@ $("#submitBtn").on('click', function () {
     var storytitle = $("#storyTitle").val();
     var missiontitle = $("#myInputSelect option:selected").text();
     var publisheddate = $("#myStoryDate").val();
-    var status = "PUBLISHED";
+    //var status = "PUBLISHED";
+    var status = "PENDING";
     
     var description = CKEDITOR.instances.editor1.getData();
     var videoUrl = $("#myStoryVideo").val();
@@ -302,6 +303,13 @@ missionSelect.addEventListener("change", function () {
                 $("#SaveBtn").prop("disabled", true);
                 $("#previewbtn").prop("disabled", true);
                 
+                alert("there is alredy submitted story for this mission ")
+            }
+            else if (data.status == "PENDING") {
+                $("#submitBtn").prop("disabled", true);
+                $("#SaveBtn").prop("disabled", true);
+                $("#previewbtn").prop("disabled", true);
+
                 alert("there is alredy submitted story for this mission ")
             }
             else {

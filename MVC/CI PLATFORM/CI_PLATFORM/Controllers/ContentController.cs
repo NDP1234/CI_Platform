@@ -18,7 +18,7 @@ using System.Text.Json.Serialization;
 
 namespace CI_PLATFORM.Controllers
 {
-    
+
     public class ContentController : Controller
     {
         private IConfiguration _configuration;
@@ -73,9 +73,9 @@ namespace CI_PLATFORM.Controllers
         public JsonResult[] Filter(int userId, string[] country, string[] city, string[] theme, string[] skill, string sort)
         {
             var session_details = HttpContext.Session.GetString("Login");
-            
 
-            var filter = _db2.GetFilterData(userId,country, city, theme, skill, sort);
+
+            var filter = _db2.GetFilterData(userId, country, city, theme, skill, sort);
             var filterlist = new JsonResult[filter.ToList().Count];
 
             int i = 0;
@@ -399,8 +399,10 @@ namespace CI_PLATFORM.Controllers
         [HttpGet]
         public IActionResult GetApplicationStatus(int missionId, int userId)
         {
-            var application = _db.MissionApplications.SingleOrDefault(m => m.UserId == userId && m.MissionId == missionId);
-            return Json(new { applied = application != null });
+            
+            var application = _db.MissionApplications.FirstOrDefault(m => m.UserId == userId && m.MissionId == missionId);
+            //return Json(new { applied = application != null });
+            return Json(application);
         }
 
         //storing  and checking details in database for applying in specific mission
@@ -419,7 +421,9 @@ namespace CI_PLATFORM.Controllers
             {
                 UserId = userId,
                 MissionId = missionId,
-                AppliedAt = DateTime.Now
+                AppliedAt = DateTime.Now,
+                ApprovalStatus = "PENDING"
+
             };
             _db.MissionApplications.Add(newApplication);
             _db.SaveChanges();

@@ -32,6 +32,7 @@ namespace CI_Platform.Repository.Repository
             List<Skill> skills = _db.Skills.ToList();
             List<MissionSkill> missionSkills = _db.MissionSkills.ToList();
             List<User> users = _db.Users.ToList();
+            bool missionApplications ;
             var Missions = (from m in mission
                             where m.DeletedAt == null
                             join i in image on m.MissionId equals i.MissionId into data
@@ -49,7 +50,8 @@ namespace CI_Platform.Repository.Repository
                                 AvgRating = avgRating,
                                 GoalObjectiveText = m.MissionType == "GOAL" ? _db.GoalMissions.Where(g => g.MissionId == m.MissionId).FirstOrDefault().GoalObjectiveText : null,
                                 Goalvalue = m.MissionType == "GOAL" ? _db.GoalMissions.Where(g => g.MissionId == m.MissionId).FirstOrDefault().GoalValue : 0,
-                                totalAchieve = (long)_db.Timesheets.Where(t => t.MissionId == m.MissionId && t.Action != null).Sum(t => t.Action)
+                                totalAchieve = (long)_db.Timesheets.Where(t => t.MissionId == m.MissionId && t.Action != null).Sum(t => t.Action),
+                                missionApplications = _db.MissionApplications.Any(ma => ma.UserId == userId && ma.ApprovalStatus == "APPROVE" && ma.MissionId==m.MissionId)
                             }).ToList();
             return Missions;
         }

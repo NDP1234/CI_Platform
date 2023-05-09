@@ -44,8 +44,8 @@
                         <!--  -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Explore</a>
-                            <ul class="dropdown-menu " >
+                               data-bs-toggle="dropdown" aria-expanded="false">Explore</a>
+                            <ul class="dropdown-menu ">
                                 <li><a class="dropdown-item gthDp" value="TopThemes" type="button">Top Themes</a></li>
                                 <li><a class="dropdown-item gthDp" value="MostRanked" type="button">Most Ranked</a></li>
                                 <li><a class="dropdown-item gthDp" value="TopFavourite" type="button">Top Favourite</a></li>
@@ -64,228 +64,382 @@
                             </a>
                             <ul class="dropdown-menu text-center">
                                 <li class="mx-auto"><a asp-action="PrivacyPolicyPage" asp-controller="UserEditProfile" class="text-decoration-none text-dark"> Privacy Policy</a></li>
-                                
+
                             </ul>
                         </li>
 
                     </ul>
                     <form class="d-flex" role="search">
 
-                        <div class="dropdown">
-                            <a class="btn  dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLinkAdmin"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="@ViewBag.UserDetails.Avatar" alt="" style="border-radius: 50%;" height="30px"
-                                     width="30px">
-                                <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
-                            </a>
+                        <!--  -->
+                        <div class="dropdown ">
+                            <div class="nav-item dropdown float-end ">
+                                <a class="nav-link dropdown-toggle text-dark pt-0 " href="#" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-bell position-relative"
+                                       style="font-size: 20px;"></i>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bgcolorForBellNotification"> 9 
+                                        <span class="visually-hidden">unread messages</span>
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu dropdownForNotifications">
+                                    <div class="d-flex justify-content-between">
+                                        <button type="button forOpenedDropdown" id="notificationSettingList"
+                                                class="btn border-0">
+                                            <i class="bi bi-gear-fill"></i>
+                                        </button>
 
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLinkAdmin">
+                                        <h6 class="NotificationText mt-0">Notification</h6>
+                                        <button class="btn border-0 pt-0">Clear All</button>
+
+
+
+                                    </div>
+                                    <div class="notificationContent">
+                                    <li>
+                                        <div class="row g-0">
+                                            <div class="col-11">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="bi bi-plus-circle"></i>
+                                                        <div class=" d-inline missionDetails text-dark text-wrap">
+                                                            New Mission details will displayed here for notifying to
+                                                            user
+                                                        </div>
+                                                    </a>
+                                                </label>
+                                            </div>
+                                            <div class="col-1">
+                                                <input class="form-check-input " type="checkbox" value=""
+                                                       id="flexCheckDefault">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <div class="row g-0">
+                                            <div class="col-11">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="bi bi-check2-square"></i>
+                                                        <div class=" d-inline missionDetails text-dark text-wrap">
+                                                            Volunteering request has been approved for this mission
+                                                            (missionid: 1234)
+                                                        </div>
+                                                    </a>
+                                                </label>
+                                            </div>
+                                            <div class="col-1">
+                                                <input class="form-check-input " type="checkbox" value=""
+                                                       id="flexCheckDefault">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <div class="row g-0">
+                                            <div class="col-11">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="bi bi-x-square"></i>
+                                                        <div class=" d-inline missionDetails text-dark text-wrap">
+                                                            Volunteering request has been declined for this mission
+                                                            (missionid: 1234)
+                                                        </div>
+                                                    </a>
+                                                </label>
+                                            </div>
+                                            <div class="col-1">
+                                                <input class="form-check-input " type="checkbox" value=""
+                                                       id="flexCheckDefault">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <hr>
+
+                                    <div class="text-center bg-light">
+                                        Older
+                                    </div>
+                                    <li>
+                                        <div class="row g-0">
+                                            <div class="col-11">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="bi bi-person-circle"></i>
+                                                        <div class=" d-inline missionDetails text-dark text-wrap">
+                                                            Nirav Patel Recommanded this mission- Mission Title
+                                                        </div>
+                                                    </a>
+                                                </label>
+                                            </div>
+                                            <div class="col-1">
+                                                <input class="form-check-input " type="checkbox" value=""
+                                                       id="flexCheckDefault">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <hr>
+                            </div>
+
+                            <div class="notificationSetting d-none text-center">
+                                <div class="text-center bg-light my-3 py-2">
+                                    Get a notification for
+                                </div>
+                                <div class="form-check mxauto">
+
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Notification setting 1
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           id="flexCheckDefault">
+                                </div>
+                                <div class="form-check  mxauto">
+
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Notification setting 2
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           id="flexCheckChecked">
+                                </div>
+                                <div class="form-check mxauto">
+
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Notification setting 3
+                                    </label>
+                                    <input class="form-check-input " type="checkbox" value=""
+                                           id="flexCheckDefault">
+                                </div>
+                                <div class="forAction mt-5">
+                                    <button class="btn  rounded-pill" id="SaveNotificationSetting">Save</button>
+                                    <button class="btn  rounded-pill" id="backBtn">Cancel</button>
+                                </div>
+                            </div>
+                            </ul>
+                        </div>
+                </div>
+
+                <!--  -->
+
+
+
+
+
+
+                <div class="dropdown">
+                    <a class="btn  dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLinkAdmin"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="@ViewBag.UserDetails.Avatar" alt="" style="border-radius: 50%;" height="30px"
+                             width="30px">
+                        <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
+                    </a>
+
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLinkAdmin">
                                 @if (@ViewBag.UserDetails.Role == "admin")
                                 {
                                     <li><a class="dropdown-item" asp-action="AdminDashBoard" asp-controller="Admin">Dashboard</a></li>
                                 }
 
-                                <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
-                                <li><a class="dropdown-item" asp-action="VolunteeringTimesheet" asp-controller="Timesheet">Volunteering Timesheet</a></li>
-                                <li><a class="dropdown-item" asp-action="Logout" asp-controller="Authentication">Logout </a></li>
-                            </ul>
-                        </div>
-                    </form>
+                        <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
+                        <li><a class="dropdown-item" asp-action="VolunteeringTimesheet" asp-controller="Timesheet">Volunteering Timesheet</a></li>
+                        <li><a class="dropdown-item" asp-action="Logout" asp-controller="Authentication">Logout </a></li>
+                    </ul>
                 </div>
+                </form>
             </div>
-        </nav>
+    </div>
+    </nav>
 
-        <!-- ////////////////////////////////// -->
-        <div class="first-nav d-md-none ">
-            <div id="mySidebar1" class="sidebar d-inline">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-                <a href="#">
-                    Stories
-                </a>
+    <!-- ////////////////////////////////// -->
+    <div class="first-nav d-md-none ">
+        <div id="mySidebar1" class="sidebar d-inline">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <a href="#">
+                Stories
+            </a>
 
-                <a href="#">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            Policy
-                        </a>
-                        <ul class="dropdown-menu ">
-                            <li><a class="dropdown-item " href="#">Policy-1</a></li>
-                            <li><a class="dropdown-item" href="#">Policy-2</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else </a></li>
-                        </ul>
-                    </li>
-                </a>
-            </div>
-            <div id="main1" class="d-flex justify-content-between m-2">
-                <button class="openbtn " onclick="openNav()">☰ </button>
-                <img src="~/images/user-img.png" class="rounded-pill  " height="40px" width="40px" alt="">
-            </div>
+            <a href="#">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Policy
+                    </a>
+                    <ul class="dropdown-menu ">
+                        <li><a class="dropdown-item " href="#">Policy-1</a></li>
+                        <li><a class="dropdown-item" href="#">Policy-2</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Something else </a></li>
+                    </ul>
+                </li>
+            </a>
         </div>
-        <!-- //////////////////////////////// -->
-        <div class="row mt-4 bdr container-fluid  ps-0 pe-0  mb-2">
-            <div class="srchbar">
-                <div class="input-group rounded bd d-none d-md-flex  ">
+        <div id="main1" class="d-flex justify-content-between m-2">
+            <button class="openbtn " onclick="openNav()">☰ </button>
+            <img src="~/images/user-img.png" class="rounded-pill  " height="40px" width="40px" alt="">
+        </div>
+    </div>
+    <!-- //////////////////////////////// -->
+    <div class="row mt-4 bdr container-fluid  ps-0 pe-0  mb-2">
+        <div class="srchbar">
+            <div class="input-group rounded bd d-none d-md-flex  ">
 
-                    <div class="col-12 col-lg-6 col-md-6 be ">
-                        <div class="srch ">
+                <div class="col-12 col-lg-6 col-md-6 be ">
+                    <div class="srch ">
 
-                            <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
+                        <i class="fas fa-search"><img src="~/images/search.png" alt=""></i>
 
-                            <form id="search-form" method="get" class="d-inline">
-                                <input type="search" class="form-control rounded d-inline srch" id="search-input" name="query" placeholder="Search mission..." aria-label="Search" aria-describedby="search-addon">
-                            </form>
+                        <form id="search-form" method="get" class="d-inline">
+                            <input type="search" class="form-control rounded d-inline srch" id="search-input" name="query" placeholder="Search mission..." aria-label="Search" aria-describedby="search-addon">
+                        </form>
 
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-lg-6 col-md-6 ">
-                        <div class="row  ">
-                            <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
-
-                                <select id="countryDropdown" class="border-0" name="CountryId">
-                                    <option value=""> Country </option>
-                                </select>
-                            </div>
-
-                            <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
-                                <a class="btn  dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLink"
-                                   data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span>City&nbsp; &nbsp;</span>
-                                </a>
-                                <ul class="dropdown-menu " id="cityDropdown" aria-labelledby="dropdownMenuLink">
-
-
-                                    <input class="form-check-input c-dropdown" type="checkbox" value="">
-                                    <label class="form-check-label">
-
-                                    </label>
-                                    <br>
-
-                                </ul>
-
-                            </div>
-
-                            <div class="dropdown d-inline col-lg-3  col-md-3 col-6 be text-center">
-                                <a class="btn  dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLink"
-                                   data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span>Theme &nbsp; &nbsp;</span>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" id="theme">
-
-                                    @foreach (var item in @ViewBag.MissionTheme)
-                                    {
-
-                                        <input class="form-check-input themeDropdown" id="@item.Title" type="checkbox" value="@item.MissionThemeId @item.Title" onclick="misfun(this);">
-                                        <label class="form-check-label" for="themeDropdown">
-                                            @item.Title
-                                        </label>
-                                        <br>
-
-                                    }
-                                </ul>
-                            </div>
-
-                            <div class="dropdown d-inline col-lg-3 col-md-3 col-6 text-center">
-                                <a class="btn  dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLink"
-                                   data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span>Skills &nbsp; &nbsp;</span>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
-                                    @foreach (var item in @ViewBag.Skill)
-                                    {
-
-                                        <input class="form-check-input" type="checkbox" value="@item.SkillId @item.SkillName" id="@item.SkillName" onclick="skillfun(this);">
-                                        <label class="form-check-label" for="flexCheckChecked4">
-                                            @item.SkillName
-                                        </label>
-                                        <br>
-                                    }
-                                </ul>
-
-
-                            </div>
-                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- ///////////////////// -->
-            <div class="second-nav 	d-md-none w-100">
-                <div class="mob-sidebar mx-auto">
 
-                    <!-- </div> -->
-                    <div id="mySidebar2" class="sidebar d-inline">
-                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">×</a>
-                        <a href="#">
+                <div class="col-12 col-lg-6 col-md-6 ">
+                    <div class="row  ">
+                        <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
 
-                            <select id="countryDropdown" name="CountryId">
+                            <select id="countryDropdown" class="border-0" name="CountryId">
                                 <option value=""> Country </option>
                             </select>
-                        </a>
-                        <a href="#">
-                            <li class="nav-item dropdown">
+                        </div>
 
-                                <select id="cityDropdown" name="CityId">
-                                    <option value="">City </option>
-                                </select>
+                        <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
+                            <a class="btn  dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLink"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <span>City&nbsp; &nbsp;</span>
+                            </a>
+                            <ul class="dropdown-menu " id="cityDropdown" aria-labelledby="dropdownMenuLink">
 
 
-                            </li>
-                        </a>
-                        <a href="#">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle b-filter " href="#" role="button" data-bs-toggle="dropdown"
-                                   aria-expanded="false">
-                                    Theme
-                                </a>
-                                <ul class="dropdown-menu ">
+                                <input class="form-check-input c-dropdown" type="checkbox" value="">
+                                <label class="form-check-label">
+
+                                </label>
+                                <br>
+
+                            </ul>
+
+                        </div>
+
+                        <div class="dropdown d-inline col-lg-3  col-md-3 col-6 be text-center">
+                            <a class="btn  dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLink"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <span>Theme &nbsp; &nbsp;</span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" id="theme">
+
                                     @foreach (var item in @ViewBag.MissionTheme)
                                     {
-                                        <li>@item.Title</li>
+
+                                            <input class="form-check-input themeDropdown" id="@item.Title" type="checkbox" value="@item.MissionThemeId @item.Title" onclick="misfun(this);">
+                                            <label class="form-check-label" for="themeDropdown">
+                                            @item.Title
+                                            </label>
+                                            <br>
+
                                     }
-                                </ul>
-                            </li>
-                        </a>
-                        <a href="#">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle b-filter" href="#" role="button" data-bs-toggle="dropdown"
-                                   aria-expanded="false">
-                                    Skills
-                                </a>
-                                <ul class="dropdown-menu ">
+                            </ul>
+                        </div>
+
+                        <div class="dropdown d-inline col-lg-3 col-md-3 col-6 text-center">
+                            <a class="btn  dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLink"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <span>Skills &nbsp; &nbsp;</span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
                                     @foreach (var item in @ViewBag.Skill)
                                     {
-                                        <li><a class="dropdown-item" href="#">@item.SkillName</a></li>
+
+                                            <input class="form-check-input" type="checkbox" value="@item.SkillId @item.SkillName" id="@item.SkillName" onclick="skillfun(this);">
+                                            <label class="form-check-label" for="flexCheckChecked4">
+                                            @item.SkillName
+                                            </label>
+                                            <br>
+                                    }
+                            </ul>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ///////////////////// -->
+        <div class="second-nav 	d-md-none w-100">
+            <div class="mob-sidebar mx-auto">
+
+                <!-- </div> -->
+                <div id="mySidebar2" class="sidebar d-inline">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">×</a>
+                    <a href="#">
+
+                        <select id="countryDropdown" name="CountryId">
+                            <option value=""> Country </option>
+                        </select>
+                    </a>
+                    <a href="#">
+                        <li class="nav-item dropdown">
+
+                            <select id="cityDropdown" name="CityId">
+                                <option value="">City </option>
+                            </select>
+
+
+                        </li>
+                    </a>
+                    <a href="#">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle b-filter " href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Theme
+                            </a>
+                            <ul class="dropdown-menu ">
+                                    @foreach (var item in @ViewBag.MissionTheme)
+                                    {
+                                            <li>@item.Title</li>
+                                    }
+                            </ul>
+                        </li>
+                    </a>
+                    <a href="#">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle b-filter" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Skills
+                            </a>
+                            <ul class="dropdown-menu ">
+                                    @foreach (var item in @ViewBag.Skill)
+                                    {
+                                            <li><a class="dropdown-item" href="#">@item.SkillName</a></li>
                                     }
 
-                                </ul>
-                            </li>
-                        </a>
-                    </div>
+                            </ul>
+                        </li>
+                    </a>
+                </div>
 
-                    <div id="main2" class="d-flex justify-content-end m-2 ">
-                        <input type="search" class="form-control rounded d-inline srch" id="search_small" placeholder="Search mission..."
-                               aria-label="Search" aria-describedby="search-addon" />
-                        <button class="openbtn " onclick="openNav2()">☰ </button>
+                <div id="main2" class="d-flex justify-content-end m-2 ">
+                    <input type="search" class="form-control rounded d-inline srch" id="search_small" placeholder="Search mission..."
+                           aria-label="Search" aria-describedby="search-addon" />
+                    <button class="openbtn " onclick="openNav2()">☰ </button>
 
-                    </div>
                 </div>
             </div>
-            <!-- ///////////////// -->
-            <div class="d-flex flex-row">
-                <div class="all-filters d-flex align-items-center flex-wrap flex-row mt-4 mgl " id="chips">
-                </div>
-                <button type="button" class="btn rounded-2 border-dark m-1" id="clrbtn">Clear All</button>
-            </div>
-
-
-
-
         </div>
+        <!-- ///////////////// -->
+        <div class="d-flex flex-row">
+            <div class="all-filters d-flex align-items-center flex-wrap flex-row mt-4 mgl " id="chips">
+            </div>
+            <button type="button" class="btn rounded-2 border-dark m-1" id="clrbtn">Clear All</button>
+        </div>
+
+
+
+
+    </div>
 
     </div>
     <div class="container mt5">
@@ -311,7 +465,7 @@
                             <option value="oldest">Oldest</option>
                             <option value="seats_desc">Lowest Available Seats</option>
                             <option value="seats_asc">Highest Available Seats</option>
-                           
+
                         </select>
 
                         <button class="btn " id="grid" onclick="showView('grid')">
@@ -333,167 +487,177 @@
         <div id="products" class="row view-group all-view">
             @foreach (var item in Model)
             {
-                <div class="item col-xs-4 col-lg-4">
+                        <div class="item col-xs-4 col-lg-4">
 
 
 
-                    <div class="thumbnail card">
-                        <div class="img-event position-relative">
-                            <img class="group list-group-image img-fluid w-100"
+                            <div class="thumbnail card">
+                                <div class="img-event position-relative">
+                                    <img class="group list-group-image img-fluid w-100"
                              src="@item.image?.MediaPath" alt="unable to load img" />
-                            <div class="bottom-left justify-content-center">
+                                    <div class="bottom-left justify-content-center">
                                 @item.Missions?.Theme.Title
-                            </div>
-                            <div class="bottom-right    text-center " style="background-color:rgba(0,0,0,0.5)">
+                                    </div>
+                            @if (item.missionApplications)
+                            {
+                                              <div class="top-left justify-content-center">
+                                               APPLIED
+                                            </div>  
+                            }
+
+                                <div class="bottom-right    text-center " style="background-color:rgba(0,0,0,0.5)">
 
                                 @if (item.isValid)
                                 {
-                                    <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
-                                        <i class="bi bi-heart filled-heart"></i>
-                                    </button>
+                                                    <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
+                                                        <i class="bi bi-heart filled-heart"></i>
+                                                    </button>
                                 }
                                 else
                                 {
-                                    <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
-                                        <i class="bi bi-heart w-100 text-white"></i>
-                                    </button>
+                                                    <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
+                                                        <i class="bi bi-heart w-100 text-white"></i>
+                                                    </button>
                                 }
 
-                            </div>
-                            <div class="bottom-right2  opacity-50   ">
+                                    </div>
+                            @*<div class="bottom-right2  opacity-50   ">
                                 <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                            </div>
-                            <div class="bottom-right3  opacity-50   ">
-                                <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                                <span>@item.Missions?.City.Name</span>
-                            </div>
-                        </div>
-                        <div class="caption card-body">
-                            <h4 class="group card-title inner list-group-item-heading">
+                                    </div>*@
+                                    <div class="bottom-right2  white  border-0 p-1 " style="background:transparent;background-color:rgba(0,0,0,0.5)">
+                                        <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
+                                    </div>
+                                    <div class="bottom-right3  white  border-0 p-1" style="background:transparent;background-color:rgba(0,0,0,0.5)">
+                                        <img src="~/images/pin.png" class="mx-auto p-1" alt="">
+                                        <span>@item.Missions?.City.Name</span>
+                                    </div>
+                                </div>
+                                <div class="caption card-body">
+                                    <h4 class="group card-title inner list-group-item-heading">
                                 @item.Missions.Title
-                            </h4>
-                            <p class="group inner list-group-item-text sd">
+                                    </h4>
+                                    <p class="group inner list-group-item-text sd">
                                 @item.Missions.ShortDescription
-                            </p>
-                            <div class="row mb">
+                                    </p>
+                                    <div class="row mb">
 
-                                <div class="col col-lg-6 col-md-6 col-sm-12">@item.Missions.OrganizationName</div>
-                                <div class="col col-lg-6 col-md-6 col-sm-12">
-                                   
-                                    <div class="text-warning">
+                                        <div class="col col-lg-6 col-md-6 col-sm-12">@item.Missions.OrganizationName</div>
+                                        <div class="col col-lg-6 col-md-6 col-sm-12">
+
+                                            <div class="text-warning">
                                         @for (int i = 1; i <= 5; i++)
                                         {
                                             if (i <= Math.Round(item.AvgRating))
                                             {
-                                                <i class="bi bi-star-fill"></i>
+                                                                        <i class="bi bi-star-fill"></i>
                                             }
                                             else
                                             {
-                                                <i class="bi bi-star"></i>
+                                                                        <i class="bi bi-star"></i>
                                             }
                                         }
-                                    </div>
-                                </div>
+                                            </div>
+                                        </div>
 
-                            </div>
-                            <div class="position-relative ">
-                                <hr style="z-index: -1;">
+                                    </div>
+                                    <div class="position-relative ">
+                                        <hr style="z-index: -1;">
                                 @if (item.Missions.MissionType == "TIME")
                                 {
-                                    <div class="dt text-center  position-absolute">
-                                        <span class="fsize"> From  @item.Missions.StartDate.ToString().Substring(0, 10)  until @item.Missions.EndDate.ToString().Substring(0, 10)</span>
-                                    </div>
+                                                    <div class="dt text-center  position-absolute">
+                                                        <span class="fsize"> From  @item.Missions.StartDate.ToString().Substring(0, 10)  until @item.Missions.EndDate.ToString().Substring(0, 10)</span>
+                                                    </div>
                                 }
                                 else
                                 {
-                                    <div class="dt text-center  position-absolute">
+                                                    <div class="dt text-center  position-absolute">
 
-                                        <span class="fsize">
+                                                        <span class="fsize">
                                             @item.GoalObjectiveText
-                                        </span>
+                                                        </span>
 
 
-                                    </div>
-
-                                }
-
-                            </div>
-                            <div class="row mt-4 ">
-                                @if (item.Missions.MissionType == "TIME")
-                                {
-                                    <div class="col">
-
-                                        <table>
-                                            <tr>
-                                                <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
-                                                <td>@item.Missions.SeatsVacancy</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="fsize2"> Seats Left</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <div class="col">
-                                        <table>
-                                            <tr>
-                                                
-                                                <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
-                                                <td>@item.Missions.StartDate.Value.AddDays(-1).ToShortDateString() </td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="fsize">Deadline</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div class="col">
-                                        <table>
-                                            <tr>
-                                                <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
-                                                <td>250</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="fsize2">Already volunteered</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <div class="col">
-                                        <table>
-                                            <tr>
-                                                <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
-                                                <td>
-                                                    
-                                                    <div class="progress">
-                                                        <div class="progress-bar bgw" role="progressbar"
-                                                     aria-valuenow="@item.totalAchieve" aria-valuemin="0" aria-valuemax="@item.Goalvalue"
-                                                     style="width: @((item.totalAchieve * 100) / item.Goalvalue)%;">
-                                                        </div>
                                                     </div>
 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="fsize2">@item.totalAchieve Achieved</td>
-                                            </tr>
-                                        </table>
+                                }
+
                                     </div>
+                                    <div class="row mt-4 ">
+                                @if (item.Missions.MissionType == "TIME")
+                                {
+                                                    <div class="col">
+
+                                                        <table>
+                                                            <tr>
+                                                                <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
+                                                                <td>@item.Missions.SeatsVacancy</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="fsize2"> Seats Left</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div class="col">
+                                                        <table>
+                                                            <tr>
+
+                                                                <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
+                                                                <td>@item.Missions.StartDate.Value.AddDays(-1).ToShortDateString() </td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="fsize">Deadline</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                }
+                                else
+                                {
+                                                    <div class="col">
+                                                        <table>
+                                                            <tr>
+                                                                <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
+                                                                <td>250</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="fsize2">Already volunteered</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div class="col">
+                                                        <table>
+                                                            <tr>
+                                                                <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
+                                                                <td>
+
+                                                                    <div class="progress">
+                                                                        <div class="progress-bar bgw" role="progressbar"
+                                                     aria-valuenow="@item.totalAchieve" aria-valuemin="0" aria-valuemax="@item.Goalvalue"
+                                                     style="width: @((item.totalAchieve * 100) / item.Goalvalue)%;">
+                                                                        </div>
+                                                                    </div>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="fsize2">@item.totalAchieve Achieved</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
 
                                 }
 
-                            </div>
+                                    </div>
 
-                            <div class="row">
-                                <div class="col-xs-12 col-md-6 mx-auto">
-                                    <a class="btn btnapp " asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id="@item.Missions.MissionId">Apply <img src="~/images/right-arrow.png" alt=""></a>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6 mx-auto">
+                                            <a class="btn btnapp " asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id="@item.Missions.MissionId">View Details <img src="~/images/right-arrow.png" alt=""></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                </div>
+                        </div>
             }
         </div>
 
@@ -503,156 +667,164 @@
             <!-- 1 -->
             @foreach (var item in Model)
             {
-                <div class="row border mt-3 item ">
+                        <div class="row border mt-3 item ">
 
-                    <div class="col col-lg-4  col-md-12 col-xs-12 position-relative border-light  ">
-                        <img src="@item.image?.MediaPath" class="thumbimg" alt="" />
-                        <div class="bl1 justify-content-center">
+                            <div class="col col-lg-4  col-md-12 col-xs-12 position-relative border-light  ">
+                                <img src="@item.image?.MediaPath" class="thumbimg" alt="" />
+                                <div class="bl1 justify-content-center">
                             @item.Missions?.Theme.Title
-                        </div>
-                        <div class="bottom-right4 text-center " style="background-color:rgba(0,0,0,0.5)">
+                                </div>
+                                <div class="bottom-right4 text-center " style="background-color:rgba(0,0,0,0.5)">
 
                             @if (item.isValid)
                             {
-                                <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
-                                    <i class="bi bi-heart filled-heart"></i>
-                                </button>
+                                                <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
+                                                    <i class="bi bi-heart filled-heart"></i>
+                                                </button>
                             }
                             else
                             {
-                                <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
-                                    <i class="bi bi-heart w-100 text-white"></i>
-                                </button>
+                                                <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
+                                                    <i class="bi bi-heart w-100 text-white"></i>
+                                                </button>
                             }
+                                </div>
+                                <div class="bottom-right5  opacity-50   ">
+                                    <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
+                                </div>
+                                <div class="bottom-right6  opacity-50   ">
+                                    <img src="~/images/pin.png" class="mx-auto p-1" alt="">
+                                    <span>@item.Missions?.City.Name</span>
+                                </div>
+                        @if (item.missionApplications)
+                         {
+{
+                                      <div class="top-left justify-content-center">
+                                               APPLIED
+                                            </div>  
+                        }
+}
                         </div>
-                        <div class="bottom-right5  opacity-50   ">
-                            <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                        </div>
-                        <div class="bottom-right6  opacity-50   ">
-                            <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                            <span>@item.Missions?.City.Name</span>
-                        </div>
-                    </div>
-                    <div class="col col-lg-8 col-md-12 col-sm-12">
-                        <h4 class="group card-title inner list-group-item-heading mtop">
+                            <div class="col col-lg-8 col-md-12 col-sm-12">
+                                <h4 class="group card-title inner list-group-item-heading mtop">
                             @item.Missions.Title
-                        </h4>
-                        <p class="group inner list-group-item-text sd">
+                                </h4>
+                                <p class="group inner list-group-item-text sd">
                             @item.Missions.ShortDescription.
-                        </p>
+                                </p>
 
-                        <div class="row">
-                            <div class="col col-lg-6 col-md-6 col-sm-12">
-                                <div class="d-inline">@item.Missions.OrganizationName</div>
-                                <div class="d-inline">
+                                <div class="row">
+                                    <div class="col col-lg-6 col-md-6 col-sm-12">
+                                        <div class="d-inline">@item.Missions.OrganizationName</div>
+                                        <div class="d-inline">
 
                                     @for (int i = 1; i <= 5; i++)
                                     {
                                         if (i <= Math.Round(item.AvgRating))
                                         {
-                                            <i class="bi bi-star-fill"></i>
+                                                                    <i class="bi bi-star-fill"></i>
                                         }
                                         else
                                         {
-                                            <i class="bi bi-star"></i>
+                                                                    <i class="bi bi-star"></i>
                                         }
                                     }
-                                </div>
-                            </div>
+                                        </div>
+                                    </div>
 
 
 
                             @if (item.Missions.MissionType == "TIME")
                             {
 
-                                <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds ">
+                                                <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds ">
 
-                                    <span class="fsize"> From @item.Missions.StartDate.ToString().Substring(0, 10) until @item.Missions.EndDate.ToString().Substring(0, 10)</span>
-                                </div>
+                                                    <span class="fsize"> From @item.Missions.StartDate.ToString().Substring(0, 10) until @item.Missions.EndDate.ToString().Substring(0, 10)</span>
+                                                </div>
                             }
                             else
                             {
 
-                                <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds  ">
+                                                <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds  ">
 
-                                    <span class="fsize">@item.GoalObjectiveText</span>
-                                </div>
+                                                    <span class="fsize">@item.GoalObjectiveText</span>
+                                                </div>
 
                             }
 
-                            <div class="col-xs-12 col-md-6 mx-auto">
-                                <a class="btn btnapp " asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id="@item.Missions.MissionId">Apply <img src="~/images/right-arrow.png" alt=""></a>
-                            </div>
-                            <div class="col-xs-12 col-md-6 mx-auto">
-                                <div class="row mt-4 ">
+                                    <div class="col-xs-12 col-md-6 mx-auto">
+                                        <a class="btn btnapp " asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id="@item.Missions.MissionId">View Details <img src="~/images/right-arrow.png" alt=""></a>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6 mx-auto">
+                                        <div class="row mt-4 ">
                                     @if (item.Missions.MissionType == "TIME")
                                     {
-                                        <div class="col">
+                                                        <div class="col">
 
-                                            <table>
-                                                <tr>
-                                                    <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
-                                                    <td>@item.Missions.SeatsVacancy</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="fsize2"> Seats Left</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <div class="col">
-                                            <table>
-                                                <tr>
-                                                    <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
-                                                    <td>@item.Missions.StartDate.Value.AddDays(-1).ToShortDateString()  </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="fsize">Deadline</td>
-                                                </tr>
-                                            </table>
-                                        </div>
+                                                            <table>
+                                                                <tr>
+                                                                    <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
+                                                                    <td>@item.Missions.SeatsVacancy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="fsize2"> Seats Left</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <div class="col">
+                                                            <table>
+                                                                <tr>
+                                                                    <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
+                                                                    <td>@item.Missions.StartDate.Value.AddDays(-1).ToShortDateString()  </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="fsize">Deadline</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
                                     }
                                     else
                                     {
-                                        <div class="col">
-                                            <table>
-                                                <tr>
-                                                    <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
-                                                    <td>250</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="fsize2">Already volunteered</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <div class="col">
-                                            <table>
-                                                <tr>
-                                                    <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
-                                                    <td>
-                                                       
-                                                        <div class="progress">
-                                                            <div class="progress-bar bgw" role="progressbar"
+                                                        <div class="col">
+                                                            <table>
+                                                                <tr>
+                                                                    <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
+                                                                    <td>250</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="fsize2">Already volunteered</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <div class="col">
+                                                            <table>
+                                                                <tr>
+                                                                    <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
+                                                                    <td>
+
+                                                                        <div class="progress">
+                                                                            <div class="progress-bar bgw" role="progressbar"
                                                          aria-valuenow="@item.totalAchieve" aria-valuemin="0" aria-valuemax="@item.Goalvalue"
                                                          style="width: @((item.totalAchieve * 100) / item.Goalvalue)%;">
-                                                            </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="fsize2">@item.totalAchieve Achieved</td>
+                                                                </tr>
+                                                            </table>
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="fsize2">@item.totalAchieve Achieved</td>
-                                                </tr>
-                                            </table>
-                                        </div>
                                     }
+                                        </div>
+
+                                    </div>
+
                                 </div>
 
                             </div>
 
                         </div>
-
-                    </div>
-
-                </div>
             }
         </div>
 
@@ -740,10 +912,28 @@
                 });
             }
         });
-       
 
-        
-      
+@*        //09-05
+const notificationSettingListButton = document.getElementById('notificationSettingList');
+const notificationSettingElement = document.querySelector('.notificationSetting');
+const notificationContentElement = document.querySelector('.notificationContent');
+
+notificationSettingListButton.addEventListener('click', function () {
+    notificationSettingElement.classList.remove('d-none');
+    notificationSettingElement.classList.add('d-block');
+    notificationContentElement.classList.add('d-none');
+});
+
+const backButton = document.querySelector('#backBtn');
+
+backButton.addEventListener('click', function () {
+    notificationSettingElement.classList.add('d-none');
+    notificationContentElement.classList.remove('d-none');
+    notificationContentElement.classList.add('d-block');
+});
+//09-05*@
+
+
 
     </script>
 </body>
