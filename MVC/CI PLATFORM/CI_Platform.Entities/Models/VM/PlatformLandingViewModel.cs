@@ -25,5 +25,6 @@ namespace CI_Platform.Entities.Models.VM
         public long totalAchieve { get; set; }
 
         public bool missionApplications { get; set; }
+        //public NotificationSetting myNotifications { get; set; } = new NotificationSetting();
     }
 }

@@ -50,6 +50,8 @@ public partial class CiPlatformContext : DbContext
 
     public virtual DbSet<MissionTheme> MissionThemes { get; set; }
 
+    public virtual DbSet<NotificationSetting> NotificationSettings { get; set; }
+
     public virtual DbSet<PasswordReset> PasswordResets { get; set; }
 
     public virtual DbSet<Skill> Skills { get; set; }
@@ -65,6 +67,8 @@ public partial class CiPlatformContext : DbContext
     public virtual DbSet<Timesheet> Timesheets { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
+
+    public virtual DbSet<UserNotificationInfo> UserNotificationInfos { get; set; }
 
     public virtual DbSet<UserSkill> UserSkills { get; set; }
 
@@ -658,6 +662,19 @@ public partial class CiPlatformContext : DbContext
                 .HasColumnName("updated_at");
         });
 
+        modelBuilder.Entity<NotificationSetting>(entity =>
+        {
+            entity.HasKey(e => e.NotificationSettingId).HasName("PK__notifica__2CEC4EFBB2B212C3");
+
+            entity.ToTable("notification_setting");
+
+            entity.Property(e => e.NotificationSettingId).HasColumnName("notification_setting_id");
+            entity.Property(e => e.NotificationName)
+                .HasMaxLength(455)
+                .IsUnicode(false)
+                .HasColumnName("notification_name");
+        });
+
         modelBuilder.Entity<PasswordReset>(entity =>
         {
             entity.HasKey(e => new { e.Email, e.Token }).HasName("PK__password__07C76CC244FD0FF4");
@@ -953,6 +970,17 @@ public partial class CiPlatformContext : DbContext
                 .HasForeignKey(d => d.CountryId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_country_user");
+        });
+
+        modelBuilder.Entity<UserNotificationInfo>(entity =>
+        {
+            entity.HasKey(e => e.UserNotificationId).HasName("PK__user_not__64BFFBDBA68AA36D");
+
+            entity.ToTable("user_notification_info");
+
+            entity.Property(e => e.UserNotificationId).HasColumnName("user_notification_id");
+            entity.Property(e => e.NotificationSettingId).HasColumnName("notification_setting_id");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
         });
 
         modelBuilder.Entity<UserSkill>(entity =>

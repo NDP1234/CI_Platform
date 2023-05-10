@@ -32,7 +32,8 @@ namespace CI_Platform.Repository.Repository
             List<Skill> skills = _db.Skills.ToList();
             List<MissionSkill> missionSkills = _db.MissionSkills.ToList();
             List<User> users = _db.Users.ToList();
-            bool missionApplications ;
+           
+            bool missionApplications;
             var Missions = (from m in mission
                             where m.DeletedAt == null
                             join i in image on m.MissionId equals i.MissionId into data
@@ -51,8 +52,11 @@ namespace CI_Platform.Repository.Repository
                                 GoalObjectiveText = m.MissionType == "GOAL" ? _db.GoalMissions.Where(g => g.MissionId == m.MissionId).FirstOrDefault().GoalObjectiveText : null,
                                 Goalvalue = m.MissionType == "GOAL" ? _db.GoalMissions.Where(g => g.MissionId == m.MissionId).FirstOrDefault().GoalValue : 0,
                                 totalAchieve = (long)_db.Timesheets.Where(t => t.MissionId == m.MissionId && t.Action != null).Sum(t => t.Action),
-                                missionApplications = _db.MissionApplications.Any(ma => ma.UserId == userId && ma.ApprovalStatus == "APPROVE" && ma.MissionId==m.MissionId)
+                                missionApplications = _db.MissionApplications.Any(ma => ma.UserId == userId && ma.ApprovalStatus == "APPROVE" && ma.MissionId == m.MissionId),
+                                 
                             }).ToList();
+           
+
             return Missions;
         }
 
@@ -332,6 +336,42 @@ namespace CI_Platform.Repository.Repository
         }
 
 
+        public bool SaveNotificationSetting(int userId, List<int> selectedIds)
+        {
+            var userDetailExist = _db.UserNotificationInfos.Where(uni => uni.UserId == userId).ToList();
+            var selectedSettings = selectedIds;
 
+            if (userDetailExist.Count>0)
+            {
+                foreach (var item in userDetailExist)
+                {
+                    _db.UserNotificationInfos.Remove(item);
+                }
+                _db.SaveChanges();
+
+                foreach(var item in selectedSettings)
+                {
+                    UserNotificationInfo userNotificationInfo = new UserNotificationInfo();
+                    userNotificationInfo.NotificationSettingId = item;
+                    userNotificationInfo.UserId = userId;
+                    _db.UserNotificationInfos.Add(userNotificationInfo);
+                }
+                _db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                foreach (var item in selectedSettings)
+                {
+                    UserNotificationInfo userNotificationInfo = new UserNotificationInfo();
+                    userNotificationInfo.NotificationSettingId = item;
+                    userNotificationInfo.UserId = userId;
+                    _db.UserNotificationInfos.Add(userNotificationInfo);
+                }
+                _db.SaveChanges();
+
+                return true;
+            }
+        }
     }
 }

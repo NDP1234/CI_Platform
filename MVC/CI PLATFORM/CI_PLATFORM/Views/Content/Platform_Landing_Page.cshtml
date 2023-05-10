@@ -1,5 +1,5 @@
 ﻿@using CI_Platform.Entities.Models.VM
-
+@inject CI_Platform.Entities.Data.CiPlatformContext _db
 @model List<PlatformLandingViewModel>;
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -85,7 +85,7 @@
                                 <ul class="dropdown-menu dropdownForNotifications">
                                     <div class="d-flex justify-content-between">
                                         <button type="button forOpenedDropdown" id="notificationSettingList"
-                                                class="btn border-0">
+                                                class="btn border-0" onclick="event.stopPropagation()">
                                             <i class="bi bi-gear-fill"></i>
                                         </button>
 
@@ -181,37 +181,29 @@
                                     <hr>
                             </div>
 
-                            <div class="notificationSetting d-none text-center">
+                            <div class="notificationSetting d-none text-left">
                                 <div class="text-center bg-light my-3 py-2">
                                     Get a notification for
                                 </div>
-                                <div class="form-check mxauto">
 
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        Notification setting 1
-                                    </label>
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="flexCheckDefault">
-                                </div>
-                                <div class="form-check  mxauto">
+                               @{
+                                 var NotificationSettingList = _db.NotificationSettings.ToList();
+                                }
+                               @foreach (var item in NotificationSettingList)
+                               {
+                                   <div class="form-check mxauto">
 
-                                    <label class="form-check-label" for="flexCheckChecked">
-                                        Notification setting 2
+                                    <label class="form-check-label" for="@item.NotificationSettingId">
+                                       @item.NotificationName
                                     </label>
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="flexCheckChecked">
+                                    <input class="form-check-input userNotificationCheck" type="checkbox" value="@item.NotificationSettingId" 
+                                           id="@item.NotificationSettingId">
                                 </div>
-                                <div class="form-check mxauto">
-
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        Notification setting 3
-                                    </label>
-                                    <input class="form-check-input " type="checkbox" value=""
-                                           id="flexCheckDefault">
-                                </div>
-                                <div class="forAction mt-5">
-                                    <button class="btn  rounded-pill" id="SaveNotificationSetting">Save</button>
-                                    <button class="btn  rounded-pill" id="backBtn">Cancel</button>
+                               }
+                                
+                                <div class="forAction mt-5 text-center">
+                                    <button class="btn  rounded-pill" id="SaveNotificationSetting" data-user-id="@ViewBag.UserDetails.UserId">Save</button>
+                                    <button class="btn  rounded-pill" id="backBtn" onclick="event.stopPropagation()">Cancel</button>
                                 </div>
                             </div>
                             </ul>
@@ -913,25 +905,7 @@
             }
         });
 
-@*        //09-05
-const notificationSettingListButton = document.getElementById('notificationSettingList');
-const notificationSettingElement = document.querySelector('.notificationSetting');
-const notificationContentElement = document.querySelector('.notificationContent');
 
-notificationSettingListButton.addEventListener('click', function () {
-    notificationSettingElement.classList.remove('d-none');
-    notificationSettingElement.classList.add('d-block');
-    notificationContentElement.classList.add('d-none');
-});
-
-const backButton = document.querySelector('#backBtn');
-
-backButton.addEventListener('click', function () {
-    notificationSettingElement.classList.add('d-none');
-    notificationContentElement.classList.remove('d-none');
-    notificationContentElement.classList.add('d-block');
-});
-//09-05*@
 
 
 

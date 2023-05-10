@@ -399,7 +399,7 @@ namespace CI_PLATFORM.Controllers
         [HttpGet]
         public IActionResult GetApplicationStatus(int missionId, int userId)
         {
-            
+
             var application = _db.MissionApplications.FirstOrDefault(m => m.UserId == userId && m.MissionId == missionId);
             //return Json(new { applied = application != null });
             return Json(application);
@@ -478,6 +478,23 @@ namespace CI_PLATFORM.Controllers
             return Explorelist;
         }
 
+        public bool SaveNotificationSettingForUser(List<int> selectedIds)
+        {
+            var session_details = HttpContext.Session.GetString("Login");
 
+            List<User> users = _users.GetUserList();
+            var profile = users.FirstOrDefault(m => m.Email == session_details);
+            ViewBag.UserDetails = profile;
+            int userId = (int)profile.UserId;
+
+            bool result = _db2.SaveNotificationSetting(userId, selectedIds);
+            return result;
+        }
+
+        public JsonResult GetNotificationSettingForUser(int UserId)
+        {
+            var getUserSettingDetails = _db.UserNotificationInfos.Where(uni => uni.UserId == UserId).ToList();
+            return Json(getUserSettingDetails);
+        }
     }
 }
