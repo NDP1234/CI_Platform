@@ -50,6 +50,8 @@ public partial class CiPlatformContext : DbContext
 
     public virtual DbSet<MissionTheme> MissionThemes { get; set; }
 
+    public virtual DbSet<NotificationDetail> NotificationDetails { get; set; }
+
     public virtual DbSet<NotificationSetting> NotificationSettings { get; set; }
 
     public virtual DbSet<PasswordReset> PasswordResets { get; set; }
@@ -660,6 +662,39 @@ public partial class CiPlatformContext : DbContext
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("updated_at");
+        });
+
+        modelBuilder.Entity<NotificationDetail>(entity =>
+        {
+            entity.HasKey(e => e.NottificationDeatilId).HasName("PK__notifica__6DF5FDAC40659E87");
+
+            entity.ToTable("notification_details");
+
+            entity.Property(e => e.NottificationDeatilId).HasColumnName("nottification_deatil_id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.DeletedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("deleted_at");
+            entity.Property(e => e.ImagePath)
+                .HasColumnType("text")
+                .HasColumnName("image_path");
+            entity.Property(e => e.MissionId).HasColumnName("mission_id");
+            entity.Property(e => e.NotificationMessage)
+                .HasColumnType("text")
+                .HasColumnName("notification_message");
+            entity.Property(e => e.NotificationSettingId).HasColumnName("notification_setting_id");
+            entity.Property(e => e.Status)
+                .HasMaxLength(12)
+                .IsUnicode(false)
+                .HasColumnName("status");
+            entity.Property(e => e.StoryId).HasColumnName("story_id");
+            entity.Property(e => e.UpdatedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("updated_at");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
         });
 
         modelBuilder.Entity<NotificationSetting>(entity =>

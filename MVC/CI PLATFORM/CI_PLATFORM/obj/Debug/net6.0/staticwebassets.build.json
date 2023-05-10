@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "U/h7FJmpaXt2FNNg9Ay9JvZi51t3KfpFlcBc7gbiks8=",
+  "Hash": "kUpZ++kx4aoDqBoSmWCFfGfO0m+ZX/csUxQ2GNQ8GBU=",
   "Source": "CI_PLATFORM",
   "BasePath": "_content/CI_PLATFORM",
   "Mode": "Default",
@@ -2210,6 +2210,23 @@
       "OriginalItemSpec": "wwwroot\\Images\\Animal-welfare-&-save-birds-campaign-1.png"
     },
     {
+      "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\Images\\approved-gdb64cf08a_1280.png",
+      "SourceId": "CI_PLATFORM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\",
+      "BasePath": "_content/CI_PLATFORM",
+      "RelativePath": "Images/approved-gdb64cf08a_1280.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\approved-gdb64cf08a_1280.png"
+    },
+    {
       "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\Images\\arrow.png",
       "SourceId": "CI_PLATFORM",
       "SourceType": "Discovered",
@@ -3891,6 +3908,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\web.png"
+    },
+    {
+      "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\Images\\x-g4cb7e4fba_1280.png",
+      "SourceId": "CI_PLATFORM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\",
+      "BasePath": "_content/CI_PLATFORM",
+      "RelativePath": "Images/x-g4cb7e4fba_1280.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\x-g4cb7e4fba_1280.png"
     },
     {
       "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\Images\\xlsx.png",

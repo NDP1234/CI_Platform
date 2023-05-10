@@ -496,5 +496,12 @@ namespace CI_PLATFORM.Controllers
             var getUserSettingDetails = _db.UserNotificationInfos.Where(uni => uni.UserId == UserId).ToList();
             return Json(getUserSettingDetails);
         }
+        public JsonResult GetNotificationCount(int UserId)
+        {
+            var getNotificationCount = _db.NotificationDetails.Where(nd => nd.Status == "NOT SEEN" && nd.UserId==UserId).Count();
+       
+            return Json(getNotificationCount);
+        }
+
     }
 }

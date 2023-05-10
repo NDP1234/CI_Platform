@@ -74,30 +74,64 @@
                         <!--  -->
                         <div class="dropdown ">
                             <div class="nav-item dropdown float-end ">
-                                <a class="nav-link dropdown-toggle text-dark pt-0 " href="#" role="button"
+                                <a class="nav-link dropdown-toggle text-dark pt-0 " role="button"
                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="bi bi-bell position-relative"
                                        style="font-size: 20px;"></i>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bgcolorForBellNotification"> 9 
+                                    
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bgcolorForBellNotification">
+                                        
                                         <span class="visually-hidden">unread messages</span>
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu dropdownForNotifications">
                                     <div class="d-flex justify-content-between">
-                                        <button type="button forOpenedDropdown" id="notificationSettingList"
-                                                class="btn border-0" onclick="event.stopPropagation()">
+                                        <button type="button" id="notificationSettingList"
+                                                class="btn border-0 forOpenedDropdown" onclick="event.stopPropagation()">
                                             <i class="bi bi-gear-fill"></i>
                                         </button>
 
                                         <h6 class="NotificationText mt-0">Notification</h6>
                                         <button class="btn border-0 pt-0">Clear All</button>
 
-
+                                    
 
                                     </div>
                                     <div class="notificationContent">
+                                        @{
+                                            var userid = @ViewBag.UserDetails.UserId;
+                                            var notificationlist = _db.NotificationDetails.ToList();
+                                        }
+                                        @foreach (var item in notificationlist.Where(nd=>nd.UserId==userid && nd.Status=="NOT SEEN").OrderByDescending(nd=>nd.CreatedAt))
+                                        {
+                                            if (@item.NotificationSettingId == 3)
+                                            {
+                                            <li>
+
+                                                <div class="row g-0">
+                                                    <div class="col-11">
+                                                        <label class="form-check-label" for="@item.NottificationDeatilId">
+                                                            <a class="dropdown-item" >
+                                                               @* <i class="bi bi-plus-circle"></i>*@
+                                                               <img src="@item.ImagePath" height="20px" width="20px"/>
+                                                                <div class=" d-inline missionDetails text-dark text-wrap">
+                                                                    @item.NotificationMessage
+                                                                </div>
+                                                            </a>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input class="form-check-input " type="checkbox" value="@item.NottificationDeatilId"
+                                                       id="@item.NottificationDeatilId">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <hr>
+                                            }
+                                        }
                                     <li>
-                                        <div class="row g-0">
+
+                                        @*<div class="row g-0">
                                             <div class="col-11">
                                                 <label class="form-check-label" for="flexCheckDefault">
                                                     <a class="dropdown-item" href="#">
@@ -155,7 +189,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <hr>
+                                    <hr>*@
 
                                     <div class="text-center bg-light">
                                         Older
@@ -186,24 +220,24 @@
                                     Get a notification for
                                 </div>
 
-                               @{
-                                 var NotificationSettingList = _db.NotificationSettings.ToList();
-                                }
-                               @foreach (var item in NotificationSettingList)
-                               {
-                                   <div class="form-check mxauto">
+                                        @{
+                                            var NotificationSettingList = _db.NotificationSettings.ToList();
+                                        }
+                                        @foreach (var item in NotificationSettingList)
+                                        {
+                                    <div class="form-check mxauto">
 
-                                    <label class="form-check-label" for="@item.NotificationSettingId">
-                                       @item.NotificationName
-                                    </label>
-                                    <input class="form-check-input userNotificationCheck" type="checkbox" value="@item.NotificationSettingId" 
+                                        <label class="form-check-label" for="@item.NotificationSettingId">
+                                                    @item.NotificationName
+                                        </label>
+                                        <input class="form-check-input userNotificationCheck" type="checkbox" value="@item.NotificationSettingId"
                                            id="@item.NotificationSettingId">
-                                </div>
-                               }
-                                
+                                    </div>
+                                        }
+
                                 <div class="forAction mt-5 text-center">
-                                    <button class="btn  rounded-pill" id="SaveNotificationSetting" data-user-id="@ViewBag.UserDetails.UserId">Save</button>
-                                    <button class="btn  rounded-pill" id="backBtn" onclick="event.stopPropagation()">Cancel</button>
+                                    <button class="btn  rounded-pill" id="SaveNotificationSetting" type="button" data-user-id="@ViewBag.UserDetails.UserId">Save</button>
+                                    <button class="btn  rounded-pill" id="backBtn" type="button" onclick="event.stopPropagation()">Cancel</button>
                                 </div>
                             </div>
                             </ul>
@@ -228,7 +262,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLinkAdmin">
                                 @if (@ViewBag.UserDetails.Role == "admin")
                                 {
-                                    <li><a class="dropdown-item" asp-action="AdminDashBoard" asp-controller="Admin">Dashboard</a></li>
+                            <li><a class="dropdown-item" asp-action="AdminDashBoard" asp-controller="Admin">Dashboard</a></li>
                                 }
 
                         <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
@@ -325,11 +359,11 @@
                                     @foreach (var item in @ViewBag.MissionTheme)
                                     {
 
-                                            <input class="form-check-input themeDropdown" id="@item.Title" type="checkbox" value="@item.MissionThemeId @item.Title" onclick="misfun(this);">
-                                            <label class="form-check-label" for="themeDropdown">
+                                    <input class="form-check-input themeDropdown" id="@item.Title" type="checkbox" value="@item.MissionThemeId @item.Title" onclick="misfun(this);">
+                                    <label class="form-check-label" for="themeDropdown">
                                             @item.Title
-                                            </label>
-                                            <br>
+                                    </label>
+                                    <br>
 
                                     }
                             </ul>
@@ -345,11 +379,11 @@
                                     @foreach (var item in @ViewBag.Skill)
                                     {
 
-                                            <input class="form-check-input" type="checkbox" value="@item.SkillId @item.SkillName" id="@item.SkillName" onclick="skillfun(this);">
-                                            <label class="form-check-label" for="flexCheckChecked4">
+                                    <input class="form-check-input" type="checkbox" value="@item.SkillId @item.SkillName" id="@item.SkillName" onclick="skillfun(this);">
+                                    <label class="form-check-label" for="flexCheckChecked4">
                                             @item.SkillName
-                                            </label>
-                                            <br>
+                                    </label>
+                                    <br>
                                     }
                             </ul>
 
@@ -391,7 +425,7 @@
                             <ul class="dropdown-menu ">
                                     @foreach (var item in @ViewBag.MissionTheme)
                                     {
-                                            <li>@item.Title</li>
+                                    <li>@item.Title</li>
                                     }
                             </ul>
                         </li>
@@ -405,7 +439,7 @@
                             <ul class="dropdown-menu ">
                                     @foreach (var item in @ViewBag.Skill)
                                     {
-                                            <li><a class="dropdown-item" href="#">@item.SkillName</a></li>
+                                    <li><a class="dropdown-item" href="#">@item.SkillName</a></li>
                                     }
 
                             </ul>
@@ -479,177 +513,177 @@
         <div id="products" class="row view-group all-view">
             @foreach (var item in Model)
             {
-                        <div class="item col-xs-4 col-lg-4">
+                <div class="item col-xs-4 col-lg-4">
 
 
 
-                            <div class="thumbnail card">
-                                <div class="img-event position-relative">
-                                    <img class="group list-group-image img-fluid w-100"
+                    <div class="thumbnail card">
+                        <div class="img-event position-relative">
+                            <img class="group list-group-image img-fluid w-100"
                              src="@item.image?.MediaPath" alt="unable to load img" />
-                                    <div class="bottom-left justify-content-center">
+                            <div class="bottom-left justify-content-center">
                                 @item.Missions?.Theme.Title
-                                    </div>
+                            </div>
                             @if (item.missionApplications)
                             {
-                                              <div class="top-left justify-content-center">
-                                               APPLIED
-                                            </div>  
+                                <div class="top-left justify-content-center">
+                                    APPLIED
+                                </div>
                             }
 
-                                <div class="bottom-right    text-center " style="background-color:rgba(0,0,0,0.5)">
+                            <div class="bottom-right    text-center " style="background-color:rgba(0,0,0,0.5)">
 
                                 @if (item.isValid)
                                 {
-                                                    <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
-                                                        <i class="bi bi-heart filled-heart"></i>
-                                                    </button>
+                                    <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
+                                        <i class="bi bi-heart filled-heart"></i>
+                                    </button>
                                 }
                                 else
                                 {
-                                                    <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
-                                                        <i class="bi bi-heart w-100 text-white"></i>
-                                                    </button>
+                                    <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
+                                        <i class="bi bi-heart w-100 text-white"></i>
+                                    </button>
                                 }
 
-                                    </div>
+                            </div>
                             @*<div class="bottom-right2  opacity-50   ">
                                 <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                                    </div>*@
-                                    <div class="bottom-right2  white  border-0 p-1 " style="background:transparent;background-color:rgba(0,0,0,0.5)">
-                                        <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                                    </div>
-                                    <div class="bottom-right3  white  border-0 p-1" style="background:transparent;background-color:rgba(0,0,0,0.5)">
-                                        <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                                        <span>@item.Missions?.City.Name</span>
-                                    </div>
-                                </div>
-                                <div class="caption card-body">
-                                    <h4 class="group card-title inner list-group-item-heading">
+                                </div>*@
+                            <div class="bottom-right2  white  border-0 p-1 " style="background:transparent;background-color:rgba(0,0,0,0.5)">
+                                <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
+                            </div>
+                            <div class="bottom-right3  white  border-0 p-1" style="background:transparent;background-color:rgba(0,0,0,0.5)">
+                                <img src="~/images/pin.png" class="mx-auto p-1" alt="">
+                                <span>@item.Missions?.City.Name</span>
+                            </div>
+                        </div>
+                        <div class="caption card-body">
+                            <h4 class="group card-title inner list-group-item-heading">
                                 @item.Missions.Title
-                                    </h4>
-                                    <p class="group inner list-group-item-text sd">
+                            </h4>
+                            <p class="group inner list-group-item-text sd">
                                 @item.Missions.ShortDescription
-                                    </p>
-                                    <div class="row mb">
+                            </p>
+                            <div class="row mb">
 
-                                        <div class="col col-lg-6 col-md-6 col-sm-12">@item.Missions.OrganizationName</div>
-                                        <div class="col col-lg-6 col-md-6 col-sm-12">
+                                <div class="col col-lg-6 col-md-6 col-sm-12">@item.Missions.OrganizationName</div>
+                                <div class="col col-lg-6 col-md-6 col-sm-12">
 
-                                            <div class="text-warning">
+                                    <div class="text-warning">
                                         @for (int i = 1; i <= 5; i++)
                                         {
                                             if (i <= Math.Round(item.AvgRating))
                                             {
-                                                                        <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
                                             }
                                             else
                                             {
-                                                                        <i class="bi bi-star"></i>
+                                                <i class="bi bi-star"></i>
                                             }
                                         }
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="position-relative ">
-                                        <hr style="z-index: -1;">
-                                @if (item.Missions.MissionType == "TIME")
-                                {
-                                                    <div class="dt text-center  position-absolute">
-                                                        <span class="fsize"> From  @item.Missions.StartDate.ToString().Substring(0, 10)  until @item.Missions.EndDate.ToString().Substring(0, 10)</span>
-                                                    </div>
-                                }
-                                else
-                                {
-                                                    <div class="dt text-center  position-absolute">
-
-                                                        <span class="fsize">
-                                            @item.GoalObjectiveText
-                                                        </span>
-
-
-                                                    </div>
-
-                                }
-
-                                    </div>
-                                    <div class="row mt-4 ">
-                                @if (item.Missions.MissionType == "TIME")
-                                {
-                                                    <div class="col">
-
-                                                        <table>
-                                                            <tr>
-                                                                <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
-                                                                <td>@item.Missions.SeatsVacancy</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="fsize2"> Seats Left</td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                    <div class="col">
-                                                        <table>
-                                                            <tr>
-
-                                                                <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
-                                                                <td>@item.Missions.StartDate.Value.AddDays(-1).ToShortDateString() </td>
-
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="fsize">Deadline</td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                }
-                                else
-                                {
-                                                    <div class="col">
-                                                        <table>
-                                                            <tr>
-                                                                <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
-                                                                <td>250</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="fsize2">Already volunteered</td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                    <div class="col">
-                                                        <table>
-                                                            <tr>
-                                                                <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
-                                                                <td>
-
-                                                                    <div class="progress">
-                                                                        <div class="progress-bar bgw" role="progressbar"
-                                                     aria-valuenow="@item.totalAchieve" aria-valuemin="0" aria-valuemax="@item.Goalvalue"
-                                                     style="width: @((item.totalAchieve * 100) / item.Goalvalue)%;">
-                                                                        </div>
-                                                                    </div>
-
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="fsize2">@item.totalAchieve Achieved</td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-
-                                }
-
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-6 mx-auto">
-                                            <a class="btn btnapp " asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id="@item.Missions.MissionId">View Details <img src="~/images/right-arrow.png" alt=""></a>
-                                        </div>
                                     </div>
                                 </div>
+
+                            </div>
+                            <div class="position-relative ">
+                                <hr style="z-index: -1;">
+                                @if (item.Missions.MissionType == "TIME")
+                                {
+                                    <div class="dt text-center  position-absolute">
+                                        <span class="fsize"> From  @item.Missions.StartDate.ToString().Substring(0, 10)  until @item.Missions.EndDate.ToString().Substring(0, 10)</span>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="dt text-center  position-absolute">
+
+                                        <span class="fsize">
+                                            @item.GoalObjectiveText
+                                        </span>
+
+
+                                    </div>
+
+                                }
+
+                            </div>
+                            <div class="row mt-4 ">
+                                @if (item.Missions.MissionType == "TIME")
+                                {
+                                    <div class="col">
+
+                                        <table>
+                                            <tr>
+                                                <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
+                                                <td>@item.Missions.SeatsVacancy</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fsize2"> Seats Left</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col">
+                                        <table>
+                                            <tr>
+
+                                                <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
+                                                <td>@item.Missions.StartDate.Value.AddDays(-1).ToShortDateString() </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="fsize">Deadline</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col">
+                                        <table>
+                                            <tr>
+                                                <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
+                                                <td>250</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fsize2">Already volunteered</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col">
+                                        <table>
+                                            <tr>
+                                                <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
+                                                <td>
+
+                                                    <div class="progress">
+                                                        <div class="progress-bar bgw" role="progressbar"
+                                                     aria-valuenow="@item.totalAchieve" aria-valuemin="0" aria-valuemax="@item.Goalvalue"
+                                                     style="width: @((item.totalAchieve * 100) / item.Goalvalue)%;">
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fsize2">@item.totalAchieve Achieved</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                }
+
                             </div>
 
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6 mx-auto">
+                                    <a class="btn btnapp " asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id="@item.Missions.MissionId">View Details <img src="~/images/right-arrow.png" alt=""></a>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+
+                </div>
             }
         </div>
 
@@ -659,164 +693,164 @@
             <!-- 1 -->
             @foreach (var item in Model)
             {
-                        <div class="row border mt-3 item ">
+                <div class="row border mt-3 item ">
 
-                            <div class="col col-lg-4  col-md-12 col-xs-12 position-relative border-light  ">
-                                <img src="@item.image?.MediaPath" class="thumbimg" alt="" />
-                                <div class="bl1 justify-content-center">
+                    <div class="col col-lg-4  col-md-12 col-xs-12 position-relative border-light  ">
+                        <img src="@item.image?.MediaPath" class="thumbimg" alt="" />
+                        <div class="bl1 justify-content-center">
                             @item.Missions?.Theme.Title
-                                </div>
-                                <div class="bottom-right4 text-center " style="background-color:rgba(0,0,0,0.5)">
+                        </div>
+                        <div class="bottom-right4 text-center " style="background-color:rgba(0,0,0,0.5)">
 
                             @if (item.isValid)
                             {
-                                                <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
-                                                    <i class="bi bi-heart filled-heart"></i>
-                                                </button>
+                                <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
+                                    <i class="bi bi-heart filled-heart"></i>
+                                </button>
                             }
                             else
                             {
-                                                <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
-                                                    <i class="bi bi-heart w-100 text-white"></i>
-                                                </button>
+                                <button data-mission-id="@item.Missions.MissionId" data-user-id="@ViewBag.UserDetails.UserId" class="white  border-0 p-1 myfavbtn2" style="background:transparent;">
+                                    <i class="bi bi-heart w-100 text-white"></i>
+                                </button>
                             }
-                                </div>
-                                <div class="bottom-right5  opacity-50   ">
-                                    <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
-                                </div>
-                                <div class="bottom-right6  opacity-50   ">
-                                    <img src="~/images/pin.png" class="mx-auto p-1" alt="">
-                                    <span>@item.Missions?.City.Name</span>
-                                </div>
-                        @if (item.missionApplications)
-                         {
-{
-                                      <div class="top-left justify-content-center">
-                                               APPLIED
-                                            </div>  
-                        }
-}
                         </div>
-                            <div class="col col-lg-8 col-md-12 col-sm-12">
-                                <h4 class="group card-title inner list-group-item-heading mtop">
+                        <div class="bottom-right5  opacity-50   ">
+                            <img src="~/images/user.png" class="mx-auto d-block p-1" alt="">
+                        </div>
+                        <div class="bottom-right6  opacity-50   ">
+                            <img src="~/images/pin.png" class="mx-auto p-1" alt="">
+                            <span>@item.Missions?.City.Name</span>
+                        </div>
+                        @if (item.missionApplications)
+                        {
+                            {
+                                <div class="top-left justify-content-center">
+                                    APPLIED
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="col col-lg-8 col-md-12 col-sm-12">
+                        <h4 class="group card-title inner list-group-item-heading mtop">
                             @item.Missions.Title
-                                </h4>
-                                <p class="group inner list-group-item-text sd">
+                        </h4>
+                        <p class="group inner list-group-item-text sd">
                             @item.Missions.ShortDescription.
-                                </p>
+                        </p>
 
-                                <div class="row">
-                                    <div class="col col-lg-6 col-md-6 col-sm-12">
-                                        <div class="d-inline">@item.Missions.OrganizationName</div>
-                                        <div class="d-inline">
+                        <div class="row">
+                            <div class="col col-lg-6 col-md-6 col-sm-12">
+                                <div class="d-inline">@item.Missions.OrganizationName</div>
+                                <div class="d-inline">
 
                                     @for (int i = 1; i <= 5; i++)
                                     {
                                         if (i <= Math.Round(item.AvgRating))
                                         {
-                                                                    <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
                                         }
                                         else
                                         {
-                                                                    <i class="bi bi-star"></i>
+                                            <i class="bi bi-star"></i>
                                         }
                                     }
-                                        </div>
-                                    </div>
+                                </div>
+                            </div>
 
 
 
                             @if (item.Missions.MissionType == "TIME")
                             {
 
-                                                <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds ">
+                                <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds ">
 
-                                                    <span class="fsize"> From @item.Missions.StartDate.ToString().Substring(0, 10) until @item.Missions.EndDate.ToString().Substring(0, 10)</span>
-                                                </div>
+                                    <span class="fsize"> From @item.Missions.StartDate.ToString().Substring(0, 10) until @item.Missions.EndDate.ToString().Substring(0, 10)</span>
+                                </div>
                             }
                             else
                             {
 
-                                                <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds  ">
+                                <div class="col col-lg-6 col-md-6 col-sm-12 border text-center bdr-rds  ">
 
-                                                    <span class="fsize">@item.GoalObjectiveText</span>
-                                                </div>
+                                    <span class="fsize">@item.GoalObjectiveText</span>
+                                </div>
 
                             }
 
-                                    <div class="col-xs-12 col-md-6 mx-auto">
-                                        <a class="btn btnapp " asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id="@item.Missions.MissionId">View Details <img src="~/images/right-arrow.png" alt=""></a>
-                                    </div>
-                                    <div class="col-xs-12 col-md-6 mx-auto">
-                                        <div class="row mt-4 ">
+                            <div class="col-xs-12 col-md-6 mx-auto">
+                                <a class="btn btnapp " asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id="@item.Missions.MissionId">View Details <img src="~/images/right-arrow.png" alt=""></a>
+                            </div>
+                            <div class="col-xs-12 col-md-6 mx-auto">
+                                <div class="row mt-4 ">
                                     @if (item.Missions.MissionType == "TIME")
                                     {
-                                                        <div class="col">
+                                        <div class="col">
 
-                                                            <table>
-                                                                <tr>
-                                                                    <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
-                                                                    <td>@item.Missions.SeatsVacancy</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="fsize2"> Seats Left</td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                        <div class="col">
-                                                            <table>
-                                                                <tr>
-                                                                    <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
-                                                                    <td>@item.Missions.StartDate.Value.AddDays(-1).ToShortDateString()  </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="fsize">Deadline</td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
+                                            <table>
+                                                <tr>
+                                                    <td rowspan="2"><img src="~/images/Seats-left.png" alt=""></td>
+                                                    <td>@item.Missions.SeatsVacancy</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="fsize2"> Seats Left</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="col">
+                                            <table>
+                                                <tr>
+                                                    <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
+                                                    <td>@item.Missions.StartDate.Value.AddDays(-1).ToShortDateString()  </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="fsize">Deadline</td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     }
                                     else
                                     {
-                                                        <div class="col">
-                                                            <table>
-                                                                <tr>
-                                                                    <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
-                                                                    <td>250</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="fsize2">Already volunteered</td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                        <div class="col">
-                                                            <table>
-                                                                <tr>
-                                                                    <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
-                                                                    <td>
+                                        <div class="col">
+                                            <table>
+                                                <tr>
+                                                    <td rowspan="2"><img src="~/images/Already-volunteered.png" alt=""></td>
+                                                    <td>250</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="fsize2">Already volunteered</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="col">
+                                            <table>
+                                                <tr>
+                                                    <td rowspan="2"><img src="~/images/achieved.png" alt=""></td>
+                                                    <td>
 
-                                                                        <div class="progress">
-                                                                            <div class="progress-bar bgw" role="progressbar"
+                                                        <div class="progress">
+                                                            <div class="progress-bar bgw" role="progressbar"
                                                          aria-valuenow="@item.totalAchieve" aria-valuemin="0" aria-valuemax="@item.Goalvalue"
                                                          style="width: @((item.totalAchieve * 100) / item.Goalvalue)%;">
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="fsize2">@item.totalAchieve Achieved</td>
-                                                                </tr>
-                                                            </table>
+                                                            </div>
                                                         </div>
-                                    }
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="fsize2">@item.totalAchieve Achieved</td>
+                                                </tr>
+                                            </table>
                                         </div>
-
-                                    </div>
-
+                                    }
                                 </div>
 
                             </div>
 
                         </div>
+
+                    </div>
+
+                </div>
             }
         </div>
 

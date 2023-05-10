@@ -71,6 +71,28 @@ namespace CI_Platform.Repository.Repository
             _db.MissionApplications.Update(MissionApplicationExist);
             _db.SaveChanges();
 
+            var userId = MissionApplicationExist.UserId;
+            var isAnyDataForUser = _db.UserNotificationInfos.Any(uni => uni.UserId == userId && uni.NotificationSettingId == 3);
+
+            if (isAnyDataForUser)
+            {
+                NotificationDetail mynotificationlist = new NotificationDetail();
+                mynotificationlist.UserId = MissionApplicationExist.UserId;
+                mynotificationlist.MissionId = MissionApplicationExist.MissionId;
+                mynotificationlist.NotificationMessage = "Volunteering request has been approved for mission " + MissionApplicationExist.MissionId;
+                mynotificationlist.Status = "NOT SEEN";
+                mynotificationlist.ImagePath = "/Images/approved-gdb64cf08a_1280.png";
+                mynotificationlist.NotificationSettingId = 3;
+
+                _db.NotificationDetails.Add(mynotificationlist);
+                _db.SaveChanges();
+            }
+            
+
+
+
+
+
             return true;
         }
         public bool forDeclineMissionApplication(int MissionAppId)
@@ -80,6 +102,23 @@ namespace CI_Platform.Repository.Repository
             MissionApplicationExist.ApprovalStatus = "DECLINE";
             _db.MissionApplications.Update(MissionApplicationExist);
             _db.SaveChanges();
+
+            var userId = MissionApplicationExist.UserId;
+            var isAnyDataForUser = _db.UserNotificationInfos.Any(uni => uni.UserId == userId && uni.NotificationSettingId == 3);
+
+            if (isAnyDataForUser)
+            {
+                NotificationDetail mynotificationlist = new NotificationDetail();
+                mynotificationlist.UserId = MissionApplicationExist.UserId;
+                mynotificationlist.MissionId = MissionApplicationExist.MissionId;
+                mynotificationlist.NotificationMessage = "Volunteering request has been declined for mission " + MissionApplicationExist.MissionId;
+                mynotificationlist.Status = "NOT SEEN";
+                mynotificationlist.ImagePath = "/Images/x-g4cb7e4fba_1280.png";
+                mynotificationlist.NotificationSettingId = 3;
+
+                _db.NotificationDetails.Add(mynotificationlist);
+                _db.SaveChanges();
+            }
 
             return true;
         }

@@ -26,5 +26,6 @@ namespace CI_Platform.Entities.Models.VM
 
         public bool missionApplications { get; set; }
         //public NotificationSetting myNotifications { get; set; } = new NotificationSetting();
+       
     }
 }

@@ -1072,4 +1072,23 @@ $(document).ready(function () {
 
     })
 })
+
+$(document).ready(function () {
+    var userId = $('#SaveNotificationSetting').attr("data-user-id");
+    console.log(userId);
+
+    $.ajax({
+        type: "POST",
+        url: "/Content/GetNotificationCount",
+        data: {
+            UserId: userId
+        },
+        success: function (data) {
+            console.log(data);
+            $('.bgcolorForBellNotification').text(data);
+
+        }
+
+    })
+})
 //10-05
