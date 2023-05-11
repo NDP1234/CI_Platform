@@ -22,6 +22,8 @@ namespace CI_Platform.Repository.Interface
         public List<PlatformLandingViewModel> GetFilterData(int userId, string[] country, string[] city, string[] theme, string[] skill, string sort);
         public List<PlatformLandingViewModel> ExploreData(string ExploreBasedOnVal, int userId);
 
-        public bool SaveNotificationSetting(int userId, List<int> selectedIds );
+        public bool SaveNotificationSetting(int userId, List<int> selectedIds);
+
+        public bool ClearAllNotification(int UserId);
     }
 }

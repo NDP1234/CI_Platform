@@ -32,8 +32,13 @@ function addtofav() {
 };
 
 
+
 //for recommandation
 $('#RecommandationBtn button').on('click', function () {
+
+    var spinner = $('#spinner');
+    spinner.removeClass('d-none');
+
     var udetails = $(this).attr('value');
     var arr = udetails.split(" ");
     var Recommanded = {
@@ -48,11 +53,15 @@ $('#RecommandationBtn button').on('click', function () {
     $.ajax({
         url: url,
         success: function (data) {
+            spinner.addClass('d-none');
             window.location.reload();
             toastr.success(' Mail sent successfully ');
         },
     });
 })
+
+
+
 
 //for star rating
 $(function () {

@@ -10,4 +10,8 @@ public partial class UserNotificationInfo
     public long NotificationSettingId { get; set; }
 
     public long UserId { get; set; }
+
+    public virtual NotificationSetting NotificationSetting { get; set; } = null!;
+
+    public virtual User User { get; set; } = null!;
 }

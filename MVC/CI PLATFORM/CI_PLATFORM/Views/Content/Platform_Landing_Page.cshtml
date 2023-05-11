@@ -78,9 +78,9 @@
                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="bi bi-bell position-relative"
                                        style="font-size: 20px;"></i>
-                                    
+
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bgcolorForBellNotification">
-                                        
+
                                         <span class="visually-hidden">unread messages</span>
                                     </span>
                                 </a>
@@ -92,186 +92,165 @@
                                         </button>
 
                                         <h6 class="NotificationText mt-0">Notification</h6>
-                                        <button class="btn border-0 pt-0">Clear All</button>
+                                        <button class="btn border-0 pt-0" id="clearAllButton" type="button" data-user-id="@ViewBag.UserDetails.UserId" onclick="event.stopPropagation()">Clear All</button>
 
-                                    
+
 
                                     </div>
                                     <div class="notificationContent">
-                                        @{
-                                            var userid = @ViewBag.UserDetails.UserId;
-                                            var notificationlist = _db.NotificationDetails.ToList();
-                                        }
-                                        @foreach (var item in notificationlist.Where(nd=>nd.UserId==userid && nd.Status=="NOT SEEN").OrderByDescending(nd=>nd.CreatedAt))
-                                        {
-                                            if (@item.NotificationSettingId == 3)
+                                        <div class="unreadNotifications">
+                                            @{
+                                                var userid = @ViewBag.UserDetails.UserId;
+                                                var notificationlist = _db.NotificationDetails.ToList();
+                                            }
+                                            @foreach (var item in notificationlist.Where(nd => nd.UserId == userid && nd.Status == "NOT SEEN").OrderByDescending(nd => nd.CreatedAt))
                                             {
+                                                if (@item.NotificationSettingId == 3)
+                                                {
                                             <li>
 
                                                 <div class="row g-0">
                                                     <div class="col-11">
                                                         <label class="form-check-label" for="@item.NottificationDeatilId">
-                                                            <a class="dropdown-item" >
-                                                               @* <i class="bi bi-plus-circle"></i>*@
-                                                               <img src="@item.ImagePath" height="20px" width="20px"/>
+                                                            <a class="dropdown-item" onclick="event.stopPropagation()" asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id="@item.MissionId">
+                                                                        @* <i class="bi bi-plus-circle"></i>*@
+                                                                <img src="@item.ImagePath" height="20px" width="20px" />
                                                                 <div class=" d-inline missionDetails text-dark text-wrap">
-                                                                    @item.NotificationMessage
+                                                                            @item.NotificationMessage
                                                                 </div>
                                                             </a>
                                                         </label>
                                                     </div>
                                                     <div class="col-1">
-                                                        <input class="form-check-input " type="checkbox" value="@item.NottificationDeatilId"
-                                                       id="@item.NottificationDeatilId">
+                                                        <input class="form-check-input my-checkbox" type="checkbox" checked value="@item.NottificationDeatilId"
+                                                       id="@item.NottificationDeatilId" onchange="updateStatusOfNotification(this)">
+
                                                     </div>
                                                 </div>
                                             </li>
                                             <hr>
+                                                }
+                                                if (@item.NotificationSettingId == 1)
+                                                {
+                                            <li>
+
+                                                <div class="row g-0">
+                                                    <div class="col-11">
+                                                        <label class="form-check-label" for="@item.NottificationDeatilId">
+                                                            <a class="dropdown-item" onclick="event.stopPropagation()" asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id="@item.MissionId">
+                                                                        @* <i class="bi bi-plus-circle"></i>*@
+                                                                <img src="@item.ImagePath" height="20px" width="20px" style="border-radius:50%" />
+                                                                <div class=" d-inline missionDetails text-dark text-wrap">
+                                                                            @item.NotificationMessage
+                                                                </div>
+                                                            </a>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input class="form-check-input my-checkbox" type="checkbox" checked value="@item.NottificationDeatilId"
+                                                       id="@item.NottificationDeatilId" onchange="updateStatusOfNotification(this)">
+
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <hr>
+                                                }
                                             }
-                                        }
-                                    <li>
+                                        </div>
 
-                                        @*<div class="row g-0">
-                                            <div class="col-11">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    <a class="dropdown-item" href="#">
-                                                        <i class="bi bi-plus-circle"></i>
-                                                        <div class=" d-inline missionDetails text-dark text-wrap">
-                                                            New Mission details will displayed here for notifying to
-                                                            user
-                                                        </div>
-                                                    </a>
-                                                </label>
-                                            </div>
-                                            <div class="col-1">
-                                                <input class="form-check-input " type="checkbox" value=""
-                                                       id="flexCheckDefault">
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <hr>
-                                    <li>
-                                        <div class="row g-0">
-                                            <div class="col-11">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    <a class="dropdown-item" href="#">
-                                                        <i class="bi bi-check2-square"></i>
-                                                        <div class=" d-inline missionDetails text-dark text-wrap">
-                                                            Volunteering request has been approved for this mission
-                                                            (missionid: 1234)
-                                                        </div>
-                                                    </a>
-                                                </label>
-                                            </div>
-                                            <div class="col-1">
-                                                <input class="form-check-input " type="checkbox" value=""
-                                                       id="flexCheckDefault">
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <hr>
-                                    <li>
-                                        <div class="row g-0">
-                                            <div class="col-11">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    <a class="dropdown-item" href="#">
-                                                        <i class="bi bi-x-square"></i>
-                                                        <div class=" d-inline missionDetails text-dark text-wrap">
-                                                            Volunteering request has been declined for this mission
-                                                            (missionid: 1234)
-                                                        </div>
-                                                    </a>
-                                                </label>
-                                            </div>
-                                            <div class="col-1">
-                                                <input class="form-check-input " type="checkbox" value=""
-                                                       id="flexCheckDefault">
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <hr>*@
+                                        @*<li>*@
 
-                                    <div class="text-center bg-light">
-                                        Older
-                                    </div>
-                                    <li>
-                                        <div class="row g-0">
-                                            <div class="col-11">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    <a class="dropdown-item" href="#">
-                                                        <i class="bi bi-person-circle"></i>
-                                                        <div class=" d-inline missionDetails text-dark text-wrap">
-                                                            Nirav Patel Recommanded this mission- Mission Title
-                                                        </div>
-                                                    </a>
-                                                </label>
-                                            </div>
-                                            <div class="col-1">
-                                                <input class="form-check-input " type="checkbox" value=""
-                                                       id="flexCheckDefault">
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <hr>
+
+
+                            <div class="text-center bg-light">
+                                Older
                             </div>
 
-                            <div class="notificationSetting d-none text-left">
-                                <div class="text-center bg-light my-3 py-2">
-                                    Get a notification for
-                                </div>
+
+                                        @if (@ViewBag.OldNotification != null)
+                                        {
+                                <li>
+                                    <div class="row g-0">
+                                        <div class="col-11">
+                                            <label class="form-check-label" for="@ViewBag.OldNotification.NottificationDeatilId">
+                                                <a class="dropdown-item" onclick="event.stopPropagation()">
+                                                                @* <i class="bi bi-plus-circle"></i>*@
+                                                    <img src="@ViewBag.OldNotification.ImagePath" height="20px" width="20px" />
+                                                    <div class=" d-inline missionDetails text-dark text-wrap">
+                                                                    @ViewBag.OldNotification.NotificationMessage
+                                                    </div>
+                                                </a>
+                                            </label>
+                                        </div>
+                                        <div class="col-1">
+                                            <input class="form-check-input mycheckboxforOldNotifications" type="checkbox" checked value="@ViewBag.OldNotification.NottificationDeatilId"
+                                               id="@ViewBag.OldNotification.NottificationDeatilId">
+
+                                        </div>
+                                    </div>
+                                </li>
+                                <hr>
+                                        }
+
+                        </div>
+
+                        <div class="notificationSetting d-none text-left">
+                            <div class="text-center bg-light my-3 py-2">
+                                Get a notification for
+                            </div>
 
                                         @{
                                             var NotificationSettingList = _db.NotificationSettings.ToList();
                                         }
                                         @foreach (var item in NotificationSettingList)
                                         {
-                                    <div class="form-check mxauto">
+                                <div class="form-check mxauto">
 
-                                        <label class="form-check-label" for="@item.NotificationSettingId">
+                                    <label class="form-check-label" for="@item.NotificationSettingId">
                                                     @item.NotificationName
-                                        </label>
-                                        <input class="form-check-input userNotificationCheck" type="checkbox" value="@item.NotificationSettingId"
-                                           id="@item.NotificationSettingId">
-                                    </div>
+                                    </label>
+                                    <input class="form-check-input userNotificationCheck " type="checkbox" value="@item.NotificationSettingId"
+                                       id="@item.NotificationSettingId">
+                                </div>
                                         }
 
-                                <div class="forAction mt-5 text-center">
-                                    <button class="btn  rounded-pill" id="SaveNotificationSetting" type="button" data-user-id="@ViewBag.UserDetails.UserId">Save</button>
-                                    <button class="btn  rounded-pill" id="backBtn" type="button" onclick="event.stopPropagation()">Cancel</button>
-                                </div>
+                            <div class="forAction mt-5 text-center">
+                                <button class="btn  rounded-pill" id="SaveNotificationSetting" type="button" data-user-id="@ViewBag.UserDetails.UserId">Save</button>
+                                <button class="btn  rounded-pill" id="backBtn" type="button" onclick="event.stopPropagation()">Cancel</button>
                             </div>
-                            </ul>
                         </div>
+                        </ul>
                 </div>
+            </div>
 
-                <!--  -->
-
-
-
+            <!--  -->
 
 
 
-                <div class="dropdown">
-                    <a class="btn  dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLinkAdmin"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="@ViewBag.UserDetails.Avatar" alt="" style="border-radius: 50%;" height="30px"
-                             width="30px">
-                        <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
-                    </a>
 
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLinkAdmin">
+
+
+            <div class="dropdown">
+                <a class="btn  dropdown-toggle p-0 b-filter" href="#" role="button" id="dropdownMenuLinkAdmin"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="@ViewBag.UserDetails.Avatar" alt="" style="border-radius: 50%;" height="30px"
+                         width="30px">
+                    <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName</span>
+                </a>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLinkAdmin">
                                 @if (@ViewBag.UserDetails.Role == "admin")
                                 {
-                            <li><a class="dropdown-item" asp-action="AdminDashBoard" asp-controller="Admin">Dashboard</a></li>
+                        <li><a class="dropdown-item" asp-action="AdminDashBoard" asp-controller="Admin">Dashboard</a></li>
                                 }
 
-                        <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
-                        <li><a class="dropdown-item" asp-action="VolunteeringTimesheet" asp-controller="Timesheet">Volunteering Timesheet</a></li>
-                        <li><a class="dropdown-item" asp-action="Logout" asp-controller="Authentication">Logout </a></li>
-                    </ul>
-                </div>
-                </form>
+                    <li><a class="dropdown-item" asp-action="UserEditProfilePage" asp-controller="UserEditProfile">My Account</a></li>
+                    <li><a class="dropdown-item" asp-action="VolunteeringTimesheet" asp-controller="Timesheet">Volunteering Timesheet</a></li>
+                    <li><a class="dropdown-item" asp-action="Logout" asp-controller="Authentication">Logout </a></li>
+                </ul>
             </div>
+            </form>
+    </div>
     </div>
     </nav>
 

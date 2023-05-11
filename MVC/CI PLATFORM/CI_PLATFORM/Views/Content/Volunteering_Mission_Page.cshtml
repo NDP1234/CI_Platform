@@ -17,6 +17,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Volunteering Mission Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 
@@ -48,7 +50,7 @@
                             <a class="nav-link text-dark" asp-action="Story_Listing_Page" asp-controller="StoryRelated">Stories</a>
                         </li>
 
-                        
+
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
@@ -72,7 +74,7 @@
                                 <span>@ViewBag.UserDetails.FirstName @ViewBag.UserDetails.LastName  </span>
                             </a>
 
-                           
+
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 @if (@ViewBag.UserDetails.Role == "admin")
                                 {
@@ -280,7 +282,7 @@
                             }
                             else
                             {
-                                <div  class="d-flex justify-content-end">
+                                <div class="d-flex justify-content-end">
                                     <table>
                                         <tr>
                                             <td rowspan="2"><img src="~/images/deadline.png" alt=""></td>
@@ -714,6 +716,8 @@
             }
 
         </div>
+       
+
         @*Modal for Recommand to co-worker*@
         <div class="modal fade" id="RecommendModel" tabindex="-1" aria-hidden="true" aria-labelledby="exampleModalLabel">
             <div class="modal-dialog modal-dialog-centered">
@@ -723,6 +727,14 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
                     </div>
                     <div class="modal-body">
+
+                        @*for displaying Spinner*@
+                        <div id="spinner" class="d-none bg-black text-center " style="width:150px; border-radius:20px;" >
+                            <i class="fa fa-spinner fa-spin" style="font-size: 100px;color: white;"></i> 
+                            <div ><p class="text-light">sending email</p></div>
+                        </div>
+                        @*for displaying Spinner*@
+
                         @foreach (var coworker in Model.UserDetail)
                         {
 

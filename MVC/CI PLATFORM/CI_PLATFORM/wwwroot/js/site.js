@@ -1085,10 +1085,64 @@ $(document).ready(function () {
         },
         success: function (data) {
             console.log(data);
-            $('.bgcolorForBellNotification').text(data);
+            if (data > 0) {
+                $('.bgcolorForBellNotification').text(data);
+            }
+            else {
+                $('.bgcolorForBellNotification').addClass('d-none');
+            }
 
         }
 
     })
 })
 //10-05
+
+//11-05
+$('#clearAllButton').on('click', function () {
+    var userId = $(this).attr('data-user-id');
+
+    $.ajax({
+        type: 'POST',
+        url: '/Content/ClearNotification',
+        data: {
+            UserId: userId
+        },
+        success: function (data) {
+            if (data) {
+                $('.notificationContent').empty();
+                $('.bgcolorForBellNotification').text(0);
+            }
+        }
+    })
+})
+
+function updateStatusOfNotification(checkbox) {
+    if (!checkbox.checked) {
+        var notificationId = checkbox.value;
+        var labelForCheckbox = $(checkbox).parent().prev('.col-11');
+        $.ajax({
+            url: '/Content/UpdateNotificationStatus',
+            type: 'POST',
+            data: { notificationId: notificationId },
+            success: function (result) {
+                labelForCheckbox.addClass('d-none');
+                checkbox.classList.add('d-none');
+
+                var badge = $('.bgcolorForBellNotification');
+                var count = parseInt(badge.text().trim()) - 1;
+                if (count > 0) {
+                    badge.text(count);
+                } else {
+                    badge.remove();
+                }
+
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
+}
+//11-05
+    

@@ -373,5 +373,18 @@ namespace CI_Platform.Repository.Repository
                 return true;
             }
         }
+
+        public bool ClearAllNotification(int UserId)
+        {
+            var getNotificationExist = _db.NotificationDetails.Where(nd => nd.UserId == UserId && nd.Status == "NOT SEEN");
+            foreach(var item in getNotificationExist)
+            {
+                item.Status = "SEEN";
+                item.UpdatedAt = DateTime.UtcNow;
+                _db.NotificationDetails.Update(item);
+            }
+            _db.SaveChanges();
+            return true;
+        }
     }
 }

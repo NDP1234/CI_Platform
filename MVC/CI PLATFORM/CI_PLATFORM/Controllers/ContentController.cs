@@ -59,10 +59,19 @@ namespace CI_PLATFORM.Controllers
             ViewBag.Skill = skill;
 
 
+
+
             List<User> users = _users.GetUserList();
             var profile = users.FirstOrDefault(m => m.Email == session_details);
             ViewBag.UserDetails = profile;
             int userId = (int)profile.UserId;
+
+            //11-05
+            DateTime currentDateTime = DateTime.Now;
+            var notifications = _db.NotificationDetails.Where(n => n.UpdatedAt >= currentDateTime.AddMinutes(-1440) && n.Status == "SEEN" && n.UserId == userId).OrderByDescending(n => n.UpdatedAt).Take(1).FirstOrDefault();
+            ViewBag.OldNotification = notifications;
+            //11-05
+
 
             List<PlatformLandingViewModel> missions = _db2.GetAllMission(userId);
 
@@ -245,6 +254,43 @@ namespace CI_PLATFORM.Controllers
                 _db.MissionInvites.Add(recObj);
                 _db.SaveChanges();
                 EmailSend(EmailAdd, userEmailOptions);
+
+                var fromuserdata = _db.Users.Where(u => u.UserId == SessionUId).First();
+
+                var isAnyDataForUser = _db.UserNotificationInfos.Any(uni => uni.UserId == uId && uni.NotificationSettingId == 1);
+
+                //var getname = _db.Users.FirstOrDefault(u => u.UserId == SessionUId);
+                //var RecomFrom = getname.FirstName + " " + getname.LastName;
+                //ViewBag.RecomFromName = RecomFrom;
+                if (isAnyDataForUser)
+                {
+                    NotificationDetail mynotificationlist = new NotificationDetail();
+                    mynotificationlist.UserId = uId;
+                    mynotificationlist.MissionId = uMissionId;
+                    var missionTitle = _db.Missions.FirstOrDefault(m => m.MissionId == uMissionId).Title;
+                    var user = _db.Users.FirstOrDefault(u => u.UserId == SessionUId);
+                    string userName;
+                    if (user != null)
+                    {
+                        userName = user.FirstName + " " + user.LastName;
+                        // use the userName variable here
+                    }
+                    else
+                    {
+                        userName = "someone";
+                        // handle the case when the user is not found
+                    }
+                    //var userName = _db.Users.FirstOrDefault(u=>u.UserId==SessionUId).FirstName +" "+ _db.Users.FirstOrDefault(u => u.UserId == SessionUId).LastName;
+                    mynotificationlist.NotificationMessage = userName + " " + "Recommends this mission" + " " + missionTitle;
+                    mynotificationlist.Status = "NOT SEEN";
+                    mynotificationlist.ImagePath = fromuserdata.Avatar;
+                    mynotificationlist.NotificationSettingId = 1;
+
+                    _db.NotificationDetails.Add(mynotificationlist);
+                    _db.SaveChanges();
+                }
+
+
             }
 
         }
@@ -498,10 +544,32 @@ namespace CI_PLATFORM.Controllers
         }
         public JsonResult GetNotificationCount(int UserId)
         {
-            var getNotificationCount = _db.NotificationDetails.Where(nd => nd.Status == "NOT SEEN" && nd.UserId==UserId).Count();
-       
+            var getNotificationCount = _db.NotificationDetails.Where(nd => nd.Status == "NOT SEEN" && nd.UserId == UserId).Count();
+
             return Json(getNotificationCount);
         }
+        public bool ClearNotification(int UserId)
+        {
+            var clearnotification = _db2.ClearAllNotification(UserId);
 
+            return clearnotification;
+        }
+
+        public IActionResult UpdateNotificationStatus(int notificationId)
+        {
+            var notification = _db.NotificationDetails.FirstOrDefault(nd => nd.NottificationDeatilId == notificationId);
+            if (notification != null)
+            {
+                notification.Status = "SEEN";
+                notification.UpdatedAt = DateTime.UtcNow;
+                _db.NotificationDetails.Update(notification);
+                _db.SaveChanges();
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, error = "Notification not found" });
+            }
+        }
     }
 }

@@ -695,6 +695,11 @@ public partial class CiPlatformContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("updated_at");
             entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.User).WithMany(p => p.NotificationDetails)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_notification_details_user");
         });
 
         modelBuilder.Entity<NotificationSetting>(entity =>
@@ -1016,6 +1021,16 @@ public partial class CiPlatformContext : DbContext
             entity.Property(e => e.UserNotificationId).HasColumnName("user_notification_id");
             entity.Property(e => e.NotificationSettingId).HasColumnName("notification_setting_id");
             entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.NotificationSetting).WithMany(p => p.UserNotificationInfos)
+                .HasForeignKey(d => d.NotificationSettingId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_user_notification_info_notification_setting");
+
+            entity.HasOne(d => d.User).WithMany(p => p.UserNotificationInfos)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_user_notification_info_user");
         });
 
         modelBuilder.Entity<UserSkill>(entity =>
