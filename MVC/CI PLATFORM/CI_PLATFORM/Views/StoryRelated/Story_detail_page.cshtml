@@ -14,6 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Story_detail_page </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
 
@@ -238,6 +239,15 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
                     </div>
                     <div class="modal-body">
+
+                         @*for displaying Spinner*@
+                        <div id="spinner" class="d-none bg-black text-center " style="width:150px; border-radius:20px;" >
+                            <i class="fa fa-spinner fa-spin" style="font-size: 100px;color: white;"></i> 
+                            <div ><p class="text-light">sending email</p></div>
+                        </div>
+                        @*for displaying Spinner*@
+
+
                         @foreach (var coworker in Model.Users)
                         {
                             <div class="d-flex flex-row justify-content-between border-bottom mt-1 py-1">

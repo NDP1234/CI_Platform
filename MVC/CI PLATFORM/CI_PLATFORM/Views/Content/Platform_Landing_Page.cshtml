@@ -105,31 +105,7 @@
                                             }
                                             @foreach (var item in notificationlist.Where(nd => nd.UserId == userid && nd.Status == "NOT SEEN").OrderByDescending(nd => nd.CreatedAt))
                                             {
-                                                if (@item.NotificationSettingId == 3)
-                                                {
-                                            <li>
-
-                                                <div class="row g-0">
-                                                    <div class="col-11">
-                                                        <label class="form-check-label" for="@item.NottificationDeatilId">
-                                                            <a class="dropdown-item" onclick="event.stopPropagation()" asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id="@item.MissionId">
-                                                                        @* <i class="bi bi-plus-circle"></i>*@
-                                                                <img src="@item.ImagePath" height="20px" width="20px" />
-                                                                <div class=" d-inline missionDetails text-dark text-wrap">
-                                                                            @item.NotificationMessage
-                                                                </div>
-                                                            </a>
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-1">
-                                                        <input class="form-check-input my-checkbox" type="checkbox" checked value="@item.NottificationDeatilId"
-                                                       id="@item.NottificationDeatilId" onchange="updateStatusOfNotification(this)">
-
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <hr>
-                                                }
+                                               
                                                 if (@item.NotificationSettingId == 1)
                                                 {
                                             <li>
@@ -155,8 +131,82 @@
                                             </li>
                                             <hr>
                                                 }
+                                                if (@item.NotificationSettingId == 2)
+                                                {
+                                            <li>
+
+                                                <div class="row g-0">
+                                                    <div class="col-11">
+                                                        <label class="form-check-label" for="@item.NottificationDeatilId">
+                                                            <a class="dropdown-item" onclick="event.stopPropagation()" asp-action="Story_detail_page" asp-controller="StoryRelated" asp-route-id="@item.StoryId">
+                                                                <img src="@item.ImagePath" height="20px" width="20px" style="border-radius:50%" />
+                                                                <div class=" d-inline missionDetails text-dark text-wrap">
+                                                                            @item.NotificationMessage
+                                                                </div>
+                                                            </a>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input class="form-check-input my-checkbox" type="checkbox" checked value="@item.NottificationDeatilId"
+                                                       id="@item.NottificationDeatilId" onchange="updateStatusOfNotification(this)">
+
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <hr>
+                                                }
+                                             if (@item.NotificationSettingId == 3)
+                                                {
+                                            <li>
+
+                                                <div class="row g-0">
+                                                    <div class="col-11">
+                                                        <label class="form-check-label" for="@item.NottificationDeatilId">
+                                                            <a class="dropdown-item" onclick="event.stopPropagation()" asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id="@item.MissionId">
+                                                                        @* <i class="bi bi-plus-circle"></i>*@
+                                                                <img src="@item.ImagePath" height="20px" width="20px" />
+                                                                <div class=" d-inline missionDetails text-dark text-wrap">
+                                                                            @item.NotificationMessage
+                                                                </div>
+                                                            </a>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input class="form-check-input my-checkbox" type="checkbox" checked value="@item.NottificationDeatilId"
+                                                       id="@item.NottificationDeatilId" onchange="updateStatusOfNotification(this)">
+
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <hr>
+                                                }
+                                            if (@item.NotificationSettingId == 4)
+                                                {
+                                            <li>
+
+                                                <div class="row g-0">
+                                                    <div class="col-11">
+                                                        <label class="form-check-label" for="@item.NottificationDeatilId">
+                                                            <a class="dropdown-item" onclick="event.stopPropagation()" asp-action="Volunteering_Mission_Page" asp-controller="Content" asp-route-id="@item.MissionId">
+                                                                        @* <i class="bi bi-plus-circle"></i>*@
+                                                                <img src="@item.ImagePath" height="20px" width="20px" />
+                                                                <div class=" d-inline missionDetails text-dark text-wrap">
+                                                                            @item.NotificationMessage
+                                                                </div>
+                                                            </a>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input class="form-check-input my-checkbox" type="checkbox" checked value="@item.NottificationDeatilId"
+                                                       id="@item.NottificationDeatilId" onchange="updateStatusOfNotification(this)">
+
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <hr>
+                                                }
                                             }
-                                        </div>
+                            </div>
 
                                         @*<li>*@
 
@@ -175,7 +225,7 @@
                                             <label class="form-check-label" for="@ViewBag.OldNotification.NottificationDeatilId">
                                                 <a class="dropdown-item" onclick="event.stopPropagation()">
                                                                 @* <i class="bi bi-plus-circle"></i>*@
-                                                    <img src="@ViewBag.OldNotification.ImagePath" height="20px" width="20px" />
+                                                    <img src="@ViewBag.OldNotification.ImagePath" height="20px" width="20px" style="border-radius:50%" />
                                                     <div class=" d-inline missionDetails text-dark text-wrap">
                                                                     @ViewBag.OldNotification.NotificationMessage
                                                     </div>
@@ -184,7 +234,7 @@
                                         </div>
                                         <div class="col-1">
                                             <input class="form-check-input mycheckboxforOldNotifications" type="checkbox" checked value="@ViewBag.OldNotification.NottificationDeatilId"
-                                               id="@ViewBag.OldNotification.NottificationDeatilId">
+                                               id="@ViewBag.OldNotification.NottificationDeatilId" disabled>
 
                                         </div>
                                     </div>
@@ -198,7 +248,7 @@
                             <div class="text-center bg-light my-3 py-2">
                                 Get a notification for
                             </div>
-
+                            
                                         @{
                                             var NotificationSettingList = _db.NotificationSettings.ToList();
                                         }
@@ -305,8 +355,8 @@
                     <div class="row  ">
                         <div class="dropdown d-inline col-lg-3 col-md-3 col-6 be text-center">
 
-                            <select id="countryDropdown" class="border-0" name="CountryId">
-                                <option value=""> Country </option>
+                            <select id="countryDropdown" class="border-0 form-select" name="CountryId" style="margin-left: 2px;">
+                                <option value="" > Country </option>
                             </select>
                         </div>
 

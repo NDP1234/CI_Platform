@@ -72,6 +72,10 @@ items.forEach((el) => {
 
 //for recommanded to coworker
 $("#RecommandationBtn button").on('click', function () {
+
+    var spinner = $('#spinner');
+    spinner.removeClass('d-none');
+
     console.log("click");
     var udetails = $(this).attr('value');
     var arr = udetails.split(" ");
@@ -87,6 +91,7 @@ $("#RecommandationBtn button").on('click', function () {
     $.ajax({
         url: url,
         success: function (data) {
+            spinner.addClass('d-none');
             window.location.reload();
             toastr.success(' Mail sent successfully ');
         },

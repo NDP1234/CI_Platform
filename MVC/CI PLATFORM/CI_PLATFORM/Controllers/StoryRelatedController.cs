@@ -181,6 +181,39 @@ public class StoryRelatedController : Controller
             _db.StoryInvites.Add(recObj);
             _db.SaveChanges();
             EmailSend(EmailAdd, MissionDetailLink);
+
+            var fromuserdata = _db.Users.Where(u => u.UserId == SessionUId).First();
+
+            var isAnyDataForUser = _db.UserNotificationInfos.Any(uni => uni.UserId == uId && uni.NotificationSettingId == 2);
+
+
+            if (isAnyDataForUser)
+            {
+                NotificationDetail mynotificationlist = new NotificationDetail();
+                mynotificationlist.UserId = uId;
+                mynotificationlist.StoryId = uStoryId;
+                var storyTitle = _db.Stories.FirstOrDefault(m => m.StoryId == uStoryId).Title;
+                var user = _db.Users.FirstOrDefault(u => u.UserId == SessionUId);
+                string userName;
+                if (user != null)
+                {
+                    userName = user.FirstName + " " + user.LastName;
+                    
+                }
+                else
+                {
+                    userName = "someone";
+                   
+                }
+                mynotificationlist.NotificationMessage = userName + " " + "Recommends this story -" + " " + storyTitle;
+                mynotificationlist.Status = "NOT SEEN";
+                mynotificationlist.ImagePath = fromuserdata.Avatar;
+                mynotificationlist.NotificationSettingId = 2;
+
+                _db.NotificationDetails.Add(mynotificationlist);
+                _db.SaveChanges();
+            }
+
         }
     }
 

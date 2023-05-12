@@ -1100,7 +1100,7 @@ togglePassword2.addEventListener('click', () => {
 
 
 //for add mission
-$(document).on('click', '#AddMissionDetailBtn', function () {
+$(document).on('click', '#AddMissionDetailBtn',  function () {
 
     (function () {
         'use strict'
@@ -1121,7 +1121,7 @@ $(document).on('click', '#AddMissionDetailBtn', function () {
 
             })
     })()
-
+    
     var MissionTitle = $('#MyMissionTitle').val();
     var ShortDescription = $('#sDescription').val();
     
@@ -1195,7 +1195,7 @@ $(document).on('click', '#AddMissionDetailBtn', function () {
     }
 
 
-    if (MissionTitle && ShortDescription && Description && CountryId && CityId && OrganisationName && Missiontype && MisStartDate && MisEndDate && Organizationdetails && MissionTheme && myAvailability && imgpathlist.length > 0 && docpathlist.length>0 && selectedMissionSkill) {
+    if (MissionTitle && ShortDescription && Description && CountryId && CityId && OrganisationName && Missiontype && MisStartDate && MisEndDate && Organizationdetails && MissionTheme && myAvailability && imgpathlist.length > 0  && selectedMissionSkill) {
         $.ajax({
             type: "POST",
             url: "/Admin/SaveMission",

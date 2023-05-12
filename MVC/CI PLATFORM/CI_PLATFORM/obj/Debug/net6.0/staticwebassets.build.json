@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "kUpZ++kx4aoDqBoSmWCFfGfO0m+ZX/csUxQ2GNQ8GBU=",
+  "Hash": "2+2hEUFES87RGHp/g+mUewPdeIUtqTfvaJ0Ee3AB0CQ=",
   "Source": "CI_PLATFORM",
   "BasePath": "_content/CI_PLATFORM",
   "Mode": "Default",
@@ -5234,6 +5234,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\profileImg\\CSR-initiative-stands-for-Coffee--and-Farmer-Equity-5.png"
+    },
+    {
+      "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\profileImg\\CSR-initiative-stands-for-Coffee--and-Farmer-Equity-6.png",
+      "SourceId": "CI_PLATFORM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\",
+      "BasePath": "_content/CI_PLATFORM",
+      "RelativePath": "profileImg/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-6.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\profileImg\\CSR-initiative-stands-for-Coffee--and-Farmer-Equity-6.png"
     },
     {
       "Identity": "C:\\Users\\pci120\\Desktop\\CI platform\\CI_Platform\\MVC\\CI PLATFORM\\CI_PLATFORM\\wwwroot\\profileImg\\dan-stark-hEceQrBaIiE-unsplash.jpg",

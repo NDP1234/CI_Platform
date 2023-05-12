@@ -416,6 +416,29 @@ namespace CI_Platform.Repository.Repository
                 _db.GoalMissions.Add(mygoalMission);
                 _db.SaveChanges();
             }
+
+            
+            var isAnyDataForUser = _db.UserNotificationInfos.Where(uni =>  uni.NotificationSettingId == 4).Select(uni=>uni.UserId).ToList();
+
+            if (isAnyDataForUser != null)
+            {
+                foreach(var user in isAnyDataForUser)
+                {
+                    NotificationDetail mynotificationlist = new NotificationDetail();
+                    mynotificationlist.UserId = user;
+                    mynotificationlist.MissionId = myMission.MissionId;
+                    mynotificationlist.NotificationMessage = "New Mission -" + myMission.Title;
+                    mynotificationlist.Status = "NOT SEEN";
+                    mynotificationlist.ImagePath = "/Images/add.png";
+                    mynotificationlist.NotificationSettingId = 4;
+
+                    _db.NotificationDetails.Add(mynotificationlist);
+
+                }
+                _db.SaveChanges();
+            }
+
+
             return true;
         }
 

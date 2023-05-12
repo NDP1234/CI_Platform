@@ -259,9 +259,7 @@ namespace CI_PLATFORM.Controllers
 
                 var isAnyDataForUser = _db.UserNotificationInfos.Any(uni => uni.UserId == uId && uni.NotificationSettingId == 1);
 
-                //var getname = _db.Users.FirstOrDefault(u => u.UserId == SessionUId);
-                //var RecomFrom = getname.FirstName + " " + getname.LastName;
-                //ViewBag.RecomFromName = RecomFrom;
+                
                 if (isAnyDataForUser)
                 {
                     NotificationDetail mynotificationlist = new NotificationDetail();
@@ -273,14 +271,11 @@ namespace CI_PLATFORM.Controllers
                     if (user != null)
                     {
                         userName = user.FirstName + " " + user.LastName;
-                        // use the userName variable here
                     }
                     else
                     {
                         userName = "someone";
-                        // handle the case when the user is not found
                     }
-                    //var userName = _db.Users.FirstOrDefault(u=>u.UserId==SessionUId).FirstName +" "+ _db.Users.FirstOrDefault(u => u.UserId == SessionUId).LastName;
                     mynotificationlist.NotificationMessage = userName + " " + "Recommends this mission" + " " + missionTitle;
                     mynotificationlist.Status = "NOT SEEN";
                     mynotificationlist.ImagePath = fromuserdata.Avatar;
