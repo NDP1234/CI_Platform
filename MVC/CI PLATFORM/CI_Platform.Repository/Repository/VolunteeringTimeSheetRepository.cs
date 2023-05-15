@@ -21,7 +21,7 @@ namespace CI_Platform.Repository.Repository
         public List<Mission> getMissionTitles(int userid)
         {
             return _db.MissionApplications
-               .Where(m => m.UserId == userid)
+               .Where(m => m.UserId == userid && m.ApprovalStatus== "APPROVE")
                .Select(m => m.Mission)
                .ToList();
         }

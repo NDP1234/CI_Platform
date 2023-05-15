@@ -205,6 +205,31 @@
                                             </li>
                                             <hr>
                                                 }
+                                                if (@item.NotificationSettingId == 5)
+                                                {
+                                            <li>
+
+                                                <div class="row g-0">
+                                                    <div class="col-11">
+                                                        <label class="form-check-label" for="@item.NottificationDeatilId">
+                                                            <a class="dropdown-item" onclick="event.stopPropagation()" asp-action="Story_detail_page" asp-controller="StoryRelated" asp-route-id="@item.StoryId">
+                                                                        @* <i class="bi bi-plus-circle"></i>*@
+                                                                <img src="@item.ImagePath" height="20px" width="20px" />
+                                                                <div class=" d-inline missionDetails text-dark text-wrap">
+                                                                            @item.NotificationMessage
+                                                                </div>
+                                                            </a>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input class="form-check-input my-checkbox" type="checkbox" checked value="@item.NottificationDeatilId"
+                                                       id="@item.NottificationDeatilId" onchange="updateStatusOfNotification(this)">
+
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <hr>
+                                                }
                                             }
                             </div>
 

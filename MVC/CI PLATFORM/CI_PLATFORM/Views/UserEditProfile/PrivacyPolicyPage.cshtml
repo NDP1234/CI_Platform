@@ -115,7 +115,7 @@
                     <nav class="nav nav-pills flex-column">
                         @foreach (var item in Model.CmsList)
                         {
-                            <a class="nav-link" href="#@item.Slug">@item.Title </a>
+                            <a class="nav-link" href="#@item.Slug" >@item.Title  </a>
                         }
                         
                     </nav>
@@ -134,6 +134,7 @@
                             <p class="p-text">@Html.Raw(item.Description)</p>
                           
                         </div>  
+                        <hr />
                         }
                        
 

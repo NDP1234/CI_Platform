@@ -131,6 +131,24 @@ namespace CI_Platform.Repository.Repository
             _db.Stories.Update(storyExist);
             _db.SaveChanges();
 
+            var userId = storyExist.UserId;
+            var isAnyDataForUser = _db.UserNotificationInfos.Any(uni => uni.UserId == userId && uni.NotificationSettingId == 5);
+
+            if (isAnyDataForUser)
+            {
+                NotificationDetail mynotificationlist = new NotificationDetail();
+                mynotificationlist.UserId = storyExist.UserId;
+                mynotificationlist.MissionId = storyExist.MissionId;
+                mynotificationlist.StoryId= storyExist.StoryId;
+                mynotificationlist.NotificationMessage = "Your story - " + storyExist.Title + " is approved by admin";
+                mynotificationlist.Status = "NOT SEEN";
+                mynotificationlist.ImagePath = "/Images/approved-gdb64cf08a_1280.png";
+                mynotificationlist.NotificationSettingId = 5;
+
+                _db.NotificationDetails.Add(mynotificationlist);
+                _db.SaveChanges();
+            }
+
             return true;
         }
         public bool forDeclineStory(int StoryId)
@@ -139,6 +157,24 @@ namespace CI_Platform.Repository.Repository
             storyExist.Status = "DECLINED";
             _db.Stories.Update(storyExist);
             _db.SaveChanges();
+
+            var userId = storyExist.UserId;
+            var isAnyDataForUser = _db.UserNotificationInfos.Any(uni => uni.UserId == userId && uni.NotificationSettingId == 5);
+
+            if (isAnyDataForUser)
+            {
+                NotificationDetail mynotificationlist = new NotificationDetail();
+                mynotificationlist.UserId = storyExist.UserId;
+                mynotificationlist.MissionId = storyExist.MissionId;
+                mynotificationlist.StoryId = storyExist.StoryId;
+                mynotificationlist.NotificationMessage = "Your story - " + storyExist.Title + " is declined by admin";
+                mynotificationlist.Status = "NOT SEEN";
+                mynotificationlist.ImagePath = "/Images/x-g4cb7e4fba_1280.png";
+                mynotificationlist.NotificationSettingId = 5;
+
+                _db.NotificationDetails.Add(mynotificationlist);
+                _db.SaveChanges();
+            }
 
             return true;
         }

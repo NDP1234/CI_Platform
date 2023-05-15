@@ -5,6 +5,7 @@
     Layout = null;
 }
 @using CI_Platform.Entities.Models.VM
+@inject CI_Platform.Entities.Data.CiPlatformContext _db
 
 @model VTSViewModel;
 
@@ -374,9 +375,9 @@
                                             <label class="mb-2" for="mymission">Mission</label>
                                             <select class="form-select" id="mymission"
                                                     aria-label="Default select example" required>
-
+                                                   
                                                 <option selected value="" disabled>Select your mission</option>
-                                                @foreach (var item in Model.Missions.Where(m => m.MissionType == "TIME"))
+                                                @foreach (var item in Model.Missions.Where(m => m.MissionType == "TIME" && m.DeletedAt== null ))
                                                 {
                                                     <option value="@item.MissionId" data-user-id="@ViewBag.UserDetails.UserId" data-start-date="@item.StartDate" data-end-date="@item.EndDate" >@item.Title</option>
                                                 }
