@@ -71,8 +71,8 @@ $(document).on("click", ".missionApplicationDeclined", function () {
 
             $('.missionApplicationListing').html(data);
             forMissionApplicationPagenation();
-           
-            toastr.success('Mission application is successfully Declined');
+
+            toastr.error('Mission application is successfully Declined');
 
 
 
@@ -121,7 +121,7 @@ $(document).on("click", ".storyDeclined", function () {
             $('.StoryListing').html(data);
             forStoryPagenation();
            
-            toastr.success(' story is sccessfully declined');
+            toastr.error(' story is sccessfully declined');
 
         },
     })

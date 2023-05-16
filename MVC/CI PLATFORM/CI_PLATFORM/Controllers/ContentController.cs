@@ -111,7 +111,8 @@ namespace CI_PLATFORM.Controllers
                     mission.SeatsVacancy,
                     mission.MissionType,
                     y.image.MediaPath,
-                    y.AvgRating
+                    y.AvgRating,
+                    y.isValid
 
                 });
                 filterlist[i] = missionObj;
@@ -508,7 +509,8 @@ namespace CI_PLATFORM.Controllers
                     mission.SeatsVacancy,
                     mission.MissionType,
                     y.image.MediaPath,
-                    y.AvgRating
+                    y.AvgRating,
+                    y.isValid
 
 
                 });

@@ -358,9 +358,9 @@ $("#FilterBtn").on('click', function () {
                         <div class="bottom-left justify-content-center">`
                     + item.value.theme +
                     `</div>
-                        <div class="bottom-right  opacity-50   ">
-                            <img src="/images/heart.png" class="mx-auto d-block p-1" alt="">
-                        </div>
+                        <div class="bottom-right  opacity-50  text-center white  border-0 p-1"  style="background:transparent; background-color:rgba(0,0,0,0.5);" >` +
+                           
+                        `</div>
                         <div class="bottom-right2  opacity-50   ">
                             <img src="/images/user.png" class="mx-auto d-block p-1" alt="">
                         </div>
@@ -411,6 +411,15 @@ $("#FilterBtn").on('click', function () {
 
                 mission.html(items);
                 console.log(item.value.missionType == "TIME")
+                if (item.value.isValid == true) {
+                    let filledheart = `<i class="bi bi-heart filled-heart"></i>`
+                    $('.bottom-right').eq(i).append(filledheart)
+                }
+                else {
+                    let heart = `<i class="bi bi-heart w-100 text-white"></i>`
+                    $('.bottom-right').eq(i).append(heart)
+                }
+
                 if (item.value.missionType == "TIME") {
                     let a = `<hr style="z-index: -1;" >
                     <div class='dt text-center position-absolute'>` +
@@ -499,9 +508,9 @@ $("#FilterBtn").on('click', function () {
             <div class="bl1 justify-content-center">`
                     + item.value.theme +
                     `</div>
-            <div class="bottom-right4  opacity-50   ">
-                <img src="/images/heart.png" class="mx-auto d-block p-1" alt="">
-            </div>
+            <div class="bottom-right4  opacity-50  text-center white  border-0 p-1" style="background:transparent; background-color:rgba(0,0,0,0.5);">`+
+                
+            `</div>
             <div class="bottom-right5  opacity-50   ">
                 <img src="/images/user.png" class="mx-auto d-block p-1" alt="">
             </div>
@@ -549,6 +558,16 @@ $("#FilterBtn").on('click', function () {
    
         </div >`
                 mission_list.html(contents)
+
+                if (item.value.isValid == true) {
+                    let filledheart = `<i class="bi bi-heart filled-heart"></i>`
+                    $('.bottom-right4').eq(i).append(filledheart)
+                }
+                else {
+                    let heart = `<i class="bi bi-heart w-100 text-white"></i>`
+                    $('.bottom-right4').eq(i).append(heart)
+                }
+
                 if (item.value.missionType == "TIME") {
 
                     var d = 
@@ -724,9 +743,9 @@ $(document).ready(function () {
                         <div class="bottom-left justify-content-center">`
                         + item.value.theme +
                         `</div>
-                        <div class="bottom-right  opacity-50   ">
-                            <img src="/images/heart.png" class="mx-auto d-block p-1" alt="">
-                        </div>
+                        <div class="bottom-right  opacity-50  text-center white  border-0 p-1"  style="background:transparent; background-color:rgba(0,0,0,0.5);" >` +
+
+                        `</div>
                         <div class="bottom-right2  opacity-50   ">
                             <img src="/images/user.png" class="mx-auto d-block p-1" alt="">
                         </div>
@@ -772,6 +791,16 @@ $(document).ready(function () {
             </div>`
 
                     mission.html(items);
+
+                    if (item.value.isValid == true) {
+                        let filledheart = `<i class="bi bi-heart filled-heart"></i>`
+                        $('.bottom-right').eq(i).append(filledheart)
+                    }
+                    else {
+                        let heart = `<i class="bi bi-heart w-100 text-white"></i>`
+                        $('.bottom-right').eq(i).append(heart)
+                    }
+
                     console.log(item.value.missionType == "TIME")
                     if (item.value.missionType == "TIME") {
                         let a = `<hr style="z-index: -1;" >
@@ -871,9 +900,9 @@ $(document).ready(function () {
             <div class="bl1 justify-content-center">`
                         + item.value.theme +
                         `</div>
-            <div class="bottom-right4  opacity-50   ">
-                <img src="/images/heart.png" class="mx-auto d-block p-1" alt="">
-            </div>
+           <div class="bottom-right4  opacity-50  text-center white  border-0 p-1" style="background:transparent; background-color:rgba(0,0,0,0.5);">`+
+
+            `</div>
             <div class="bottom-right5  opacity-50   ">
                 <img src="/images/user.png" class="mx-auto d-block p-1" alt="">
             </div>
@@ -917,6 +946,16 @@ $(document).ready(function () {
    
         </div >`
                     mission_list.html(contents)
+
+                    if (item.value.isValid == true) {
+                        let filledheart = `<i class="bi bi-heart filled-heart"></i>`
+                        $('.bottom-right').eq(i).append(filledheart)
+                    }
+                    else {
+                        let heart = `<i class="bi bi-heart w-100 text-white"></i>`
+                        $('.bottom-right').eq(i).append(heart)
+                    }
+
                     if (item.value.missionType == "TIME") {
 
                         var d =
